@@ -1,4 +1,4 @@
-package algo;
+package extendableHashing;
 
 final class Bucket {
     int localDepth; // сколько бит важно для конкретного бакета

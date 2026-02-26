@@ -1,6 +1,6 @@
 package extendible;
 
-import algo.ExtendibleHashTable;
+import extendableHashing.ExtendableHashTable;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,23 +8,23 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ExtendibleHashTableTest {
+public class ExtendableHashTableTest {
     @Test
     void put_then_get_returns_value() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.put(1, 10);
         assertEquals(10, ht.get(1));
     }
 
     @Test
     void get_missing_returns_null() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         assertNull(ht.get(404));
     }
 
     @Test
     void split_keepsAllKeys() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.put(1, 10);
         ht.put(2, 20);
         ht.put(3, 30);
@@ -36,7 +36,7 @@ public class ExtendibleHashTableTest {
 
     @Test
     void put_SameKey_doesNotInsertNewRecord_keepsOldValue() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.put(1, 10);
         ht.put(1, 99);
         assertEquals(10, ht.get(1));
@@ -44,7 +44,7 @@ public class ExtendibleHashTableTest {
 
     @Test
     void remove_existing_removesAndGetReturnsNull() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.put(1, 10);
         assertTrue(ht.remove(1));
         assertNull(ht.get(1));
@@ -52,13 +52,13 @@ public class ExtendibleHashTableTest {
 
     @Test
     void remove_missing_returnsFalse() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         assertFalse(ht.remove(404));
     }
 
     @Test
     void remove_oneKey_doesNotAffectOthers() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2);
+        ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.put(1, 10);
         ht.put(2, 20);
         ht.put(3, 30);
@@ -72,7 +72,7 @@ public class ExtendibleHashTableTest {
 
     @Test
     void merge_reducesUniqueBucketCount() {
-        ExtendibleHashTable ht = new ExtendibleHashTable(2, 42L);
+        ExtendableHashTable ht = new ExtendableHashTable(2, 42L);
 
         List<Integer> insertedKeys = new ArrayList<>();
 

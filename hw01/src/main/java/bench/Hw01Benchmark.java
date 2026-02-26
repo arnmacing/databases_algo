@@ -1,6 +1,6 @@
 package bench;
 
-import algo.ExtendibleHashTable;
+import extendableHashing.ExtendableHashTable;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
@@ -25,7 +25,7 @@ public class Hw01Benchmark {
         @Param({"42"})
         public long seed;
 
-        public ExtendibleHashTable ht;
+        public ExtendableHashTable ht;
         public int[] presentKeys;
         public int[] absentKeys;
 
@@ -33,7 +33,7 @@ public class Hw01Benchmark {
 
         @Setup(Level.Trial)
         public void setup() {
-            ht = new ExtendibleHashTable(bucketCapacity, seed);
+            ht = new ExtendableHashTable(bucketCapacity, seed);
 
             presentKeys = new int[n];
             absentKeys = new int[n];
@@ -86,7 +86,7 @@ public class Hw01Benchmark {
         @Param({"42"})
         public long seed;
 
-        public ExtendibleHashTable ht;
+        public ExtendableHashTable ht;
         public int[] baseKeys;   // ключи, которые постоянно в таблице
         public int[] extraKeys;  // ключи, которые будем вставлять
 
@@ -94,7 +94,7 @@ public class Hw01Benchmark {
 
         @Setup(Level.Iteration)
         public void setupIteration() {
-            ht = new ExtendibleHashTable(bucketCapacity, seed);
+            ht = new ExtendableHashTable(bucketCapacity, seed);
 
             baseKeys = new int[n];
             extraKeys = new int[n];

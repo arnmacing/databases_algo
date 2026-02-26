@@ -1,4 +1,4 @@
-package algo;
+package extendableHashing;
 
 enum PutResult {
     INSERTED,

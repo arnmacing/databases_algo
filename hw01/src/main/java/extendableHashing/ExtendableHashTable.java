@@ -1,16 +1,16 @@
-package algo;
+package extendableHashing;
 
 
 import java.util.*;
 
-public class ExtendibleHashTable {
+public class ExtendableHashTable {
     private final int bucketCapacity;
     private int globalDepth;
     private Bucket[] directory;
     private final int a;
     private final int b;
 
-    public ExtendibleHashTable(int bucketCapacity) {
+    public ExtendableHashTable(int bucketCapacity) {
         this.bucketCapacity = bucketCapacity;
         this.globalDepth = 0;
         this.directory = new Bucket[]{new Bucket(0, bucketCapacity)};
@@ -21,7 +21,7 @@ public class ExtendibleHashTable {
     }
 
     // нужен для теста merge
-    public ExtendibleHashTable(int bucketCapacity, long seed) {
+    public ExtendableHashTable(int bucketCapacity, long seed) {
         this.bucketCapacity = bucketCapacity;
         this.globalDepth = 0;
         this.directory = new Bucket[]{new Bucket(0, bucketCapacity)};
