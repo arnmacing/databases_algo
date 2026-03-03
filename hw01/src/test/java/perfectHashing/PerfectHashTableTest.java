@@ -89,16 +89,111 @@ public class PerfectHashTableTest {
     @Test
     void containsKey_shouldBeConsistentWithGet() {
         int[] keys = {1, 2, 3};
-        Integer[] values = {10, 20, 30};
+        Integer[] values = {10, null, 30};
 
         PerfectHashTable<Integer> table = PerfectHashTable.build(keys, values, 42L);
 
-        for (int key : keys) {
-            assertTrue(table.containsKey(key));
-            assertNotNull(table.get(key));
-        }
+        assertTrue(table.containsKey(1));
+        assertEquals(10, table.get(1));
+
+        assertTrue(table.containsKey(2));
+        assertNull(table.get(2));
+
+        assertTrue(table.containsKey(3));
+        assertEquals(30, table.get(3));
 
         assertFalse(table.containsKey(4));
         assertNull(table.get(4));
+    }
+
+    @Test
+    void containsKey_shouldWorkWithNullValues() {
+        int[] keys = {1, 2, 3};
+        String[] values = {"A", null, "C"};
+
+        PerfectHashTable<String> table = PerfectHashTable.build(keys, values, 42L);
+
+        assertTrue(table.containsKey(2));
+        assertNull(table.get(2));
+        assertFalse(table.containsKey(999));
+        assertNull(table.get(999));
+    }
+
+    @Test
+    void randomized_denseKeys_matchesHashMap() {
+        long seed = 123L;
+        java.util.SplittableRandom rnd = new java.util.SplittableRandom(seed);
+
+        int n = 2000;
+        int[] keys = new int[n];
+        Integer[] values = new Integer[n];
+        java.util.HashMap<Integer, Integer> ref = new java.util.HashMap<>(n * 2);
+
+        for (int i = 0; i < n; i++) {
+            int k = i - 1000; // [-1000..999]
+            Integer v = (rnd.nextInt(10) == 0) ? null : rnd.nextInt(); // иногда null
+            keys[i] = k;
+            values[i] = v;
+            ref.put(k, v);
+        }
+
+        PerfectHashTable<Integer> table = PerfectHashTable.build(keys, values, seed);
+
+        // свои ключи
+        for (int k : keys) {
+            assertTrue(table.containsKey(k));
+            assertEquals(ref.get(k), table.get(k));
+        }
+
+        // чужие ключи
+        for (int t = 0; t < 500; t++) {
+            int k = 100_000 + t;
+            assertFalse(table.containsKey(k));
+            assertNull(table.get(k));
+        }
+    }
+
+    @Test
+    void randomized_sparseUniqueKeys_matchesHashMap() {
+        long seed = 777L;
+        java.util.SplittableRandom rnd = new java.util.SplittableRandom(seed);
+
+        int n = 3000;
+        int[] keys = new int[n];
+        Integer[] values = new Integer[n];
+        java.util.HashMap<Integer, Integer> ref = new java.util.HashMap<>(n * 2);
+        java.util.HashSet<Integer> seen = new java.util.HashSet<>(n * 2);
+
+        int i = 0;
+        while (i < n) {
+            int k = rnd.nextInt(); // разреженно
+            if (!seen.add(k)) {
+                continue;
+            }
+            Integer v = (rnd.nextInt(20) == 0) ? null : rnd.nextInt();
+            keys[i] = k;
+            values[i] = v;
+            ref.put(k, v);
+            i++;
+        }
+
+        PerfectHashTable<Integer> table = PerfectHashTable.build(keys, values, seed);
+
+        for (int k : keys) {
+            assertTrue(table.containsKey(k));
+            assertEquals(ref.get(k), table.get(k));
+        }
+
+        // генерируем и пропускаем те, что случайно попали в set
+        int checked = 0;
+        while (checked < 1000) {
+            int k = rnd.nextInt();
+            if (seen.contains(k)) {
+                continue;
+            }
+            assertFalse(table.containsKey(k));
+            assertNull(table.get(k));
+            checked++;
+        }
     }
 }

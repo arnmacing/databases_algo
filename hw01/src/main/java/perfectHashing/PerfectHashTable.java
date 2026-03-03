@@ -75,7 +75,8 @@ public class PerfectHashTable<V> {
     }
 
     public boolean containsKey(int key) {
-        return get(key) != null;
+        int bucket = h1.mod(key, m);
+        return level2[bucket].containsKey(key);
     }
 
     public int size() {
@@ -175,6 +176,14 @@ public class PerfectHashTable<V> {
                 return (V) values[pos];
             }
             return null;
+        }
+
+        boolean containsKey(int key) {
+            if (size == 0) {
+                return false;
+            }
+            int pos = h2.mod(key, size);
+            return used[pos] && keys[pos] == key;
         }
     }
 
