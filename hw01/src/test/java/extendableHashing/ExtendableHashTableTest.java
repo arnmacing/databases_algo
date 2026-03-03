@@ -1,6 +1,5 @@
-package extendible;
+package extendableHashing;
 
-import extendableHashing.ExtendableHashTable;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

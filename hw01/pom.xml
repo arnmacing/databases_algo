@@ -80,9 +80,10 @@
                             <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
                             <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
 
-                            <includes>
-                                <include>algo/*</include>
-                            </includes>
+                            <excludes>
+                                <exclude>bench/**</exclude>
+                                <exclude>**/jmh_generated/**</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
