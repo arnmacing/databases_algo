@@ -37,7 +37,8 @@ final class Bucket {
     PutResult put(int key, int value) {
         int idx = indexOf(key);
         if (idx >= 0) {
-            return PutResult.ALREADY_PRESENT;
+            values[idx] = value;
+            return PutResult.UPDATED;
         }
         if (size == keys.length) {
             return PutResult.FULL;

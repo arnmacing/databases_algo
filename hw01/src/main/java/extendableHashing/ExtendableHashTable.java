@@ -46,13 +46,9 @@ public class ExtendableHashTable {
             Bucket bucket = directory[idx];
 
             PutResult result = bucket.put(key, value);
-            if (result == PutResult.INSERTED) {
+            if (result == PutResult.INSERTED || result == PutResult.UPDATED) {
                 return;
             }
-            if (result == PutResult.ALREADY_PRESENT) {
-                return;
-            }
-
             splitBucket(idx);
         }
     }

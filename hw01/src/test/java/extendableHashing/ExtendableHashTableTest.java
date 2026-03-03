@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,11 +35,11 @@ public class ExtendableHashTableTest {
     }
 
     @Test
-    void put_SameKey_doesNotInsertNewRecord_keepsOldValue() {
+    void put_sameKey_updatesValue() {
         ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.put(1, 10);
         ht.put(1, 99);
-        assertEquals(10, ht.get(1));
+        assertEquals(99, ht.get(1));
     }
 
     @Test
@@ -97,5 +98,45 @@ public class ExtendableHashTableTest {
         assertTrue(after < before, "уменьшение числа бакетов");
         assertEquals(1, after, "схлопнулось в 1 бакет");
 
+    }
+
+    @Test
+    void randomized_operations_matchHashMap() {
+        long seed = 123456789L;
+        Random rnd = new Random(seed);
+
+        ExtendableHashTable ht = new ExtendableHashTable(2, seed);
+        java.util.HashMap<Integer, Integer> ref = new java.util.HashMap<>();
+
+        int ops = 50_000;
+
+        for (int i = 0; i < ops; i++) {
+            int key = rnd.nextInt(2000) - 1000; // отрицательные тоже
+            int action = rnd.nextInt(4);
+
+            switch (action) {
+                case 0 -> { // put/upsert
+                    int value = rnd.nextInt();
+                    ht.put(key, value);
+                    ref.put(key, value);
+                }
+                case 1 -> { // remove
+                    boolean a = ht.remove(key);
+                    boolean b = (ref.remove(key) != null);
+                    assertEquals(b, a, "remove mismatch for key=" + key);
+                }
+                case 2 -> { // get
+                    Integer a = ht.get(key);
+                    Integer b = ref.get(key);
+                    assertEquals(b, a, "get mismatch for key=" + key);
+                }
+                case 3 -> { // update
+                    int value = rnd.nextInt();
+                    ht.put(key, value);
+                    ref.put(key, value);
+                    assertEquals(ref.get(key), ht.get(key));
+                }
+            }
+        }
     }
 }
