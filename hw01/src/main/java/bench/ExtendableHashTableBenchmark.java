@@ -5,14 +5,15 @@ import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.SplittableRandom;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode({Mode.Throughput, Mode.AverageTime})
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1) // чета не поняла что Петя сказал про этот параметр
-public class Hw01Benchmark {
+@Fork(1)
+public class ExtendableHashTableBenchmark {
     @State(Scope.Thread)
     public static class ReadState {
 
@@ -53,6 +54,13 @@ public class Hw01Benchmark {
             }
 
             p = 0;
+        }
+
+        @TearDown(Level.Trial)
+        public void tearDown() {
+            if (ht != null) {
+                ht.close();
+            }
         }
 
         public int nextPresent() {
@@ -114,6 +122,13 @@ public class Hw01Benchmark {
             p = 0;
         }
 
+        @TearDown(Level.Iteration)
+        public void tearDownIteration() {
+            if (ht != null) {
+                ht.close();
+            }
+        }
+
         public int nextBase() {
             int k = baseKeys[p];
             p++;
@@ -160,6 +175,14 @@ public class Hw01Benchmark {
         s.ht.put(k, k);
     }
 
+    @Benchmark
+    public void updateExisting(WriteState s, Blackhole bh) {
+        int k = s.nextBase();
+        int v = ~k;
+        s.ht.put(k, v);
+        bh.consume(s.ht.get(k));
+    }
+
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
@@ -171,6 +194,9 @@ public class Hw01Benchmark {
     }
 
     public static void main(String[] args) throws Exception {
-        org.openjdk.jmh.Main.main(args);
+        String[] forwarded = args == null ? new String[0] : args;
+        String[] withInclude = Arrays.copyOf(forwarded, forwarded.length + 1);
+        withInclude[forwarded.length] = ExtendableHashTableBenchmark.class.getName() + ".*";
+        org.openjdk.jmh.Main.main(withInclude);
     }
 }
