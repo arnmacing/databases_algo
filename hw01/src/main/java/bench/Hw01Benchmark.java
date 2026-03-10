@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Fork(1) // чета не поняла что Петя сказал про этот параметр
 public class Hw01Benchmark {
     @State(Scope.Thread)
     public static class ReadState {
