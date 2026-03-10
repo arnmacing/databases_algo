@@ -1,0 +1,4 @@
+package bench.jmh_generated;
+public class ExtendableHashTableBenchmark_WriteState_jmhType extends ExtendableHashTableBenchmark_WriteState_jmhType_B3 {
+}
+

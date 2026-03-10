@@ -1,0 +1,4 @@
+package bench.jmh_generated;
+public class PerfectHashingBenchmark_LookupState_jmhType extends PerfectHashingBenchmark_LookupState_jmhType_B3 {
+}
+
