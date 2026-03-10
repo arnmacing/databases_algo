@@ -14,7 +14,7 @@ import java.util.SplittableRandom;
 
 /**
  * Расширяемая хеш-таблица, которая живет в файле с mmap.
- *
+ * <p>
  * Как устроен файл:
  * 1) фиксированный заголовок с метаданными таблицы
  * 2) фиксированная область директории (до {@code MAX_GLOBAL_DEPTH})
@@ -108,7 +108,7 @@ public class ExtendableHashTable implements AutoCloseable {
             ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));
             initializeNewTable(seed);
         } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось инициализировать расширяемую хеш-таблицу", e);
+            throw new UncheckedIOException("Не удалось инициализировать", e);
         }
     }
 
@@ -121,7 +121,7 @@ public class ExtendableHashTable implements AutoCloseable {
 
             long currentSize = channel.size();
             if (currentSize < BUCKET_REGION_OFFSET) {
-                throw new IllegalStateException("Файл таблицы поврежден: слишком маленький");
+                throw new IllegalStateException("слишком маленький файл таблицы");
             }
 
             this.mappedSize = 0;
@@ -135,7 +135,7 @@ public class ExtendableHashTable implements AutoCloseable {
 
             this.globalDepth = readHeaderInt(OFF_GLOBAL_DEPTH);
             if (globalDepth < 0 || globalDepth > MAX_GLOBAL_DEPTH) {
-                throw new IllegalStateException("Файл таблицы поврежден: некорректный globalDepth");
+                throw new IllegalStateException("Некорректный globalDepth");
             }
 
             this.hashA = readHeaderInt(OFF_HASH_A);
@@ -143,10 +143,10 @@ public class ExtendableHashTable implements AutoCloseable {
             this.nextFreeOffset = readHeaderLong(OFF_NEXT_FREE);
 
             if (nextFreeOffset < BUCKET_REGION_OFFSET || nextFreeOffset > mappedSize) {
-                throw new IllegalStateException("Файл таблицы поврежден: некорректный nextFreeOffset");
+                throw new IllegalStateException("Некорректный nextFreeOffset");
             }
         } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось открыть расширяемую хеш-таблицу", e);
+            throw new UncheckedIOException("Не удалось открыть", e);
         }
     }
 
@@ -216,7 +216,7 @@ public class ExtendableHashTable implements AutoCloseable {
                 buffer.force();
             }
         } catch (Exception e) {
-            error = new IOException("Failed to flush mapped buffer", e);
+            error = new IOException("Failed to flush", e);
         }
 
         try {
@@ -238,7 +238,7 @@ public class ExtendableHashTable implements AutoCloseable {
         }
 
         if (error != null) {
-            throw new UncheckedIOException("Failed to close extendable hash table", error);
+            throw new UncheckedIOException("Failed to close", error);
         }
     }
 
@@ -442,13 +442,13 @@ public class ExtendableHashTable implements AutoCloseable {
 
     private void validateHeader() {
         if (readHeaderInt(OFF_MAGIC) != MAGIC) {
-            throw new IllegalStateException("Файл таблицы поврежден: неверный magic");
+            throw new IllegalStateException("Неверный magic");
         }
         if (readHeaderInt(OFF_VERSION) != VERSION) {
             throw new IllegalStateException("Неподдерживаемая версия таблицы");
         }
         if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {
-            throw new IllegalStateException("Неподдерживаемый формат структуры файла таблицы");
+            throw new IllegalStateException("Странный формат структуры");
         }
     }
 
@@ -489,7 +489,7 @@ public class ExtendableHashTable implements AutoCloseable {
             path.toFile().deleteOnExit();
             return path;
         } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось создать временный файл для хеш-таблицы", e);
+            throw new UncheckedIOException("Не удалось создать временный файл", e);
         }
     }
 
@@ -632,7 +632,7 @@ public class ExtendableHashTable implements AutoCloseable {
     private int toBufferIndex(long offset, int length) {
         long limit = offset + length;
         if (offset < 0 || limit < offset || limit > mappedSize) {
-            throw new IllegalStateException("Файл таблицы поврежден: некорректные смещения");
+            throw new IllegalStateException("Некорректные смещения");
         }
         return (int) offset;
     }

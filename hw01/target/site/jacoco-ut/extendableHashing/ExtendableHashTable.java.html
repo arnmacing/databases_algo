@@ -14,7 +14,7 @@ import java.util.SplittableRandom;
 
 /**
  * Расширяемая хеш-таблица, которая живет в файле с mmap.
- *
+ * &lt;p&gt;
  * Как устроен файл:
  * 1) фиксированный заголовок с метаданными таблицы
  * 2) фиксированная область директории (до {@code MAX_GLOBAL_DEPTH})
@@ -77,8 +77,8 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L77">    }</span>
 
     public ExtendableHashTable(Path filePath, int bucketCapacity) {
-<span class="nc" id="L80">        this(filePath, bucketCapacity, new SplittableRandom().nextLong(), false);</span>
-<span class="nc" id="L81">    }</span>
+<span class="fc" id="L80">        this(filePath, bucketCapacity, new SplittableRandom().nextLong(), false);</span>
+<span class="fc" id="L81">    }</span>
 
     public ExtendableHashTable(Path filePath, int bucketCapacity, long seed) {
 <span class="fc" id="L84">        this(filePath, bucketCapacity, seed, false);</span>
@@ -98,18 +98,18 @@ public class ExtendableHashTable implements AutoCloseable {
 
         try {
 <span class="fc" id="L100">            this.channel = FileChannel.open(</span>
-                    filePath,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.TRUNCATE_EXISTING,
-                    StandardOpenOption.READ,
-                    StandardOpenOption.WRITE
+<span class="fc" id="L101">                    filePath,</span>
+<span class="fc" id="L102">                    StandardOpenOption.CREATE,</span>
+<span class="fc" id="L103">                    StandardOpenOption.TRUNCATE_EXISTING,</span>
+<span class="fc" id="L104">                    StandardOpenOption.READ,</span>
+<span class="fc" id="L105">                    StandardOpenOption.WRITE</span>
             );
 <span class="fc" id="L107">            this.mappedSize = 0;</span>
 <span class="fc" id="L108">            ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));</span>
 <span class="fc" id="L109">            initializeNewTable(seed);</span>
-<span class="nc" id="L110">        } catch (IOException e) {</span>
+<span class="pc" id="L110">        } catch (IOException e) {</span>
 <span class="nc" id="L111">            throw new UncheckedIOException(&quot;Не удалось инициализировать расширяемую хеш-таблицу&quot;, e);</span>
-<span class="fc" id="L112">        }</span>
+        }
 <span class="fc" id="L113">    }</span>
 
 <span class="fc" id="L115">    private ExtendableHashTable(Path filePath) {</span>
@@ -120,8 +120,8 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L120">            this.channel = FileChannel.open(filePath, StandardOpenOption.READ, StandardOpenOption.WRITE);</span>
 
 <span class="fc" id="L122">            long currentSize = channel.size();</span>
-<span class="pc bpc" id="L123" title="1 of 2 branches missed.">            if (currentSize &lt; BUCKET_REGION_OFFSET) {</span>
-<span class="nc" id="L124">                throw new IllegalStateException(&quot;Файл таблицы поврежден: слишком маленький&quot;);</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            if (currentSize &lt; BUCKET_REGION_OFFSET) {</span>
+<span class="fc" id="L124">                throw new IllegalStateException(&quot;Файл таблицы поврежден: слишком маленький&quot;);</span>
             }
 
 <span class="fc" id="L127">            this.mappedSize = 0;</span>
@@ -134,27 +134,27 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L134">            this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);</span>
 
 <span class="fc" id="L136">            this.globalDepth = readHeaderInt(OFF_GLOBAL_DEPTH);</span>
-<span class="pc bpc" id="L137" title="2 of 4 branches missed.">            if (globalDepth &lt; 0 || globalDepth &gt; MAX_GLOBAL_DEPTH) {</span>
-<span class="nc" id="L138">                throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректный globalDepth&quot;);</span>
+<span class="pc bpc" id="L137" title="1 of 4 branches missed.">            if (globalDepth &lt; 0 || globalDepth &gt; MAX_GLOBAL_DEPTH) {</span>
+<span class="fc" id="L138">                throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректный globalDepth&quot;);</span>
             }
 
 <span class="fc" id="L141">            this.hashA = readHeaderInt(OFF_HASH_A);</span>
 <span class="fc" id="L142">            this.hashB = readHeaderInt(OFF_HASH_B);</span>
 <span class="fc" id="L143">            this.nextFreeOffset = readHeaderLong(OFF_NEXT_FREE);</span>
 
-<span class="pc bpc" id="L145" title="2 of 4 branches missed.">            if (nextFreeOffset &lt; BUCKET_REGION_OFFSET || nextFreeOffset &gt; mappedSize) {</span>
-<span class="nc" id="L146">                throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректный nextFreeOffset&quot;);</span>
+<span class="pc bpc" id="L145" title="1 of 4 branches missed.">            if (nextFreeOffset &lt; BUCKET_REGION_OFFSET || nextFreeOffset &gt; mappedSize) {</span>
+<span class="fc" id="L146">                throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректный nextFreeOffset&quot;);</span>
             }
-<span class="nc" id="L148">        } catch (IOException e) {</span>
-<span class="nc" id="L149">            throw new UncheckedIOException(&quot;Не удалось открыть расширяемую хеш-таблицу&quot;, e);</span>
-<span class="fc" id="L150">        }</span>
+<span class="fc" id="L148">        } catch (IOException e) {</span>
+<span class="fc" id="L149">            throw new UncheckedIOException(&quot;Не удалось открыть расширяемую хеш-таблицу&quot;, e);</span>
+        }
 <span class="fc" id="L151">    }</span>
 
     // ---- Публичный API ----
     public void put(int key, int value) {
 <span class="fc" id="L155">        ensureOpen();</span>
 
-        while (true) {
+<span class="fc" id="L157">        while (true) {</span>
 <span class="fc" id="L158">            int directoryIndex = directoryIndex(key);</span>
 <span class="fc" id="L159">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
 
@@ -164,7 +164,7 @@ public class ExtendableHashTable implements AutoCloseable {
             }
 
 <span class="fc" id="L166">            splitBucket(directoryIndex);</span>
-<span class="fc" id="L167">        }</span>
+        }
     }
 
     public Integer get(int key) {
@@ -199,46 +199,46 @@ public class ExtendableHashTable implements AutoCloseable {
     }
 
     public Path filePath() {
-<span class="nc" id="L202">        return filePath;</span>
+<span class="fc" id="L202">        return filePath;</span>
     }
 
     @Override
     public void close() {
-<span class="pc bpc" id="L207" title="1 of 2 branches missed.">        if (closed) {</span>
-<span class="nc" id="L208">            return;</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">        if (closed) {</span>
+<span class="fc" id="L208">            return;</span>
         }
 <span class="fc" id="L210">        closed = true;</span>
 
 <span class="fc" id="L212">        IOException error = null;</span>
 
         try {
-<span class="pc bpc" id="L215" title="1 of 2 branches missed.">            if (buffer != null) {</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">            if (buffer != null) {</span>
 <span class="fc" id="L216">                buffer.force();</span>
             }
-<span class="nc" id="L218">        } catch (Exception e) {</span>
+<span class="pc" id="L218">        } catch (Exception e) {</span>
 <span class="nc" id="L219">            error = new IOException(&quot;Failed to flush mapped buffer&quot;, e);</span>
-<span class="fc" id="L220">        }</span>
+        }
 
         try {
 <span class="fc" id="L223">            channel.close();</span>
-<span class="nc" id="L224">        } catch (IOException e) {</span>
+<span class="pc" id="L224">        } catch (IOException e) {</span>
 <span class="nc bnc" id="L225" title="All 2 branches missed.">            if (error == null) {</span>
 <span class="nc" id="L226">                error = e;</span>
             }
-<span class="fc" id="L228">        }</span>
+        }
 
 <span class="fc bfc" id="L230" title="All 2 branches covered.">        if (deleteOnClose) {</span>
             try {
 <span class="fc" id="L232">                Files.deleteIfExists(filePath);</span>
-<span class="nc" id="L233">            } catch (IOException e) {</span>
-<span class="nc bnc" id="L234" title="All 2 branches missed.">                if (error == null) {</span>
-<span class="nc" id="L235">                    error = e;</span>
+<span class="fc" id="L233">            } catch (IOException e) {</span>
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">                if (error == null) {</span>
+<span class="fc" id="L235">                    error = e;</span>
                 }
-<span class="fc" id="L237">            }</span>
+            }
         }
 
-<span class="pc bpc" id="L240" title="1 of 2 branches missed.">        if (error != null) {</span>
-<span class="nc" id="L241">            throw new UncheckedIOException(&quot;Failed to close extendable hash table&quot;, error);</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">        if (error != null) {</span>
+<span class="fc" id="L241">            throw new UncheckedIOException(&quot;Failed to close extendable hash table&quot;, error);</span>
         }
 <span class="fc" id="L243">    }</span>
 
@@ -292,7 +292,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L292">    }</span>
 
     private void tryMerge(int directoryIndex) {
-        while (true) {
+<span class="fc" id="L295">        while (true) {</span>
 <span class="fc" id="L296">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
 <span class="fc" id="L297">            int localDepth = bucketLocalDepth(bucketOffset);</span>
 
@@ -343,7 +343,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc bfc" id="L343" title="All 2 branches covered.">            for (int i = base; i &lt; directoryLength(); i += step) {</span>
 <span class="fc" id="L344">                writeDirectoryPointer(i, survivorOffset);</span>
             }
-<span class="fc" id="L346">        }</span>
+        }
     }
 
     private void doubleDirectory() {
@@ -441,14 +441,14 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L441">    }</span>
 
     private void validateHeader() {
-<span class="pc bpc" id="L444" title="1 of 2 branches missed.">        if (readHeaderInt(OFF_MAGIC) != MAGIC) {</span>
-<span class="nc" id="L445">            throw new IllegalStateException(&quot;Файл таблицы поврежден: неверный magic&quot;);</span>
+<span class="fc bfc" id="L444" title="All 2 branches covered.">        if (readHeaderInt(OFF_MAGIC) != MAGIC) {</span>
+<span class="fc" id="L445">            throw new IllegalStateException(&quot;Файл таблицы поврежден: неверный magic&quot;);</span>
         }
-<span class="pc bpc" id="L447" title="1 of 2 branches missed.">        if (readHeaderInt(OFF_VERSION) != VERSION) {</span>
-<span class="nc" id="L448">            throw new IllegalStateException(&quot;Неподдерживаемая версия таблицы&quot;);</span>
+<span class="fc bfc" id="L447" title="All 2 branches covered.">        if (readHeaderInt(OFF_VERSION) != VERSION) {</span>
+<span class="fc" id="L448">            throw new IllegalStateException(&quot;Неподдерживаемая версия таблицы&quot;);</span>
         }
-<span class="pc bpc" id="L450" title="1 of 2 branches missed.">        if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {</span>
-<span class="nc" id="L451">            throw new IllegalStateException(&quot;Неподдерживаемый формат структуры файла таблицы&quot;);</span>
+<span class="fc bfc" id="L450" title="All 2 branches covered.">        if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {</span>
+<span class="fc" id="L451">            throw new IllegalStateException(&quot;Неподдерживаемый формат структуры файла таблицы&quot;);</span>
         }
 <span class="fc" id="L453">    }</span>
 
@@ -464,8 +464,8 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L464">    }</span>
 
     private static void validateBucketCapacity(int bucketCapacity) {
-<span class="pc bpc" id="L467" title="1 of 2 branches missed.">        if (bucketCapacity &lt;= 0) {</span>
-<span class="nc" id="L468">            throw new IllegalArgumentException(&quot;bucketCapacity должен быть &gt; 0&quot;);</span>
+<span class="fc bfc" id="L467" title="All 2 branches covered.">        if (bucketCapacity &lt;= 0) {</span>
+<span class="fc" id="L468">            throw new IllegalArgumentException(&quot;bucketCapacity должен быть &gt; 0&quot;);</span>
         }
 <span class="fc" id="L470">    }</span>
 
@@ -512,9 +512,9 @@ public class ExtendableHashTable implements AutoCloseable {
             }
 <span class="fc" id="L513">            buffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, newSize);</span>
 <span class="fc" id="L514">            mappedSize = newSize;</span>
-<span class="nc" id="L515">        } catch (IOException e) {</span>
+<span class="pc" id="L515">        } catch (IOException e) {</span>
 <span class="nc" id="L516">            throw new UncheckedIOException(&quot;Не удалось перемапить файл таблицы&quot;, e);</span>
-<span class="fc" id="L517">        }</span>
+        }
 <span class="fc" id="L518">    }</span>
 
     private long allocateBucket(int localDepth) {
