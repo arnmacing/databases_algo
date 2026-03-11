@@ -1,0 +1,4 @@
+package bench.jmh_generated;
+public class GeoSpatialIndexBenchmark_BuildState_jmhType extends GeoSpatialIndexBenchmark_BuildState_jmhType_B3 {
+}
+

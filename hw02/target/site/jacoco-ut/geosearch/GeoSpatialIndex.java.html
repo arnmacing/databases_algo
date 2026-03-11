@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeoSpatialIndex.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hw02</a> &gt; <a href="index.source.html" class="el_package">geosearch</a> &gt; <span class="el_source">GeoSpatialIndex.java</span></div><h1>GeoSpatialIndex.java</h1><pre class="source lang-java linenums">package geosearch;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+public class GeoSpatialIndex&lt;T&gt; {
+    private static final double EARTH_RADIUS_METERS = 6_371_008.8;
+    private static final double WORLD_WIDTH_METERS = 2.0 * Math.PI * EARTH_RADIUS_METERS;
+    private static final double MIN_LATITUDE = -90.0;
+    private static final double MAX_LATITUDE = 90.0;
+    private static final double MIN_LONGITUDE = -180.0;
+    private static final double MAX_LONGITUDE = 180.0;
+    private static final int DEFAULT_LEAF_CAPACITY = 16;
+    private static final int MIN_TREE_DEPTH = 2;
+    private static final int MAX_TREE_DEPTH = 24;
+
+    public static final double DEFAULT_CELL_SIZE_METERS = 500.0;
+
+    private final int leafCapacity;
+    private final int maxDepth;
+    private final Node&lt;T&gt; root;
+<span class="fc" id="L28">    private final Map&lt;String, IndexEntry&lt;T&gt;&gt; byId = new HashMap&lt;&gt;();</span>
+
+    public GeoSpatialIndex() {
+<span class="fc" id="L31">        this(DEFAULT_CELL_SIZE_METERS);</span>
+<span class="fc" id="L32">    }</span>
+
+<span class="fc" id="L34">    public GeoSpatialIndex(double cellSizeMeters) {</span>
+<span class="fc" id="L35">        validateCellSize(cellSizeMeters);</span>
+<span class="fc" id="L36">        this.leafCapacity = DEFAULT_LEAF_CAPACITY;</span>
+<span class="fc" id="L37">        this.maxDepth = computeMaxDepth(cellSizeMeters);</span>
+<span class="fc" id="L38">        this.root = Node.leaf(MIN_LATITUDE, MAX_LATITUDE, MIN_LONGITUDE, MAX_LONGITUDE);</span>
+<span class="fc" id="L39">    }</span>
+
+    public void put(String id, double latitude, double longitude, T payload) {
+<span class="fc" id="L42">        GeoObject&lt;T&gt; object = new GeoObject&lt;&gt;(id, latitude, longitude, payload);</span>
+
+<span class="fc" id="L44">        IndexEntry&lt;T&gt; oldEntry = byId.remove(id);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (oldEntry != null) {</span>
+<span class="fc" id="L46">            removeFromTree(root, oldEntry);</span>
+        }
+
+<span class="fc" id="L49">        IndexEntry&lt;T&gt; newEntry = new IndexEntry&lt;&gt;(object);</span>
+<span class="fc" id="L50">        insertIntoTree(root, newEntry, 0);</span>
+<span class="fc" id="L51">        byId.put(id, newEntry);</span>
+<span class="fc" id="L52">    }</span>
+
+    public void put(GeoObject&lt;T&gt; object) {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (object == null) {</span>
+<span class="fc" id="L56">            throw new IllegalArgumentException(&quot;object must not be null&quot;);</span>
+        }
+<span class="fc" id="L58">        put(object.id(), object.latitude(), object.longitude(), object.payload());</span>
+<span class="fc" id="L59">    }</span>
+
+    public boolean remove(String id) {
+<span class="fc" id="L62">        validateId(id);</span>
+<span class="fc" id="L63">        IndexEntry&lt;T&gt; entry = byId.remove(id);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (entry == null) {</span>
+<span class="fc" id="L65">            return false;</span>
+        }
+<span class="fc" id="L67">        return removeFromTree(root, entry);</span>
+    }
+
+    public Optional&lt;GeoObject&lt;T&gt;&gt; getById(String id) {
+<span class="fc" id="L71">        validateId(id);</span>
+<span class="fc" id="L72">        IndexEntry&lt;T&gt; entry = byId.get(id);</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (entry == null) {</span>
+<span class="fc" id="L74">            return Optional.empty();</span>
+        }
+<span class="fc" id="L76">        return Optional.of(entry.object);</span>
+    }
+
+    public int size() {
+<span class="fc" id="L80">        return byId.size();</span>
+    }
+
+    public List&lt;GeoSearchResult&lt;T&gt;&gt; findNearby(double latitude, double longitude, double radiusMeters) {
+<span class="fc" id="L84">        validateLatitude(latitude);</span>
+<span class="fc" id="L85">        validateLongitude(longitude);</span>
+<span class="fc" id="L86">        validateRadius(radiusMeters);</span>
+
+<span class="fc" id="L88">        double angularRadiusDegrees = Math.toDegrees(radiusMeters / EARTH_RADIUS_METERS);</span>
+<span class="fc" id="L89">        double minLatitude = Math.max(MIN_LATITUDE, latitude - angularRadiusDegrees);</span>
+<span class="fc" id="L90">        double maxLatitude = Math.min(MAX_LATITUDE, latitude + angularRadiusDegrees);</span>
+
+<span class="fc" id="L92">        double maxAbsLatitude = Math.max(Math.abs(minLatitude), Math.abs(maxLatitude));</span>
+<span class="fc" id="L93">        double cosAtMaxAbsLatitude = Math.cos(Math.toRadians(maxAbsLatitude));</span>
+<span class="fc" id="L94">        double minCos = Math.max(cosAtMaxAbsLatitude, 1.0e-6);</span>
+
+        double longitudeDelta;
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (radiusMeters == 0.0) {</span>
+<span class="fc" id="L98">            longitudeDelta = 0.0;</span>
+        } else {
+<span class="fc" id="L100">            longitudeDelta = Math.toDegrees(radiusMeters / (EARTH_RADIUS_METERS * minCos));</span>
+<span class="fc" id="L101">            longitudeDelta = Math.min(MAX_LONGITUDE, longitudeDelta);</span>
+        }
+
+<span class="fc" id="L104">        List&lt;LonWindow&gt; longitudeWindows = buildLongitudeWindows(longitude, longitudeDelta);</span>
+<span class="fc" id="L105">        List&lt;IndexEntry&lt;T&gt;&gt; candidates = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (LonWindow window : longitudeWindows) {</span>
+<span class="fc" id="L107">            collectInRange(root, minLatitude, maxLatitude, window.minLongitude, window.maxLongitude, candidates);</span>
+<span class="fc" id="L108">        }</span>
+
+<span class="fc" id="L110">        List&lt;GeoSearchResult&lt;T&gt;&gt; results = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L111">        Set&lt;String&gt; seenIds = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        for (IndexEntry&lt;T&gt; candidate : candidates) {</span>
+<span class="fc" id="L113">            String id = candidate.object.id();</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">            if (!seenIds.add(id)) {</span>
+<span class="nc" id="L115">                continue;</span>
+            }
+<span class="fc" id="L117">            GeoObject&lt;T&gt; object = candidate.object;</span>
+<span class="fc" id="L118">            double distanceMeters = haversineMeters(latitude, longitude, object.latitude(), object.longitude());</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">            if (distanceMeters &lt;= radiusMeters) {</span>
+<span class="fc" id="L120">                results.add(new GeoSearchResult&lt;&gt;(object, distanceMeters));</span>
+            }
+<span class="fc" id="L122">        }</span>
+
+<span class="fc" id="L124">        results.sort(Comparator</span>
+<span class="fc" id="L125">                .comparingDouble(GeoSearchResult&lt;T&gt;::distanceMeters)</span>
+<span class="fc" id="L126">                .thenComparing(result -&gt; result.object().id()));</span>
+
+<span class="fc" id="L128">        return results;</span>
+    }
+
+    private void insertIntoTree(Node&lt;T&gt; node, IndexEntry&lt;T&gt; entry, int depth) {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (node.isLeaf()) {</span>
+<span class="fc" id="L133">            node.entries.add(entry);</span>
+<span class="pc bpc" id="L134" title="1 of 4 branches missed.">            if (node.entries.size() &gt; leafCapacity &amp;&amp; depth &lt; maxDepth) {</span>
+<span class="fc" id="L135">                split(node, depth);</span>
+            }
+<span class="fc" id="L137">            return;</span>
+        }
+
+<span class="fc" id="L140">        Node&lt;T&gt; child = node.children[childIndex(node, entry.object.latitude(), entry.object.longitude())];</span>
+<span class="fc" id="L141">        insertIntoTree(child, entry, depth + 1);</span>
+<span class="fc" id="L142">    }</span>
+
+    private void split(Node&lt;T&gt; node, int depth) {
+<span class="fc" id="L145">        double midLat = midpoint(node.latMin, node.latMax);</span>
+<span class="fc" id="L146">        double midLon = midpoint(node.lonMin, node.lonMax);</span>
+
+        @SuppressWarnings(&quot;unchecked&quot;)
+<span class="fc" id="L149">        Node&lt;T&gt;[] children = (Node&lt;T&gt;[]) new Node&lt;?&gt;[4];</span>
+<span class="fc" id="L150">        children[0] = Node.leaf(node.latMin, midLat, node.lonMin, midLon); // SW</span>
+<span class="fc" id="L151">        children[1] = Node.leaf(node.latMin, midLat, midLon, node.lonMax); // SE</span>
+<span class="fc" id="L152">        children[2] = Node.leaf(midLat, node.latMax, node.lonMin, midLon); // NW</span>
+<span class="fc" id="L153">        children[3] = Node.leaf(midLat, node.latMax, midLon, node.lonMax); // NE</span>
+
+<span class="fc" id="L155">        List&lt;IndexEntry&lt;T&gt;&gt; oldEntries = node.entries;</span>
+<span class="fc" id="L156">        node.entries = null;</span>
+<span class="fc" id="L157">        node.children = children;</span>
+
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        for (IndexEntry&lt;T&gt; entry : oldEntries) {</span>
+<span class="fc" id="L160">            Node&lt;T&gt; child = node.children[childIndex(node, entry.object.latitude(), entry.object.longitude())];</span>
+<span class="fc" id="L161">            insertIntoTree(child, entry, depth + 1);</span>
+<span class="fc" id="L162">        }</span>
+<span class="fc" id="L163">    }</span>
+
+    private boolean removeFromTree(Node&lt;T&gt; node, IndexEntry&lt;T&gt; entry) {
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (node.isLeaf()) {</span>
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">            for (int i = 0; i &lt; node.entries.size(); i++) {</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">                if (node.entries.get(i).object.id().equals(entry.object.id())) {</span>
+<span class="fc" id="L169">                    node.entries.remove(i);</span>
+<span class="fc" id="L170">                    return true;</span>
+                }
+            }
+<span class="nc" id="L173">            return false;</span>
+        }
+
+<span class="fc" id="L176">        Node&lt;T&gt; child = node.children[childIndex(node, entry.object.latitude(), entry.object.longitude())];</span>
+<span class="fc" id="L177">        return removeFromTree(child, entry);</span>
+    }
+
+    private void collectInRange(
+            Node&lt;T&gt; node,
+            double minLatitude,
+            double maxLatitude,
+            double minLongitude,
+            double maxLongitude,
+            List&lt;IndexEntry&lt;T&gt;&gt; out) {
+
+<span class="fc bfc" id="L188" title="All 2 branches covered.">        if (!intersects(node, minLatitude, maxLatitude, minLongitude, maxLongitude)) {</span>
+<span class="fc" id="L189">            return;</span>
+        }
+
+<span class="fc bfc" id="L192" title="All 2 branches covered.">        if (node.isLeaf()) {</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">            for (IndexEntry&lt;T&gt; entry : node.entries) {</span>
+<span class="fc" id="L194">                double latitude = entry.object.latitude();</span>
+<span class="fc" id="L195">                double longitude = entry.object.longitude();</span>
+<span class="fc bfc" id="L196" title="All 8 branches covered.">                if (latitude &gt;= minLatitude &amp;&amp; latitude &lt;= maxLatitude</span>
+                        &amp;&amp; longitude &gt;= minLongitude &amp;&amp; longitude &lt;= maxLongitude) {
+<span class="fc" id="L198">                    out.add(entry);</span>
+                }
+<span class="fc" id="L200">            }</span>
+<span class="fc" id="L201">            return;</span>
+        }
+
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        for (Node&lt;T&gt; child : node.children) {</span>
+<span class="fc" id="L205">            collectInRange(child, minLatitude, maxLatitude, minLongitude, maxLongitude, out);</span>
+        }
+<span class="fc" id="L207">    }</span>
+
+    private static boolean intersects(
+            Node&lt;?&gt; node,
+            double minLatitude,
+            double maxLatitude,
+            double minLongitude,
+            double maxLongitude) {
+
+<span class="fc bfc" id="L216" title="All 8 branches covered.">        return node.latMax &gt;= minLatitude &amp;&amp; node.latMin &lt;= maxLatitude</span>
+                &amp;&amp; node.lonMax &gt;= minLongitude &amp;&amp; node.lonMin &lt;= maxLongitude;
+    }
+
+    private static int childIndex(Node&lt;?&gt; node, double latitude, double longitude) {
+<span class="fc" id="L221">        double midLat = midpoint(node.latMin, node.latMax);</span>
+<span class="fc" id="L222">        double midLon = midpoint(node.lonMin, node.lonMax);</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        int row = latitude &gt;= midLat ? 1 : 0;</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">        int col = longitude &gt;= midLon ? 1 : 0;</span>
+<span class="fc" id="L225">        return row * 2 + col;</span>
+    }
+
+    private static double midpoint(double left, double right) {
+<span class="fc" id="L229">        return left + (right - left) * 0.5;</span>
+    }
+
+    private static int computeMaxDepth(double cellSizeMeters) {
+<span class="fc" id="L233">        double cellsPerWorld = WORLD_WIDTH_METERS / cellSizeMeters;</span>
+<span class="fc bfc" id="L234" title="All 2 branches covered.">        if (cellsPerWorld &lt;= 1.0) {</span>
+<span class="fc" id="L235">            return MIN_TREE_DEPTH;</span>
+        }
+<span class="fc" id="L237">        int depth = (int) Math.ceil(Math.log(cellsPerWorld) / Math.log(2.0));</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (depth &lt; MIN_TREE_DEPTH) {</span>
+<span class="fc" id="L239">            return MIN_TREE_DEPTH;</span>
+        }
+<span class="fc" id="L241">        return Math.min(depth, MAX_TREE_DEPTH);</span>
+    }
+
+    private static List&lt;LonWindow&gt; buildLongitudeWindows(double longitude, double delta) {
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        if (delta &gt;= MAX_LONGITUDE) {</span>
+<span class="fc" id="L246">            return List.of(new LonWindow(MIN_LONGITUDE, MAX_LONGITUDE));</span>
+        }
+
+<span class="fc" id="L249">        double left = longitude - delta;</span>
+<span class="fc" id="L250">        double right = longitude + delta;</span>
+<span class="fc bfc" id="L251" title="All 2 branches covered.">        if (left &lt; MIN_LONGITUDE) {</span>
+<span class="fc" id="L252">            return List.of(</span>
+                    new LonWindow(left + 360.0, MAX_LONGITUDE),
+                    new LonWindow(MIN_LONGITUDE, right));
+        }
+<span class="fc bfc" id="L256" title="All 2 branches covered.">        if (right &gt; MAX_LONGITUDE) {</span>
+<span class="fc" id="L257">            return List.of(</span>
+                    new LonWindow(left, MAX_LONGITUDE),
+                    new LonWindow(MIN_LONGITUDE, right - 360.0));
+        }
+<span class="fc" id="L261">        return List.of(new LonWindow(left, right));</span>
+    }
+
+    private static double haversineMeters(double lat1, double lon1, double lat2, double lon2) {
+<span class="fc" id="L265">        double lat1Rad = Math.toRadians(lat1);</span>
+<span class="fc" id="L266">        double lat2Rad = Math.toRadians(lat2);</span>
+<span class="fc" id="L267">        double dLat = lat2Rad - lat1Rad;</span>
+<span class="fc" id="L268">        double dLon = Math.toRadians(lon2 - lon1);</span>
+
+<span class="fc" id="L270">        double sinHalfLat = Math.sin(dLat / 2.0);</span>
+<span class="fc" id="L271">        double sinHalfLon = Math.sin(dLon / 2.0);</span>
+
+<span class="fc" id="L273">        double a = sinHalfLat * sinHalfLat</span>
+<span class="fc" id="L274">                + Math.cos(lat1Rad) * Math.cos(lat2Rad) * sinHalfLon * sinHalfLon;</span>
+<span class="fc" id="L275">        double c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1.0 - a));</span>
+<span class="fc" id="L276">        return EARTH_RADIUS_METERS * c;</span>
+    }
+
+    private static void validateId(String id) {
+<span class="fc bfc" id="L280" title="All 4 branches covered.">        if (id == null || id.isBlank()) {</span>
+<span class="fc" id="L281">            throw new IllegalArgumentException(&quot;id must not be null or blank&quot;);</span>
+        }
+<span class="fc" id="L283">    }</span>
+
+    private static void validateLatitude(double latitude) {
+<span class="fc bfc" id="L286" title="All 6 branches covered.">        if (!Double.isFinite(latitude) || latitude &lt; MIN_LATITUDE || latitude &gt; MAX_LATITUDE) {</span>
+<span class="fc" id="L287">            throw new IllegalArgumentException(&quot;latitude must be in [-90, 90] and finite&quot;);</span>
+        }
+<span class="fc" id="L289">    }</span>
+
+    private static void validateLongitude(double longitude) {
+<span class="fc bfc" id="L292" title="All 6 branches covered.">        if (!Double.isFinite(longitude) || longitude &lt; MIN_LONGITUDE || longitude &gt; MAX_LONGITUDE) {</span>
+<span class="fc" id="L293">            throw new IllegalArgumentException(&quot;longitude must be in [-180, 180] and finite&quot;);</span>
+        }
+<span class="fc" id="L295">    }</span>
+
+    private static void validateRadius(double radiusMeters) {
+<span class="fc bfc" id="L298" title="All 4 branches covered.">        if (!Double.isFinite(radiusMeters) || radiusMeters &lt; 0.0) {</span>
+<span class="fc" id="L299">            throw new IllegalArgumentException(&quot;radiusMeters must be finite and &gt;= 0&quot;);</span>
+        }
+<span class="fc" id="L301">    }</span>
+
+    private static void validateCellSize(double cellSizeMeters) {
+<span class="fc bfc" id="L304" title="All 4 branches covered.">        if (!Double.isFinite(cellSizeMeters) || cellSizeMeters &lt;= 0.0) {</span>
+<span class="fc" id="L305">            throw new IllegalArgumentException(&quot;cellSizeMeters must be finite and &gt; 0&quot;);</span>
+        }
+<span class="fc" id="L307">    }</span>
+
+<span class="fc" id="L309">    private record LonWindow(double minLongitude, double maxLongitude) {</span>
+    }
+
+    private static final class IndexEntry&lt;T&gt; {
+        private final GeoObject&lt;T&gt; object;
+
+<span class="fc" id="L315">        private IndexEntry(GeoObject&lt;T&gt; object) {</span>
+<span class="fc" id="L316">            this.object = object;</span>
+<span class="fc" id="L317">        }</span>
+    }
+
+    private static final class Node&lt;T&gt; {
+        private final double latMin;
+        private final double latMax;
+        private final double lonMin;
+        private final double lonMax;
+        private List&lt;IndexEntry&lt;T&gt;&gt; entries;
+        private Node&lt;T&gt;[] children;
+
+<span class="fc" id="L328">        private Node(double latMin, double latMax, double lonMin, double lonMax, List&lt;IndexEntry&lt;T&gt;&gt; entries) {</span>
+<span class="fc" id="L329">            this.latMin = latMin;</span>
+<span class="fc" id="L330">            this.latMax = latMax;</span>
+<span class="fc" id="L331">            this.lonMin = lonMin;</span>
+<span class="fc" id="L332">            this.lonMax = lonMax;</span>
+<span class="fc" id="L333">            this.entries = entries;</span>
+<span class="fc" id="L334">        }</span>
+
+        private static &lt;T&gt; Node&lt;T&gt; leaf(double latMin, double latMax, double lonMin, double lonMax) {
+<span class="fc" id="L337">            return new Node&lt;&gt;(latMin, latMax, lonMin, lonMax, new ArrayList&lt;&gt;());</span>
+        }
+
+        private boolean isLeaf() {
+<span class="fc bfc" id="L341" title="All 2 branches covered.">            return children == null;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

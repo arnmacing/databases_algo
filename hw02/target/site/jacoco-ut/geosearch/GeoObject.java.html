@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeoObject.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hw02</a> &gt; <a href="index.source.html" class="el_package">geosearch</a> &gt; <span class="el_source">GeoObject.java</span></div><h1>GeoObject.java</h1><pre class="source lang-java linenums">package geosearch;
+
+public record GeoObject&lt;T&gt;(String id, double latitude, double longitude, T payload) {
+
+<span class="fc" id="L5">    public GeoObject {</span>
+<span class="fc" id="L6">        validateId(id);</span>
+<span class="fc" id="L7">        validateLatitude(latitude);</span>
+<span class="fc" id="L8">        validateLongitude(longitude);</span>
+<span class="fc" id="L9">    }</span>
+
+    private static void validateId(String id) {
+<span class="fc bfc" id="L12" title="All 4 branches covered.">        if (id == null || id.isBlank()) {</span>
+<span class="fc" id="L13">            throw new IllegalArgumentException(&quot;id must not be null or blank&quot;);</span>
+        }
+<span class="fc" id="L15">    }</span>
+
+    private static void validateLatitude(double latitude) {
+<span class="fc bfc" id="L18" title="All 6 branches covered.">        if (!Double.isFinite(latitude) || latitude &lt; -90.0 || latitude &gt; 90.0) {</span>
+<span class="fc" id="L19">            throw new IllegalArgumentException(&quot;latitude must be in [-90, 90] and finite&quot;);</span>
+        }
+<span class="fc" id="L21">    }</span>
+
+    private static void validateLongitude(double longitude) {
+<span class="fc bfc" id="L24" title="All 6 branches covered.">        if (!Double.isFinite(longitude) || longitude &lt; -180.0 || longitude &gt; 180.0) {</span>
+<span class="fc" id="L25">            throw new IllegalArgumentException(&quot;longitude must be in [-180, 180] and finite&quot;);</span>
+        }
+<span class="fc" id="L27">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

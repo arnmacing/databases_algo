@@ -1,0 +1,4 @@
+package bench.jmh_generated;
+public class GeoSpatialIndexBenchmark_MutationState_jmhType extends GeoSpatialIndexBenchmark_MutationState_jmhType_B3 {
+}
+

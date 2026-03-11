@@ -1,0 +1,16 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,bench/GeoSpatialIndexBenchmark$BuildState.setup
+inline,bench/GeoSpatialIndexBenchmark$MutationState.setup
+inline,bench/GeoSpatialIndexBenchmark$QueryState.setup
+inline,bench/GeoSpatialIndexBenchmark.buildGeoSpatialIndex
+inline,bench/GeoSpatialIndexBenchmark.buildNaiveIndex
+inline,bench/GeoSpatialIndexBenchmark.nearbyQueryGeoSpatialIndex
+inline,bench/GeoSpatialIndexBenchmark.nearbyQueryNaive
+inline,bench/GeoSpatialIndexBenchmark.removeThenPutGeoSpatialIndex
+inline,bench/GeoSpatialIndexBenchmark.removeThenPutNaive
+inline,bench/GeoSpatialIndexBenchmark.upsertExistingGeoSpatialIndex
+inline,bench/GeoSpatialIndexBenchmark.upsertExistingNaive
