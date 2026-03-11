@@ -108,7 +108,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L108">            ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));</span>
 <span class="fc" id="L109">            initializeNewTable(seed);</span>
 <span class="pc" id="L110">        } catch (IOException e) {</span>
-<span class="nc" id="L111">            throw new UncheckedIOException(&quot;Не удалось инициализировать расширяемую хеш-таблицу&quot;, e);</span>
+<span class="nc" id="L111">            throw new UncheckedIOException(&quot;Не удалось инициализировать&quot;, e);</span>
         }
 <span class="fc" id="L113">    }</span>
 
@@ -121,7 +121,7 @@ public class ExtendableHashTable implements AutoCloseable {
 
 <span class="fc" id="L122">            long currentSize = channel.size();</span>
 <span class="fc bfc" id="L123" title="All 2 branches covered.">            if (currentSize &lt; BUCKET_REGION_OFFSET) {</span>
-<span class="fc" id="L124">                throw new IllegalStateException(&quot;Файл таблицы поврежден: слишком маленький&quot;);</span>
+<span class="fc" id="L124">                throw new IllegalStateException(&quot;слишком маленький файл таблицы&quot;);</span>
             }
 
 <span class="fc" id="L127">            this.mappedSize = 0;</span>
@@ -135,7 +135,7 @@ public class ExtendableHashTable implements AutoCloseable {
 
 <span class="fc" id="L136">            this.globalDepth = readHeaderInt(OFF_GLOBAL_DEPTH);</span>
 <span class="pc bpc" id="L137" title="1 of 4 branches missed.">            if (globalDepth &lt; 0 || globalDepth &gt; MAX_GLOBAL_DEPTH) {</span>
-<span class="fc" id="L138">                throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректный globalDepth&quot;);</span>
+<span class="fc" id="L138">                throw new IllegalStateException(&quot;Некорректный globalDepth&quot;);</span>
             }
 
 <span class="fc" id="L141">            this.hashA = readHeaderInt(OFF_HASH_A);</span>
@@ -143,10 +143,10 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L143">            this.nextFreeOffset = readHeaderLong(OFF_NEXT_FREE);</span>
 
 <span class="pc bpc" id="L145" title="1 of 4 branches missed.">            if (nextFreeOffset &lt; BUCKET_REGION_OFFSET || nextFreeOffset &gt; mappedSize) {</span>
-<span class="fc" id="L146">                throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректный nextFreeOffset&quot;);</span>
+<span class="fc" id="L146">                throw new IllegalStateException(&quot;Некорректный nextFreeOffset&quot;);</span>
             }
 <span class="fc" id="L148">        } catch (IOException e) {</span>
-<span class="fc" id="L149">            throw new UncheckedIOException(&quot;Не удалось открыть расширяемую хеш-таблицу&quot;, e);</span>
+<span class="fc" id="L149">            throw new UncheckedIOException(&quot;Не удалось открыть&quot;, e);</span>
         }
 <span class="fc" id="L151">    }</span>
 
@@ -216,7 +216,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L216">                buffer.force();</span>
             }
 <span class="pc" id="L218">        } catch (Exception e) {</span>
-<span class="nc" id="L219">            error = new IOException(&quot;Failed to flush mapped buffer&quot;, e);</span>
+<span class="nc" id="L219">            error = new IOException(&quot;Failed to flush&quot;, e);</span>
         }
 
         try {
@@ -238,7 +238,7 @@ public class ExtendableHashTable implements AutoCloseable {
         }
 
 <span class="fc bfc" id="L240" title="All 2 branches covered.">        if (error != null) {</span>
-<span class="fc" id="L241">            throw new UncheckedIOException(&quot;Failed to close extendable hash table&quot;, error);</span>
+<span class="fc" id="L241">            throw new UncheckedIOException(&quot;Failed to close&quot;, error);</span>
         }
 <span class="fc" id="L243">    }</span>
 
@@ -442,13 +442,13 @@ public class ExtendableHashTable implements AutoCloseable {
 
     private void validateHeader() {
 <span class="fc bfc" id="L444" title="All 2 branches covered.">        if (readHeaderInt(OFF_MAGIC) != MAGIC) {</span>
-<span class="fc" id="L445">            throw new IllegalStateException(&quot;Файл таблицы поврежден: неверный magic&quot;);</span>
+<span class="fc" id="L445">            throw new IllegalStateException(&quot;Неверный magic&quot;);</span>
         }
 <span class="fc bfc" id="L447" title="All 2 branches covered.">        if (readHeaderInt(OFF_VERSION) != VERSION) {</span>
 <span class="fc" id="L448">            throw new IllegalStateException(&quot;Неподдерживаемая версия таблицы&quot;);</span>
         }
 <span class="fc bfc" id="L450" title="All 2 branches covered.">        if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {</span>
-<span class="fc" id="L451">            throw new IllegalStateException(&quot;Неподдерживаемый формат структуры файла таблицы&quot;);</span>
+<span class="fc" id="L451">            throw new IllegalStateException(&quot;Странный формат структуры&quot;);</span>
         }
 <span class="fc" id="L453">    }</span>
 
@@ -489,7 +489,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L489">            path.toFile().deleteOnExit();</span>
 <span class="fc" id="L490">            return path;</span>
 <span class="nc" id="L491">        } catch (IOException e) {</span>
-<span class="nc" id="L492">            throw new UncheckedIOException(&quot;Не удалось создать временный файл для хеш-таблицы&quot;, e);</span>
+<span class="nc" id="L492">            throw new UncheckedIOException(&quot;Не удалось создать временный файл&quot;, e);</span>
         }
     }
 
@@ -632,7 +632,7 @@ public class ExtendableHashTable implements AutoCloseable {
     private int toBufferIndex(long offset, int length) {
 <span class="fc" id="L633">        long limit = offset + length;</span>
 <span class="pc bpc" id="L634" title="3 of 6 branches missed.">        if (offset &lt; 0 || limit &lt; offset || limit &gt; mappedSize) {</span>
-<span class="nc" id="L635">            throw new IllegalStateException(&quot;Файл таблицы поврежден: некорректные смещения&quot;);</span>
+<span class="nc" id="L635">            throw new IllegalStateException(&quot;Некорректные смещения&quot;);</span>
         }
 <span class="fc" id="L637">        return (int) offset;</span>
     }
