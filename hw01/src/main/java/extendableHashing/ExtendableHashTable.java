@@ -53,6 +53,14 @@ public class ExtendableHashTable implements AutoCloseable {
         return new ExtendableHashTable(filePath);
     }
 
+    /**
+     * Внутренний конструктор создания новой таблицы.
+     *
+     * @param filePath       путь к файлу, где создаётся структура.
+     * @param bucketCapacity вместимость бакета.
+     * @param seed           seed для детерминированного выбора параметров хеш-функции.
+     * @param deleteOnClose  удалять ли файл при close().
+     */
     private ExtendableHashTable(Path filePath, int bucketCapacity, long seed, boolean deleteOnClose) {
         validateBucketCapacity(bucketCapacity);
 
@@ -62,7 +70,12 @@ public class ExtendableHashTable implements AutoCloseable {
         this.deleteOnClose = deleteOnClose;
 
         try {
-            this.channel = FileChannel.open(filePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.READ, StandardOpenOption.WRITE);
+            this.channel = FileChannel.open(
+                    filePath,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.READ,
+                    StandardOpenOption.WRITE);
             this.mappedSize = 0;
             ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));
 
@@ -88,6 +101,11 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Внутренний конструктор открытия уже существующей таблицы.
+     *
+     * @param filePath путь к файлу готовой таблицы.
+     */
     private ExtendableHashTable(Path filePath) {
         this.filePath = filePath;
         this.deleteOnClose = false;
@@ -134,6 +152,13 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Вставляет новую пару ключ-значение или обновляет значение существующего ключа.
+     * <p>
+     * 1) по хешу определяем индекс директории;
+     * 2) пытаемся вставить в соответствующий бакет;
+     * 3) если бакет полон, делим его и пробуем снова.
+     */
     public void put(int key, int value) {
         ensureOpen();
 
@@ -150,6 +175,9 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Ищет значение по ключу.
+     */
     public Integer get(int key) {
         ensureOpen();
         long bucketOffset = readDirectoryPointer(directoryIndex(key));
@@ -157,6 +185,9 @@ public class ExtendableHashTable implements AutoCloseable {
         return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);
     }
 
+    /**
+     * Удаляет ключ из таблицы.
+     */
     public boolean remove(int key) {
         ensureOpen();
 
@@ -178,6 +209,9 @@ public class ExtendableHashTable implements AutoCloseable {
         return true;
     }
 
+    /**
+     * Считает число уникальных бакетов, на которые указывает директория для теста.
+     */
     public int uniqueBucketCountForTest() {
         ensureOpen();
 
@@ -192,6 +226,9 @@ public class ExtendableHashTable implements AutoCloseable {
         return filePath;
     }
 
+    /**
+     * Закрывает таблицу, сбрасывает изменения на диск и при необходимости удаляет файл.
+     */
     @Override
     public void close() {
         if (closed) {
@@ -232,6 +269,16 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+
+    /**
+     * Вычисляет индекс директории по ключу.
+     * <p>
+     * Берём не весь хеш, а только globalDepth младших битов.
+     * Поэтому длина директории всегда 2^globalDepth.
+     *
+     * @param key ключ, для которого ищется индекс директории.
+     * @return номер ячейки директории.
+     */
     private int directoryIndex(int key) {
         if (globalDepth == 0) {
             return 0;
@@ -241,6 +288,17 @@ public class ExtendableHashTable implements AutoCloseable {
         return hash(key) & mask;
     }
 
+    /**
+     * Делит переполненный бакет на два.
+     * <p>
+     * 1) берём переполненный бакет;
+     * 2) если его localDepth совпадает с globalDepth, сначала удваиваем директорию;
+     * 3) создаём новый бакет;
+     * 4) переназначаем часть ссылок директории на новый бакет;
+     * 5) перераскладываем записи старого бакета по двум бакетам по следующему значащему биту.
+     *
+     * @param splitDirectoryIndex индекс директории, через который мы пришли к переполненному бакету.
+     */
     private void splitBucket(int splitDirectoryIndex) {
         long oldBucketOffset = readDirectoryPointer(splitDirectoryIndex);
         int oldDepth = bucketLocalDepth(oldBucketOffset);
@@ -280,6 +338,11 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Пытается объединить бакет после удаления.
+     *
+     * @param directoryIndex индекс директории, соответствующий бакету после удаления.
+     */
     private void tryMerge(int directoryIndex) {
         while (true) {
             long bucketOffset = readDirectoryPointer(directoryIndex);
@@ -335,6 +398,12 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Удваивает директорию.
+     * <p>
+     * Старая половина копируется во вторую половину,
+     * после чего globalDepth увеличивается на 1.
+     */
     private void doubleDirectory() {
         if (globalDepth == MAX_GLOBAL_DEPTH) {
             throw new IllegalStateException("Достигнут максимальный globalDepth: " + MAX_GLOBAL_DEPTH);
@@ -349,13 +418,23 @@ public class ExtendableHashTable implements AutoCloseable {
         writeHeaderInt(OFF_GLOBAL_DEPTH, globalDepth);
     }
 
+
+    /**
+     * Хеширует ключ.
+     * <p>
+     * 1) сначала подобный шаг a*x+b,
+     * 2) потом fmix32-перемешивание из MurmurHash3,
+     * чтобы младшие биты хеша были лучше перемешаны
+     *
+     * @param key исходный ключ.
+     * @return 32-битный хеш ключа.
+     */
     private int hash(int key) {
         long x = Integer.toUnsignedLong(key);
         long aa = Integer.toUnsignedLong(hashA);
         long bb = Integer.toUnsignedLong(hashB);
         int h = (int) (aa * x + bb);
 
-        // fmix32 из MurmurHash3
         h ^= (h >>> 16);
         h *= 0x85ebca6b;
         h ^= (h >>> 13);
@@ -365,7 +444,14 @@ public class ExtendableHashTable implements AutoCloseable {
         return h;
     }
 
-    // ---- Операции с бакетами ----
+    /**
+     * Пытается вставить или обновить запись внутри одного бакета.
+     *
+     * @param bucketOffset смещение бакета в файле.
+     * @param key          ключ для вставки.
+     * @param value        значение для вставки или обновления.
+     * @return результат операции: INSERTED, UPDATED или FULL.
+     */
     private PutResult putIntoBucket(long bucketOffset, int key, int value) {
         int position = indexOf(bucketOffset, key);
         if (position >= 0) {
@@ -384,6 +470,14 @@ public class ExtendableHashTable implements AutoCloseable {
         return PutResult.INSERTED;
     }
 
+
+    /**
+     * Линейно ищет ключ внутри бакета, так как они маленькие;
+     *
+     * @param bucketOffset смещение бакета.
+     * @param key          искомый ключ.
+     * @return индекс слота либо NOT_FOUND.
+     */
     private int indexOf(long bucketOffset, int key) {
         int size = bucketSize(bucketOffset);
         for (int i = 0; i < size; i++) {
@@ -394,6 +488,7 @@ public class ExtendableHashTable implements AutoCloseable {
         return NOT_FOUND;
     }
 
+    // helpers
     private static void validateBucketCapacity(int bucketCapacity) {
         if (bucketCapacity <= 0) {
             throw new IllegalArgumentException("bucketCapacity должен быть > 0");
@@ -420,7 +515,6 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
-    // ---- Рост файла и выделение памяти ----
     private void ensureMappedSize(long minSize) {
         if (minSize <= mappedSize) {
             return;
@@ -464,7 +558,6 @@ public class ExtendableHashTable implements AutoCloseable {
         return bucketOffset;
     }
 
-    // ---- Хелперы директории ----
     private long readDirectoryPointer(int directoryIndex) {
         long offset = directoryOffset(directoryIndex);
         return buffer.getLong(toBufferIndex(offset, Long.BYTES));
@@ -475,7 +568,6 @@ public class ExtendableHashTable implements AutoCloseable {
         buffer.putLong(toBufferIndex(offset, Long.BYTES), bucketOffset);
     }
 
-    // ---- Хелперы структуры бакета ----
     private int bucketLocalDepth(long bucketOffset) {
         return readIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH);
     }
@@ -512,7 +604,6 @@ public class ExtendableHashTable implements AutoCloseable {
         writeIntAt(offset, value);
     }
 
-    // ---- Хелперы заголовка ----
     private int readHeaderInt(int offset) {
         return buffer.getInt(offset);
     }
@@ -525,7 +616,6 @@ public class ExtendableHashTable implements AutoCloseable {
         buffer.putLong(offset, value);
     }
 
-    // ---- Низкоуровневые примитивы mmap ----
     private int readIntAt(long offset) {
         return buffer.getInt(toBufferIndex(offset, Integer.BYTES));
     }
