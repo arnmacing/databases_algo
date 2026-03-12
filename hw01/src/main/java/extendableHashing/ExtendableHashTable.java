@@ -12,52 +12,18 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.SplittableRandom;
 
-/**
- * Расширяемая хеш-таблица, которая живет в файле с mmap.
- * <p>
- * Как устроен файл:
- * 1) фиксированный заголовок с метаданными таблицы
- * 2) фиксированная область директории (до {@code MAX_GLOBAL_DEPTH})
- * 3) область бакетов, в которую только дописываем
- */
+import static extendableHashing.ExtendableHashFileFormat.*;
+
+
 public class ExtendableHashTable implements AutoCloseable {
-
-    // ---- Константы формата файла ----
-    private static final int MAGIC = 0x45585448; // EXTH
-    private static final int VERSION = 1;
-
-    private static final int MAX_GLOBAL_DEPTH = 20;
-    private static final int DIRECTORY_CAPACITY = 1 << MAX_GLOBAL_DEPTH;
-
-    private static final int HEADER_SIZE = 64;
-    private static final int OFF_MAGIC = 0;
-    private static final int OFF_VERSION = 4;
-    private static final int OFF_BUCKET_CAPACITY = 8;
-    private static final int OFF_GLOBAL_DEPTH = 12;
-    private static final int OFF_HASH_A = 16;
-    private static final int OFF_HASH_B = 20;
-    private static final int OFF_NEXT_FREE = 24;
-    private static final int OFF_MAX_GLOBAL_DEPTH = 32;
-
-    private static final long DIRECTORY_OFFSET = HEADER_SIZE;
-    private static final long DIRECTORY_BYTES = (long) DIRECTORY_CAPACITY * Long.BYTES;
-    private static final long BUCKET_REGION_OFFSET = DIRECTORY_OFFSET + DIRECTORY_BYTES;
-    private static final long MIN_FILE_SIZE = BUCKET_REGION_OFFSET + 4096;
-
-    private static final int BUCKET_OFF_LOCAL_DEPTH = 0;
-    private static final int BUCKET_OFF_SIZE = 4;
-    private static final int BUCKET_HEADER_SIZE = 8;
-
     private static final int NOT_FOUND = -1;
 
-    // ---- Неизменяемая конфигурация и ресурсы ----
     private final int bucketCapacity;
     private final int bucketRecordSize;
     private final Path filePath;
     private final boolean deleteOnClose;
     private final FileChannel channel;
 
-    // ---- Кэш состояния из файла ----
     private MappedByteBuffer buffer;
     private long mappedSize;
     private int globalDepth;
@@ -65,7 +31,6 @@ public class ExtendableHashTable implements AutoCloseable {
     private int hashB;
     private long nextFreeOffset;
 
-    // ---- Жизненный цикл ----
     private boolean closed;
 
     public ExtendableHashTable(int bucketCapacity) {
@@ -97,16 +62,27 @@ public class ExtendableHashTable implements AutoCloseable {
         this.deleteOnClose = deleteOnClose;
 
         try {
-            this.channel = FileChannel.open(
-                    filePath,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.TRUNCATE_EXISTING,
-                    StandardOpenOption.READ,
-                    StandardOpenOption.WRITE
-            );
+            this.channel = FileChannel.open(filePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.READ, StandardOpenOption.WRITE);
             this.mappedSize = 0;
             ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));
-            initializeNewTable(seed);
+
+            SplittableRandom random = new SplittableRandom(seed);
+            this.hashA = random.nextInt() | 1;
+            this.hashB = random.nextInt();
+            this.globalDepth = 0;
+            this.nextFreeOffset = BUCKET_REGION_OFFSET;
+
+            writeHeaderInt(OFF_MAGIC, MAGIC);
+            writeHeaderInt(OFF_VERSION, VERSION);
+            writeHeaderInt(OFF_BUCKET_CAPACITY, this.bucketCapacity);
+            writeHeaderInt(OFF_GLOBAL_DEPTH, this.globalDepth);
+            writeHeaderInt(OFF_HASH_A, this.hashA);
+            writeHeaderInt(OFF_HASH_B, this.hashB);
+            writeHeaderLong(OFF_NEXT_FREE, this.nextFreeOffset);
+            writeHeaderInt(OFF_MAX_GLOBAL_DEPTH, MAX_GLOBAL_DEPTH);
+
+            long initialBucketOffset = allocateBucket(0);
+            writeDirectoryPointer(0, initialBucketOffset);
         } catch (IOException e) {
             throw new UncheckedIOException("Не удалось инициализировать", e);
         }
@@ -127,7 +103,15 @@ public class ExtendableHashTable implements AutoCloseable {
             this.mappedSize = 0;
             ensureMappedSize(currentSize);
 
-            validateHeader();
+            if (readHeaderInt(OFF_MAGIC) != MAGIC) {
+                throw new IllegalStateException("Неверный magic");
+            }
+            if (readHeaderInt(OFF_VERSION) != VERSION) {
+                throw new IllegalStateException("Неподдерживаемая версия таблицы");
+            }
+            if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {
+                throw new IllegalStateException("Странный формат структуры");
+            }
 
             this.bucketCapacity = readHeaderInt(OFF_BUCKET_CAPACITY);
             validateBucketCapacity(bucketCapacity);
@@ -140,7 +124,7 @@ public class ExtendableHashTable implements AutoCloseable {
 
             this.hashA = readHeaderInt(OFF_HASH_A);
             this.hashB = readHeaderInt(OFF_HASH_B);
-            this.nextFreeOffset = readHeaderLong(OFF_NEXT_FREE);
+            this.nextFreeOffset = buffer.getLong(OFF_NEXT_FREE);
 
             if (nextFreeOffset < BUCKET_REGION_OFFSET || nextFreeOffset > mappedSize) {
                 throw new IllegalStateException("Некорректный nextFreeOffset");
@@ -150,7 +134,6 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
-    // ---- Публичный API ----
     public void put(int key, int value) {
         ensureOpen();
 
@@ -170,7 +153,8 @@ public class ExtendableHashTable implements AutoCloseable {
     public Integer get(int key) {
         ensureOpen();
         long bucketOffset = readDirectoryPointer(directoryIndex(key));
-        return getFromBucket(bucketOffset, key);
+        int position = indexOf(bucketOffset, key);
+        return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);
     }
 
     public boolean remove(int key) {
@@ -178,11 +162,17 @@ public class ExtendableHashTable implements AutoCloseable {
 
         int directoryIndex = directoryIndex(key);
         long bucketOffset = readDirectoryPointer(directoryIndex);
-        boolean removed = removeFromBucket(bucketOffset, key);
-
-        if (!removed) {
+        int position = indexOf(bucketOffset, key);
+        if (position == NOT_FOUND) {
             return false;
         }
+
+        int size = bucketSize(bucketOffset);
+        int last = size - 1;
+
+        writeBucketKey(bucketOffset, position, readBucketKey(bucketOffset, last));
+        writeBucketValue(bucketOffset, position, readBucketValue(bucketOffset, last));
+        writeBucketSize(bucketOffset, last);
 
         tryMerge(directoryIndex);
         return true;
@@ -242,7 +232,6 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
-    // ---- Алгоритм расширяемого хеширования ----
     private int directoryIndex(int key) {
         if (globalDepth == 0) {
             return 0;
@@ -395,27 +384,6 @@ public class ExtendableHashTable implements AutoCloseable {
         return PutResult.INSERTED;
     }
 
-    private Integer getFromBucket(long bucketOffset, int key) {
-        int position = indexOf(bucketOffset, key);
-        return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);
-    }
-
-    private boolean removeFromBucket(long bucketOffset, int key) {
-        int position = indexOf(bucketOffset, key);
-        if (position == NOT_FOUND) {
-            return false;
-        }
-
-        int size = bucketSize(bucketOffset);
-        int last = size - 1;
-
-        writeBucketKey(bucketOffset, position, readBucketKey(bucketOffset, last));
-        writeBucketValue(bucketOffset, position, readBucketValue(bucketOffset, last));
-        writeBucketSize(bucketOffset, last);
-
-        return true;
-    }
-
     private int indexOf(long bucketOffset, int key) {
         int size = bucketSize(bucketOffset);
         for (int i = 0; i < size; i++) {
@@ -426,51 +394,10 @@ public class ExtendableHashTable implements AutoCloseable {
         return NOT_FOUND;
     }
 
-    // ---- Инициализация и валидация ----
-    private void initializeNewTable(long seed) {
-        SplittableRandom random = new SplittableRandom(seed);
-        this.hashA = random.nextInt() | 1;
-        this.hashB = random.nextInt();
-        this.globalDepth = 0;
-        this.nextFreeOffset = BUCKET_REGION_OFFSET;
-
-        writeHeader();
-
-        long initialBucketOffset = allocateBucket(0);
-        writeDirectoryPointer(0, initialBucketOffset);
-    }
-
-    private void validateHeader() {
-        if (readHeaderInt(OFF_MAGIC) != MAGIC) {
-            throw new IllegalStateException("Неверный magic");
-        }
-        if (readHeaderInt(OFF_VERSION) != VERSION) {
-            throw new IllegalStateException("Неподдерживаемая версия таблицы");
-        }
-        if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {
-            throw new IllegalStateException("Странный формат структуры");
-        }
-    }
-
-    private void writeHeader() {
-        writeHeaderInt(OFF_MAGIC, MAGIC);
-        writeHeaderInt(OFF_VERSION, VERSION);
-        writeHeaderInt(OFF_BUCKET_CAPACITY, bucketCapacity);
-        writeHeaderInt(OFF_GLOBAL_DEPTH, globalDepth);
-        writeHeaderInt(OFF_HASH_A, hashA);
-        writeHeaderInt(OFF_HASH_B, hashB);
-        writeHeaderLong(OFF_NEXT_FREE, nextFreeOffset);
-        writeHeaderInt(OFF_MAX_GLOBAL_DEPTH, MAX_GLOBAL_DEPTH);
-    }
-
     private static void validateBucketCapacity(int bucketCapacity) {
         if (bucketCapacity <= 0) {
             throw new IllegalArgumentException("bucketCapacity должен быть > 0");
         }
-    }
-
-    private static int bucketRecordSizeFor(int bucketCapacity) {
-        return BUCKET_HEADER_SIZE + (bucketCapacity * Integer.BYTES * 2);
     }
 
     private int directoryLength() {
@@ -538,16 +465,14 @@ public class ExtendableHashTable implements AutoCloseable {
     }
 
     // ---- Хелперы директории ----
-    private long directoryOffset(int directoryIndex) {
-        return DIRECTORY_OFFSET + ((long) directoryIndex * Long.BYTES);
-    }
-
     private long readDirectoryPointer(int directoryIndex) {
-        return readLongAt(directoryOffset(directoryIndex));
+        long offset = directoryOffset(directoryIndex);
+        return buffer.getLong(toBufferIndex(offset, Long.BYTES));
     }
 
     private void writeDirectoryPointer(int directoryIndex, long bucketOffset) {
-        writeLongAt(directoryOffset(directoryIndex), bucketOffset);
+        long offset = directoryOffset(directoryIndex);
+        buffer.putLong(toBufferIndex(offset, Long.BYTES), bucketOffset);
     }
 
     // ---- Хелперы структуры бакета ----
@@ -567,14 +492,6 @@ public class ExtendableHashTable implements AutoCloseable {
         writeIntAt(bucketOffset + BUCKET_OFF_SIZE, size);
     }
 
-    private long bucketKeysOffset(long bucketOffset) {
-        return bucketOffset + BUCKET_HEADER_SIZE;
-    }
-
-    private long bucketValuesOffset(long bucketOffset) {
-        return bucketKeysOffset(bucketOffset) + ((long) bucketCapacity * Integer.BYTES);
-    }
-
     private int readBucketKey(long bucketOffset, int slot) {
         long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);
         return readIntAt(offset);
@@ -586,12 +503,12 @@ public class ExtendableHashTable implements AutoCloseable {
     }
 
     private int readBucketValue(long bucketOffset, int slot) {
-        long offset = bucketValuesOffset(bucketOffset) + ((long) slot * Integer.BYTES);
+        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);
         return readIntAt(offset);
     }
 
     private void writeBucketValue(long bucketOffset, int slot, int value) {
-        long offset = bucketValuesOffset(bucketOffset) + ((long) slot * Integer.BYTES);
+        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);
         writeIntAt(offset, value);
     }
 
@@ -602,10 +519,6 @@ public class ExtendableHashTable implements AutoCloseable {
 
     private void writeHeaderInt(int offset, int value) {
         buffer.putInt(offset, value);
-    }
-
-    private long readHeaderLong(int offset) {
-        return buffer.getLong(offset);
     }
 
     private void writeHeaderLong(int offset, long value) {
@@ -619,14 +532,6 @@ public class ExtendableHashTable implements AutoCloseable {
 
     private void writeIntAt(long offset, int value) {
         buffer.putInt(toBufferIndex(offset, Integer.BYTES), value);
-    }
-
-    private long readLongAt(long offset) {
-        return buffer.getLong(toBufferIndex(offset, Long.BYTES));
-    }
-
-    private void writeLongAt(long offset, long value) {
-        buffer.putLong(toBufferIndex(offset, Long.BYTES), value);
     }
 
     private int toBufferIndex(long offset, int length) {

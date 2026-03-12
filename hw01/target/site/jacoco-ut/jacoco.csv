@@ -1,10 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-hw01,lsh,MinHashLshIndex,0,757,1,77,0,150,1,54,0,16
+hw01,lsh,MinHashLshIndex,0,757,1,77,0,152,1,54,0,16
 hw01,lsh,MinHashLshIndex.IntList,0,64,0,4,0,12,0,7,0,5
 hw01,lsh,MinHashLshIndex.Pair,0,20,0,0,0,6,0,2,0,2
-hw01,extendableHashing,PutResult,0,34,0,0,0,4,0,1,0,1
-hw01,extendableHashing,ExtendableHashTable,54,1278,12,96,12,289,11,97,0,54
-hw01,perfectHashing,PerfectHashTable,0,327,1,23,0,61,1,19,0,8
-hw01,perfectHashing,PerfectHashTable.SecondaryTable,0,179,0,20,0,39,0,16,0,6
+hw01,extendableHashing,PutResult,0,21,0,0,0,4,0,1,0,1
+hw01,extendableHashing,ExtendableHashFileFormat,0,27,0,0,0,4,0,4,0,4
+hw01,extendableHashing,ExtendableHashTable,54,1212,12,94,12,267,11,84,0,42
+hw01,perfectHashing,PerfectHashTable,1,328,1,23,1,62,1,19,0,8
+hw01,perfectHashing,PerfectHashTable.SecondaryTable,0,180,0,20,0,40,0,16,0,6
 hw01,perfectHashing,PerfectHashTable.HashFunction,0,52,0,2,0,11,0,4,0,3
 hw01,perfectHashing,PerfectHashTable.Buckets,0,9,0,0,0,4,0,1,0,1

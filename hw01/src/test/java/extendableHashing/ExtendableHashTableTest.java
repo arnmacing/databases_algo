@@ -128,7 +128,7 @@ public class ExtendableHashTableTest {
                 int action = rnd.nextInt(4);
 
                 switch (action) {
-                    case 0 -> { // put/upsert
+                    case 0 -> {
                         int value = rnd.nextInt();
                         ht.put(key, value);
                         ref.put(key, value);

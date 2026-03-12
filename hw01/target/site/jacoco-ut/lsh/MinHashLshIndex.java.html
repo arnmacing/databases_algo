@@ -124,7 +124,7 @@ public final class MinHashLshIndex {
                         }
                     }
                 }
-            }
+<span class="fc" id="L127">            }</span>
         }
 
 <span class="fc" id="L130">        result.sort(Comparator.comparingDouble((Pair p) -&gt; -p.similarity));</span>
@@ -174,7 +174,7 @@ public final class MinHashLshIndex {
 <span class="fc" id="L174">        int k = 0;</span>
 <span class="fc bfc" id="L175" title="All 2 branches covered.">        for (int v : set) {</span>
 <span class="fc" id="L176">            arr[k++] = v;</span>
-        }
+<span class="fc" id="L177">        }</span>
 <span class="fc" id="L178">        Arrays.sort(arr);</span>
 <span class="fc" id="L179">        return arr;</span>
     }
@@ -243,11 +243,11 @@ public final class MinHashLshIndex {
 <span class="fc bfc" id="L243" title="All 2 branches covered.">            } else if (x &lt; y) {</span>
 <span class="fc" id="L244">                union++;</span>
 <span class="fc" id="L245">                i++;</span>
-<span class="fc" id="L246">            } else {</span>
+            } else {
 <span class="fc" id="L247">                union++;</span>
 <span class="fc" id="L248">                j++;</span>
             }
-        }
+<span class="fc" id="L250">        }</span>
 <span class="fc" id="L251">        union += (a.length - i) + (b.length - j);</span>
 
 <span class="fc bfc" id="L253" title="All 2 branches covered.">        if (union == 0) {</span>
