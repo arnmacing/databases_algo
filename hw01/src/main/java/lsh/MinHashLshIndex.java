@@ -132,7 +132,7 @@ public final class MinHashLshIndex {
     }
 
     /**
-     * точный Jaccard
+     * точный Jaccard для тестов
      */
     public List<Pair> nearDuplicatesFullScan(double threshold) {
         if (threshold < 0.0 || threshold > 1.0) {

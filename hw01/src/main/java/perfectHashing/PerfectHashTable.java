@@ -1,9 +1,6 @@
 package perfectHashing;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SplittableRandom;
+import java.util.*;
 
 public class PerfectHashTable<V> {
     private static final int P = 2_147_483_647;

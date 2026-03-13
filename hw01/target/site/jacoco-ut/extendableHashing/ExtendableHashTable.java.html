@@ -53,493 +53,583 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L53">        return new ExtendableHashTable(filePath);</span>
     }
 
-<span class="fc" id="L56">    private ExtendableHashTable(Path filePath, int bucketCapacity, long seed, boolean deleteOnClose) {</span>
-<span class="fc" id="L57">        validateBucketCapacity(bucketCapacity);</span>
+    /**
+     * Внутренний конструктор создания новой таблицы.
+     *
+     * @param filePath       путь к файлу, где создаётся структура.
+     * @param bucketCapacity вместимость бакета.
+     * @param seed           seed для детерминированного выбора параметров хеш-функции.
+     * @param deleteOnClose  удалять ли файл при close().
+     */
+<span class="fc" id="L64">    private ExtendableHashTable(Path filePath, int bucketCapacity, long seed, boolean deleteOnClose) {</span>
+<span class="fc" id="L65">        validateBucketCapacity(bucketCapacity);</span>
 
-<span class="fc" id="L59">        this.bucketCapacity = bucketCapacity;</span>
-<span class="fc" id="L60">        this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);</span>
-<span class="fc" id="L61">        this.filePath = filePath;</span>
-<span class="fc" id="L62">        this.deleteOnClose = deleteOnClose;</span>
-
-        try {
-<span class="fc" id="L65">            this.channel = FileChannel.open(filePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.READ, StandardOpenOption.WRITE);</span>
-<span class="fc" id="L66">            this.mappedSize = 0;</span>
-<span class="fc" id="L67">            ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));</span>
-
-<span class="fc" id="L69">            SplittableRandom random = new SplittableRandom(seed);</span>
-<span class="fc" id="L70">            this.hashA = random.nextInt() | 1;</span>
-<span class="fc" id="L71">            this.hashB = random.nextInt();</span>
-<span class="fc" id="L72">            this.globalDepth = 0;</span>
-<span class="fc" id="L73">            this.nextFreeOffset = BUCKET_REGION_OFFSET;</span>
-
-<span class="fc" id="L75">            writeHeaderInt(OFF_MAGIC, MAGIC);</span>
-<span class="fc" id="L76">            writeHeaderInt(OFF_VERSION, VERSION);</span>
-<span class="fc" id="L77">            writeHeaderInt(OFF_BUCKET_CAPACITY, this.bucketCapacity);</span>
-<span class="fc" id="L78">            writeHeaderInt(OFF_GLOBAL_DEPTH, this.globalDepth);</span>
-<span class="fc" id="L79">            writeHeaderInt(OFF_HASH_A, this.hashA);</span>
-<span class="fc" id="L80">            writeHeaderInt(OFF_HASH_B, this.hashB);</span>
-<span class="fc" id="L81">            writeHeaderLong(OFF_NEXT_FREE, this.nextFreeOffset);</span>
-<span class="fc" id="L82">            writeHeaderInt(OFF_MAX_GLOBAL_DEPTH, MAX_GLOBAL_DEPTH);</span>
-
-<span class="fc" id="L84">            long initialBucketOffset = allocateBucket(0);</span>
-<span class="fc" id="L85">            writeDirectoryPointer(0, initialBucketOffset);</span>
-<span class="pc" id="L86">        } catch (IOException e) {</span>
-<span class="nc" id="L87">            throw new UncheckedIOException(&quot;Не удалось инициализировать&quot;, e);</span>
-        }
-<span class="fc" id="L89">    }</span>
-
-<span class="fc" id="L91">    private ExtendableHashTable(Path filePath) {</span>
-<span class="fc" id="L92">        this.filePath = filePath;</span>
-<span class="fc" id="L93">        this.deleteOnClose = false;</span>
+<span class="fc" id="L67">        this.bucketCapacity = bucketCapacity;</span>
+<span class="fc" id="L68">        this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);</span>
+<span class="fc" id="L69">        this.filePath = filePath;</span>
+<span class="fc" id="L70">        this.deleteOnClose = deleteOnClose;</span>
 
         try {
-<span class="fc" id="L96">            this.channel = FileChannel.open(filePath, StandardOpenOption.READ, StandardOpenOption.WRITE);</span>
+<span class="fc" id="L73">            this.channel = FileChannel.open(</span>
+                    filePath,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.READ,
+                    StandardOpenOption.WRITE);
+<span class="fc" id="L79">            this.mappedSize = 0;</span>
+<span class="fc" id="L80">            ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));</span>
 
-<span class="fc" id="L98">            long currentSize = channel.size();</span>
-<span class="fc bfc" id="L99" title="All 2 branches covered.">            if (currentSize &lt; BUCKET_REGION_OFFSET) {</span>
-<span class="fc" id="L100">                throw new IllegalStateException(&quot;слишком маленький файл таблицы&quot;);</span>
+<span class="fc" id="L82">            SplittableRandom random = new SplittableRandom(seed);</span>
+<span class="fc" id="L83">            this.hashA = random.nextInt() | 1;</span>
+<span class="fc" id="L84">            this.hashB = random.nextInt();</span>
+<span class="fc" id="L85">            this.globalDepth = 0;</span>
+<span class="fc" id="L86">            this.nextFreeOffset = BUCKET_REGION_OFFSET;</span>
+
+<span class="fc" id="L88">            writeHeaderInt(OFF_MAGIC, MAGIC);</span>
+<span class="fc" id="L89">            writeHeaderInt(OFF_VERSION, VERSION);</span>
+<span class="fc" id="L90">            writeHeaderInt(OFF_BUCKET_CAPACITY, this.bucketCapacity);</span>
+<span class="fc" id="L91">            writeHeaderInt(OFF_GLOBAL_DEPTH, this.globalDepth);</span>
+<span class="fc" id="L92">            writeHeaderInt(OFF_HASH_A, this.hashA);</span>
+<span class="fc" id="L93">            writeHeaderInt(OFF_HASH_B, this.hashB);</span>
+<span class="fc" id="L94">            writeHeaderLong(OFF_NEXT_FREE, this.nextFreeOffset);</span>
+<span class="fc" id="L95">            writeHeaderInt(OFF_MAX_GLOBAL_DEPTH, MAX_GLOBAL_DEPTH);</span>
+
+<span class="fc" id="L97">            long initialBucketOffset = allocateBucket(0);</span>
+<span class="fc" id="L98">            writeDirectoryPointer(0, initialBucketOffset);</span>
+<span class="nc" id="L99">        } catch (IOException e) {</span>
+<span class="nc" id="L100">            throw new UncheckedIOException(&quot;Не удалось инициализировать&quot;, e);</span>
+<span class="fc" id="L101">        }</span>
+<span class="fc" id="L102">    }</span>
+
+    /**
+     * Внутренний конструктор открытия уже существующей таблицы.
+     *
+     * @param filePath путь к файлу готовой таблицы.
+     */
+<span class="fc" id="L109">    private ExtendableHashTable(Path filePath) {</span>
+<span class="fc" id="L110">        this.filePath = filePath;</span>
+<span class="fc" id="L111">        this.deleteOnClose = false;</span>
+
+        try {
+<span class="fc" id="L114">            this.channel = FileChannel.open(filePath, StandardOpenOption.READ, StandardOpenOption.WRITE);</span>
+
+<span class="fc" id="L116">            long currentSize = channel.size();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if (currentSize &lt; BUCKET_REGION_OFFSET) {</span>
+<span class="fc" id="L118">                throw new IllegalStateException(&quot;слишком маленький файл таблицы&quot;);</span>
             }
 
-<span class="fc" id="L103">            this.mappedSize = 0;</span>
-<span class="fc" id="L104">            ensureMappedSize(currentSize);</span>
+<span class="fc" id="L121">            this.mappedSize = 0;</span>
+<span class="fc" id="L122">            ensureMappedSize(currentSize);</span>
 
-<span class="fc bfc" id="L106" title="All 2 branches covered.">            if (readHeaderInt(OFF_MAGIC) != MAGIC) {</span>
-<span class="fc" id="L107">                throw new IllegalStateException(&quot;Неверный magic&quot;);</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            if (readHeaderInt(OFF_MAGIC) != MAGIC) {</span>
+<span class="fc" id="L125">                throw new IllegalStateException(&quot;Неверный magic&quot;);</span>
             }
-<span class="fc bfc" id="L109" title="All 2 branches covered.">            if (readHeaderInt(OFF_VERSION) != VERSION) {</span>
-<span class="fc" id="L110">                throw new IllegalStateException(&quot;Неподдерживаемая версия таблицы&quot;);</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">            if (readHeaderInt(OFF_VERSION) != VERSION) {</span>
+<span class="fc" id="L128">                throw new IllegalStateException(&quot;Неподдерживаемая версия таблицы&quot;);</span>
             }
-<span class="fc bfc" id="L112" title="All 2 branches covered.">            if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {</span>
-<span class="fc" id="L113">                throw new IllegalStateException(&quot;Странный формат структуры&quot;);</span>
-            }
-
-<span class="fc" id="L116">            this.bucketCapacity = readHeaderInt(OFF_BUCKET_CAPACITY);</span>
-<span class="fc" id="L117">            validateBucketCapacity(bucketCapacity);</span>
-<span class="fc" id="L118">            this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);</span>
-
-<span class="fc" id="L120">            this.globalDepth = readHeaderInt(OFF_GLOBAL_DEPTH);</span>
-<span class="pc bpc" id="L121" title="1 of 4 branches missed.">            if (globalDepth &lt; 0 || globalDepth &gt; MAX_GLOBAL_DEPTH) {</span>
-<span class="fc" id="L122">                throw new IllegalStateException(&quot;Некорректный globalDepth&quot;);</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">            if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {</span>
+<span class="fc" id="L131">                throw new IllegalStateException(&quot;Странный формат структуры&quot;);</span>
             }
 
-<span class="fc" id="L125">            this.hashA = readHeaderInt(OFF_HASH_A);</span>
-<span class="fc" id="L126">            this.hashB = readHeaderInt(OFF_HASH_B);</span>
-<span class="fc" id="L127">            this.nextFreeOffset = buffer.getLong(OFF_NEXT_FREE);</span>
+<span class="fc" id="L134">            this.bucketCapacity = readHeaderInt(OFF_BUCKET_CAPACITY);</span>
+<span class="fc" id="L135">            validateBucketCapacity(bucketCapacity);</span>
+<span class="fc" id="L136">            this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);</span>
 
-<span class="pc bpc" id="L129" title="1 of 4 branches missed.">            if (nextFreeOffset &lt; BUCKET_REGION_OFFSET || nextFreeOffset &gt; mappedSize) {</span>
-<span class="fc" id="L130">                throw new IllegalStateException(&quot;Некорректный nextFreeOffset&quot;);</span>
+<span class="fc" id="L138">            this.globalDepth = readHeaderInt(OFF_GLOBAL_DEPTH);</span>
+<span class="pc bpc" id="L139" title="1 of 4 branches missed.">            if (globalDepth &lt; 0 || globalDepth &gt; MAX_GLOBAL_DEPTH) {</span>
+<span class="fc" id="L140">                throw new IllegalStateException(&quot;Некорректный globalDepth&quot;);</span>
             }
-<span class="fc" id="L132">        } catch (IOException e) {</span>
-<span class="fc" id="L133">            throw new UncheckedIOException(&quot;Не удалось открыть&quot;, e);</span>
-        }
-<span class="fc" id="L135">    }</span>
 
+<span class="fc" id="L143">            this.hashA = readHeaderInt(OFF_HASH_A);</span>
+<span class="fc" id="L144">            this.hashB = readHeaderInt(OFF_HASH_B);</span>
+<span class="fc" id="L145">            this.nextFreeOffset = buffer.getLong(OFF_NEXT_FREE);</span>
+
+<span class="pc bpc" id="L147" title="1 of 4 branches missed.">            if (nextFreeOffset &lt; BUCKET_REGION_OFFSET || nextFreeOffset &gt; mappedSize) {</span>
+<span class="fc" id="L148">                throw new IllegalStateException(&quot;Некорректный nextFreeOffset&quot;);</span>
+            }
+<span class="fc" id="L150">        } catch (IOException e) {</span>
+<span class="fc" id="L151">            throw new UncheckedIOException(&quot;Не удалось открыть&quot;, e);</span>
+<span class="fc" id="L152">        }</span>
+<span class="fc" id="L153">    }</span>
+
+    /**
+     * Вставляет новую пару ключ-значение или обновляет значение существующего ключа.
+     * &lt;p&gt;
+     * 1) по хешу определяем индекс директории;
+     * 2) пытаемся вставить в соответствующий бакет;
+     * 3) если бакет полон, делим его и пробуем снова.
+     */
     public void put(int key, int value) {
-<span class="fc" id="L138">        ensureOpen();</span>
+<span class="fc" id="L163">        ensureOpen();</span>
 
-<span class="fc" id="L140">        while (true) {</span>
-<span class="fc" id="L141">            int directoryIndex = directoryIndex(key);</span>
-<span class="fc" id="L142">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
+        while (true) {
+<span class="fc" id="L166">            int directoryIndex = directoryIndex(key);</span>
+<span class="fc" id="L167">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
 
-<span class="fc" id="L144">            PutResult result = putIntoBucket(bucketOffset, key, value);</span>
-<span class="fc bfc" id="L145" title="All 4 branches covered.">            if (result == PutResult.INSERTED || result == PutResult.UPDATED) {</span>
-<span class="fc" id="L146">                return;</span>
+<span class="fc" id="L169">            PutResult result = putIntoBucket(bucketOffset, key, value);</span>
+<span class="fc bfc" id="L170" title="All 4 branches covered.">            if (result == PutResult.INSERTED || result == PutResult.UPDATED) {</span>
+<span class="fc" id="L171">                return;</span>
             }
 
-<span class="fc" id="L149">            splitBucket(directoryIndex);</span>
-        }
+<span class="fc" id="L174">            splitBucket(directoryIndex);</span>
+<span class="fc" id="L175">        }</span>
     }
 
+    /**
+     * Ищет значение по ключу.
+     */
     public Integer get(int key) {
-<span class="fc" id="L154">        ensureOpen();</span>
-<span class="fc" id="L155">        long bucketOffset = readDirectoryPointer(directoryIndex(key));</span>
-<span class="fc" id="L156">        int position = indexOf(bucketOffset, key);</span>
-<span class="fc bfc" id="L157" title="All 2 branches covered.">        return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);</span>
-    }
-
-    public boolean remove(int key) {
-<span class="fc" id="L161">        ensureOpen();</span>
-
-<span class="fc" id="L163">        int directoryIndex = directoryIndex(key);</span>
-<span class="fc" id="L164">        long bucketOffset = readDirectoryPointer(directoryIndex);</span>
-<span class="fc" id="L165">        int position = indexOf(bucketOffset, key);</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (position == NOT_FOUND) {</span>
-<span class="fc" id="L167">            return false;</span>
-        }
-
-<span class="fc" id="L170">        int size = bucketSize(bucketOffset);</span>
-<span class="fc" id="L171">        int last = size - 1;</span>
-
-<span class="fc" id="L173">        writeBucketKey(bucketOffset, position, readBucketKey(bucketOffset, last));</span>
-<span class="fc" id="L174">        writeBucketValue(bucketOffset, position, readBucketValue(bucketOffset, last));</span>
-<span class="fc" id="L175">        writeBucketSize(bucketOffset, last);</span>
-
-<span class="fc" id="L177">        tryMerge(directoryIndex);</span>
-<span class="fc" id="L178">        return true;</span>
-    }
-
-    public int uniqueBucketCountForTest() {
 <span class="fc" id="L182">        ensureOpen();</span>
+<span class="fc" id="L183">        long bucketOffset = readDirectoryPointer(directoryIndex(key));</span>
+<span class="fc" id="L184">        int position = indexOf(bucketOffset, key);</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);</span>
+    }
 
-<span class="fc" id="L184">        Set&lt;Long&gt; unique = new HashSet&lt;&gt;(Math.max(16, directoryLength() * 2));</span>
-<span class="fc bfc" id="L185" title="All 2 branches covered.">        for (int i = 0; i &lt; directoryLength(); i++) {</span>
-<span class="fc" id="L186">            unique.add(readDirectoryPointer(i));</span>
+    /**
+     * Удаляет ключ из таблицы.
+     */
+    public boolean remove(int key) {
+<span class="fc" id="L192">        ensureOpen();</span>
+
+<span class="fc" id="L194">        int directoryIndex = directoryIndex(key);</span>
+<span class="fc" id="L195">        long bucketOffset = readDirectoryPointer(directoryIndex);</span>
+<span class="fc" id="L196">        int position = indexOf(bucketOffset, key);</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">        if (position == NOT_FOUND) {</span>
+<span class="fc" id="L198">            return false;</span>
         }
-<span class="fc" id="L188">        return unique.size();</span>
+
+<span class="fc" id="L201">        int size = bucketSize(bucketOffset);</span>
+<span class="fc" id="L202">        int last = size - 1;</span>
+
+<span class="fc" id="L204">        writeBucketKey(bucketOffset, position, readBucketKey(bucketOffset, last));</span>
+<span class="fc" id="L205">        writeBucketValue(bucketOffset, position, readBucketValue(bucketOffset, last));</span>
+<span class="fc" id="L206">        writeBucketSize(bucketOffset, last);</span>
+
+<span class="fc" id="L208">        tryMerge(directoryIndex);</span>
+<span class="fc" id="L209">        return true;</span>
+    }
+
+    /**
+     * Считает число уникальных бакетов, на которые указывает директория для теста.
+     */
+    public int uniqueBucketCountForTest() {
+<span class="fc" id="L216">        ensureOpen();</span>
+
+<span class="fc" id="L218">        Set&lt;Long&gt; unique = new HashSet&lt;&gt;(Math.max(16, directoryLength() * 2));</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">        for (int i = 0; i &lt; directoryLength(); i++) {</span>
+<span class="fc" id="L220">            unique.add(readDirectoryPointer(i));</span>
+        }
+<span class="fc" id="L222">        return unique.size();</span>
     }
 
     public Path filePath() {
-<span class="fc" id="L192">        return filePath;</span>
+<span class="fc" id="L226">        return filePath;</span>
     }
 
+    /**
+     * Закрывает таблицу, сбрасывает изменения на диск и при необходимости удаляет файл.
+     */
     @Override
     public void close() {
-<span class="fc bfc" id="L197" title="All 2 branches covered.">        if (closed) {</span>
-<span class="fc" id="L198">            return;</span>
+<span class="fc bfc" id="L234" title="All 2 branches covered.">        if (closed) {</span>
+<span class="fc" id="L235">            return;</span>
         }
-<span class="fc" id="L200">        closed = true;</span>
+<span class="fc" id="L237">        closed = true;</span>
 
-<span class="fc" id="L202">        IOException error = null;</span>
+<span class="fc" id="L239">        IOException error = null;</span>
 
         try {
-<span class="fc bfc" id="L205" title="All 2 branches covered.">            if (buffer != null) {</span>
-<span class="fc" id="L206">                buffer.force();</span>
+<span class="fc bfc" id="L242" title="All 2 branches covered.">            if (buffer != null) {</span>
+<span class="fc" id="L243">                buffer.force();</span>
             }
-<span class="pc" id="L208">        } catch (Exception e) {</span>
-<span class="nc" id="L209">            error = new IOException(&quot;Failed to flush&quot;, e);</span>
-        }
+<span class="nc" id="L245">        } catch (Exception e) {</span>
+<span class="nc" id="L246">            error = new IOException(&quot;Failed to flush&quot;, e);</span>
+<span class="fc" id="L247">        }</span>
 
         try {
-<span class="fc" id="L213">            channel.close();</span>
-<span class="pc" id="L214">        } catch (IOException e) {</span>
-<span class="nc bnc" id="L215" title="All 2 branches missed.">            if (error == null) {</span>
-<span class="nc" id="L216">                error = e;</span>
+<span class="fc" id="L250">            channel.close();</span>
+<span class="nc" id="L251">        } catch (IOException e) {</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">            if (error == null) {</span>
+<span class="nc" id="L253">                error = e;</span>
             }
-        }
+<span class="fc" id="L255">        }</span>
 
-<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (deleteOnClose) {</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        if (deleteOnClose) {</span>
             try {
-<span class="fc" id="L222">                Files.deleteIfExists(filePath);</span>
-<span class="fc" id="L223">            } catch (IOException e) {</span>
-<span class="pc bpc" id="L224" title="1 of 2 branches missed.">                if (error == null) {</span>
-<span class="fc" id="L225">                    error = e;</span>
+<span class="fc" id="L259">                Files.deleteIfExists(filePath);</span>
+<span class="fc" id="L260">            } catch (IOException e) {</span>
+<span class="pc bpc" id="L261" title="1 of 2 branches missed.">                if (error == null) {</span>
+<span class="fc" id="L262">                    error = e;</span>
                 }
-            }
+<span class="fc" id="L264">            }</span>
         }
 
-<span class="fc bfc" id="L230" title="All 2 branches covered.">        if (error != null) {</span>
-<span class="fc" id="L231">            throw new UncheckedIOException(&quot;Failed to close&quot;, error);</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">        if (error != null) {</span>
+<span class="fc" id="L268">            throw new UncheckedIOException(&quot;Failed to close&quot;, error);</span>
         }
-<span class="fc" id="L233">    }</span>
+<span class="fc" id="L270">    }</span>
 
+
+    /**
+     * Вычисляет индекс директории по ключу.
+     * &lt;p&gt;
+     * Берём не весь хеш, а только globalDepth младших битов.
+     * Поэтому длина директории всегда 2^globalDepth.
+     *
+     * @param key ключ, для которого ищется индекс директории.
+     * @return номер ячейки директории.
+     */
     private int directoryIndex(int key) {
-<span class="fc bfc" id="L236" title="All 2 branches covered.">        if (globalDepth == 0) {</span>
-<span class="fc" id="L237">            return 0;</span>
+<span class="fc bfc" id="L283" title="All 2 branches covered.">        if (globalDepth == 0) {</span>
+<span class="fc" id="L284">            return 0;</span>
         }
 
-<span class="fc" id="L240">        int mask = (1 &lt;&lt; globalDepth) - 1;</span>
-<span class="fc" id="L241">        return hash(key) &amp; mask;</span>
+<span class="fc" id="L287">        int mask = (1 &lt;&lt; globalDepth) - 1;</span>
+<span class="fc" id="L288">        return hash(key) &amp; mask;</span>
     }
 
+    /**
+     * Делит переполненный бакет на два.
+     * &lt;p&gt;
+     * 1) берём переполненный бакет;
+     * 2) если его localDepth совпадает с globalDepth, сначала удваиваем директорию;
+     * 3) создаём новый бакет;
+     * 4) переназначаем часть ссылок директории на новый бакет;
+     * 5) перераскладываем записи старого бакета по двум бакетам по следующему значащему биту.
+     *
+     * @param splitDirectoryIndex индекс директории, через который мы пришли к переполненному бакету.
+     */
     private void splitBucket(int splitDirectoryIndex) {
-<span class="fc" id="L245">        long oldBucketOffset = readDirectoryPointer(splitDirectoryIndex);</span>
-<span class="fc" id="L246">        int oldDepth = bucketLocalDepth(oldBucketOffset);</span>
+<span class="fc" id="L303">        long oldBucketOffset = readDirectoryPointer(splitDirectoryIndex);</span>
+<span class="fc" id="L304">        int oldDepth = bucketLocalDepth(oldBucketOffset);</span>
 
-<span class="fc bfc" id="L248" title="All 2 branches covered.">        if (oldDepth == globalDepth) {</span>
-<span class="fc" id="L249">            doubleDirectory();</span>
+<span class="fc bfc" id="L306" title="All 2 branches covered.">        if (oldDepth == globalDepth) {</span>
+<span class="fc" id="L307">            doubleDirectory();</span>
         }
 
-<span class="fc" id="L252">        int splitBit = 1 &lt;&lt; oldDepth;</span>
+<span class="fc" id="L310">        int splitBit = 1 &lt;&lt; oldDepth;</span>
 
-<span class="fc" id="L254">        long newBucketOffset = allocateBucket(oldDepth + 1);</span>
-<span class="fc" id="L255">        writeBucketLocalDepth(oldBucketOffset, oldDepth + 1);</span>
+<span class="fc" id="L312">        long newBucketOffset = allocateBucket(oldDepth + 1);</span>
+<span class="fc" id="L313">        writeBucketLocalDepth(oldBucketOffset, oldDepth + 1);</span>
 
-<span class="fc bfc" id="L257" title="All 2 branches covered.">        for (int i = 0; i &lt; directoryLength(); i++) {</span>
-<span class="fc bfc" id="L258" title="All 4 branches covered.">            if (readDirectoryPointer(i) == oldBucketOffset &amp;&amp; (i &amp; splitBit) != 0) {</span>
-<span class="fc" id="L259">                writeDirectoryPointer(i, newBucketOffset);</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">        for (int i = 0; i &lt; directoryLength(); i++) {</span>
+<span class="fc bfc" id="L316" title="All 4 branches covered.">            if (readDirectoryPointer(i) == oldBucketOffset &amp;&amp; (i &amp; splitBit) != 0) {</span>
+<span class="fc" id="L317">                writeDirectoryPointer(i, newBucketOffset);</span>
             }
         }
 
-<span class="fc" id="L263">        int count = bucketSize(oldBucketOffset);</span>
-<span class="fc" id="L264">        int[] keys = new int[count];</span>
-<span class="fc" id="L265">        int[] values = new int[count];</span>
+<span class="fc" id="L321">        int count = bucketSize(oldBucketOffset);</span>
+<span class="fc" id="L322">        int[] keys = new int[count];</span>
+<span class="fc" id="L323">        int[] values = new int[count];</span>
 
-<span class="fc bfc" id="L267" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
-<span class="fc" id="L268">            keys[i] = readBucketKey(oldBucketOffset, i);</span>
-<span class="fc" id="L269">            values[i] = readBucketValue(oldBucketOffset, i);</span>
+<span class="fc bfc" id="L325" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc" id="L326">            keys[i] = readBucketKey(oldBucketOffset, i);</span>
+<span class="fc" id="L327">            values[i] = readBucketValue(oldBucketOffset, i);</span>
         }
 
-<span class="fc" id="L272">        writeBucketSize(oldBucketOffset, 0);</span>
+<span class="fc" id="L330">        writeBucketSize(oldBucketOffset, 0);</span>
 
-<span class="fc bfc" id="L274" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
-<span class="fc bfc" id="L275" title="All 2 branches covered.">            long targetOffset = ((hash(keys[i]) &amp; splitBit) == 0) ? oldBucketOffset : newBucketOffset;</span>
-<span class="fc" id="L276">            PutResult result = putIntoBucket(targetOffset, keys[i], values[i]);</span>
-<span class="pc bpc" id="L277" title="1 of 2 branches missed.">            if (result != PutResult.INSERTED) {</span>
-<span class="nc" id="L278">                throw new IllegalStateException(&quot;Повторная вставка после split не удалась&quot;);</span>
+<span class="fc bfc" id="L332" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc bfc" id="L333" title="All 2 branches covered.">            long targetOffset = ((hash(keys[i]) &amp; splitBit) == 0) ? oldBucketOffset : newBucketOffset;</span>
+<span class="fc" id="L334">            PutResult result = putIntoBucket(targetOffset, keys[i], values[i]);</span>
+<span class="pc bpc" id="L335" title="1 of 2 branches missed.">            if (result != PutResult.INSERTED) {</span>
+<span class="nc" id="L336">                throw new IllegalStateException(&quot;Повторная вставка после split не удалась&quot;);</span>
             }
         }
-<span class="fc" id="L281">    }</span>
+<span class="fc" id="L339">    }</span>
 
+    /**
+     * Пытается объединить бакет после удаления.
+     *
+     * @param directoryIndex индекс директории, соответствующий бакету после удаления.
+     */
     private void tryMerge(int directoryIndex) {
-<span class="fc" id="L284">        while (true) {</span>
-<span class="fc" id="L285">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
-<span class="fc" id="L286">            int localDepth = bucketLocalDepth(bucketOffset);</span>
+        while (true) {
+<span class="fc" id="L348">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
+<span class="fc" id="L349">            int localDepth = bucketLocalDepth(bucketOffset);</span>
 
-<span class="fc bfc" id="L288" title="All 2 branches covered.">            if (localDepth == 0) {</span>
-<span class="fc" id="L289">                return;</span>
+<span class="fc bfc" id="L351" title="All 2 branches covered.">            if (localDepth == 0) {</span>
+<span class="fc" id="L352">                return;</span>
             }
 
-<span class="fc" id="L292">            int buddyIndex = directoryIndex ^ (1 &lt;&lt; (localDepth - 1));</span>
-<span class="fc" id="L293">            long buddyOffset = readDirectoryPointer(buddyIndex);</span>
+<span class="fc" id="L355">            int buddyIndex = directoryIndex ^ (1 &lt;&lt; (localDepth - 1));</span>
+<span class="fc" id="L356">            long buddyOffset = readDirectoryPointer(buddyIndex);</span>
 
-<span class="pc bpc" id="L295" title="1 of 2 branches missed.">            if (buddyOffset == bucketOffset) {</span>
-<span class="nc" id="L296">                return;</span>
+<span class="pc bpc" id="L358" title="1 of 2 branches missed.">            if (buddyOffset == bucketOffset) {</span>
+<span class="nc" id="L359">                return;</span>
             }
 
-<span class="fc bfc" id="L299" title="All 2 branches covered.">            if (bucketLocalDepth(buddyOffset) != localDepth) {</span>
-<span class="fc" id="L300">                return;</span>
+<span class="fc bfc" id="L362" title="All 2 branches covered.">            if (bucketLocalDepth(buddyOffset) != localDepth) {</span>
+<span class="fc" id="L363">                return;</span>
             }
 
-<span class="fc" id="L303">            int totalSize = bucketSize(bucketOffset) + bucketSize(buddyOffset);</span>
-<span class="fc bfc" id="L304" title="All 2 branches covered.">            if (totalSize &gt; bucketCapacity) {</span>
-<span class="fc" id="L305">                return;</span>
+<span class="fc" id="L366">            int totalSize = bucketSize(bucketOffset) + bucketSize(buddyOffset);</span>
+<span class="fc bfc" id="L367" title="All 2 branches covered.">            if (totalSize &gt; bucketCapacity) {</span>
+<span class="fc" id="L368">                return;</span>
             }
 
-<span class="fc" id="L308">            long survivorOffset = bucketOffset;</span>
-<span class="fc" id="L309">            long victimOffset = buddyOffset;</span>
+<span class="fc" id="L371">            long survivorOffset = bucketOffset;</span>
+<span class="fc" id="L372">            long victimOffset = buddyOffset;</span>
 
-<span class="fc bfc" id="L311" title="All 2 branches covered.">            if (bucketSize(victimOffset) &gt; bucketSize(survivorOffset)) {</span>
-<span class="fc" id="L312">                long tmp = survivorOffset;</span>
-<span class="fc" id="L313">                survivorOffset = victimOffset;</span>
-<span class="fc" id="L314">                victimOffset = tmp;</span>
+<span class="fc bfc" id="L374" title="All 2 branches covered.">            if (bucketSize(victimOffset) &gt; bucketSize(survivorOffset)) {</span>
+<span class="fc" id="L375">                long tmp = survivorOffset;</span>
+<span class="fc" id="L376">                survivorOffset = victimOffset;</span>
+<span class="fc" id="L377">                victimOffset = tmp;</span>
             }
 
-<span class="fc" id="L317">            int survivorSize = bucketSize(survivorOffset);</span>
-<span class="fc" id="L318">            int victimSize = bucketSize(victimOffset);</span>
+<span class="fc" id="L380">            int survivorSize = bucketSize(survivorOffset);</span>
+<span class="fc" id="L381">            int victimSize = bucketSize(victimOffset);</span>
 
-<span class="fc bfc" id="L320" title="All 2 branches covered.">            for (int i = 0; i &lt; victimSize; i++) {</span>
-<span class="fc" id="L321">                writeBucketKey(survivorOffset, survivorSize + i, readBucketKey(victimOffset, i));</span>
-<span class="fc" id="L322">                writeBucketValue(survivorOffset, survivorSize + i, readBucketValue(victimOffset, i));</span>
+<span class="fc bfc" id="L383" title="All 2 branches covered.">            for (int i = 0; i &lt; victimSize; i++) {</span>
+<span class="fc" id="L384">                writeBucketKey(survivorOffset, survivorSize + i, readBucketKey(victimOffset, i));</span>
+<span class="fc" id="L385">                writeBucketValue(survivorOffset, survivorSize + i, readBucketValue(victimOffset, i));</span>
             }
 
-<span class="fc" id="L325">            writeBucketSize(survivorOffset, survivorSize + victimSize);</span>
-<span class="fc" id="L326">            writeBucketLocalDepth(survivorOffset, localDepth - 1);</span>
+<span class="fc" id="L388">            writeBucketSize(survivorOffset, survivorSize + victimSize);</span>
+<span class="fc" id="L389">            writeBucketLocalDepth(survivorOffset, localDepth - 1);</span>
 
-<span class="fc" id="L328">            int newDepth = localDepth - 1;</span>
-<span class="fc bfc" id="L329" title="All 2 branches covered.">            int base = (newDepth == 0) ? 0 : (directoryIndex &amp; ((1 &lt;&lt; newDepth) - 1));</span>
-<span class="fc bfc" id="L330" title="All 2 branches covered.">            int step = (newDepth == 0) ? 1 : (1 &lt;&lt; newDepth);</span>
+<span class="fc" id="L391">            int newDepth = localDepth - 1;</span>
+<span class="fc bfc" id="L392" title="All 2 branches covered.">            int base = (newDepth == 0) ? 0 : (directoryIndex &amp; ((1 &lt;&lt; newDepth) - 1));</span>
+<span class="fc bfc" id="L393" title="All 2 branches covered.">            int step = (newDepth == 0) ? 1 : (1 &lt;&lt; newDepth);</span>
 
-<span class="fc bfc" id="L332" title="All 2 branches covered.">            for (int i = base; i &lt; directoryLength(); i += step) {</span>
-<span class="fc" id="L333">                writeDirectoryPointer(i, survivorOffset);</span>
+<span class="fc bfc" id="L395" title="All 2 branches covered.">            for (int i = base; i &lt; directoryLength(); i += step) {</span>
+<span class="fc" id="L396">                writeDirectoryPointer(i, survivorOffset);</span>
             }
-        }
+<span class="fc" id="L398">        }</span>
     }
 
+    /**
+     * Удваивает директорию.
+     * &lt;p&gt;
+     * Старая половина копируется во вторую половину,
+     * после чего globalDepth увеличивается на 1.
+     */
     private void doubleDirectory() {
-<span class="pc bpc" id="L339" title="1 of 2 branches missed.">        if (globalDepth == MAX_GLOBAL_DEPTH) {</span>
-<span class="nc" id="L340">            throw new IllegalStateException(&quot;Достигнут максимальный globalDepth: &quot; + MAX_GLOBAL_DEPTH);</span>
+<span class="pc bpc" id="L408" title="1 of 2 branches missed.">        if (globalDepth == MAX_GLOBAL_DEPTH) {</span>
+<span class="nc" id="L409">            throw new IllegalStateException(&quot;Достигнут максимальный globalDepth: &quot; + MAX_GLOBAL_DEPTH);</span>
         }
 
-<span class="fc" id="L343">        int oldLength = directoryLength();</span>
-<span class="fc bfc" id="L344" title="All 2 branches covered.">        for (int i = 0; i &lt; oldLength; i++) {</span>
-<span class="fc" id="L345">            writeDirectoryPointer(i + oldLength, readDirectoryPointer(i));</span>
+<span class="fc" id="L412">        int oldLength = directoryLength();</span>
+<span class="fc bfc" id="L413" title="All 2 branches covered.">        for (int i = 0; i &lt; oldLength; i++) {</span>
+<span class="fc" id="L414">            writeDirectoryPointer(i + oldLength, readDirectoryPointer(i));</span>
         }
 
-<span class="fc" id="L348">        globalDepth++;</span>
-<span class="fc" id="L349">        writeHeaderInt(OFF_GLOBAL_DEPTH, globalDepth);</span>
-<span class="fc" id="L350">    }</span>
+<span class="fc" id="L417">        globalDepth++;</span>
+<span class="fc" id="L418">        writeHeaderInt(OFF_GLOBAL_DEPTH, globalDepth);</span>
+<span class="fc" id="L419">    }</span>
 
+
+    /**
+     * Хеширует ключ.
+     * &lt;p&gt;
+     * 1) сначала подобный шаг a*x+b,
+     * 2) потом fmix32-перемешивание из MurmurHash3,
+     * чтобы младшие биты хеша были лучше перемешаны
+     *
+     * @param key исходный ключ.
+     * @return 32-битный хеш ключа.
+     */
     private int hash(int key) {
-<span class="fc" id="L353">        long x = Integer.toUnsignedLong(key);</span>
-<span class="fc" id="L354">        long aa = Integer.toUnsignedLong(hashA);</span>
-<span class="fc" id="L355">        long bb = Integer.toUnsignedLong(hashB);</span>
-<span class="fc" id="L356">        int h = (int) (aa * x + bb);</span>
+<span class="fc" id="L433">        long x = Integer.toUnsignedLong(key);</span>
+<span class="fc" id="L434">        long aa = Integer.toUnsignedLong(hashA);</span>
+<span class="fc" id="L435">        long bb = Integer.toUnsignedLong(hashB);</span>
+<span class="fc" id="L436">        int h = (int) (aa * x + bb);</span>
 
-        // fmix32 из MurmurHash3
-<span class="fc" id="L359">        h ^= (h &gt;&gt;&gt; 16);</span>
-<span class="fc" id="L360">        h *= 0x85ebca6b;</span>
-<span class="fc" id="L361">        h ^= (h &gt;&gt;&gt; 13);</span>
-<span class="fc" id="L362">        h *= 0xc2b2ae35;</span>
-<span class="fc" id="L363">        h ^= (h &gt;&gt;&gt; 16);</span>
+<span class="fc" id="L438">        h ^= (h &gt;&gt;&gt; 16);</span>
+<span class="fc" id="L439">        h *= 0x85ebca6b;</span>
+<span class="fc" id="L440">        h ^= (h &gt;&gt;&gt; 13);</span>
+<span class="fc" id="L441">        h *= 0xc2b2ae35;</span>
+<span class="fc" id="L442">        h ^= (h &gt;&gt;&gt; 16);</span>
 
-<span class="fc" id="L365">        return h;</span>
+<span class="fc" id="L444">        return h;</span>
     }
 
-    // ---- Операции с бакетами ----
+    /**
+     * Пытается вставить или обновить запись внутри одного бакета.
+     *
+     * @param bucketOffset смещение бакета в файле.
+     * @param key          ключ для вставки.
+     * @param value        значение для вставки или обновления.
+     * @return результат операции: INSERTED, UPDATED или FULL.
+     */
     private PutResult putIntoBucket(long bucketOffset, int key, int value) {
-<span class="fc" id="L370">        int position = indexOf(bucketOffset, key);</span>
-<span class="fc bfc" id="L371" title="All 2 branches covered.">        if (position &gt;= 0) {</span>
-<span class="fc" id="L372">            writeBucketValue(bucketOffset, position, value);</span>
-<span class="fc" id="L373">            return PutResult.UPDATED;</span>
+<span class="fc" id="L456">        int position = indexOf(bucketOffset, key);</span>
+<span class="fc bfc" id="L457" title="All 2 branches covered.">        if (position &gt;= 0) {</span>
+<span class="fc" id="L458">            writeBucketValue(bucketOffset, position, value);</span>
+<span class="fc" id="L459">            return PutResult.UPDATED;</span>
         }
 
-<span class="fc" id="L376">        int size = bucketSize(bucketOffset);</span>
-<span class="fc bfc" id="L377" title="All 2 branches covered.">        if (size == bucketCapacity) {</span>
-<span class="fc" id="L378">            return PutResult.FULL;</span>
+<span class="fc" id="L462">        int size = bucketSize(bucketOffset);</span>
+<span class="fc bfc" id="L463" title="All 2 branches covered.">        if (size == bucketCapacity) {</span>
+<span class="fc" id="L464">            return PutResult.FULL;</span>
         }
 
-<span class="fc" id="L381">        writeBucketKey(bucketOffset, size, key);</span>
-<span class="fc" id="L382">        writeBucketValue(bucketOffset, size, value);</span>
-<span class="fc" id="L383">        writeBucketSize(bucketOffset, size + 1);</span>
-<span class="fc" id="L384">        return PutResult.INSERTED;</span>
+<span class="fc" id="L467">        writeBucketKey(bucketOffset, size, key);</span>
+<span class="fc" id="L468">        writeBucketValue(bucketOffset, size, value);</span>
+<span class="fc" id="L469">        writeBucketSize(bucketOffset, size + 1);</span>
+<span class="fc" id="L470">        return PutResult.INSERTED;</span>
     }
 
+
+    /**
+     * Линейно ищет ключ внутри бакета, так как они маленькие;
+     *
+     * @param bucketOffset смещение бакета.
+     * @param key          искомый ключ.
+     * @return индекс слота либо NOT_FOUND.
+     */
     private int indexOf(long bucketOffset, int key) {
-<span class="fc" id="L388">        int size = bucketSize(bucketOffset);</span>
-<span class="fc bfc" id="L389" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
-<span class="fc bfc" id="L390" title="All 2 branches covered.">            if (readBucketKey(bucketOffset, i) == key) {</span>
-<span class="fc" id="L391">                return i;</span>
+<span class="fc" id="L482">        int size = bucketSize(bucketOffset);</span>
+<span class="fc bfc" id="L483" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L484" title="All 2 branches covered.">            if (readBucketKey(bucketOffset, i) == key) {</span>
+<span class="fc" id="L485">                return i;</span>
             }
         }
-<span class="fc" id="L394">        return NOT_FOUND;</span>
+<span class="fc" id="L488">        return NOT_FOUND;</span>
     }
 
+    // helpers
     private static void validateBucketCapacity(int bucketCapacity) {
-<span class="fc bfc" id="L398" title="All 2 branches covered.">        if (bucketCapacity &lt;= 0) {</span>
-<span class="fc" id="L399">            throw new IllegalArgumentException(&quot;bucketCapacity должен быть &gt; 0&quot;);</span>
+<span class="fc bfc" id="L493" title="All 2 branches covered.">        if (bucketCapacity &lt;= 0) {</span>
+<span class="fc" id="L494">            throw new IllegalArgumentException(&quot;bucketCapacity должен быть &gt; 0&quot;);</span>
         }
-<span class="fc" id="L401">    }</span>
+<span class="fc" id="L496">    }</span>
 
     private int directoryLength() {
-<span class="fc" id="L404">        return 1 &lt;&lt; globalDepth;</span>
+<span class="fc" id="L499">        return 1 &lt;&lt; globalDepth;</span>
     }
 
     private void ensureOpen() {
-<span class="fc bfc" id="L408" title="All 2 branches covered.">        if (closed) {</span>
-<span class="fc" id="L409">            throw new IllegalStateException(&quot;Хеш-таблица уже закрыта&quot;);</span>
+<span class="fc bfc" id="L503" title="All 2 branches covered.">        if (closed) {</span>
+<span class="fc" id="L504">            throw new IllegalStateException(&quot;Хеш-таблица уже закрыта&quot;);</span>
         }
-<span class="fc" id="L411">    }</span>
+<span class="fc" id="L506">    }</span>
 
     private static Path createTempFile() {
         try {
-<span class="fc" id="L415">            Path path = Files.createTempFile(&quot;extendable-hash-&quot;, &quot;.dat&quot;);</span>
-<span class="fc" id="L416">            path.toFile().deleteOnExit();</span>
-<span class="fc" id="L417">            return path;</span>
-<span class="nc" id="L418">        } catch (IOException e) {</span>
-<span class="nc" id="L419">            throw new UncheckedIOException(&quot;Не удалось создать временный файл&quot;, e);</span>
+<span class="fc" id="L510">            Path path = Files.createTempFile(&quot;extendable-hash-&quot;, &quot;.dat&quot;);</span>
+<span class="fc" id="L511">            path.toFile().deleteOnExit();</span>
+<span class="fc" id="L512">            return path;</span>
+<span class="nc" id="L513">        } catch (IOException e) {</span>
+<span class="nc" id="L514">            throw new UncheckedIOException(&quot;Не удалось создать временный файл&quot;, e);</span>
         }
     }
 
-    // ---- Рост файла и выделение памяти ----
     private void ensureMappedSize(long minSize) {
-<span class="fc bfc" id="L425" title="All 2 branches covered.">        if (minSize &lt;= mappedSize) {</span>
-<span class="fc" id="L426">            return;</span>
+<span class="fc bfc" id="L519" title="All 2 branches covered.">        if (minSize &lt;= mappedSize) {</span>
+<span class="fc" id="L520">            return;</span>
         }
 
-<span class="fc bfc" id="L429" title="All 2 branches covered.">        long newSize = Math.max(minSize, mappedSize == 0 ? MIN_FILE_SIZE : mappedSize * 2);</span>
-<span class="pc bpc" id="L430" title="1 of 2 branches missed.">        if (newSize &gt; Integer.MAX_VALUE) {</span>
-<span class="nc" id="L431">            throw new IllegalStateException(&quot;Файл таблицы вырос больше лимита mmap ByteBuffer&quot;);</span>
+<span class="fc bfc" id="L523" title="All 2 branches covered.">        long newSize = Math.max(minSize, mappedSize == 0 ? MIN_FILE_SIZE : mappedSize * 2);</span>
+<span class="pc bpc" id="L524" title="1 of 2 branches missed.">        if (newSize &gt; Integer.MAX_VALUE) {</span>
+<span class="nc" id="L525">            throw new IllegalStateException(&quot;Файл таблицы вырос больше лимита mmap ByteBuffer&quot;);</span>
         }
 
         try {
-<span class="fc" id="L435">            long currentSize = channel.size();</span>
-<span class="fc bfc" id="L436" title="All 2 branches covered.">            if (currentSize &lt; newSize) {</span>
-<span class="fc" id="L437">                channel.position(newSize - 1);</span>
-<span class="fc" id="L438">                channel.write(ByteBuffer.wrap(new byte[]{0}));</span>
+<span class="fc" id="L529">            long currentSize = channel.size();</span>
+<span class="fc bfc" id="L530" title="All 2 branches covered.">            if (currentSize &lt; newSize) {</span>
+<span class="fc" id="L531">                channel.position(newSize - 1);</span>
+<span class="fc" id="L532">                channel.write(ByteBuffer.wrap(new byte[]{0}));</span>
             }
-<span class="fc" id="L440">            buffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, newSize);</span>
-<span class="fc" id="L441">            mappedSize = newSize;</span>
-<span class="pc" id="L442">        } catch (IOException e) {</span>
-<span class="nc" id="L443">            throw new UncheckedIOException(&quot;Не удалось перемапить файл таблицы&quot;, e);</span>
-        }
-<span class="fc" id="L445">    }</span>
+<span class="fc" id="L534">            buffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, newSize);</span>
+<span class="fc" id="L535">            mappedSize = newSize;</span>
+<span class="nc" id="L536">        } catch (IOException e) {</span>
+<span class="nc" id="L537">            throw new UncheckedIOException(&quot;Не удалось перемапить файл таблицы&quot;, e);</span>
+<span class="fc" id="L538">        }</span>
+<span class="fc" id="L539">    }</span>
 
     private long allocateBucket(int localDepth) {
-<span class="fc" id="L448">        long bucketOffset = nextFreeOffset;</span>
-<span class="fc" id="L449">        long updatedNextFree = bucketOffset + bucketRecordSize;</span>
+<span class="fc" id="L542">        long bucketOffset = nextFreeOffset;</span>
+<span class="fc" id="L543">        long updatedNextFree = bucketOffset + bucketRecordSize;</span>
 
-<span class="fc" id="L451">        ensureMappedSize(updatedNextFree);</span>
+<span class="fc" id="L545">        ensureMappedSize(updatedNextFree);</span>
 
-<span class="fc" id="L453">        nextFreeOffset = updatedNextFree;</span>
-<span class="fc" id="L454">        writeHeaderLong(OFF_NEXT_FREE, nextFreeOffset);</span>
+<span class="fc" id="L547">        nextFreeOffset = updatedNextFree;</span>
+<span class="fc" id="L548">        writeHeaderLong(OFF_NEXT_FREE, nextFreeOffset);</span>
 
-<span class="fc" id="L456">        writeBucketLocalDepth(bucketOffset, localDepth);</span>
-<span class="fc" id="L457">        writeBucketSize(bucketOffset, 0);</span>
+<span class="fc" id="L550">        writeBucketLocalDepth(bucketOffset, localDepth);</span>
+<span class="fc" id="L551">        writeBucketSize(bucketOffset, 0);</span>
 
-<span class="fc bfc" id="L459" title="All 2 branches covered.">        for (int i = 0; i &lt; bucketCapacity; i++) {</span>
-<span class="fc" id="L460">            writeBucketKey(bucketOffset, i, 0);</span>
-<span class="fc" id="L461">            writeBucketValue(bucketOffset, i, 0);</span>
+<span class="fc bfc" id="L553" title="All 2 branches covered.">        for (int i = 0; i &lt; bucketCapacity; i++) {</span>
+<span class="fc" id="L554">            writeBucketKey(bucketOffset, i, 0);</span>
+<span class="fc" id="L555">            writeBucketValue(bucketOffset, i, 0);</span>
         }
 
-<span class="fc" id="L464">        return bucketOffset;</span>
+<span class="fc" id="L558">        return bucketOffset;</span>
     }
 
-    // ---- Хелперы директории ----
     private long readDirectoryPointer(int directoryIndex) {
-<span class="fc" id="L469">        long offset = directoryOffset(directoryIndex);</span>
-<span class="fc" id="L470">        return buffer.getLong(toBufferIndex(offset, Long.BYTES));</span>
+<span class="fc" id="L562">        long offset = directoryOffset(directoryIndex);</span>
+<span class="fc" id="L563">        return buffer.getLong(toBufferIndex(offset, Long.BYTES));</span>
     }
 
     private void writeDirectoryPointer(int directoryIndex, long bucketOffset) {
-<span class="fc" id="L474">        long offset = directoryOffset(directoryIndex);</span>
-<span class="fc" id="L475">        buffer.putLong(toBufferIndex(offset, Long.BYTES), bucketOffset);</span>
-<span class="fc" id="L476">    }</span>
+<span class="fc" id="L567">        long offset = directoryOffset(directoryIndex);</span>
+<span class="fc" id="L568">        buffer.putLong(toBufferIndex(offset, Long.BYTES), bucketOffset);</span>
+<span class="fc" id="L569">    }</span>
 
-    // ---- Хелперы структуры бакета ----
     private int bucketLocalDepth(long bucketOffset) {
-<span class="fc" id="L480">        return readIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH);</span>
+<span class="fc" id="L572">        return readIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH);</span>
     }
 
     private void writeBucketLocalDepth(long bucketOffset, int localDepth) {
-<span class="fc" id="L484">        writeIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH, localDepth);</span>
-<span class="fc" id="L485">    }</span>
+<span class="fc" id="L576">        writeIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH, localDepth);</span>
+<span class="fc" id="L577">    }</span>
 
     private int bucketSize(long bucketOffset) {
-<span class="fc" id="L488">        return readIntAt(bucketOffset + BUCKET_OFF_SIZE);</span>
+<span class="fc" id="L580">        return readIntAt(bucketOffset + BUCKET_OFF_SIZE);</span>
     }
 
     private void writeBucketSize(long bucketOffset, int size) {
-<span class="fc" id="L492">        writeIntAt(bucketOffset + BUCKET_OFF_SIZE, size);</span>
-<span class="fc" id="L493">    }</span>
+<span class="fc" id="L584">        writeIntAt(bucketOffset + BUCKET_OFF_SIZE, size);</span>
+<span class="fc" id="L585">    }</span>
 
     private int readBucketKey(long bucketOffset, int slot) {
-<span class="fc" id="L496">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L497">        return readIntAt(offset);</span>
+<span class="fc" id="L588">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L589">        return readIntAt(offset);</span>
     }
 
     private void writeBucketKey(long bucketOffset, int slot, int key) {
-<span class="fc" id="L501">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L502">        writeIntAt(offset, key);</span>
-<span class="fc" id="L503">    }</span>
+<span class="fc" id="L593">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L594">        writeIntAt(offset, key);</span>
+<span class="fc" id="L595">    }</span>
 
     private int readBucketValue(long bucketOffset, int slot) {
-<span class="fc" id="L506">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L507">        return readIntAt(offset);</span>
+<span class="fc" id="L598">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L599">        return readIntAt(offset);</span>
     }
 
     private void writeBucketValue(long bucketOffset, int slot, int value) {
-<span class="fc" id="L511">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L512">        writeIntAt(offset, value);</span>
-<span class="fc" id="L513">    }</span>
+<span class="fc" id="L603">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L604">        writeIntAt(offset, value);</span>
+<span class="fc" id="L605">    }</span>
 
-    // ---- Хелперы заголовка ----
     private int readHeaderInt(int offset) {
-<span class="fc" id="L517">        return buffer.getInt(offset);</span>
+<span class="fc" id="L608">        return buffer.getInt(offset);</span>
     }
 
     private void writeHeaderInt(int offset, int value) {
-<span class="fc" id="L521">        buffer.putInt(offset, value);</span>
-<span class="fc" id="L522">    }</span>
+<span class="fc" id="L612">        buffer.putInt(offset, value);</span>
+<span class="fc" id="L613">    }</span>
 
     private void writeHeaderLong(int offset, long value) {
-<span class="fc" id="L525">        buffer.putLong(offset, value);</span>
-<span class="fc" id="L526">    }</span>
+<span class="fc" id="L616">        buffer.putLong(offset, value);</span>
+<span class="fc" id="L617">    }</span>
 
-    // ---- Низкоуровневые примитивы mmap ----
     private int readIntAt(long offset) {
-<span class="fc" id="L530">        return buffer.getInt(toBufferIndex(offset, Integer.BYTES));</span>
+<span class="fc" id="L620">        return buffer.getInt(toBufferIndex(offset, Integer.BYTES));</span>
     }
 
     private void writeIntAt(long offset, int value) {
-<span class="fc" id="L534">        buffer.putInt(toBufferIndex(offset, Integer.BYTES), value);</span>
-<span class="fc" id="L535">    }</span>
+<span class="fc" id="L624">        buffer.putInt(toBufferIndex(offset, Integer.BYTES), value);</span>
+<span class="fc" id="L625">    }</span>
 
     private int toBufferIndex(long offset, int length) {
-<span class="fc" id="L538">        long limit = offset + length;</span>
-<span class="pc bpc" id="L539" title="3 of 6 branches missed.">        if (offset &lt; 0 || limit &lt; offset || limit &gt; mappedSize) {</span>
-<span class="nc" id="L540">            throw new IllegalStateException(&quot;Некорректные смещения&quot;);</span>
+<span class="fc" id="L628">        long limit = offset + length;</span>
+<span class="pc bpc" id="L629" title="3 of 6 branches missed.">        if (offset &lt; 0 || limit &lt; offset || limit &gt; mappedSize) {</span>
+<span class="nc" id="L630">            throw new IllegalStateException(&quot;Некорректные смещения&quot;);</span>
         }
-<span class="fc" id="L542">        return (int) offset;</span>
+<span class="fc" id="L632">        return (int) offset;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

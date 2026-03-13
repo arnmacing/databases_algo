@@ -1,4 +1,5 @@
 bench/jmh_generated/ExtendableHashTableBenchmark_removeThenPut_jmhTest.class
+extendableHashing/ExtendableHashFileFormat.class
 bench/jmh_generated/LshBenchmark_jmhType_B2.class
 bench/jmh_generated/PerfectHashingBenchmark_BuildState_jmhType_B3.class
 bench/jmh_generated/ExtendableHashTableBenchmark_WriteState_jmhType_B2.class
