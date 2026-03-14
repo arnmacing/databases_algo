@@ -8,160 +8,47 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SplittableRandom;
 
 import static extendableHashing.ExtendableHashFileFormat.*;
 
-
 public class ExtendableHashTable implements AutoCloseable {
     private static final int NOT_FOUND = -1;
-
     private final int bucketCapacity;
     private final int bucketRecordSize;
-    private final Path filePath;
-    private final boolean deleteOnClose;
+    private final Path storagePath;
     private final FileChannel channel;
-
     private MappedByteBuffer buffer;
     private long mappedSize;
     private int globalDepth;
-    private int hashA;
-    private int hashB;
     private long nextFreeOffset;
-
     private boolean closed;
 
     public ExtendableHashTable(int bucketCapacity) {
-        this(createTempFile(), bucketCapacity, new SplittableRandom().nextLong(), true);
-    }
-
-    public ExtendableHashTable(int bucketCapacity, long seed) {
-        this(createTempFile(), bucketCapacity, seed, true);
-    }
-
-    public ExtendableHashTable(Path filePath, int bucketCapacity) {
-        this(filePath, bucketCapacity, new SplittableRandom().nextLong(), false);
-    }
-
-    public ExtendableHashTable(Path filePath, int bucketCapacity, long seed) {
-        this(filePath, bucketCapacity, seed, false);
-    }
-
-    public static ExtendableHashTable open(Path filePath) {
-        return new ExtendableHashTable(filePath);
-    }
-
-    /**
-     * Внутренний конструктор создания новой таблицы.
-     *
-     * @param filePath       путь к файлу, где создаётся структура.
-     * @param bucketCapacity вместимость бакета.
-     * @param seed           seed для детерминированного выбора параметров хеш-функции.
-     * @param deleteOnClose  удалять ли файл при close().
-     */
-    private ExtendableHashTable(Path filePath, int bucketCapacity, long seed, boolean deleteOnClose) {
-        validateBucketCapacity(bucketCapacity);
-
         this.bucketCapacity = bucketCapacity;
         this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);
-        this.filePath = filePath;
-        this.deleteOnClose = deleteOnClose;
+        this.storagePath = createTempFile();
+        this.channel = openChannel(
+                storagePath,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING,
+                StandardOpenOption.READ,
+                StandardOpenOption.WRITE);
 
-        try {
-            this.channel = FileChannel.open(
-                    filePath,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.TRUNCATE_EXISTING,
-                    StandardOpenOption.READ,
-                    StandardOpenOption.WRITE);
-            this.mappedSize = 0;
-            ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));
+        this.mappedSize = 0;
+        ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));
 
-            SplittableRandom random = new SplittableRandom(seed);
-            this.hashA = random.nextInt() | 1;
-            this.hashB = random.nextInt();
-            this.globalDepth = 0;
-            this.nextFreeOffset = BUCKET_REGION_OFFSET;
+        this.globalDepth = 0;
+        this.nextFreeOffset = BUCKET_REGION_OFFSET;
 
-            writeHeaderInt(OFF_MAGIC, MAGIC);
-            writeHeaderInt(OFF_VERSION, VERSION);
-            writeHeaderInt(OFF_BUCKET_CAPACITY, this.bucketCapacity);
-            writeHeaderInt(OFF_GLOBAL_DEPTH, this.globalDepth);
-            writeHeaderInt(OFF_HASH_A, this.hashA);
-            writeHeaderInt(OFF_HASH_B, this.hashB);
-            writeHeaderLong(OFF_NEXT_FREE, this.nextFreeOffset);
-            writeHeaderInt(OFF_MAX_GLOBAL_DEPTH, MAX_GLOBAL_DEPTH);
+        writeHeaderInt(OFF_BUCKET_CAPACITY, this.bucketCapacity);
+        writeHeaderInt(OFF_GLOBAL_DEPTH, this.globalDepth);
+        writeHeaderLong(OFF_NEXT_FREE, this.nextFreeOffset);
 
-            long initialBucketOffset = allocateBucket(0);
-            writeDirectoryPointer(0, initialBucketOffset);
-        } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось инициализировать", e);
-        }
+        long initialBucketOffset = allocateBucket(0);
+        writeDirectoryPointer(0, initialBucketOffset);
     }
 
-    /**
-     * Внутренний конструктор открытия уже существующей таблицы.
-     *
-     * @param filePath путь к файлу готовой таблицы.
-     */
-    private ExtendableHashTable(Path filePath) {
-        this.filePath = filePath;
-        this.deleteOnClose = false;
-
-        try {
-            this.channel = FileChannel.open(filePath, StandardOpenOption.READ, StandardOpenOption.WRITE);
-
-            long currentSize = channel.size();
-            if (currentSize < BUCKET_REGION_OFFSET) {
-                throw new IllegalStateException("слишком маленький файл таблицы");
-            }
-
-            this.mappedSize = 0;
-            ensureMappedSize(currentSize);
-
-            if (readHeaderInt(OFF_MAGIC) != MAGIC) {
-                throw new IllegalStateException("Неверный magic");
-            }
-            if (readHeaderInt(OFF_VERSION) != VERSION) {
-                throw new IllegalStateException("Неподдерживаемая версия таблицы");
-            }
-            if (readHeaderInt(OFF_MAX_GLOBAL_DEPTH) != MAX_GLOBAL_DEPTH) {
-                throw new IllegalStateException("Странный формат структуры");
-            }
-
-            this.bucketCapacity = readHeaderInt(OFF_BUCKET_CAPACITY);
-            validateBucketCapacity(bucketCapacity);
-            this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);
-
-            this.globalDepth = readHeaderInt(OFF_GLOBAL_DEPTH);
-            if (globalDepth < 0 || globalDepth > MAX_GLOBAL_DEPTH) {
-                throw new IllegalStateException("Некорректный globalDepth");
-            }
-
-            this.hashA = readHeaderInt(OFF_HASH_A);
-            this.hashB = readHeaderInt(OFF_HASH_B);
-            this.nextFreeOffset = buffer.getLong(OFF_NEXT_FREE);
-
-            if (nextFreeOffset < BUCKET_REGION_OFFSET || nextFreeOffset > mappedSize) {
-                throw new IllegalStateException("Некорректный nextFreeOffset");
-            }
-        } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось открыть", e);
-        }
-    }
-
-    /**
-     * Вставляет новую пару ключ-значение или обновляет значение существующего ключа.
-     * <p>
-     * 1) по хешу определяем индекс директории;
-     * 2) пытаемся вставить в соответствующий бакет;
-     * 3) если бакет полон, делим его и пробуем снова.
-     */
     public void put(int key, int value) {
-        ensureOpen();
-
         while (true) {
             int directoryIndex = directoryIndex(key);
             long bucketOffset = readDirectoryPointer(directoryIndex);
@@ -175,22 +62,13 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
-    /**
-     * Ищет значение по ключу.
-     */
     public Integer get(int key) {
-        ensureOpen();
         long bucketOffset = readDirectoryPointer(directoryIndex(key));
         int position = indexOf(bucketOffset, key);
         return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);
     }
 
-    /**
-     * Удаляет ключ из таблицы.
-     */
     public boolean remove(int key) {
-        ensureOpen();
-
         int directoryIndex = directoryIndex(key);
         long bucketOffset = readDirectoryPointer(directoryIndex);
         int position = indexOf(bucketOffset, key);
@@ -209,26 +87,6 @@ public class ExtendableHashTable implements AutoCloseable {
         return true;
     }
 
-    /**
-     * Считает число уникальных бакетов, на которые указывает директория для теста.
-     */
-    public int uniqueBucketCountForTest() {
-        ensureOpen();
-
-        Set<Long> unique = new HashSet<>(Math.max(16, directoryLength() * 2));
-        for (int i = 0; i < directoryLength(); i++) {
-            unique.add(readDirectoryPointer(i));
-        }
-        return unique.size();
-    }
-
-    public Path filePath() {
-        return filePath;
-    }
-
-    /**
-     * Закрывает таблицу, сбрасывает изменения на диск и при необходимости удаляет файл.
-     */
     @Override
     public void close() {
         if (closed) {
@@ -236,49 +94,23 @@ public class ExtendableHashTable implements AutoCloseable {
         }
         closed = true;
 
-        IOException error = null;
-
-        try {
-            if (buffer != null) {
-                buffer.force();
-            }
-        } catch (Exception e) {
-            error = new IOException("Failed to flush", e);
+        if (buffer != null) {
+            buffer.force();
         }
 
         try {
             channel.close();
         } catch (IOException e) {
-            if (error == null) {
-                error = e;
-            }
+            throw new UncheckedIOException(e);
         }
 
-        if (deleteOnClose) {
-            try {
-                Files.deleteIfExists(filePath);
-            } catch (IOException e) {
-                if (error == null) {
-                    error = e;
-                }
-            }
-        }
-
-        if (error != null) {
-            throw new UncheckedIOException("Failed to close", error);
+        try {
+            Files.deleteIfExists(storagePath);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
     }
 
-
-    /**
-     * Вычисляет индекс директории по ключу.
-     * <p>
-     * Берём не весь хеш, а только globalDepth младших битов.
-     * Поэтому длина директории всегда 2^globalDepth.
-     *
-     * @param key ключ, для которого ищется индекс директории.
-     * @return номер ячейки директории.
-     */
     private int directoryIndex(int key) {
         if (globalDepth == 0) {
             return 0;
@@ -288,17 +120,6 @@ public class ExtendableHashTable implements AutoCloseable {
         return hash(key) & mask;
     }
 
-    /**
-     * Делит переполненный бакет на два.
-     * <p>
-     * 1) берём переполненный бакет;
-     * 2) если его localDepth совпадает с globalDepth, сначала удваиваем директорию;
-     * 3) создаём новый бакет;
-     * 4) переназначаем часть ссылок директории на новый бакет;
-     * 5) перераскладываем записи старого бакета по двум бакетам по следующему значащему биту.
-     *
-     * @param splitDirectoryIndex индекс директории, через который мы пришли к переполненному бакету.
-     */
     private void splitBucket(int splitDirectoryIndex) {
         long oldBucketOffset = readDirectoryPointer(splitDirectoryIndex);
         int oldDepth = bucketLocalDepth(oldBucketOffset);
@@ -333,16 +154,11 @@ public class ExtendableHashTable implements AutoCloseable {
             long targetOffset = ((hash(keys[i]) & splitBit) == 0) ? oldBucketOffset : newBucketOffset;
             PutResult result = putIntoBucket(targetOffset, keys[i], values[i]);
             if (result != PutResult.INSERTED) {
-                throw new IllegalStateException("Повторная вставка после split не удалась");
+                throw new IllegalStateException("split reinsertion failed");
             }
         }
     }
 
-    /**
-     * Пытается объединить бакет после удаления.
-     *
-     * @param directoryIndex индекс директории, соответствующий бакету после удаления.
-     */
     private void tryMerge(int directoryIndex) {
         while (true) {
             long bucketOffset = readDirectoryPointer(directoryIndex);
@@ -398,15 +214,9 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
-    /**
-     * Удваивает директорию.
-     * <p>
-     * Старая половина копируется во вторую половину,
-     * после чего globalDepth увеличивается на 1.
-     */
     private void doubleDirectory() {
         if (globalDepth == MAX_GLOBAL_DEPTH) {
-            throw new IllegalStateException("Достигнут максимальный globalDepth: " + MAX_GLOBAL_DEPTH);
+            throw new IllegalStateException("max globalDepth reached");
         }
 
         int oldLength = directoryLength();
@@ -418,40 +228,16 @@ public class ExtendableHashTable implements AutoCloseable {
         writeHeaderInt(OFF_GLOBAL_DEPTH, globalDepth);
     }
 
-
-    /**
-     * Хеширует ключ.
-     * <p>
-     * 1) сначала подобный шаг a*x+b,
-     * 2) потом fmix32-перемешивание из MurmurHash3,
-     * чтобы младшие биты хеша были лучше перемешаны
-     *
-     * @param key исходный ключ.
-     * @return 32-битный хеш ключа.
-     */
     private int hash(int key) {
-        long x = Integer.toUnsignedLong(key);
-        long aa = Integer.toUnsignedLong(hashA);
-        long bb = Integer.toUnsignedLong(hashB);
-        int h = (int) (aa * x + bb);
-
+        int h = key;
         h ^= (h >>> 16);
-        h *= 0x85ebca6b;
-        h ^= (h >>> 13);
-        h *= 0xc2b2ae35;
+        h *= 0x7feb352d;
+        h ^= (h >>> 15);
+        h *= 0x846ca68b;
         h ^= (h >>> 16);
-
         return h;
     }
 
-    /**
-     * Пытается вставить или обновить запись внутри одного бакета.
-     *
-     * @param bucketOffset смещение бакета в файле.
-     * @param key          ключ для вставки.
-     * @param value        значение для вставки или обновления.
-     * @return результат операции: INSERTED, UPDATED или FULL.
-     */
     private PutResult putIntoBucket(long bucketOffset, int key, int value) {
         int position = indexOf(bucketOffset, key);
         if (position >= 0) {
@@ -470,14 +256,6 @@ public class ExtendableHashTable implements AutoCloseable {
         return PutResult.INSERTED;
     }
 
-
-    /**
-     * Линейно ищет ключ внутри бакета, так как они маленькие;
-     *
-     * @param bucketOffset смещение бакета.
-     * @param key          искомый ключ.
-     * @return индекс слота либо NOT_FOUND.
-     */
     private int indexOf(long bucketOffset, int key) {
         int size = bucketSize(bucketOffset);
         for (int i = 0; i < size; i++) {
@@ -488,30 +266,15 @@ public class ExtendableHashTable implements AutoCloseable {
         return NOT_FOUND;
     }
 
-    // helpers
-    private static void validateBucketCapacity(int bucketCapacity) {
-        if (bucketCapacity <= 0) {
-            throw new IllegalArgumentException("bucketCapacity должен быть > 0");
-        }
-    }
-
     private int directoryLength() {
         return 1 << globalDepth;
     }
 
-    private void ensureOpen() {
-        if (closed) {
-            throw new IllegalStateException("Хеш-таблица уже закрыта");
-        }
-    }
-
     private static Path createTempFile() {
         try {
-            Path path = Files.createTempFile("extendable-hash-", ".dat");
-            path.toFile().deleteOnExit();
-            return path;
+            return Files.createTempFile("extendable-hash-", ".dat");
         } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось создать временный файл", e);
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -522,20 +285,31 @@ public class ExtendableHashTable implements AutoCloseable {
 
         long newSize = Math.max(minSize, mappedSize == 0 ? MIN_FILE_SIZE : mappedSize * 2);
         if (newSize > Integer.MAX_VALUE) {
-            throw new IllegalStateException("Файл таблицы вырос больше лимита mmap ByteBuffer");
+            throw new IllegalStateException("file is too large for mmap ByteBuffer");
+        }
+
+        long currentSize;
+        try {
+            currentSize = channel.size();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        if (currentSize < newSize) {
+            try {
+                channel.position(newSize - 1);
+                channel.write(ByteBuffer.wrap(new byte[]{0}));
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
         }
 
         try {
-            long currentSize = channel.size();
-            if (currentSize < newSize) {
-                channel.position(newSize - 1);
-                channel.write(ByteBuffer.wrap(new byte[]{0}));
-            }
             buffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, newSize);
-            mappedSize = newSize;
         } catch (IOException e) {
-            throw new UncheckedIOException("Не удалось перемапить файл таблицы", e);
+            throw new UncheckedIOException(e);
         }
+        mappedSize = newSize;
     }
 
     private long allocateBucket(int localDepth) {
@@ -549,23 +323,17 @@ public class ExtendableHashTable implements AutoCloseable {
 
         writeBucketLocalDepth(bucketOffset, localDepth);
         writeBucketSize(bucketOffset, 0);
-
-        for (int i = 0; i < bucketCapacity; i++) {
-            writeBucketKey(bucketOffset, i, 0);
-            writeBucketValue(bucketOffset, i, 0);
-        }
-
         return bucketOffset;
     }
 
     private long readDirectoryPointer(int directoryIndex) {
         long offset = directoryOffset(directoryIndex);
-        return buffer.getLong(toBufferIndex(offset, Long.BYTES));
+        return buffer.getLong(toBufferIndex(offset));
     }
 
     private void writeDirectoryPointer(int directoryIndex, long bucketOffset) {
         long offset = directoryOffset(directoryIndex);
-        buffer.putLong(toBufferIndex(offset, Long.BYTES), bucketOffset);
+        buffer.putLong(toBufferIndex(offset), bucketOffset);
     }
 
     private int bucketLocalDepth(long bucketOffset) {
@@ -604,10 +372,6 @@ public class ExtendableHashTable implements AutoCloseable {
         writeIntAt(offset, value);
     }
 
-    private int readHeaderInt(int offset) {
-        return buffer.getInt(offset);
-    }
-
     private void writeHeaderInt(int offset, int value) {
         buffer.putInt(offset, value);
     }
@@ -617,18 +381,22 @@ public class ExtendableHashTable implements AutoCloseable {
     }
 
     private int readIntAt(long offset) {
-        return buffer.getInt(toBufferIndex(offset, Integer.BYTES));
+        return buffer.getInt(toBufferIndex(offset));
     }
 
     private void writeIntAt(long offset, int value) {
-        buffer.putInt(toBufferIndex(offset, Integer.BYTES), value);
+        buffer.putInt(toBufferIndex(offset), value);
     }
 
-    private int toBufferIndex(long offset, int length) {
-        long limit = offset + length;
-        if (offset < 0 || limit < offset || limit > mappedSize) {
-            throw new IllegalStateException("Некорректные смещения");
-        }
+    private int toBufferIndex(long offset) {
         return (int) offset;
+    }
+
+    private static FileChannel openChannel(Path filePath, StandardOpenOption... options) {
+        try {
+            return FileChannel.open(filePath, options);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 }

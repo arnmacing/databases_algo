@@ -34,7 +34,7 @@ public class ExtendableHashTableBenchmark {
 
         @Setup(Level.Trial)
         public void setup() {
-            ht = new ExtendableHashTable(bucketCapacity, seed);
+            ht = new ExtendableHashTable(bucketCapacity);
 
             presentKeys = new int[n];
             absentKeys = new int[n];
@@ -102,7 +102,7 @@ public class ExtendableHashTableBenchmark {
 
         @Setup(Level.Iteration)
         public void setupIteration() {
-            ht = new ExtendableHashTable(bucketCapacity, seed);
+            ht = new ExtendableHashTable(bucketCapacity);
 
             baseKeys = new int[n];
             extraKeys = new int[n];
