@@ -229,13 +229,8 @@ public class ExtendableHashTable implements AutoCloseable {
     }
 
     private int hash(int key) {
-        int h = key;
-        h ^= (h >>> 16);
-        h *= 0x7feb352d;
-        h ^= (h >>> 15);
-        h *= 0x846ca68b;
-        h ^= (h >>> 16);
-        return h;
+        int h = Integer.hashCode(key);
+        return h ^ (h >>> 16);
     }
 
     private PutResult putIntoBucket(long bucketOffset, int key, int value) {

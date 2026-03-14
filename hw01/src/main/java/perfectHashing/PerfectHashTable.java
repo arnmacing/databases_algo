@@ -4,8 +4,6 @@ import java.util.SplittableRandom;
 
 public class PerfectHashTable<V> {
     private static final int P = 2_147_483_647;
-    private static final int MEMORY_FACTOR = 4;
-
     private final int n;
     private final HashFunction h1;
     private final SecondaryTable<V>[] level2;
@@ -44,7 +42,7 @@ public class PerfectHashTable<V> {
             for (int s : sizes) {
                 sumSquares += (long) s * s;
             }
-            if (sumSquares > (long) MEMORY_FACTOR * n) {
+            if (sumSquares > 4L * n) {
                 continue;
             }
 

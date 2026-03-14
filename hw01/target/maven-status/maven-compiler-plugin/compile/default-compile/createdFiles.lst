@@ -20,13 +20,11 @@ perfectHashing/PerfectHashTable$HashFunction.class
 bench/jmh_generated/PerfectHashingBenchmark_BuildState_jmhType_B2.class
 bench/LshBenchmark.class
 bench/jmh_generated/LshBenchmark_BuildState_jmhType_B3.class
-lsh/MinHashLshIndex$Pair.class
 bench/jmh_generated/LshBenchmark_buildIndex_jmhTest.class
 bench/LshBenchmark$SearchState.class
 bench/jmh_generated/ExtendableHashTableBenchmark_jmhType_B1.class
 bench/jmh_generated/PerfectHashingBenchmark_jmhType_B2.class
 bench/jmh_generated/PerfectHashingBenchmark_containsHit_jmhTest.class
-lsh/MinHashLshIndex$IntList.class
 bench/jmh_generated/ExtendableHashTableBenchmark_jmhType.class
 bench/jmh_generated/LshBenchmark_jmhType_B3.class
 bench/jmh_generated/ExtendableHashTableBenchmark_ReadState_jmhType_B2.class

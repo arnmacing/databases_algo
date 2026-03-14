@@ -28,11 +28,11 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L28">        this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);</span>
 <span class="fc" id="L29">        this.storagePath = createTempFile();</span>
 <span class="fc" id="L30">        this.channel = openChannel(</span>
-                storagePath,
-                StandardOpenOption.CREATE,
-                StandardOpenOption.TRUNCATE_EXISTING,
-                StandardOpenOption.READ,
-                StandardOpenOption.WRITE);
+<span class="fc" id="L31">                storagePath,</span>
+<span class="fc" id="L32">                StandardOpenOption.CREATE,</span>
+<span class="fc" id="L33">                StandardOpenOption.TRUNCATE_EXISTING,</span>
+<span class="fc" id="L34">                StandardOpenOption.READ,</span>
+<span class="fc" id="L35">                StandardOpenOption.WRITE);</span>
 
 <span class="fc" id="L37">        this.mappedSize = 0;</span>
 <span class="fc" id="L38">        ensureMappedSize(Math.max(MIN_FILE_SIZE, BUCKET_REGION_OFFSET + bucketRecordSize));</span>
@@ -49,7 +49,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L49">    }</span>
 
     public void put(int key, int value) {
-        while (true) {
+<span class="fc" id="L52">        while (true) {</span>
 <span class="fc" id="L53">            int directoryIndex = directoryIndex(key);</span>
 <span class="fc" id="L54">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
 
@@ -59,7 +59,7 @@ public class ExtendableHashTable implements AutoCloseable {
             }
 
 <span class="fc" id="L61">            splitBucket(directoryIndex);</span>
-<span class="fc" id="L62">        }</span>
+        }
     }
 
     public Integer get(int key) {
@@ -100,15 +100,15 @@ public class ExtendableHashTable implements AutoCloseable {
 
         try {
 <span class="fc" id="L102">            channel.close();</span>
-<span class="nc" id="L103">        } catch (IOException e) {</span>
+<span class="pc" id="L103">        } catch (IOException e) {</span>
 <span class="nc" id="L104">            throw new UncheckedIOException(e);</span>
-<span class="fc" id="L105">        }</span>
+        }
 
         try {
 <span class="fc" id="L108">            Files.deleteIfExists(storagePath);</span>
-<span class="nc" id="L109">        } catch (IOException e) {</span>
+<span class="pc" id="L109">        } catch (IOException e) {</span>
 <span class="nc" id="L110">            throw new UncheckedIOException(e);</span>
-<span class="fc" id="L111">        }</span>
+        }
 <span class="fc" id="L112">    }</span>
 
     private int directoryIndex(int key) {
@@ -160,7 +160,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L160">    }</span>
 
     private void tryMerge(int directoryIndex) {
-        while (true) {
+<span class="fc" id="L163">        while (true) {</span>
 <span class="fc" id="L164">            long bucketOffset = readDirectoryPointer(directoryIndex);</span>
 <span class="fc" id="L165">            int localDepth = bucketLocalDepth(bucketOffset);</span>
 
@@ -211,7 +211,7 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc bfc" id="L211" title="All 2 branches covered.">            for (int i = base; i &lt; directoryLength(); i += step) {</span>
 <span class="fc" id="L212">                writeDirectoryPointer(i, survivorOffset);</span>
             }
-<span class="fc" id="L214">        }</span>
+        }
     }
 
     private void doubleDirectory() {
@@ -229,174 +229,169 @@ public class ExtendableHashTable implements AutoCloseable {
 <span class="fc" id="L229">    }</span>
 
     private int hash(int key) {
-<span class="fc" id="L232">        int h = key;</span>
-<span class="fc" id="L233">        h ^= (h &gt;&gt;&gt; 16);</span>
-<span class="fc" id="L234">        h *= 0x7feb352d;</span>
-<span class="fc" id="L235">        h ^= (h &gt;&gt;&gt; 15);</span>
-<span class="fc" id="L236">        h *= 0x846ca68b;</span>
-<span class="fc" id="L237">        h ^= (h &gt;&gt;&gt; 16);</span>
-<span class="fc" id="L238">        return h;</span>
+<span class="fc" id="L232">        int h = Integer.hashCode(key);</span>
+<span class="fc" id="L233">        return h ^ (h &gt;&gt;&gt; 16);</span>
     }
 
     private PutResult putIntoBucket(long bucketOffset, int key, int value) {
-<span class="fc" id="L242">        int position = indexOf(bucketOffset, key);</span>
-<span class="fc bfc" id="L243" title="All 2 branches covered.">        if (position &gt;= 0) {</span>
-<span class="fc" id="L244">            writeBucketValue(bucketOffset, position, value);</span>
-<span class="fc" id="L245">            return PutResult.UPDATED;</span>
+<span class="fc" id="L237">        int position = indexOf(bucketOffset, key);</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (position &gt;= 0) {</span>
+<span class="fc" id="L239">            writeBucketValue(bucketOffset, position, value);</span>
+<span class="fc" id="L240">            return PutResult.UPDATED;</span>
         }
 
-<span class="fc" id="L248">        int size = bucketSize(bucketOffset);</span>
-<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (size == bucketCapacity) {</span>
-<span class="fc" id="L250">            return PutResult.FULL;</span>
+<span class="fc" id="L243">        int size = bucketSize(bucketOffset);</span>
+<span class="fc bfc" id="L244" title="All 2 branches covered.">        if (size == bucketCapacity) {</span>
+<span class="fc" id="L245">            return PutResult.FULL;</span>
         }
 
-<span class="fc" id="L253">        writeBucketKey(bucketOffset, size, key);</span>
-<span class="fc" id="L254">        writeBucketValue(bucketOffset, size, value);</span>
-<span class="fc" id="L255">        writeBucketSize(bucketOffset, size + 1);</span>
-<span class="fc" id="L256">        return PutResult.INSERTED;</span>
+<span class="fc" id="L248">        writeBucketKey(bucketOffset, size, key);</span>
+<span class="fc" id="L249">        writeBucketValue(bucketOffset, size, value);</span>
+<span class="fc" id="L250">        writeBucketSize(bucketOffset, size + 1);</span>
+<span class="fc" id="L251">        return PutResult.INSERTED;</span>
     }
 
     private int indexOf(long bucketOffset, int key) {
-<span class="fc" id="L260">        int size = bucketSize(bucketOffset);</span>
-<span class="fc bfc" id="L261" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
-<span class="fc bfc" id="L262" title="All 2 branches covered.">            if (readBucketKey(bucketOffset, i) == key) {</span>
-<span class="fc" id="L263">                return i;</span>
+<span class="fc" id="L255">        int size = bucketSize(bucketOffset);</span>
+<span class="fc bfc" id="L256" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">            if (readBucketKey(bucketOffset, i) == key) {</span>
+<span class="fc" id="L258">                return i;</span>
             }
         }
-<span class="fc" id="L266">        return NOT_FOUND;</span>
+<span class="fc" id="L261">        return NOT_FOUND;</span>
     }
 
     private int directoryLength() {
-<span class="fc" id="L270">        return 1 &lt;&lt; globalDepth;</span>
+<span class="fc" id="L265">        return 1 &lt;&lt; globalDepth;</span>
     }
 
     private static Path createTempFile() {
         try {
-<span class="fc" id="L275">            return Files.createTempFile(&quot;extendable-hash-&quot;, &quot;.dat&quot;);</span>
-<span class="nc" id="L276">        } catch (IOException e) {</span>
-<span class="nc" id="L277">            throw new UncheckedIOException(e);</span>
+<span class="fc" id="L270">            return Files.createTempFile(&quot;extendable-hash-&quot;, &quot;.dat&quot;);</span>
+<span class="nc" id="L271">        } catch (IOException e) {</span>
+<span class="nc" id="L272">            throw new UncheckedIOException(e);</span>
         }
     }
 
     private void ensureMappedSize(long minSize) {
-<span class="fc bfc" id="L282" title="All 2 branches covered.">        if (minSize &lt;= mappedSize) {</span>
-<span class="fc" id="L283">            return;</span>
+<span class="fc bfc" id="L277" title="All 2 branches covered.">        if (minSize &lt;= mappedSize) {</span>
+<span class="fc" id="L278">            return;</span>
         }
 
-<span class="fc bfc" id="L286" title="All 2 branches covered.">        long newSize = Math.max(minSize, mappedSize == 0 ? MIN_FILE_SIZE : mappedSize * 2);</span>
-<span class="pc bpc" id="L287" title="1 of 2 branches missed.">        if (newSize &gt; Integer.MAX_VALUE) {</span>
-<span class="nc" id="L288">            throw new IllegalStateException(&quot;file is too large for mmap ByteBuffer&quot;);</span>
+<span class="fc bfc" id="L281" title="All 2 branches covered.">        long newSize = Math.max(minSize, mappedSize == 0 ? MIN_FILE_SIZE : mappedSize * 2);</span>
+<span class="pc bpc" id="L282" title="1 of 2 branches missed.">        if (newSize &gt; Integer.MAX_VALUE) {</span>
+<span class="nc" id="L283">            throw new IllegalStateException(&quot;file is too large for mmap ByteBuffer&quot;);</span>
         }
 
         long currentSize;
         try {
-<span class="fc" id="L293">            currentSize = channel.size();</span>
-<span class="nc" id="L294">        } catch (IOException e) {</span>
-<span class="nc" id="L295">            throw new UncheckedIOException(e);</span>
-<span class="fc" id="L296">        }</span>
+<span class="fc" id="L288">            currentSize = channel.size();</span>
+<span class="pc" id="L289">        } catch (IOException e) {</span>
+<span class="nc" id="L290">            throw new UncheckedIOException(e);</span>
+        }
 
-<span class="pc bpc" id="L298" title="1 of 2 branches missed.">        if (currentSize &lt; newSize) {</span>
+<span class="pc bpc" id="L293" title="1 of 2 branches missed.">        if (currentSize &lt; newSize) {</span>
             try {
-<span class="fc" id="L300">                channel.position(newSize - 1);</span>
-<span class="fc" id="L301">                channel.write(ByteBuffer.wrap(new byte[]{0}));</span>
-<span class="nc" id="L302">            } catch (IOException e) {</span>
-<span class="nc" id="L303">                throw new UncheckedIOException(e);</span>
-<span class="fc" id="L304">            }</span>
+<span class="fc" id="L295">                channel.position(newSize - 1);</span>
+<span class="fc" id="L296">                channel.write(ByteBuffer.wrap(new byte[]{0}));</span>
+<span class="pc" id="L297">            } catch (IOException e) {</span>
+<span class="nc" id="L298">                throw new UncheckedIOException(e);</span>
+            }
         }
 
         try {
-<span class="fc" id="L308">            buffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, newSize);</span>
-<span class="nc" id="L309">        } catch (IOException e) {</span>
-<span class="nc" id="L310">            throw new UncheckedIOException(e);</span>
-<span class="fc" id="L311">        }</span>
-<span class="fc" id="L312">        mappedSize = newSize;</span>
-<span class="fc" id="L313">    }</span>
+<span class="fc" id="L303">            buffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, newSize);</span>
+<span class="pc" id="L304">        } catch (IOException e) {</span>
+<span class="nc" id="L305">            throw new UncheckedIOException(e);</span>
+        }
+<span class="fc" id="L307">        mappedSize = newSize;</span>
+<span class="fc" id="L308">    }</span>
 
     private long allocateBucket(int localDepth) {
-<span class="fc" id="L316">        long bucketOffset = nextFreeOffset;</span>
-<span class="fc" id="L317">        long updatedNextFree = bucketOffset + bucketRecordSize;</span>
+<span class="fc" id="L311">        long bucketOffset = nextFreeOffset;</span>
+<span class="fc" id="L312">        long updatedNextFree = bucketOffset + bucketRecordSize;</span>
 
-<span class="fc" id="L319">        ensureMappedSize(updatedNextFree);</span>
+<span class="fc" id="L314">        ensureMappedSize(updatedNextFree);</span>
 
-<span class="fc" id="L321">        nextFreeOffset = updatedNextFree;</span>
-<span class="fc" id="L322">        writeHeaderLong(OFF_NEXT_FREE, nextFreeOffset);</span>
+<span class="fc" id="L316">        nextFreeOffset = updatedNextFree;</span>
+<span class="fc" id="L317">        writeHeaderLong(OFF_NEXT_FREE, nextFreeOffset);</span>
 
-<span class="fc" id="L324">        writeBucketLocalDepth(bucketOffset, localDepth);</span>
-<span class="fc" id="L325">        writeBucketSize(bucketOffset, 0);</span>
-<span class="fc" id="L326">        return bucketOffset;</span>
+<span class="fc" id="L319">        writeBucketLocalDepth(bucketOffset, localDepth);</span>
+<span class="fc" id="L320">        writeBucketSize(bucketOffset, 0);</span>
+<span class="fc" id="L321">        return bucketOffset;</span>
     }
 
     private long readDirectoryPointer(int directoryIndex) {
-<span class="fc" id="L330">        long offset = directoryOffset(directoryIndex);</span>
-<span class="fc" id="L331">        return buffer.getLong(toBufferIndex(offset));</span>
+<span class="fc" id="L325">        long offset = directoryOffset(directoryIndex);</span>
+<span class="fc" id="L326">        return buffer.getLong(toBufferIndex(offset));</span>
     }
 
     private void writeDirectoryPointer(int directoryIndex, long bucketOffset) {
-<span class="fc" id="L335">        long offset = directoryOffset(directoryIndex);</span>
-<span class="fc" id="L336">        buffer.putLong(toBufferIndex(offset), bucketOffset);</span>
-<span class="fc" id="L337">    }</span>
+<span class="fc" id="L330">        long offset = directoryOffset(directoryIndex);</span>
+<span class="fc" id="L331">        buffer.putLong(toBufferIndex(offset), bucketOffset);</span>
+<span class="fc" id="L332">    }</span>
 
     private int bucketLocalDepth(long bucketOffset) {
-<span class="fc" id="L340">        return readIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH);</span>
+<span class="fc" id="L335">        return readIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH);</span>
     }
 
     private void writeBucketLocalDepth(long bucketOffset, int localDepth) {
-<span class="fc" id="L344">        writeIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH, localDepth);</span>
-<span class="fc" id="L345">    }</span>
+<span class="fc" id="L339">        writeIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH, localDepth);</span>
+<span class="fc" id="L340">    }</span>
 
     private int bucketSize(long bucketOffset) {
-<span class="fc" id="L348">        return readIntAt(bucketOffset + BUCKET_OFF_SIZE);</span>
+<span class="fc" id="L343">        return readIntAt(bucketOffset + BUCKET_OFF_SIZE);</span>
     }
 
     private void writeBucketSize(long bucketOffset, int size) {
-<span class="fc" id="L352">        writeIntAt(bucketOffset + BUCKET_OFF_SIZE, size);</span>
-<span class="fc" id="L353">    }</span>
+<span class="fc" id="L347">        writeIntAt(bucketOffset + BUCKET_OFF_SIZE, size);</span>
+<span class="fc" id="L348">    }</span>
 
     private int readBucketKey(long bucketOffset, int slot) {
-<span class="fc" id="L356">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L357">        return readIntAt(offset);</span>
+<span class="fc" id="L351">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L352">        return readIntAt(offset);</span>
     }
 
     private void writeBucketKey(long bucketOffset, int slot, int key) {
-<span class="fc" id="L361">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L362">        writeIntAt(offset, key);</span>
-<span class="fc" id="L363">    }</span>
+<span class="fc" id="L356">        long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L357">        writeIntAt(offset, key);</span>
+<span class="fc" id="L358">    }</span>
 
     private int readBucketValue(long bucketOffset, int slot) {
-<span class="fc" id="L366">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L367">        return readIntAt(offset);</span>
+<span class="fc" id="L361">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L362">        return readIntAt(offset);</span>
     }
 
     private void writeBucketValue(long bucketOffset, int slot, int value) {
-<span class="fc" id="L371">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
-<span class="fc" id="L372">        writeIntAt(offset, value);</span>
-<span class="fc" id="L373">    }</span>
+<span class="fc" id="L366">        long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);</span>
+<span class="fc" id="L367">        writeIntAt(offset, value);</span>
+<span class="fc" id="L368">    }</span>
 
     private void writeHeaderInt(int offset, int value) {
-<span class="fc" id="L376">        buffer.putInt(offset, value);</span>
-<span class="fc" id="L377">    }</span>
+<span class="fc" id="L371">        buffer.putInt(offset, value);</span>
+<span class="fc" id="L372">    }</span>
 
     private void writeHeaderLong(int offset, long value) {
-<span class="fc" id="L380">        buffer.putLong(offset, value);</span>
-<span class="fc" id="L381">    }</span>
+<span class="fc" id="L375">        buffer.putLong(offset, value);</span>
+<span class="fc" id="L376">    }</span>
 
     private int readIntAt(long offset) {
-<span class="fc" id="L384">        return buffer.getInt(toBufferIndex(offset));</span>
+<span class="fc" id="L379">        return buffer.getInt(toBufferIndex(offset));</span>
     }
 
     private void writeIntAt(long offset, int value) {
-<span class="fc" id="L388">        buffer.putInt(toBufferIndex(offset), value);</span>
-<span class="fc" id="L389">    }</span>
+<span class="fc" id="L383">        buffer.putInt(toBufferIndex(offset), value);</span>
+<span class="fc" id="L384">    }</span>
 
     private int toBufferIndex(long offset) {
-<span class="fc" id="L392">        return (int) offset;</span>
+<span class="fc" id="L387">        return (int) offset;</span>
     }
 
     private static FileChannel openChannel(Path filePath, StandardOpenOption... options) {
         try {
-<span class="fc" id="L397">            return FileChannel.open(filePath, options);</span>
-<span class="nc" id="L398">        } catch (IOException e) {</span>
-<span class="nc" id="L399">            throw new UncheckedIOException(e);</span>
+<span class="fc" id="L392">            return FileChannel.open(filePath, options);</span>
+<span class="nc" id="L393">        } catch (IOException e) {</span>
+<span class="nc" id="L394">            throw new UncheckedIOException(e);</span>
         }
     }
 }
