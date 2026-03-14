@@ -32,8 +32,8 @@ import org.openjdk.jmh.results.ScalarResult;
 import org.openjdk.jmh.results.AggregationPolicy;
 import org.openjdk.jmh.runner.FailureAssistException;
 
+import bench.jmh_generated.LshBenchmark_FullScanState_jmhType;
 import bench.jmh_generated.LshBenchmark_jmhType;
-import bench.jmh_generated.LshBenchmark_SearchState_jmhType;
 public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
 
     byte p000, p001, p002, p003, p004, p005, p006, p007, p008, p009, p010, p011, p012, p013, p014, p015;
@@ -70,25 +70,26 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
             LshBenchmark_jmhType l_lshbenchmark0_0 = _jmh_tryInit_f_lshbenchmark0_0(control);
-            LshBenchmark_SearchState_jmhType l_searchstate1_1 = _jmh_tryInit_f_searchstate1_1(control);
+            LshBenchmark_FullScanState_jmhType l_fullscanstate1_1 = _jmh_tryInit_f_fullscanstate1_1(control);
 
             control.preSetup();
+            l_fullscanstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
                 if (control.shouldYield) Thread.yield();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            nearDuplicatesFullScan_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_searchstate1_1, l_lshbenchmark0_0);
+            nearDuplicatesFullScan_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_fullscanstate1_1, l_lshbenchmark0_0);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                    blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
                     if (control.shouldYield) Thread.yield();
                     res.allOps++;
                 }
@@ -98,7 +99,7 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             control.preTearDown();
 
             if (control.isLastIteration()) {
-                f_searchstate1_1 = null;
+                f_fullscanstate1_1 = null;
                 f_lshbenchmark0_0 = null;
             }
             res.allOps += res.measuredOps;
@@ -116,12 +117,12 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void nearDuplicatesFullScan_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, LshBenchmark_SearchState_jmhType l_searchstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
+    public static void nearDuplicatesFullScan_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, LshBenchmark_FullScanState_jmhType l_fullscanstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+            blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -141,25 +142,26 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
             LshBenchmark_jmhType l_lshbenchmark0_0 = _jmh_tryInit_f_lshbenchmark0_0(control);
-            LshBenchmark_SearchState_jmhType l_searchstate1_1 = _jmh_tryInit_f_searchstate1_1(control);
+            LshBenchmark_FullScanState_jmhType l_fullscanstate1_1 = _jmh_tryInit_f_fullscanstate1_1(control);
 
             control.preSetup();
+            l_fullscanstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
                 if (control.shouldYield) Thread.yield();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            nearDuplicatesFullScan_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_searchstate1_1, l_lshbenchmark0_0);
+            nearDuplicatesFullScan_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_fullscanstate1_1, l_lshbenchmark0_0);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                    blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
                     if (control.shouldYield) Thread.yield();
                     res.allOps++;
                 }
@@ -169,7 +171,7 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             control.preTearDown();
 
             if (control.isLastIteration()) {
-                f_searchstate1_1 = null;
+                f_fullscanstate1_1 = null;
                 f_lshbenchmark0_0 = null;
             }
             res.allOps += res.measuredOps;
@@ -187,12 +189,12 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void nearDuplicatesFullScan_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, LshBenchmark_SearchState_jmhType l_searchstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
+    public static void nearDuplicatesFullScan_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, LshBenchmark_FullScanState_jmhType l_fullscanstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+            blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -212,14 +214,15 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
             LshBenchmark_jmhType l_lshbenchmark0_0 = _jmh_tryInit_f_lshbenchmark0_0(control);
-            LshBenchmark_SearchState_jmhType l_searchstate1_1 = _jmh_tryInit_f_searchstate1_1(control);
+            LshBenchmark_FullScanState_jmhType l_fullscanstate1_1 = _jmh_tryInit_f_fullscanstate1_1(control);
 
             control.preSetup();
+            l_fullscanstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
                 if (control.shouldYield) Thread.yield();
                 res.allOps++;
             }
@@ -229,12 +232,12 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             int batchSize = iterationParams.getBatchSize();
             int opsPerInv = benchmarkParams.getOpsPerInvocation();
             SampleBuffer buffer = new SampleBuffer();
-            nearDuplicatesFullScan_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_searchstate1_1, l_lshbenchmark0_0);
+            nearDuplicatesFullScan_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_fullscanstate1_1, l_lshbenchmark0_0);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                    blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
                     if (control.shouldYield) Thread.yield();
                     res.allOps++;
                 }
@@ -244,7 +247,7 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             control.preTearDown();
 
             if (control.isLastIteration()) {
-                f_searchstate1_1 = null;
+                f_fullscanstate1_1 = null;
                 f_lshbenchmark0_0 = null;
             }
             res.allOps += res.measuredOps * batchSize;
@@ -259,7 +262,7 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void nearDuplicatesFullScan_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, LshBenchmark_SearchState_jmhType l_searchstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
+    public static void nearDuplicatesFullScan_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, LshBenchmark_FullScanState_jmhType l_fullscanstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
         long realTime = 0;
         long operations = 0;
         int rnd = (int)System.nanoTime();
@@ -274,7 +277,7 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             }
             for (int b = 0; b < batchSize; b++) {
                 if (control.volatileSpoiler) return;
-                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+                blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
             }
             if (sample) {
                 buffer.add((System.nanoTime() - time) / opsPerInv);
@@ -302,19 +305,20 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
         }
         if (threadParams.getSubgroupIndex() == 0) {
             LshBenchmark_jmhType l_lshbenchmark0_0 = _jmh_tryInit_f_lshbenchmark0_0(control);
-            LshBenchmark_SearchState_jmhType l_searchstate1_1 = _jmh_tryInit_f_searchstate1_1(control);
+            LshBenchmark_FullScanState_jmhType l_fullscanstate1_1 = _jmh_tryInit_f_fullscanstate1_1(control);
 
             control.preSetup();
+            l_fullscanstate1_1.setupIteration();
 
 
             notifyControl.startMeasurement = true;
             RawResults res = new RawResults();
             int batchSize = iterationParams.getBatchSize();
-            nearDuplicatesFullScan_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_searchstate1_1, l_lshbenchmark0_0);
+            nearDuplicatesFullScan_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_fullscanstate1_1, l_lshbenchmark0_0);
             control.preTearDown();
 
             if (control.isLastIteration()) {
-                f_searchstate1_1 = null;
+                f_fullscanstate1_1 = null;
                 f_lshbenchmark0_0 = null;
             }
             int opsPerInv = control.benchmarkParams.getOpsPerInvocation();
@@ -327,17 +331,43 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void nearDuplicatesFullScan_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, LshBenchmark_SearchState_jmhType l_searchstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
+    public static void nearDuplicatesFullScan_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, LshBenchmark_FullScanState_jmhType l_fullscanstate1_1, LshBenchmark_jmhType l_lshbenchmark0_0) throws Throwable {
         long realTime = 0;
         result.startTime = System.nanoTime();
         for (int b = 0; b < batchSize; b++) {
             if (control.volatileSpoiler) return;
-            blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_searchstate1_1));
+            blackhole.consume(l_lshbenchmark0_0.nearDuplicatesFullScan(l_fullscanstate1_1));
         }
         result.stopTime = System.nanoTime();
         result.realTime = realTime;
     }
 
+    
+    LshBenchmark_FullScanState_jmhType f_fullscanstate1_1;
+    
+    LshBenchmark_FullScanState_jmhType _jmh_tryInit_f_fullscanstate1_1(InfraControl control) throws Throwable {
+        if (control.isFailing) throw new FailureAssistException();
+        LshBenchmark_FullScanState_jmhType val = f_fullscanstate1_1;
+        if (val == null) {
+            val = new LshBenchmark_FullScanState_jmhType();
+                Field f;
+                f = bench.LshBenchmark.FullScanState.class.getDeclaredField("docs");
+                f.setAccessible(true);
+                f.set(val, Integer.valueOf(control.getParam("docs")));
+                f = bench.LshBenchmark.FullScanState.class.getDeclaredField("seed");
+                f.setAccessible(true);
+                f.set(val, Long.valueOf(control.getParam("seed")));
+                f = bench.LshBenchmark.FullScanState.class.getDeclaredField("threshold");
+                f.setAccessible(true);
+                f.set(val, Double.valueOf(control.getParam("threshold")));
+                f = bench.LshBenchmark.FullScanState.class.getDeclaredField("wordsPerDoc");
+                f.setAccessible(true);
+                f.set(val, Integer.valueOf(control.getParam("wordsPerDoc")));
+            val.setupTrial();
+            f_fullscanstate1_1 = val;
+        }
+        return val;
+    }
     
     LshBenchmark_jmhType f_lshbenchmark0_0;
     
@@ -347,32 +377,6 @@ public final class LshBenchmark_nearDuplicatesFullScan_jmhTest {
         if (val == null) {
             val = new LshBenchmark_jmhType();
             f_lshbenchmark0_0 = val;
-        }
-        return val;
-    }
-    
-    LshBenchmark_SearchState_jmhType f_searchstate1_1;
-    
-    LshBenchmark_SearchState_jmhType _jmh_tryInit_f_searchstate1_1(InfraControl control) throws Throwable {
-        if (control.isFailing) throw new FailureAssistException();
-        LshBenchmark_SearchState_jmhType val = f_searchstate1_1;
-        if (val == null) {
-            val = new LshBenchmark_SearchState_jmhType();
-                Field f;
-                f = bench.LshBenchmark.SearchState.class.getDeclaredField("docs");
-                f.setAccessible(true);
-                f.set(val, Integer.valueOf(control.getParam("docs")));
-                f = bench.LshBenchmark.SearchState.class.getDeclaredField("seed");
-                f.setAccessible(true);
-                f.set(val, Long.valueOf(control.getParam("seed")));
-                f = bench.LshBenchmark.SearchState.class.getDeclaredField("threshold");
-                f.setAccessible(true);
-                f.set(val, Double.valueOf(control.getParam("threshold")));
-                f = bench.LshBenchmark.SearchState.class.getDeclaredField("wordsPerDoc");
-                f.setAccessible(true);
-                f.set(val, Integer.valueOf(control.getParam("wordsPerDoc")));
-            val.setup();
-            f_searchstate1_1 = val;
         }
         return val;
     }

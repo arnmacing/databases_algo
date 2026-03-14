@@ -1,56 +1,58 @@
 package bench;
 
 import lsh.MinHashLshIndex;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.SplittableRandom;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Warmup(iterations = 8, time = 2, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 12, time = 2, timeUnit = TimeUnit.SECONDS)
+@Fork(2)
 public class LshBenchmark {
 
     private static final String[] DICT = {
             "mama", "myla", "ramu", "koshki", "lyubyat", "moloko",
             "samolety", "letayut", "vysoko", "programmirovanie", "algoritmy",
-            "hash", "tablica", "indeks", "poisk", "tekst", "dubl"
+            "hash", "tablica", "indeks", "poisk", "tekst", "dubl",
+            "database", "storage", "engine", "query", "planner", "optimizer",
+            "transaction", "isolation", "consistency", "durability", "atomicity",
+            "replica", "cluster", "sharding", "partition", "latency", "throughput",
+            "benchmark", "workload", "dataset", "feature", "vector", "embedding",
+            "similarity", "duplicate", "document", "search", "ranking", "relevance",
+            "token", "shingle", "signature", "bucket", "collision", "entropy",
+            "stream", "window", "pipeline", "ingest", "schema", "column",
+            "row", "indexing", "snapshot", "checkpoint", "recovery", "journal",
+            "cache", "buffer", "paging", "memory", "io", "mmap",
+            "thread", "parallel", "batch", "service", "api", "client",
+            "server", "request", "response", "timeout", "retry", "backoff",
+            "monitoring", "metrics", "histogram", "percentile", "telemetry",
+            "logging", "debug", "release", "stable", "version", "experiment"
     };
 
     @State(Scope.Benchmark)
     public static class BuildState {
-        @Param({"2000", "10000"})
+        @Param({"20000", "60000"})
         public int docs;
 
-        @Param({"12"})
+        @Param({"16"})
         public int wordsPerDoc;
 
         @Param({"42"})
         public long seed;
 
         String[] texts;
+        int iteration;
 
         @Setup(Level.Trial)
-        public void setup() {
+        public void setupTrial() {
             texts = new String[docs];
             SplittableRandom rnd = new SplittableRandom(seed);
-
             for (int i = 0; i < docs; i += 2) {
                 String base = randomText(rnd, wordsPerDoc);
                 texts[i] = base;
@@ -58,15 +60,21 @@ public class LshBenchmark {
                     texts[i + 1] = noisyFormattingVariant(rnd, base);
                 }
             }
+            iteration = 0;
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            shuffle(texts, seed + iteration++);
         }
     }
 
     @State(Scope.Thread)
     public static class AddState {
-        @Param({"5000"})
+        @Param({"20000"})
         public int baseDocs;
 
-        @Param({"12"})
+        @Param({"16"})
         public int wordsPerDoc;
 
         @Param({"42"})
@@ -75,11 +83,13 @@ public class LshBenchmark {
         MinHashLshIndex index;
         SplittableRandom rnd;
         int nextDocId;
+        int iteration;
 
         @Setup(Level.Iteration)
-        public void setup() {
+        public void setupIteration() {
+            long iterSeed = seed + iteration++;
             index = new MinHashLshIndex(5, 128, 32, seed);
-            rnd = new SplittableRandom(seed ^ 0x9E3779B97F4A7C15L);
+            rnd = new SplittableRandom(iterSeed);
 
             int docId = 1;
             for (int i = 0; i < baseDocs; i++) {
@@ -90,27 +100,27 @@ public class LshBenchmark {
     }
 
     @State(Scope.Thread)
-    public static class SearchState {
-        @Param({"1000", "3000"})
+    public static class QueryState {
+        @Param({"20000", "60000"})
         public int docs;
 
-        @Param({"12"})
+        @Param({"16"})
         public int wordsPerDoc;
-
-        @Param({"0.9"})
-        public double threshold;
 
         @Param({"42"})
         public long seed;
 
         MinHashLshIndex index;
         String[] queries;
-        int queryPos;
+        int[] order;
+        int pos;
+        int iteration;
 
         @Setup(Level.Trial)
-        public void setup() {
+        public void setupTrial() {
             index = new MinHashLshIndex(5, 128, 32, seed);
             queries = new String[docs];
+            order = new int[docs];
 
             SplittableRandom rnd = new SplittableRandom(seed);
             int docId = 1;
@@ -127,16 +137,124 @@ public class LshBenchmark {
                 }
             }
 
-            queryPos = 0;
+            for (int i = 0; i < docs; i++) {
+                order[i] = i;
+            }
+            pos = 0;
+            iteration = 0;
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            shuffle(order, seed + iteration++);
+            pos = 0;
         }
 
         String nextQuery() {
-            String query = queries[queryPos];
-            queryPos++;
-            if (queryPos == queries.length) {
-                queryPos = 0;
+            String query = queries[order[pos]];
+            pos++;
+            if (pos == queries.length) {
+                pos = 0;
             }
             return query;
+        }
+    }
+
+    @State(Scope.Thread)
+    public static class LshDuplicatesState {
+        @Param({"6000", "12000"})
+        public int docs;
+
+        @Param({"16"})
+        public int wordsPerDoc;
+
+        @Param({"0.9"})
+        public double threshold;
+
+        @Param({"42"})
+        public long seed;
+
+        String[] texts;
+        int[] order;
+        MinHashLshIndex index;
+        int iteration;
+
+        @Setup(Level.Trial)
+        public void setupTrial() {
+            texts = new String[docs];
+            order = new int[docs];
+            SplittableRandom rnd = new SplittableRandom(seed);
+
+            for (int i = 0; i < docs; i += 2) {
+                String base = randomText(rnd, wordsPerDoc);
+                texts[i] = base;
+                if (i + 1 < docs) {
+                    texts[i + 1] = noisyFormattingVariant(rnd, base);
+                }
+            }
+            for (int i = 0; i < docs; i++) {
+                order[i] = i;
+            }
+            iteration = 0;
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            shuffle(order, seed + iteration++);
+            index = new MinHashLshIndex(5, 128, 32, seed);
+            int docId = 1;
+            for (int id : order) {
+                index.add(docId++, texts[id]);
+            }
+        }
+    }
+
+    @State(Scope.Thread)
+    public static class FullScanState {
+        @Param({"1500", "3000"})
+        public int docs;
+
+        @Param({"16"})
+        public int wordsPerDoc;
+
+        @Param({"0.9"})
+        public double threshold;
+
+        @Param({"42"})
+        public long seed;
+
+        String[] texts;
+        int[] order;
+        MinHashLshIndex index;
+        int iteration;
+
+        @Setup(Level.Trial)
+        public void setupTrial() {
+            texts = new String[docs];
+            order = new int[docs];
+            SplittableRandom rnd = new SplittableRandom(seed);
+
+            for (int i = 0; i < docs; i += 2) {
+                String base = randomText(rnd, wordsPerDoc);
+                texts[i] = base;
+                if (i + 1 < docs) {
+                    texts[i + 1] = noisyFormattingVariant(rnd, base);
+                }
+            }
+            for (int i = 0; i < docs; i++) {
+                order[i] = i;
+            }
+            iteration = 0;
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            shuffle(order, seed + iteration++);
+            index = new MinHashLshIndex(5, 128, 32, seed);
+            int docId = 1;
+            for (int id : order) {
+                index.add(docId++, texts[id]);
+            }
         }
     }
 
@@ -155,18 +273,38 @@ public class LshBenchmark {
     }
 
     @Benchmark
-    public int candidatesQuery(SearchState state) {
+    public int candidatesQuery(QueryState state) {
         return state.index.candidates(state.nextQuery()).size();
     }
 
     @Benchmark
-    public int nearDuplicatesLsh(SearchState state) {
+    public int nearDuplicatesLsh(LshDuplicatesState state) {
         return state.index.nearDuplicates(state.threshold).size();
     }
 
     @Benchmark
-    public int nearDuplicatesFullScan(SearchState state) {
+    public int nearDuplicatesFullScan(FullScanState state) {
         return state.index.nearDuplicatesFullScan(state.threshold).size();
+    }
+
+    private static void shuffle(int[] a, long seed) {
+        SplittableRandom rnd = new SplittableRandom(seed);
+        for (int i = a.length - 1; i > 0; i--) {
+            int j = rnd.nextInt(i + 1);
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+    }
+
+    private static void shuffle(String[] a, long seed) {
+        SplittableRandom rnd = new SplittableRandom(seed);
+        for (int i = a.length - 1; i > 0; i--) {
+            int j = rnd.nextInt(i + 1);
+            String tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
     }
 
     private static String randomText(SplittableRandom rnd, int words) {

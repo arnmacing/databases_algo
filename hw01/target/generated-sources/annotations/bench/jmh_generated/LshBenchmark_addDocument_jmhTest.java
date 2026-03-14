@@ -73,7 +73,7 @@ public final class LshBenchmark_addDocument_jmhTest {
             LshBenchmark_AddState_jmhType l_addstate1_1 = _jmh_tryInit_f_addstate1_1(control);
 
             control.preSetup();
-            l_addstate1_1.setup();
+            l_addstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -145,7 +145,7 @@ public final class LshBenchmark_addDocument_jmhTest {
             LshBenchmark_AddState_jmhType l_addstate1_1 = _jmh_tryInit_f_addstate1_1(control);
 
             control.preSetup();
-            l_addstate1_1.setup();
+            l_addstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -217,7 +217,7 @@ public final class LshBenchmark_addDocument_jmhTest {
             LshBenchmark_AddState_jmhType l_addstate1_1 = _jmh_tryInit_f_addstate1_1(control);
 
             control.preSetup();
-            l_addstate1_1.setup();
+            l_addstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -308,7 +308,7 @@ public final class LshBenchmark_addDocument_jmhTest {
             LshBenchmark_AddState_jmhType l_addstate1_1 = _jmh_tryInit_f_addstate1_1(control);
 
             control.preSetup();
-            l_addstate1_1.setup();
+            l_addstate1_1.setupIteration();
 
 
             notifyControl.startMeasurement = true;

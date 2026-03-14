@@ -1,34 +1,23 @@
 package bench;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import perfectHashing.PerfectHashTable;
 
-import java.util.SplittableRandom;
 import java.util.Arrays;
+import java.util.SplittableRandom;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Warmup(iterations = 8, time = 2, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 12, time = 2, timeUnit = TimeUnit.SECONDS)
+@Fork(2)
 public class PerfectHashingBenchmark {
 
     @State(Scope.Benchmark)
     public static class BuildState {
-        @Param({"10000", "50000"})
+        @Param({"200000", "800000"})
         public int n;
 
         @Param({"42"})
@@ -36,25 +25,31 @@ public class PerfectHashingBenchmark {
 
         int[] keys;
         Integer[] values;
+        int iteration;
 
         @Setup(Level.Trial)
-        public void setup() {
+        public void setupTrial() {
             keys = new int[n];
             values = new Integer[n];
             SplittableRandom rnd = new SplittableRandom(seed);
 
             for (int i = 0; i < n; i++) {
-                // ключи одной четности, чтобы для miss-запросов можно было взять противоположную
                 int key = (i << 1) - n;
                 keys[i] = key;
                 values[i] = rnd.nextInt();
             }
+            iteration = 0;
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            shufflePairs(keys, values, seed + iteration++);
         }
     }
 
     @State(Scope.Thread)
     public static class LookupState {
-        @Param({"10000", "50000"})
+        @Param({"200000", "800000"})
         public int n;
 
         @Param({"42"})
@@ -64,9 +59,10 @@ public class PerfectHashingBenchmark {
         int[] presentKeys;
         int[] absentKeys;
         int pos;
+        int iteration;
 
         @Setup(Level.Trial)
-        public void setup() {
+        public void setupTrial() {
             presentKeys = new int[n];
             Integer[] values = new Integer[n];
             absentKeys = new int[n];
@@ -79,10 +75,16 @@ public class PerfectHashingBenchmark {
                 absentKeys[i] = key + 1;
             }
 
-            shuffle(presentKeys, seed ^ 0x9E3779B97F4A7C15L);
-            shuffle(absentKeys, seed ^ 0xBF58476D1CE4E5B9L);
-
             table = PerfectHashTable.build(presentKeys, values, seed);
+            pos = 0;
+            iteration = 0;
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            long iterSeed = seed + iteration++;
+            shuffle(presentKeys, iterSeed);
+            shuffle(absentKeys, iterSeed + 1);
             pos = 0;
         }
 
@@ -139,6 +141,21 @@ public class PerfectHashingBenchmark {
             int tmp = a[i];
             a[i] = a[j];
             a[j] = tmp;
+        }
+    }
+
+    private static void shufflePairs(int[] keys, Integer[] values, long seed) {
+        SplittableRandom rnd = new SplittableRandom(seed);
+        for (int i = keys.length - 1; i > 0; i--) {
+            int j = rnd.nextInt(i + 1);
+
+            int keyTmp = keys[i];
+            keys[i] = keys[j];
+            keys[j] = keyTmp;
+
+            Integer valueTmp = values[i];
+            values[i] = values[j];
+            values[j] = valueTmp;
         }
     }
 

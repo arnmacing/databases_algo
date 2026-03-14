@@ -73,6 +73,7 @@ public final class ExtendableHashTableBenchmark_getMiss_jmhTest {
             ExtendableHashTableBenchmark_ReadState_jmhType l_readstate1_1 = _jmh_tryInit_f_readstate1_1(control);
 
             control.preSetup();
+            l_readstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -145,6 +146,7 @@ public final class ExtendableHashTableBenchmark_getMiss_jmhTest {
             ExtendableHashTableBenchmark_ReadState_jmhType l_readstate1_1 = _jmh_tryInit_f_readstate1_1(control);
 
             control.preSetup();
+            l_readstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -217,6 +219,7 @@ public final class ExtendableHashTableBenchmark_getMiss_jmhTest {
             ExtendableHashTableBenchmark_ReadState_jmhType l_readstate1_1 = _jmh_tryInit_f_readstate1_1(control);
 
             control.preSetup();
+            l_readstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -308,6 +311,7 @@ public final class ExtendableHashTableBenchmark_getMiss_jmhTest {
             ExtendableHashTableBenchmark_ReadState_jmhType l_readstate1_1 = _jmh_tryInit_f_readstate1_1(control);
 
             control.preSetup();
+            l_readstate1_1.setupIteration();
 
 
             notifyControl.startMeasurement = true;
@@ -372,7 +376,7 @@ public final class ExtendableHashTableBenchmark_getMiss_jmhTest {
                 f = bench.ExtendableHashTableBenchmark.ReadState.class.getDeclaredField("seed");
                 f.setAccessible(true);
                 f.set(val, Long.valueOf(control.getParam("seed")));
-            val.setup();
+            val.setupTrial();
             f_readstate1_1 = val;
         }
         return val;

@@ -73,6 +73,7 @@ public final class PerfectHashingBenchmark_containsMiss_jmhTest {
             PerfectHashingBenchmark_LookupState_jmhType l_lookupstate1_1 = _jmh_tryInit_f_lookupstate1_1(control);
 
             control.preSetup();
+            l_lookupstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -144,6 +145,7 @@ public final class PerfectHashingBenchmark_containsMiss_jmhTest {
             PerfectHashingBenchmark_LookupState_jmhType l_lookupstate1_1 = _jmh_tryInit_f_lookupstate1_1(control);
 
             control.preSetup();
+            l_lookupstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -215,6 +217,7 @@ public final class PerfectHashingBenchmark_containsMiss_jmhTest {
             PerfectHashingBenchmark_LookupState_jmhType l_lookupstate1_1 = _jmh_tryInit_f_lookupstate1_1(control);
 
             control.preSetup();
+            l_lookupstate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -305,6 +308,7 @@ public final class PerfectHashingBenchmark_containsMiss_jmhTest {
             PerfectHashingBenchmark_LookupState_jmhType l_lookupstate1_1 = _jmh_tryInit_f_lookupstate1_1(control);
 
             control.preSetup();
+            l_lookupstate1_1.setupIteration();
 
 
             notifyControl.startMeasurement = true;
@@ -353,7 +357,7 @@ public final class PerfectHashingBenchmark_containsMiss_jmhTest {
                 f = bench.PerfectHashingBenchmark.LookupState.class.getDeclaredField("seed");
                 f.setAccessible(true);
                 f.set(val, Long.valueOf(control.getParam("seed")));
-            val.setup();
+            val.setupTrial();
             f_lookupstate1_1 = val;
         }
         return val;

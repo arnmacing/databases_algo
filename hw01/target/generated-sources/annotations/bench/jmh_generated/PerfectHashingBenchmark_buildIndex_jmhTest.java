@@ -73,6 +73,25 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (!l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.setupIteration();
+                        l_buildstate1_G.readyIteration = true;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
 
             control.announceWarmupReady();
@@ -96,6 +115,24 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 if (!(e instanceof InterruptedException)) throw e;
             }
             control.preTearDown();
+            if (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.readyIteration = false;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
             if (control.isLastIteration()) {
                 if (PerfectHashingBenchmark_BuildState_jmhType.tearTrialMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
@@ -167,6 +204,25 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (!l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.setupIteration();
+                        l_buildstate1_G.readyIteration = true;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
 
             control.announceWarmupReady();
@@ -190,6 +246,24 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 if (!(e instanceof InterruptedException)) throw e;
             }
             control.preTearDown();
+            if (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.readyIteration = false;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
             if (control.isLastIteration()) {
                 if (PerfectHashingBenchmark_BuildState_jmhType.tearTrialMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
@@ -261,6 +335,25 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (!l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.setupIteration();
+                        l_buildstate1_G.readyIteration = true;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
 
             control.announceWarmupReady();
@@ -288,6 +381,24 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 if (!(e instanceof InterruptedException)) throw e;
             }
             control.preTearDown();
+            if (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.readyIteration = false;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
             if (control.isLastIteration()) {
                 if (PerfectHashingBenchmark_BuildState_jmhType.tearTrialMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
@@ -374,6 +485,25 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (!l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.setupIteration();
+                        l_buildstate1_G.readyIteration = true;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
 
             notifyControl.startMeasurement = true;
@@ -381,6 +511,24 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             int batchSize = iterationParams.getBatchSize();
             buildIndex_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_buildstate1_G, l_perfecthashingbenchmark0_0);
             control.preTearDown();
+            if (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
+                try {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (l_buildstate1_G.readyIteration) {
+                        l_buildstate1_G.readyIteration = false;
+                    }
+                } catch (Throwable t) {
+                    control.isFailing = true;
+                    throw t;
+                } finally {
+                    PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.set(l_buildstate1_G, 0);
+                }
+            } else {
+                while (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.get(l_buildstate1_G) == 1) {
+                    if (control.isFailing) throw new FailureAssistException();
+                    if (Thread.interrupted()) throw new InterruptedException();
+                }
+            }
 
             if (control.isLastIteration()) {
                 if (PerfectHashingBenchmark_BuildState_jmhType.tearTrialMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
@@ -453,7 +601,7 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             f = bench.PerfectHashingBenchmark.BuildState.class.getDeclaredField("seed");
             f.setAccessible(true);
             f.set(val, Long.valueOf(control.getParam("seed")));
-            val.setup();
+            val.setupTrial();
             val.readyTrial = true;
             f_buildstate1_G = val;
             } catch (Throwable t) {

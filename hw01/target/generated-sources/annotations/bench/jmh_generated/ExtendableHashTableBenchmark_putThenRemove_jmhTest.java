@@ -97,9 +97,9 @@ public final class ExtendableHashTableBenchmark_putThenRemove_jmhTest {
                 if (!(e instanceof InterruptedException)) throw e;
             }
             control.preTearDown();
-            l_writestate1_1.tearDownIteration();
 
             if (control.isLastIteration()) {
+                l_writestate1_1.tearDownTrial();
                 f_writestate1_1 = null;
                 f_extendablehashtablebenchmark0_0 = null;
             }
@@ -170,9 +170,9 @@ public final class ExtendableHashTableBenchmark_putThenRemove_jmhTest {
                 if (!(e instanceof InterruptedException)) throw e;
             }
             control.preTearDown();
-            l_writestate1_1.tearDownIteration();
 
             if (control.isLastIteration()) {
+                l_writestate1_1.tearDownTrial();
                 f_writestate1_1 = null;
                 f_extendablehashtablebenchmark0_0 = null;
             }
@@ -247,9 +247,9 @@ public final class ExtendableHashTableBenchmark_putThenRemove_jmhTest {
                 if (!(e instanceof InterruptedException)) throw e;
             }
             control.preTearDown();
-            l_writestate1_1.tearDownIteration();
 
             if (control.isLastIteration()) {
+                l_writestate1_1.tearDownTrial();
                 f_writestate1_1 = null;
                 f_extendablehashtablebenchmark0_0 = null;
             }
@@ -319,9 +319,9 @@ public final class ExtendableHashTableBenchmark_putThenRemove_jmhTest {
             int batchSize = iterationParams.getBatchSize();
             putThenRemove_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_writestate1_1, l_extendablehashtablebenchmark0_0);
             control.preTearDown();
-            l_writestate1_1.tearDownIteration();
 
             if (control.isLastIteration()) {
+                l_writestate1_1.tearDownTrial();
                 f_writestate1_1 = null;
                 f_extendablehashtablebenchmark0_0 = null;
             }
@@ -376,6 +376,7 @@ public final class ExtendableHashTableBenchmark_putThenRemove_jmhTest {
                 f = bench.ExtendableHashTableBenchmark.WriteState.class.getDeclaredField("seed");
                 f.setAccessible(true);
                 f.set(val, Long.valueOf(control.getParam("seed")));
+            val.setupTrial();
             f_writestate1_1 = val;
         }
         return val;
