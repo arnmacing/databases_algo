@@ -74,4 +74,3 @@ bench/LshBenchmark$AddState.class
 bench/jmh_generated/PerfectHashingBenchmark_LookupState_jmhType_B2.class
 bench/PerfectHashingBenchmark.class
 bench/jmh_generated/LshBenchmark_candidatesQuery_jmhTest.class
-perfectHashing/PerfectHashTable$Buckets.class

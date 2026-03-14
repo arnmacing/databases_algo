@@ -31,11 +31,14 @@ public class PerfectHashTableTest {
     }
 
     @Test
-    void build_shouldRejectDuplicateKeys() {
+    void build_withDuplicateKeys_shouldKeepLastValue() {
         int[] keys = {1, 2, 2, 3};
         Integer[] values = {10, 20, 200, 30};
-        Executable act = () -> PerfectHashTable.build(keys, values, 42L);
-        assertThrows(IllegalArgumentException.class, act);
+
+        PerfectHashTable<Integer> table = PerfectHashTable.build(keys, values, 42L);
+
+        assertTrue(table.containsKey(2));
+        assertEquals(200, table.get(2));
     }
 
     @Test
