@@ -290,7 +290,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * Замеряет построение структуры по подготовленным текстам
+     * построение структуры по подготовленным текстам
      */
     public void buildIndex(BuildState state, Blackhole bh) {
         MinHashLshIndex index = new MinHashLshIndex(5, 128, 32, state.seed);
@@ -302,7 +302,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * Замеряет добавление одного нового документа
+     * добавление одного нового документа
      */
     public void addDocument(AddState state) {
         state.index.add(state.nextDocId++, randomText(state.rnd, state.wordsPerDoc));
@@ -310,7 +310,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * Замеряет получение кандидатов
+     * получение кандидатов
      */
     public int candidatesQuery(QueryState state) {
         return state.index.candidates(state.nextQuery()).size();
@@ -318,7 +318,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * Замеряет поиск близких пар
+     * поиск близких пар
      */
     public int nearDuplicatesLsh(LshDuplicatesState state) {
         return state.index.nearDuplicates(state.threshold).size();
@@ -326,7 +326,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * Замеряет поиск близких пар полным перебором
+     * поиск близких пар полным перебором
      */
     public int nearDuplicatesFullScan(FullScanState state) {
         return state.index.nearDuplicatesFullScan(state.threshold).size();

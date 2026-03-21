@@ -236,7 +236,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * Замеряет чтение по ключу, который есть в таблице
+     * чтение по ключу, который есть в таблице
      */
     public void getHit(ReadState s, Blackhole bh) {
         bh.consume(s.ht.get(s.nextPresent()));
@@ -244,7 +244,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * Замеряет чтение по ключу, которого нет
+     * чтение по ключу, которого нет
      */
     public void getMiss(ReadState s, Blackhole bh) {
         bh.consume(s.ht.get(s.nextAbsent()));
@@ -252,7 +252,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * Замеряет вставку и удаление ключа
+     * вставку и удаление ключа
      */
     public void putThenRemove(WriteState s) {
         int k = s.nextExtra();
@@ -262,7 +262,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * Замеряет удаление и вставку ключа
+     * удаление и вставку ключа
      */
     public void removeThenPut(WriteState s) {
         int k = s.nextBase();
@@ -272,7 +272,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * Замеряет обновление значения ключа
+     * обновление значения ключа
      */
     public void updateExisting(WriteState s, Blackhole bh) {
         int k = s.nextBase();
@@ -285,7 +285,7 @@ public class ExtendableHashTableBenchmark {
     @BenchmarkMode(Mode.SingleShotTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     /**
-     * Замеряет построение таблицы
+     * построение таблицы
      */
     public int buildFromScratch(BuildState s, Blackhole bh) {
         try (ExtendableHashTable ht = new ExtendableHashTable(s.bucketCapacity)) {

@@ -127,7 +127,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * Замеряет время построения таблицы
+     * время построения таблицы
      */
     public int buildIndex(BuildState state, Blackhole bh) {
         PerfectHashTable<Integer> table = PerfectHashTable.build(state.keys, state.values, state.seed);
@@ -137,7 +137,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * Замеряет чтение по существующему ключу
+     * чтение по существующему ключу
      */
     public void getHit(LookupState state, Blackhole bh) {
         bh.consume(state.table.get(state.nextPresent()));
@@ -145,7 +145,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * Замеряет чтение по отсутствующему ключу
+     * чтение по отсутствующему ключу
      */
     public void getMiss(LookupState state, Blackhole bh) {
         bh.consume(state.table.get(state.nextAbsent()));
@@ -153,7 +153,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * Замеряет проверку наличия существующего ключа
+     * проверку наличия существующего ключа
      */
     public boolean containsHit(LookupState state) {
         return state.table.containsKey(state.nextPresent());
@@ -161,7 +161,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * Замеряет проверку наличия отсутствующего ключа
+     * проверку наличия отсутствующего ключа
      */
     public boolean containsMiss(LookupState state) {
         return state.table.containsKey(state.nextAbsent());
