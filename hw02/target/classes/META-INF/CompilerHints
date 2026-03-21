@@ -5,7 +5,9 @@ dontinline,*.*_ss_jmhStub
 dontinline,*.*_thrpt_jmhStub
 inline,bench/GeoSpatialIndexBenchmark$BuildState.setup
 inline,bench/GeoSpatialIndexBenchmark$MutationState.setup
+inline,bench/GeoSpatialIndexBenchmark$MutationState.setupTrial
 inline,bench/GeoSpatialIndexBenchmark$QueryState.setup
+inline,bench/GeoSpatialIndexBenchmark$QueryState.setupIteration
 inline,bench/GeoSpatialIndexBenchmark.buildGeoSpatialIndex
 inline,bench/GeoSpatialIndexBenchmark.buildNaiveIndex
 inline,bench/GeoSpatialIndexBenchmark.nearbyQueryGeoSpatialIndex

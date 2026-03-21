@@ -143,13 +143,6 @@ class GeoSpatialIndexTest {
         assertThrows(IllegalArgumentException.class, () -> new GeoObject<>("id", 0.0, Double.NaN, "x"));
 
         GeoObject<String> obj = new GeoObject<>("id", 0.0, 0.0, "x");
-        assertThrows(NullPointerException.class, () -> new GeoSearchResult<>(null, 1.0));
-        assertThrows(IllegalArgumentException.class, () -> new GeoSearchResult<>(obj, -0.1));
-        assertThrows(IllegalArgumentException.class, () -> new GeoSearchResult<>(obj, Double.NaN));
-
-        assertThrows(IllegalArgumentException.class, () -> new GeoSpatialIndex<>(0.0));
-        assertThrows(IllegalArgumentException.class, () -> new GeoSpatialIndex<>(Double.NaN));
-
         GeoSpatialIndex<String> index = new GeoSpatialIndex<>();
         assertThrows(IllegalArgumentException.class, () -> index.put(null, 0.0, 0.0, "null-id"));
         assertThrows(IllegalArgumentException.class, () -> index.put("a", -91.0, 0.0, "bad-lat-low"));
@@ -159,8 +152,6 @@ class GeoSpatialIndexTest {
         assertThrows(IllegalArgumentException.class, () -> index.put("a", Double.NaN, 0.0, "nan-lat"));
         assertThrows(IllegalArgumentException.class, () -> index.put("a", 0.0, Double.POSITIVE_INFINITY, "inf-lon"));
         assertThrows(IllegalArgumentException.class, () -> index.put(" ", 0.0, 0.0, "blank-id"));
-        assertThrows(IllegalArgumentException.class, () -> index.put((GeoObject<String>) null));
-
         assertThrows(IllegalArgumentException.class, () -> index.findNearby(-91.0, 0.0, 1.0));
         assertThrows(IllegalArgumentException.class, () -> index.findNearby(91.0, 0.0, 1.0));
         assertThrows(IllegalArgumentException.class, () -> index.findNearby(0.0, -181.0, 1.0));

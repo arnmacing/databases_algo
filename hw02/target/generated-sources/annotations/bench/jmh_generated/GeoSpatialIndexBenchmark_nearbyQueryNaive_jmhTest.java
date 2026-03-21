@@ -73,6 +73,7 @@ public final class GeoSpatialIndexBenchmark_nearbyQueryNaive_jmhTest {
             GeoSpatialIndexBenchmark_QueryState_jmhType l_querystate1_1 = _jmh_tryInit_f_querystate1_1(control);
 
             control.preSetup();
+            l_querystate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -144,6 +145,7 @@ public final class GeoSpatialIndexBenchmark_nearbyQueryNaive_jmhTest {
             GeoSpatialIndexBenchmark_QueryState_jmhType l_querystate1_1 = _jmh_tryInit_f_querystate1_1(control);
 
             control.preSetup();
+            l_querystate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -215,6 +217,7 @@ public final class GeoSpatialIndexBenchmark_nearbyQueryNaive_jmhTest {
             GeoSpatialIndexBenchmark_QueryState_jmhType l_querystate1_1 = _jmh_tryInit_f_querystate1_1(control);
 
             control.preSetup();
+            l_querystate1_1.setupIteration();
 
 
             control.announceWarmupReady();
@@ -305,6 +308,7 @@ public final class GeoSpatialIndexBenchmark_nearbyQueryNaive_jmhTest {
             GeoSpatialIndexBenchmark_QueryState_jmhType l_querystate1_1 = _jmh_tryInit_f_querystate1_1(control);
 
             control.preSetup();
+            l_querystate1_1.setupIteration();
 
 
             notifyControl.startMeasurement = true;

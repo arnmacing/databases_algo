@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 hw02,geosearch,GeoSpatialIndex.LonWindow,0,9,0,0,0,1,0,1,0,1
 hw02,geosearch,GeoObject,0,66,0,16,0,14,0,12,0,4
-hw02,geosearch,GeoSearchResult,0,25,0,4,0,5,0,3,0,1
-hw02,geosearch,GeoSpatialIndex,3,814,3,91,2,155,3,68,0,24
-hw02,geosearch,GeoSpatialIndex.IndexEntry,0,6,0,0,0,3,0,1,0,1
-hw02,geosearch,GeoSpatialIndex.Node,0,36,0,2,0,9,0,4,0,3
+hw02,geosearch,QuadTree.Node,0,36,0,2,0,9,0,4,0,3
+hw02,geosearch,GeoSearchResult,0,9,0,0,0,1,0,1,0,1
+hw02,geosearch,GeoSpatialIndex,6,436,3,45,2,95,3,38,0,17
+hw02,geosearch,QuadTree,2,359,2,40,1,60,2,30,0,11

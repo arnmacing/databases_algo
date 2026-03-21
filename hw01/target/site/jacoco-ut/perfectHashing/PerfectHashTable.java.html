@@ -14,100 +14,105 @@ public class PerfectHashTable&lt;V&gt; {
 <span class="fc" id="L14">        this.level2 = level2;</span>
 <span class="fc" id="L15">    }</span>
 
+    /**
+     * Строит двухуровневую таблицу без коллизий внутри бакетов второго уровня
+     */
     public static &lt;V&gt; PerfectHashTable&lt;V&gt; build(int[] keys, V[] values, long seed) {
-<span class="fc bfc" id="L18" title="All 4 branches covered.">        if (keys == null || values == null) {</span>
-<span class="fc" id="L19">            throw new IllegalArgumentException(&quot;keys and values must not be null&quot;);</span>
-        }
-<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (keys.length != values.length) {</span>
-<span class="fc" id="L22">            throw new IllegalArgumentException(&quot;keys and values must have the same length&quot;);</span>
-        }
-
-<span class="fc" id="L25">        int n = keys.length;</span>
-<span class="fc" id="L26">        int m = Math.max(1, n);</span>
-<span class="fc" id="L27">        SplittableRandom rnd = new SplittableRandom(seed);</span>
-
+<span class="fc" id="L21">        int n = keys.length;</span>
+<span class="fc" id="L22">        int m = Math.max(1, n);</span>
+<span class="fc" id="L23">        SplittableRandom rnd = new SplittableRandom(seed);</span>
         HashFunction h1;
         int[][] keysByBucket;
         Object[][] valuesByBucket;
 
         while (true) {
-<span class="fc" id="L34">            h1 = HashFunction.random(rnd);</span>
-
-<span class="fc" id="L36">            int[] sizes = new int[m];</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">            for (int key : keys) {</span>
-<span class="fc" id="L38">                sizes[h1.mod(key, m)]++;</span>
+<span class="fc" id="L29">            h1 = HashFunction.random(rnd);</span>
+<span class="fc" id="L30">            int[] sizes = new int[m];</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            for (int key : keys) {</span>
+<span class="fc" id="L32">                sizes[h1.mod(key, m)]++;</span>
             }
 
-<span class="fc" id="L41">            long sumSquares = 0L;</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">            for (int s : sizes) {</span>
-<span class="fc" id="L43">                sumSquares += (long) s * s;</span>
+<span class="fc" id="L35">            long sumSquares = 0L;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (int s : sizes) {</span>
+<span class="fc" id="L37">                sumSquares += (long) s * s;</span>
             }
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">            if (sumSquares &gt; 4L * n) {</span>
-<span class="nc" id="L46">                continue;</span>
-            }
-
-<span class="fc" id="L49">            keysByBucket = new int[m][];</span>
-<span class="fc" id="L50">            valuesByBucket = new Object[m][];</span>
-<span class="fc" id="L51">            int[] pos = new int[m];</span>
-
-<span class="fc bfc" id="L53" title="All 2 branches covered.">            for (int j = 0; j &lt; m; j++) {</span>
-<span class="fc" id="L54">                keysByBucket[j] = new int[sizes[j]];</span>
-<span class="fc" id="L55">                valuesByBucket[j] = new Object[sizes[j]];</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">            if (sumSquares &gt; 4L * n) {</span>
+<span class="nc" id="L40">                continue;</span>
             }
 
-<span class="fc bfc" id="L58" title="All 2 branches covered.">            for (int i = 0; i &lt; n; i++) {</span>
-<span class="fc" id="L59">                int bucket = h1.mod(keys[i], m);</span>
-<span class="fc" id="L60">                int p = pos[bucket]++;</span>
-<span class="fc" id="L61">                keysByBucket[bucket][p] = keys[i];</span>
-<span class="fc" id="L62">                valuesByBucket[bucket][p] = values[i];</span>
+<span class="fc" id="L43">            keysByBucket = new int[m][];</span>
+<span class="fc" id="L44">            valuesByBucket = new Object[m][];</span>
+<span class="fc" id="L45">            int[] pos = new int[m];</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            for (int j = 0; j &lt; m; j++) {</span>
+<span class="fc" id="L48">                keysByBucket[j] = new int[sizes[j]];</span>
+<span class="fc" id="L49">                valuesByBucket[j] = new Object[sizes[j]];</span>
             }
 
-<span class="fc" id="L65">            break;</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            for (int i = 0; i &lt; n; i++) {</span>
+<span class="fc" id="L53">                int bucket = h1.mod(keys[i], m);</span>
+<span class="fc" id="L54">                int p = pos[bucket]++;</span>
+<span class="fc" id="L55">                keysByBucket[bucket][p] = keys[i];</span>
+<span class="fc" id="L56">                valuesByBucket[bucket][p] = values[i];</span>
+            }
+            break;
         }
 
         @SuppressWarnings(&quot;unchecked&quot;)
-<span class="fc" id="L69">        SecondaryTable&lt;V&gt;[] level2 = (SecondaryTable&lt;V&gt;[]) new SecondaryTable&lt;?&gt;[m];</span>
+<span class="fc" id="L62">        SecondaryTable&lt;V&gt;[] level2 = (SecondaryTable&lt;V&gt;[]) new SecondaryTable&lt;?&gt;[m];</span>
 
-<span class="fc bfc" id="L71" title="All 2 branches covered.">        for (int j = 0; j &lt; m; j++) {</span>
-<span class="fc" id="L72">            level2[j] = SecondaryTable.buildForBucket(keysByBucket[j], valuesByBucket[j], rnd);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (int j = 0; j &lt; m; j++) {</span>
+<span class="fc" id="L65">            level2[j] = SecondaryTable.buildForBucket(keysByBucket[j], valuesByBucket[j], rnd);</span>
         }
 
-<span class="fc" id="L75">        return new PerfectHashTable&lt;&gt;(n, h1, level2);</span>
+<span class="fc" id="L68">        return new PerfectHashTable&lt;&gt;(n, h1, level2);</span>
     }
 
+    /**
+     * Возвращает значение по ключу
+     */
     public V get(int key) {
-<span class="fc" id="L79">        int bucket = h1.mod(key, level2.length);</span>
-<span class="fc" id="L80">        return level2[bucket].get(key);</span>
+<span class="fc" id="L75">        int bucket = h1.mod(key, level2.length);</span>
+<span class="fc" id="L76">        return level2[bucket].get(key);</span>
     }
 
+    /**
+     * Проверяет наличие ключа
+     */
     public boolean containsKey(int key) {
-<span class="fc" id="L84">        int bucket = h1.mod(key, level2.length);</span>
-<span class="fc" id="L85">        return level2[bucket].containsKey(key);</span>
+<span class="fc" id="L83">        int bucket = h1.mod(key, level2.length);</span>
+<span class="fc" id="L84">        return level2[bucket].containsKey(key);</span>
     }
 
+    /**
+     * Возвращает число пар ключ-значение
+     */
     public int size() {
-<span class="fc" id="L89">        return n;</span>
+<span class="fc" id="L91">        return n;</span>
     }
 
     static final class HashFunction {
         final int a;
         final int b;
 
-<span class="fc" id="L96">        HashFunction(int a, int b) {</span>
-<span class="fc" id="L97">            this.a = a;</span>
-<span class="fc" id="L98">            this.b = b;</span>
-<span class="fc" id="L99">        }</span>
+<span class="fc" id="L98">        HashFunction(int a, int b) {</span>
+<span class="fc" id="L99">            this.a = a;</span>
+<span class="fc" id="L100">            this.b = b;</span>
+<span class="fc" id="L101">        }</span>
 
+        /**
+         * Переводит ключ в номер бакета по модулю заданного размера
+         */
         int mod(int key, int mod) {
-<span class="fc" id="L102">            long x = ((long) a * key + b) % P;</span>
-<span class="fc bfc" id="L103" title="All 2 branches covered.">            if (x &lt; 0) {</span>
-<span class="fc" id="L104">                x += P;</span>
+<span class="fc" id="L107">            long x = ((long) a * key + b) % P;</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">            if (x &lt; 0) {</span>
+<span class="fc" id="L109">                x += P;</span>
             }
-<span class="fc" id="L106">            return (int) (x % mod);</span>
+<span class="fc" id="L111">            return (int) (x % mod);</span>
         }
 
         static HashFunction random(SplittableRandom rnd) {
-<span class="fc" id="L110">            return new HashFunction(rnd.nextInt(1, P), rnd.nextInt(0, P));</span>
+<span class="fc" id="L115">            return new HashFunction(rnd.nextInt(1, P), rnd.nextInt(0, P));</span>
         }
     }
 
@@ -118,73 +123,82 @@ public class PerfectHashTable&lt;V&gt; {
         final boolean[] used;
         final Object[] values;
 
-<span class="fc" id="L121">        private SecondaryTable(int size, HashFunction h2, int[] keys, boolean[] used, Object[] values) {</span>
-<span class="fc" id="L122">            this.size = size;</span>
-<span class="fc" id="L123">            this.h2 = h2;</span>
-<span class="fc" id="L124">            this.keys = keys;</span>
-<span class="fc" id="L125">            this.used = used;</span>
-<span class="fc" id="L126">            this.values = values;</span>
-<span class="fc" id="L127">        }</span>
+        /**
+         * Создаёт внутреннюю таблицу второго уровня
+         */
+<span class="fc" id="L129">        private SecondaryTable(int size, HashFunction h2, int[] keys, boolean[] used, Object[] values) {</span>
+<span class="fc" id="L130">            this.size = size;</span>
+<span class="fc" id="L131">            this.h2 = h2;</span>
+<span class="fc" id="L132">            this.keys = keys;</span>
+<span class="fc" id="L133">            this.used = used;</span>
+<span class="fc" id="L134">            this.values = values;</span>
+<span class="fc" id="L135">        }</span>
 
+        /**
+         * Возвращает пустую таблицу
+         */
         static &lt;V&gt; SecondaryTable&lt;V&gt; empty() {
-<span class="fc" id="L130">            return new SecondaryTable&lt;&gt;(0, new HashFunction(1, 0), new int[0], new boolean[0], new Object[0]);</span>
+<span class="fc" id="L141">            return new SecondaryTable&lt;&gt;(0, new HashFunction(1, 0), new int[0], new boolean[0], new Object[0]);</span>
         }
 
+        /**
+         * Строит таблицу второго уровня для бакета
+         */
         static &lt;V&gt; SecondaryTable&lt;V&gt; buildForBucket(int[] bucketKeys, Object[] bucketValues, SplittableRandom rnd) {
-<span class="fc" id="L134">            int nj = bucketKeys.length;</span>
-<span class="fc bfc" id="L135" title="All 2 branches covered.">            if (nj == 0) {</span>
-<span class="fc" id="L136">                return empty();</span>
+<span class="fc" id="L148">            int nj = bucketKeys.length;</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">            if (nj == 0) {</span>
+<span class="fc" id="L150">                return empty();</span>
             }
 
-<span class="fc" id="L139">            int size = nj * nj;</span>
+<span class="fc" id="L153">            int size = nj * nj;</span>
 
             while (true) {
-<span class="fc" id="L142">                HashFunction h2 = HashFunction.random(rnd);</span>
-<span class="fc" id="L143">                int[] keys = new int[size];</span>
-<span class="fc" id="L144">                boolean[] used = new boolean[size];</span>
-<span class="fc" id="L145">                Object[] values = new Object[size];</span>
+<span class="fc" id="L156">                HashFunction h2 = HashFunction.random(rnd);</span>
+<span class="fc" id="L157">                int[] keys = new int[size];</span>
+<span class="fc" id="L158">                boolean[] used = new boolean[size];</span>
+<span class="fc" id="L159">                Object[] values = new Object[size];</span>
 
-<span class="fc" id="L147">                boolean ok = true;</span>
-<span class="fc bfc" id="L148" title="All 2 branches covered.">                for (int i = 0; i &lt; nj; i++) {</span>
-<span class="fc" id="L149">                    int key = bucketKeys[i];</span>
-<span class="fc" id="L150">                    int pos = h2.mod(key, size);</span>
+<span class="fc" id="L161">                boolean ok = true;</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">                for (int i = 0; i &lt; nj; i++) {</span>
+<span class="fc" id="L163">                    int key = bucketKeys[i];</span>
+<span class="fc" id="L164">                    int pos = h2.mod(key, size);</span>
 
-<span class="fc bfc" id="L152" title="All 4 branches covered.">                    if (used[pos] &amp;&amp; keys[pos] != key) {</span>
-<span class="fc" id="L153">                        ok = false;</span>
-<span class="fc" id="L154">                        break;</span>
+<span class="fc bfc" id="L166" title="All 4 branches covered.">                    if (used[pos] &amp;&amp; keys[pos] != key) {</span>
+<span class="fc" id="L167">                        ok = false;</span>
+<span class="fc" id="L168">                        break;</span>
                     }
 
-<span class="fc" id="L157">                    used[pos] = true;</span>
-<span class="fc" id="L158">                    keys[pos] = key;</span>
-<span class="fc" id="L159">                    values[pos] = bucketValues[i];</span>
+<span class="fc" id="L171">                    used[pos] = true;</span>
+<span class="fc" id="L172">                    keys[pos] = key;</span>
+<span class="fc" id="L173">                    values[pos] = bucketValues[i];</span>
                 }
 
-<span class="fc bfc" id="L162" title="All 2 branches covered.">                if (ok) {</span>
-<span class="fc" id="L163">                    return new SecondaryTable&lt;&gt;(size, h2, keys, used, values);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">                if (ok) {</span>
+<span class="fc" id="L177">                    return new SecondaryTable&lt;&gt;(size, h2, keys, used, values);</span>
                 }
-<span class="fc" id="L165">            }</span>
+            }
         }
 
         @SuppressWarnings(&quot;unchecked&quot;)
         V get(int key) {
-<span class="fc bfc" id="L170" title="All 2 branches covered.">            if (size == 0) {</span>
-<span class="fc" id="L171">                return null;</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">            if (size == 0) {</span>
+<span class="fc" id="L185">                return null;</span>
             }
 
-<span class="fc" id="L174">            int pos = h2.mod(key, size);</span>
-<span class="fc bfc" id="L175" title="All 4 branches covered.">            if (used[pos] &amp;&amp; keys[pos] == key) {</span>
-<span class="fc" id="L176">                return (V) values[pos];</span>
+<span class="fc" id="L188">            int pos = h2.mod(key, size);</span>
+<span class="fc bfc" id="L189" title="All 4 branches covered.">            if (used[pos] &amp;&amp; keys[pos] == key) {</span>
+<span class="fc" id="L190">                return (V) values[pos];</span>
             }
-<span class="fc" id="L178">            return null;</span>
+<span class="fc" id="L192">            return null;</span>
         }
 
         boolean containsKey(int key) {
-<span class="fc bfc" id="L182" title="All 2 branches covered.">            if (size == 0) {</span>
-<span class="fc" id="L183">                return false;</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">            if (size == 0) {</span>
+<span class="fc" id="L197">                return false;</span>
             }
 
-<span class="fc" id="L186">            int pos = h2.mod(key, size);</span>
-<span class="fc bfc" id="L187" title="All 4 branches covered.">            return used[pos] &amp;&amp; keys[pos] == key;</span>
+<span class="fc" id="L200">            int pos = h2.mod(key, size);</span>
+<span class="fc bfc" id="L201" title="All 4 branches covered.">            return used[pos] &amp;&amp; keys[pos] == key;</span>
         }
     }
 }

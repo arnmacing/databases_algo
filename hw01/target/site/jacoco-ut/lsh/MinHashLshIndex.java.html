@@ -13,203 +13,234 @@ public final class MinHashLshIndex {
     private final List&lt;Map&lt;Integer, List&lt;Integer&gt;&gt;&gt; tables;
     private final Map&lt;Integer, int[]&gt; docShingles;
 
-<span class="fc" id="L16">    public MinHashLshIndex(int shingleSize, int signatureSize, int bands, long seed) {</span>
-<span class="fc" id="L17">        this.shingleSize = shingleSize;</span>
-<span class="fc" id="L18">        this.signatureSize = signatureSize;</span>
-<span class="fc" id="L19">        this.bands = bands;</span>
-<span class="fc" id="L20">        this.rows = signatureSize / bands;</span>
+    /**
+     * Создаёт структуру
+     */
+<span class="fc" id="L19">    public MinHashLshIndex(int shingleSize, int signatureSize, int bands, long seed) {</span>
+<span class="fc" id="L20">        this.shingleSize = shingleSize;</span>
+<span class="fc" id="L21">        this.signatureSize = signatureSize;</span>
+<span class="fc" id="L22">        this.bands = bands;</span>
+<span class="fc" id="L23">        this.rows = signatureSize / bands;</span>
 
-<span class="fc" id="L22">        this.a = new int[signatureSize];</span>
-<span class="fc" id="L23">        this.b = new int[signatureSize];</span>
-<span class="fc" id="L24">        SplittableRandom rnd = new SplittableRandom(seed);</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">        for (int i = 0; i &lt; signatureSize; i++) {</span>
-<span class="fc" id="L26">            a[i] = rnd.nextInt(1, P);</span>
-<span class="fc" id="L27">            b[i] = rnd.nextInt(0, P);</span>
+<span class="fc" id="L25">        this.a = new int[signatureSize];</span>
+<span class="fc" id="L26">        this.b = new int[signatureSize];</span>
+<span class="fc" id="L27">        SplittableRandom rnd = new SplittableRandom(seed);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; signatureSize; i++) {</span>
+<span class="fc" id="L29">            a[i] = rnd.nextInt(1, P);</span>
+<span class="fc" id="L30">            b[i] = rnd.nextInt(0, P);</span>
         }
 
-<span class="fc" id="L30">        this.tables = new ArrayList&lt;&gt;(bands);</span>
-<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (int i = 0; i &lt; bands; i++) {</span>
-<span class="fc" id="L32">            tables.add(new HashMap&lt;&gt;());</span>
+<span class="fc" id="L33">        this.tables = new ArrayList&lt;&gt;(bands);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (int i = 0; i &lt; bands; i++) {</span>
+<span class="fc" id="L35">            tables.add(new HashMap&lt;&gt;());</span>
         }
 
-<span class="fc" id="L35">        this.docShingles = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L38">        this.docShingles = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L39">    }</span>
 
+    /**
+     * Добавляет документ
+     */
     public void add(int docId, String text) {
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (docShingles.containsKey(docId)) {</span>
-<span class="fc" id="L40">            throw new IllegalArgumentException(&quot;docId already exists: &quot; + docId);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (docShingles.containsKey(docId)) {</span>
+<span class="fc" id="L46">            throw new IllegalArgumentException(&quot;docId already exists: &quot; + docId);</span>
         }
 
-<span class="fc" id="L43">        int[] shingles = shinglesOf(text);</span>
-<span class="fc" id="L44">        int[] sig = signatureOf(shingles);</span>
-<span class="fc" id="L45">        docShingles.put(docId, shingles);</span>
+<span class="fc" id="L49">        int[] shingles = shinglesOf(text);</span>
+<span class="fc" id="L50">        int[] sig = signatureOf(shingles);</span>
+<span class="fc" id="L51">        docShingles.put(docId, shingles);</span>
 
-<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (int band = 0; band &lt; bands; band++) {</span>
-<span class="fc" id="L48">            int key = bandKey(sig, band);</span>
-<span class="fc" id="L49">            tables.get(band).computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;()).add(docId);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int band = 0; band &lt; bands; band++) {</span>
+<span class="fc" id="L54">            int key = bandKey(sig, band);</span>
+<span class="fc" id="L55">            tables.get(band).computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;()).add(docId);</span>
         }
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L57">    }</span>
 
+    /**
+     * Возвращает кандидатов
+     */
     public Set&lt;Integer&gt; candidates(String text) {
-<span class="fc" id="L54">        int[] sig = signatureOf(shinglesOf(text));</span>
-<span class="fc" id="L55">        Set&lt;Integer&gt; result = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L63">        int[] sig = signatureOf(shinglesOf(text));</span>
+<span class="fc" id="L64">        Set&lt;Integer&gt; result = new HashSet&lt;&gt;();</span>
 
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (int band = 0; band &lt; bands; band++) {</span>
-<span class="fc" id="L58">            List&lt;Integer&gt; ids = tables.get(band).get(bandKey(sig, band));</span>
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">            if (ids != null) {</span>
-<span class="fc" id="L60">                result.addAll(ids);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        for (int band = 0; band &lt; bands; band++) {</span>
+<span class="fc" id="L67">            List&lt;Integer&gt; ids = tables.get(band).get(bandKey(sig, band));</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">            if (ids != null) {</span>
+<span class="fc" id="L69">                result.addAll(ids);</span>
             }
         }
-
-<span class="fc" id="L64">        return result;</span>
+<span class="fc" id="L72">        return result;</span>
     }
 
+    /**
+     * Ищет близкие пары через полосы, вычисляем схожесть через Жаккара
+     */
     public List&lt;Pair&gt; nearDuplicates(double threshold) {
-<span class="fc" id="L68">        Set&lt;Long&gt; seenPairs = new HashSet&lt;&gt;();</span>
-<span class="fc" id="L69">        List&lt;Pair&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L79">        Set&lt;Long&gt; seenPairs = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L80">        List&lt;Pair&gt; result = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L71" title="All 2 branches covered.">        for (int band = 0; band &lt; bands; band++) {</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">            for (List&lt;Integer&gt; bucket : tables.get(band).values()) {</span>
-<span class="fc" id="L73">                int size = bucket.size();</span>
-<span class="fc bfc" id="L74" title="All 2 branches covered.">                if (size &lt; 2) {</span>
-<span class="fc" id="L75">                    continue;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        for (int band = 0; band &lt; bands; band++) {</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">            for (List&lt;Integer&gt; bucket : tables.get(band).values()) {</span>
+<span class="fc" id="L84">                int size = bucket.size();</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">                if (size &lt; 2) {</span>
+<span class="fc" id="L86">                    continue;</span>
                 }
-
-<span class="fc bfc" id="L78" title="All 2 branches covered.">                for (int i = 0; i &lt; size; i++) {</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">                    for (int j = i + 1; j &lt; size; j++) {</span>
-<span class="fc" id="L80">                        int x = bucket.get(i);</span>
-<span class="fc" id="L81">                        int y = bucket.get(j);</span>
-<span class="fc" id="L82">                        long packed = packPair(x, y);</span>
-<span class="fc bfc" id="L83" title="All 2 branches covered.">                        if (!seenPairs.add(packed)) {</span>
-<span class="fc" id="L84">                            continue;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">                for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">                    for (int j = i + 1; j &lt; size; j++) {</span>
+<span class="fc" id="L90">                        int x = bucket.get(i);</span>
+<span class="fc" id="L91">                        int y = bucket.get(j);</span>
+<span class="fc" id="L92">                        long packed = packPair(x, y);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                        if (!seenPairs.add(packed)) {</span>
+<span class="fc" id="L94">                            continue;</span>
                         }
 
-<span class="fc" id="L87">                        double jac = jaccard(docShingles.get(x), docShingles.get(y));</span>
-<span class="fc bfc" id="L88" title="All 2 branches covered.">                        if (jac &gt;= threshold) {</span>
-<span class="fc" id="L89">                            result.add(new Pair(x, y, jac));</span>
+<span class="fc" id="L97">                        double jac = jaccard(docShingles.get(x), docShingles.get(y));</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">                        if (jac &gt;= threshold) {</span>
+<span class="fc" id="L99">                            result.add(new Pair(x, y, jac));</span>
                         }
                     }
                 }
-<span class="fc" id="L93">            }</span>
+            }
         }
-
-<span class="fc" id="L96">        result.sort(Comparator.comparingDouble((Pair p) -&gt; -p.similarity));</span>
-<span class="fc" id="L97">        return result;</span>
+<span class="fc" id="L105">        result.sort(Comparator.comparingDouble((Pair p) -&gt; -p.similarity));</span>
+<span class="fc" id="L106">        return result;</span>
     }
 
+    /**
+     * Сравнивает все пары документов (для бенча)
+     */
     public List&lt;Pair&gt; nearDuplicatesFullScan(double threshold) {
-<span class="fc" id="L101">        List&lt;Integer&gt; ids = new ArrayList&lt;&gt;(docShingles.keySet());</span>
-<span class="fc" id="L102">        Collections.sort(ids);</span>
+<span class="fc" id="L113">        List&lt;Integer&gt; ids = new ArrayList&lt;&gt;(docShingles.keySet());</span>
+<span class="fc" id="L114">        Collections.sort(ids);</span>
 
-<span class="fc" id="L104">        List&lt;Pair&gt; result = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L105" title="All 2 branches covered.">        for (int i = 0; i &lt; ids.size(); i++) {</span>
-<span class="fc bfc" id="L106" title="All 2 branches covered.">            for (int j = i + 1; j &lt; ids.size(); j++) {</span>
-<span class="fc" id="L107">                int x = ids.get(i);</span>
-<span class="fc" id="L108">                int y = ids.get(j);</span>
-<span class="fc" id="L109">                double jac = jaccard(docShingles.get(x), docShingles.get(y));</span>
-<span class="fc bfc" id="L110" title="All 2 branches covered.">                if (jac &gt;= threshold) {</span>
-<span class="fc" id="L111">                    result.add(new Pair(x, y, jac));</span>
+<span class="fc" id="L116">        List&lt;Pair&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (int i = 0; i &lt; ids.size(); i++) {</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            for (int j = i + 1; j &lt; ids.size(); j++) {</span>
+<span class="fc" id="L119">                int x = ids.get(i);</span>
+<span class="fc" id="L120">                int y = ids.get(j);</span>
+<span class="fc" id="L121">                double jac = jaccard(docShingles.get(x), docShingles.get(y));</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">                if (jac &gt;= threshold) {</span>
+<span class="fc" id="L123">                    result.add(new Pair(x, y, jac));</span>
                 }
             }
         }
-
-<span class="fc" id="L116">        result.sort(Comparator.comparingDouble((Pair p) -&gt; -p.similarity));</span>
-<span class="fc" id="L117">        return result;</span>
+<span class="fc" id="L127">        result.sort(Comparator.comparingDouble((Pair p) -&gt; -p.similarity));</span>
+<span class="fc" id="L128">        return result;</span>
     }
 
+    /**
+     * Преобразует текст в отсортированный набор шинглов
+     */
     private int[] shinglesOf(String text) {
-<span class="fc" id="L121">        String s = normalize(text);</span>
-<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (s.length() &lt; shingleSize) {</span>
-<span class="fc" id="L123">            return new int[]{s.hashCode()};</span>
+<span class="fc" id="L135">        String s = normalize(text);</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (s.length() &lt; shingleSize) {</span>
+<span class="fc" id="L137">            return new int[]{s.hashCode()};</span>
         }
 
-<span class="fc" id="L126">        Set&lt;Integer&gt; set = new HashSet&lt;&gt;();</span>
-<span class="fc bfc" id="L127" title="All 2 branches covered.">        for (int i = 0; i + shingleSize &lt;= s.length(); i++) {</span>
-<span class="fc" id="L128">            set.add(s.substring(i, i + shingleSize).hashCode());</span>
+<span class="fc" id="L140">        Set&lt;Integer&gt; set = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        for (int i = 0; i + shingleSize &lt;= s.length(); i++) {</span>
+<span class="fc" id="L142">            set.add(s.substring(i, i + shingleSize).hashCode());</span>
         }
 
-<span class="fc" id="L131">        int[] arr = new int[set.size()];</span>
-<span class="fc" id="L132">        int k = 0;</span>
-<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (int v : set) {</span>
-<span class="fc" id="L134">            arr[k++] = v;</span>
-<span class="fc" id="L135">        }</span>
-<span class="fc" id="L136">        Arrays.sort(arr);</span>
-<span class="fc" id="L137">        return arr;</span>
+<span class="fc" id="L145">        int[] arr = new int[set.size()];</span>
+<span class="fc" id="L146">        int k = 0;</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (int v : set) {</span>
+<span class="fc" id="L148">            arr[k++] = v;</span>
+        }
+<span class="fc" id="L150">        Arrays.sort(arr);</span>
+<span class="fc" id="L151">        return arr;</span>
     }
 
+    /**
+     * Нормализует текст
+     */
     private static String normalize(String text) {
-<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (text == null) {</span>
-<span class="fc" id="L142">            return &quot;&quot;;</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        if (text == null) {</span>
+<span class="fc" id="L159">            return &quot;&quot;;</span>
         }
-<span class="fc" id="L144">        String s = text.toLowerCase(Locale.ROOT);</span>
-<span class="fc" id="L145">        s = s.replaceAll(&quot;[^\\p{L}\\p{N}\\s]+&quot;, &quot; &quot;);</span>
-<span class="fc" id="L146">        s = s.replaceAll(&quot;\\s+&quot;, &quot; &quot;).trim();</span>
-<span class="fc" id="L147">        return s;</span>
+<span class="fc" id="L161">        String s = text.toLowerCase(Locale.ROOT);</span>
+<span class="fc" id="L162">        s = s.replaceAll(&quot;[^\\p{L}\\p{N}\\s]+&quot;, &quot; &quot;);</span>
+<span class="fc" id="L163">        s = s.replaceAll(&quot;\\s+&quot;, &quot; &quot;).trim();</span>
+<span class="fc" id="L164">        return s;</span>
     }
 
+    /**
+     * Строит сигнатуру
+     */
     private int[] signatureOf(int[] shinglesSortedUnique) {
-<span class="fc" id="L151">        int[] sig = new int[signatureSize];</span>
-<span class="fc" id="L152">        Arrays.fill(sig, Integer.MAX_VALUE);</span>
+<span class="fc" id="L171">        int[] sig = new int[signatureSize];</span>
+<span class="fc" id="L172">        Arrays.fill(sig, Integer.MAX_VALUE);</span>
 
-<span class="fc bfc" id="L154" title="All 2 branches covered.">        for (int x : shinglesSortedUnique) {</span>
-<span class="fc bfc" id="L155" title="All 2 branches covered.">            for (int i = 0; i &lt; signatureSize; i++) {</span>
-<span class="fc" id="L156">                int hx = hashUniversal(a[i], b[i], x);</span>
-<span class="fc bfc" id="L157" title="All 2 branches covered.">                if (hx &lt; sig[i]) {</span>
-<span class="fc" id="L158">                    sig[i] = hx;</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        for (int x : shinglesSortedUnique) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">            for (int i = 0; i &lt; signatureSize; i++) {</span>
+<span class="fc" id="L176">                int hx = hashUniversal(a[i], b[i], x);</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">                if (hx &lt; sig[i]) {</span>
+<span class="fc" id="L178">                    sig[i] = hx;</span>
                 }
             }
         }
-<span class="fc" id="L162">        return sig;</span>
+<span class="fc" id="L182">        return sig;</span>
     }
 
+    /**
+     * Вычисляет хэш для сигнатур
+     */
     private static int hashUniversal(int a, int b, int x) {
-<span class="fc" id="L166">        long v = ((long) a * x + b) % P;</span>
-<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if (v &lt; 0) {</span>
-<span class="nc" id="L168">            v += P;</span>
+<span class="fc" id="L189">        long v = ((long) a * x + b) % P;</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        if (v &lt; 0) {</span>
+<span class="nc" id="L191">            v += P;</span>
         }
-<span class="fc" id="L170">        return (int) v;</span>
+<span class="fc" id="L193">        return (int) v;</span>
     }
 
+    /**
+     * Строит ключ для одной сигнатуры
+     */
     private int bandKey(int[] sig, int band) {
-<span class="fc" id="L174">        int start = band * rows;</span>
-<span class="fc" id="L175">        int h = 1;</span>
-<span class="fc bfc" id="L176" title="All 2 branches covered.">        for (int i = 0; i &lt; rows; i++) {</span>
-<span class="fc" id="L177">            h = 31 * h + sig[start + i];</span>
+<span class="fc" id="L200">        int start = band * rows;</span>
+<span class="fc" id="L201">        int h = 1;</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">        for (int i = 0; i &lt; rows; i++) {</span>
+<span class="fc" id="L203">            h = 31 * h + sig[start + i];</span>
         }
-<span class="fc" id="L179">        return h;</span>
+<span class="fc" id="L205">        return h;</span>
     }
 
+    /**
+     * Считает меру Жаккара
+     */
     static double jaccard(int[] a, int[] b) {
-<span class="fc" id="L183">        int i = 0;</span>
-<span class="fc" id="L184">        int j = 0;</span>
-<span class="fc" id="L185">        int inter = 0;</span>
-<span class="fc" id="L186">        int union = 0;</span>
+<span class="fc" id="L212">        int i = 0;</span>
+<span class="fc" id="L213">        int j = 0;</span>
+<span class="fc" id="L214">        int inter = 0;</span>
+<span class="fc" id="L215">        int union = 0;</span>
 
-<span class="fc bfc" id="L188" title="All 4 branches covered.">        while (i &lt; a.length &amp;&amp; j &lt; b.length) {</span>
-<span class="fc" id="L189">            int x = a[i];</span>
-<span class="fc" id="L190">            int y = b[j];</span>
-<span class="fc bfc" id="L191" title="All 2 branches covered.">            if (x == y) {</span>
-<span class="fc" id="L192">                inter++;</span>
-<span class="fc" id="L193">                union++;</span>
-<span class="fc" id="L194">                i++;</span>
-<span class="fc" id="L195">                j++;</span>
-<span class="fc bfc" id="L196" title="All 2 branches covered.">            } else if (x &lt; y) {</span>
-<span class="fc" id="L197">                union++;</span>
-<span class="fc" id="L198">                i++;</span>
-            } else {
-<span class="fc" id="L200">                union++;</span>
-<span class="fc" id="L201">                j++;</span>
+<span class="fc bfc" id="L217" title="All 4 branches covered.">        while (i &lt; a.length &amp;&amp; j &lt; b.length) {</span>
+<span class="fc" id="L218">            int x = a[i];</span>
+<span class="fc" id="L219">            int y = b[j];</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">            if (x == y) {</span>
+<span class="fc" id="L221">                inter++;</span>
+<span class="fc" id="L222">                union++;</span>
+<span class="fc" id="L223">                i++;</span>
+<span class="fc" id="L224">                j++;</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">            } else if (x &lt; y) {</span>
+<span class="fc" id="L226">                union++;</span>
+<span class="fc" id="L227">                i++;</span>
+<span class="fc" id="L228">            } else {</span>
+<span class="fc" id="L229">                union++;</span>
+<span class="fc" id="L230">                j++;</span>
             }
-<span class="fc" id="L203">        }</span>
-
-<span class="fc" id="L205">        union += (a.length - i) + (b.length - j);</span>
-<span class="fc bfc" id="L206" title="All 2 branches covered.">        return (union == 0) ? 1.0 : (double) inter / union;</span>
+        }
+<span class="fc" id="L233">        union += (a.length - i) + (b.length - j);</span>
+<span class="fc bfc" id="L234" title="All 2 branches covered.">        return (union == 0) ? 1.0 : (double) inter / union;</span>
     }
 
+    /**
+     * Упаковывает пару в одно число, чтобы удобно хранить уже проверенные пары
+     */
     private static long packPair(int x, int y) {
-<span class="fc" id="L210">        int a = Math.min(x, y);</span>
-<span class="fc" id="L211">        int b = Math.max(x, y);</span>
-<span class="fc" id="L212">        return (((long) a) &lt;&lt; 32) | Integer.toUnsignedLong(b);</span>
+<span class="fc" id="L241">        int a = Math.min(x, y);</span>
+<span class="fc" id="L242">        int b = Math.max(x, y);</span>
+<span class="fc" id="L243">        return (((long) a) &lt;&lt; 32) | Integer.toUnsignedLong(b);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

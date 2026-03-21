@@ -93,6 +93,9 @@ cat > hw01/target/jmh-system-report/pandoc-header.tex <<'EOF'
 \sloppy
 \usepackage{etoolbox}
 \AtBeginEnvironment{longtable}{\footnotesize}
+\usepackage{float}
+\usepackage[section]{placeins}
+\floatplacement{figure}{H}
 EOF
 ```
 
@@ -105,6 +108,7 @@ pandoc report_pdf.md -o report-best.pdf \
   -V monofont='Menlo' \
   -V geometry:margin=1.6cm \
   -V fontsize=10pt \
+  -V fig-pos=H \
   --include-in-header=pandoc-header.tex
 ```
 

@@ -372,6 +372,7 @@ public final class GeoSpatialIndexBenchmark_upsertExistingGeoSpatialIndex_jmhTes
                 f = bench.GeoSpatialIndexBenchmark.MutationState.class.getDeclaredField("seed");
                 f.setAccessible(true);
                 f.set(val, Long.valueOf(control.getParam("seed")));
+            val.setupTrial();
             f_mutationstate1_1 = val;
         }
         return val;
