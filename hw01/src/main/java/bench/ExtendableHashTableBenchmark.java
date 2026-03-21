@@ -34,6 +34,9 @@ public class ExtendableHashTableBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Создаёт таблицу, заполняет её и подготавливает ключи (getHit/getMiss)
+         */
         public void setupTrial() {
             ht = new ExtendableHashTable(bucketCapacity);
             presentKeys = new int[n];
@@ -55,6 +58,9 @@ public class ExtendableHashTableBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Перемешивает порядок ключей перед измерением.
+         */
         public void setupIteration() {
             long iterSeed = seed + iteration++;
             shuffle(presentKeys, iterSeed);
@@ -64,12 +70,18 @@ public class ExtendableHashTableBenchmark {
         }
 
         @TearDown(Level.Trial)
+        /**
+         * Освобождает ресурсы после завершения измерений
+         */
         public void tearDown() {
             if (ht != null) {
                 ht.close();
             }
         }
 
+        /**
+         * Возвращает следующий ключ, который есть в таблице
+         */
         int nextPresent() {
             int k = presentKeys[p];
             p++;
@@ -79,6 +91,9 @@ public class ExtendableHashTableBenchmark {
             return k;
         }
 
+        /**
+         * Возвращает следующий ключ, которого нет в таблице
+         */
         int nextAbsent() {
             int k = absentKeys[p];
             p++;
@@ -108,6 +123,9 @@ public class ExtendableHashTableBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Создаёт таблицу и заранее заполняет наборы ключей (removeThenPut, updateExisting, putThenRemove)
+         */
         public void setupTrial() {
             ht = new ExtendableHashTable(bucketCapacity);
 
@@ -135,6 +153,9 @@ public class ExtendableHashTableBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Меняет порядок ключей перед измерением.
+         */
         public void setupIteration() {
             long iterSeed = seed + iteration++;
             shuffle(baseKeys, iterSeed);
@@ -144,12 +165,18 @@ public class ExtendableHashTableBenchmark {
         }
 
         @TearDown(Level.Trial)
+        /**
+         * Закрывает таблицу после завершения измерений.
+         */
         public void tearDownTrial() {
             if (ht != null) {
                 ht.close();
             }
         }
 
+        /**
+         * Возвращает следующий ключ, существующий в таблице.
+         */
         int nextBase() {
             int k = baseKeys[p];
             p++;
@@ -159,6 +186,9 @@ public class ExtendableHashTableBenchmark {
             return k;
         }
 
+        /**
+         * Возвращает следующий ключ, отсутствующий в таблице.
+         */
         int nextExtra() {
             int k = extraKeys[p];
             p++;
@@ -184,6 +214,9 @@ public class ExtendableHashTableBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Подготавливает массив ключей для замера построения таблицы
+         */
         public void setupTrial() {
             keys = new int[n];
             for (int i = 0; i < n; i++) {
@@ -193,22 +226,34 @@ public class ExtendableHashTableBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Перемешивает ключи перед измерением построения
+         */
         public void setupIteration() {
             shuffle(keys, seed + iteration++);
         }
     }
 
     @Benchmark
+    /**
+     * Замеряет чтение по ключу, который есть в таблице
+     */
     public void getHit(ReadState s, Blackhole bh) {
         bh.consume(s.ht.get(s.nextPresent()));
     }
 
     @Benchmark
+    /**
+     * Замеряет чтение по ключу, которого нет
+     */
     public void getMiss(ReadState s, Blackhole bh) {
         bh.consume(s.ht.get(s.nextAbsent()));
     }
 
     @Benchmark
+    /**
+     * Замеряет вставку и удаление ключа
+     */
     public void putThenRemove(WriteState s) {
         int k = s.nextExtra();
         s.ht.put(k, k);
@@ -216,6 +261,9 @@ public class ExtendableHashTableBenchmark {
     }
 
     @Benchmark
+    /**
+     * Замеряет удаление и вставку ключа
+     */
     public void removeThenPut(WriteState s) {
         int k = s.nextBase();
         s.ht.remove(k);
@@ -223,6 +271,9 @@ public class ExtendableHashTableBenchmark {
     }
 
     @Benchmark
+    /**
+     * Замеряет обновление значения ключа
+     */
     public void updateExisting(WriteState s, Blackhole bh) {
         int k = s.nextBase();
         int v = ~k;
@@ -233,6 +284,9 @@ public class ExtendableHashTableBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.SingleShotTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    /**
+     * Замеряет построение таблицы
+     */
     public int buildFromScratch(BuildState s, Blackhole bh) {
         try (ExtendableHashTable ht = new ExtendableHashTable(s.bucketCapacity)) {
             for (int key : s.keys) {
@@ -244,12 +298,18 @@ public class ExtendableHashTableBenchmark {
         }
     }
 
+    /**
+     * Предварительное чтение
+     */
     private static void prefault(ExtendableHashTable ht, int[] keys) {
         for (int i = 0; i < keys.length; i += PREFETCH_STRIDE) {
             ht.get(keys[i]);
         }
     }
 
+    /**
+     * Перемешивает массив чисел
+     */
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {

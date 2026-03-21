@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ExtendableHashTableTest {
     @Test
+    // после вставки значение читается
     void put_then_get_returns_value() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             ht.put(1, 10);
@@ -17,6 +18,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // чтение отсутствующего
     void get_missing_returns_null() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             assertNull(ht.get(404));
@@ -24,6 +26,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // после деления корзины все вставленные ключи доступны
     void split_keeps_all_keys() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             ht.put(1, 10);
@@ -37,6 +40,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // обновление значения
     void put_same_key_updates_value() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             ht.put(1, 10);
@@ -46,6 +50,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // удаление существующего ключа
     void remove_existing_removes_key() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             ht.put(1, 10);
@@ -55,6 +60,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // удаление отсутствующего ключа
     void remove_missing_returns_false() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             assertFalse(ht.remove(404));
@@ -62,6 +68,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // удаление одного ключа
     void remove_one_key_does_not_affect_others() {
         try (ExtendableHashTable ht = new ExtendableHashTable(2)) {
             ht.put(1, 10);
@@ -76,6 +83,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // случайная последовательность операций
     void randomized_operations_match_hash_map() {
         long seed = 123456789L;
         Random rnd = new Random(seed);
@@ -113,6 +121,7 @@ public class ExtendableHashTableTest {
     }
 
     @Test
+    // повторное закрытие таблицы
     void close_is_idempotent() {
         ExtendableHashTable ht = new ExtendableHashTable(2);
         ht.close();

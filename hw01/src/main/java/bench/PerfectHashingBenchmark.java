@@ -28,6 +28,9 @@ public class PerfectHashingBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Подготавливает данные для замера построения таблицы
+         */
         public void setupTrial() {
             keys = new int[n];
             values = new Integer[n];
@@ -42,6 +45,9 @@ public class PerfectHashingBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Перемешивает пары ключ-значение
+         */
         public void setupIteration() {
             shufflePairs(keys, values, seed + iteration++);
         }
@@ -62,6 +68,9 @@ public class PerfectHashingBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Готовит таблицу и наборы ключей для чтения
+         */
         public void setupTrial() {
             presentKeys = new int[n];
             Integer[] values = new Integer[n];
@@ -81,6 +90,9 @@ public class PerfectHashingBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Меняет порядок ключей
+         */
         public void setupIteration() {
             long iterSeed = seed + iteration++;
             shuffle(presentKeys, iterSeed);
@@ -88,6 +100,9 @@ public class PerfectHashingBenchmark {
             pos = 0;
         }
 
+        /**
+         * Возвращает следующий существующий ключ
+         */
         int nextPresent() {
             int key = presentKeys[pos];
             pos++;
@@ -97,6 +112,9 @@ public class PerfectHashingBenchmark {
             return key;
         }
 
+        /**
+         * Возвращает следующий несуществующий ключ
+         */
         int nextAbsent() {
             int key = absentKeys[pos];
             pos++;
@@ -108,6 +126,9 @@ public class PerfectHashingBenchmark {
     }
 
     @Benchmark
+    /**
+     * Замеряет время построения таблицы
+     */
     public int buildIndex(BuildState state, Blackhole bh) {
         PerfectHashTable<Integer> table = PerfectHashTable.build(state.keys, state.values, state.seed);
         bh.consume(table.containsKey(state.keys[state.n / 2]));
@@ -115,25 +136,40 @@ public class PerfectHashingBenchmark {
     }
 
     @Benchmark
+    /**
+     * Замеряет чтение по существующему ключу
+     */
     public void getHit(LookupState state, Blackhole bh) {
         bh.consume(state.table.get(state.nextPresent()));
     }
 
     @Benchmark
+    /**
+     * Замеряет чтение по отсутствующему ключу
+     */
     public void getMiss(LookupState state, Blackhole bh) {
         bh.consume(state.table.get(state.nextAbsent()));
     }
 
     @Benchmark
+    /**
+     * Замеряет проверку наличия существующего ключа
+     */
     public boolean containsHit(LookupState state) {
         return state.table.containsKey(state.nextPresent());
     }
 
     @Benchmark
+    /**
+     * Замеряет проверку наличия отсутствующего ключа
+     */
     public boolean containsMiss(LookupState state) {
         return state.table.containsKey(state.nextAbsent());
     }
 
+    /**
+     * Перемешивает массив
+     */
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
@@ -144,6 +180,9 @@ public class PerfectHashingBenchmark {
         }
     }
 
+    /**
+     * Перемешивает ключи и значения пар
+     */
     private static void shufflePairs(int[] keys, Integer[] values, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = keys.length - 1; i > 0; i--) {

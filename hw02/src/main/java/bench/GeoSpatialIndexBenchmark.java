@@ -23,17 +23,19 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.SplittableRandom;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Warmup(iterations = 8, time = 2, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 12, time = 2, timeUnit = TimeUnit.SECONDS)
+@Fork(2)
 public class GeoSpatialIndexBenchmark {
     private static final double EARTH_RADIUS_METERS = 6_371_008.8;
-    private static final int QUERY_COUNT = 4_096;
+    private static final int QUERY_COUNT = 16_384;
+    private static final int PARITY_CHECKS = 64;
 
     @State(Scope.Benchmark)
     public static class BuildState {
@@ -71,6 +73,9 @@ public class GeoSpatialIndexBenchmark {
         GeneratedData data;
         GeoSpatialIndex<Integer> geoIndex;
         NaiveGeoIndex<Integer> naiveIndex;
+        SplittableRandom orderRnd;
+        int queryStart;
+        int queryStep;
         int queryPos;
 
         @Setup(Level.Trial)
@@ -79,11 +84,19 @@ public class GeoSpatialIndexBenchmark {
             geoIndex = buildGeoIndex(data, cellSizeMeters);
             naiveIndex = buildNaiveIndex(data);
             verifyQueryParity(geoIndex, naiveIndex, data, radiusMeters);
+            long mixedSeed = Integer.toUnsignedLong(Objects.hash(seed, n, cellSizeMeters, radiusMeters, "query"));
+            orderRnd = new SplittableRandom(mixedSeed);
+        }
+
+        @Setup(Level.Iteration)
+        public void setupIteration() {
+            queryStart = orderRnd.nextInt(data.queryLatitudes.length);
+            queryStep = coPrimeStep(orderRnd, data.queryLatitudes.length);
             queryPos = 0;
         }
 
         int nextQueryIndex() {
-            int idx = queryPos;
+            int idx = (int) ((queryStart + (long) queryPos * queryStep) % data.queryLatitudes.length);
             queryPos++;
             if (queryPos == data.queryLatitudes.length) {
                 queryPos = 0;
@@ -94,7 +107,7 @@ public class GeoSpatialIndexBenchmark {
 
     @State(Scope.Thread)
     public static class MutationState {
-        @Param({"10000", "100000"})
+        @Param({"10000", "100000", "300000"})
         public int n;
 
         @Param({"120.0", "500.0"})
@@ -106,18 +119,29 @@ public class GeoSpatialIndexBenchmark {
         GeneratedData data;
         GeoSpatialIndex<Integer> geoIndex;
         NaiveGeoIndex<Integer> naiveIndex;
+        SplittableRandom orderRnd;
+        int positionStart;
+        int positionStep;
         int pos;
+
+        @Setup(Level.Trial)
+        public void setupTrial() {
+            long mixedSeed = Integer.toUnsignedLong(Objects.hash(seed, n, cellSizeMeters, "mutation"));
+            orderRnd = new SplittableRandom(mixedSeed);
+        }
 
         @Setup(Level.Iteration)
         public void setup() {
             data = GeneratedData.generate(n, QUERY_COUNT, seed);
             geoIndex = buildGeoIndex(data, cellSizeMeters);
             naiveIndex = buildNaiveIndex(data);
+            positionStart = orderRnd.nextInt(data.ids.length);
+            positionStep = coPrimeStep(orderRnd, data.ids.length);
             pos = 0;
         }
 
         int nextPos() {
-            int idx = pos;
+            int idx = (int) ((positionStart + (long) pos * positionStep) % data.ids.length);
             pos++;
             if (pos == data.ids.length) {
                 pos = 0;
@@ -208,7 +232,7 @@ public class GeoSpatialIndexBenchmark {
             GeneratedData data,
             double radiusMeters) {
 
-        int checks = Math.min(32, data.queryLatitudes.length);
+        int checks = Math.min(PARITY_CHECKS, data.queryLatitudes.length);
         for (int i = 0; i < checks; i++) {
             List<GeoSearchResult<Integer>> geo = geoIndex.findNearby(
                     data.queryLatitudes[i], data.queryLongitudes[i], radiusMeters);
@@ -289,6 +313,31 @@ public class GeoSpatialIndexBenchmark {
 
     private static double clampLatitude(double latitude) {
         return Math.max(-90.0, Math.min(90.0, latitude));
+    }
+
+    private static int coPrimeStep(SplittableRandom rnd, int modulo) {
+        if (modulo <= 1) {
+            return 1;
+        }
+        int step = rnd.nextInt(1, modulo);
+        while (greatestCommonDivisor(step, modulo) != 1) {
+            step++;
+            if (step == modulo) {
+                step = 1;
+            }
+        }
+        return step;
+    }
+
+    private static int greatestCommonDivisor(int a, int b) {
+        int left = Math.abs(a);
+        int right = Math.abs(b);
+        while (right != 0) {
+            int t = left % right;
+            left = right;
+            right = t;
+        }
+        return left;
     }
 
     private static final class GeneratedData {

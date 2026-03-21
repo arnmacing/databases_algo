@@ -13,6 +13,9 @@ public final class MinHashLshIndex {
     private final List<Map<Integer, List<Integer>>> tables;
     private final Map<Integer, int[]> docShingles;
 
+    /**
+     * Создаёт структуру
+     */
     public MinHashLshIndex(int shingleSize, int signatureSize, int bands, long seed) {
         this.shingleSize = shingleSize;
         this.signatureSize = signatureSize;
@@ -35,6 +38,9 @@ public final class MinHashLshIndex {
         this.docShingles = new HashMap<>();
     }
 
+    /**
+     * Добавляет документ
+     */
     public void add(int docId, String text) {
         if (docShingles.containsKey(docId)) {
             throw new IllegalArgumentException("docId already exists: " + docId);
@@ -50,6 +56,9 @@ public final class MinHashLshIndex {
         }
     }
 
+    /**
+     * Возвращает кандидатов
+     */
     public Set<Integer> candidates(String text) {
         int[] sig = signatureOf(shinglesOf(text));
         Set<Integer> result = new HashSet<>();
@@ -60,10 +69,12 @@ public final class MinHashLshIndex {
                 result.addAll(ids);
             }
         }
-
         return result;
     }
 
+    /**
+     * Ищет близкие пары через полосы, вычисляем схожесть через Жаккара
+     */
     public List<Pair> nearDuplicates(double threshold) {
         Set<Long> seenPairs = new HashSet<>();
         List<Pair> result = new ArrayList<>();
@@ -74,7 +85,6 @@ public final class MinHashLshIndex {
                 if (size < 2) {
                     continue;
                 }
-
                 for (int i = 0; i < size; i++) {
                     for (int j = i + 1; j < size; j++) {
                         int x = bucket.get(i);
@@ -92,11 +102,13 @@ public final class MinHashLshIndex {
                 }
             }
         }
-
         result.sort(Comparator.comparingDouble((Pair p) -> -p.similarity));
         return result;
     }
 
+    /**
+     * Сравнивает все пары документов (для бенча)
+     */
     public List<Pair> nearDuplicatesFullScan(double threshold) {
         List<Integer> ids = new ArrayList<>(docShingles.keySet());
         Collections.sort(ids);
@@ -112,11 +124,13 @@ public final class MinHashLshIndex {
                 }
             }
         }
-
         result.sort(Comparator.comparingDouble((Pair p) -> -p.similarity));
         return result;
     }
 
+    /**
+     * Преобразует текст в отсортированный набор шинглов
+     */
     private int[] shinglesOf(String text) {
         String s = normalize(text);
         if (s.length() < shingleSize) {
@@ -137,6 +151,9 @@ public final class MinHashLshIndex {
         return arr;
     }
 
+    /**
+     * Нормализует текст
+     */
     private static String normalize(String text) {
         if (text == null) {
             return "";
@@ -147,6 +164,9 @@ public final class MinHashLshIndex {
         return s;
     }
 
+    /**
+     * Строит сигнатуру
+     */
     private int[] signatureOf(int[] shinglesSortedUnique) {
         int[] sig = new int[signatureSize];
         Arrays.fill(sig, Integer.MAX_VALUE);
@@ -162,6 +182,9 @@ public final class MinHashLshIndex {
         return sig;
     }
 
+    /**
+     * Вычисляет хэш для сигнатур
+     */
     private static int hashUniversal(int a, int b, int x) {
         long v = ((long) a * x + b) % P;
         if (v < 0) {
@@ -170,6 +193,9 @@ public final class MinHashLshIndex {
         return (int) v;
     }
 
+    /**
+     * Строит ключ для одной сигнатуры
+     */
     private int bandKey(int[] sig, int band) {
         int start = band * rows;
         int h = 1;
@@ -179,6 +205,9 @@ public final class MinHashLshIndex {
         return h;
     }
 
+    /**
+     * Считает меру Жаккара
+     */
     static double jaccard(int[] a, int[] b) {
         int i = 0;
         int j = 0;
@@ -201,11 +230,13 @@ public final class MinHashLshIndex {
                 j++;
             }
         }
-
         union += (a.length - i) + (b.length - j);
         return (union == 0) ? 1.0 : (double) inter / union;
     }
 
+    /**
+     * Упаковывает пару в одно число, чтобы удобно хранить уже проверенные пары
+     */
     private static long packPair(int x, int y) {
         int a = Math.min(x, y);
         int b = Math.max(x, y);

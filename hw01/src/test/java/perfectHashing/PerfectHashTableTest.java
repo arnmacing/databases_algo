@@ -9,28 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PerfectHashTableTest {
 
     @Test
-    void build_shouldRejectNullKeys() {
-        Integer[] values = {1, 2, 3};
-        Executable act = () -> PerfectHashTable.build(null, values, 42L);
-        assertThrows(IllegalArgumentException.class, act);
-    }
-
-    @Test
-    void build_shouldRejectNullValues() {
-        int[] keys = {1, 2, 3};
-        Executable act = () -> PerfectHashTable.build(keys, null, 42L);
-        assertThrows(IllegalArgumentException.class, act);
-    }
-
-    @Test
-    void build_shouldRejectLengthMismatch() {
-        int[] keys = {1, 2, 3};
-        Integer[] values = {10, 20};
-        Executable act = () -> PerfectHashTable.build(keys, values, 42L);
-        assertThrows(IllegalArgumentException.class, act);
-    }
-
-    @Test
+        // повтор ключа
     void build_withDuplicateKeys_shouldKeepLastValue() {
         int[] keys = {1, 2, 2, 3};
         Integer[] values = {10, 20, 200, 30};
@@ -42,6 +21,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // пустой набор данных
     void build_emptyInput_shouldWork() {
         int[] keys = {};
         Integer[] values = {};
@@ -52,6 +32,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // после построения значения читаются по ключам
     void get_shouldReturnInsertedValues() {
         int[] keys = {10, 20, 30};
         String[] values = {"A", "B", "C"};
@@ -65,6 +46,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // отсутствующий ключ
     void get_shouldReturnNullForMissingKey() {
         int[] keys = {10, 20, 30};
         String[] values = {"A", "B", "C"};
@@ -75,6 +57,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // поддержка отрицательных ключей
     void get_shouldWorkWithNegativeKeys() {
         int[] keys = {-10, -20, 0, 30};
         String[] values = {"A", "B", "C", "D"};
@@ -90,6 +73,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // согласованность методов чтения и проверки наличия ключа
     void containsKey_shouldBeConsistentWithGet() {
         int[] keys = {1, 2, 3};
         Integer[] values = {10, null, 30};
@@ -110,6 +94,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // ключ есть, но значение отсутствует
     void containsKey_shouldWorkWithNullValues() {
         int[] keys = {1, 2, 3};
         String[] values = {"A", null, "C"};
@@ -123,6 +108,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // поведение таблицы на плотном диапазоне случайных ключей
     void randomized_denseKeys_matchesHashMap() {
         long seed = 123L;
         java.util.SplittableRandom rnd = new java.util.SplittableRandom(seed);
@@ -157,6 +143,7 @@ public class PerfectHashTableTest {
     }
 
     @Test
+        // на разрежённом наборе случайных ключей
     void randomized_sparseUniqueKeys_matchesHashMap() {
         long seed = 777L;
         java.util.SplittableRandom rnd = new java.util.SplittableRandom(seed);
@@ -187,7 +174,7 @@ public class PerfectHashTableTest {
             assertEquals(ref.get(k), table.get(k));
         }
 
-        // генерируем и пропускаем те, что случайно попали в set
+        // генерируем и пропускаем ключи, которые случайно попали в множество уже известных
         int checked = 0;
         while (checked < 1000) {
             int k = rnd.nextInt();

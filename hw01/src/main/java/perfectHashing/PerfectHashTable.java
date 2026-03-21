@@ -14,25 +14,19 @@ public class PerfectHashTable<V> {
         this.level2 = level2;
     }
 
+    /**
+     * Строит двухуровневую таблицу без коллизий внутри бакетов второго уровня
+     */
     public static <V> PerfectHashTable<V> build(int[] keys, V[] values, long seed) {
-        if (keys == null || values == null) {
-            throw new IllegalArgumentException("keys and values must not be null");
-        }
-        if (keys.length != values.length) {
-            throw new IllegalArgumentException("keys and values must have the same length");
-        }
-
         int n = keys.length;
         int m = Math.max(1, n);
         SplittableRandom rnd = new SplittableRandom(seed);
-
         HashFunction h1;
         int[][] keysByBucket;
         Object[][] valuesByBucket;
 
         while (true) {
             h1 = HashFunction.random(rnd);
-
             int[] sizes = new int[m];
             for (int key : keys) {
                 sizes[h1.mod(key, m)]++;
@@ -61,7 +55,6 @@ public class PerfectHashTable<V> {
                 keysByBucket[bucket][p] = keys[i];
                 valuesByBucket[bucket][p] = values[i];
             }
-
             break;
         }
 
@@ -75,16 +68,25 @@ public class PerfectHashTable<V> {
         return new PerfectHashTable<>(n, h1, level2);
     }
 
+    /**
+     * Возвращает значение по ключу
+     */
     public V get(int key) {
         int bucket = h1.mod(key, level2.length);
         return level2[bucket].get(key);
     }
 
+    /**
+     * Проверяет наличие ключа
+     */
     public boolean containsKey(int key) {
         int bucket = h1.mod(key, level2.length);
         return level2[bucket].containsKey(key);
     }
 
+    /**
+     * Возвращает число пар ключ-значение
+     */
     public int size() {
         return n;
     }
@@ -98,6 +100,9 @@ public class PerfectHashTable<V> {
             this.b = b;
         }
 
+        /**
+         * Переводит ключ в номер бакета по модулю заданного размера
+         */
         int mod(int key, int mod) {
             long x = ((long) a * key + b) % P;
             if (x < 0) {
@@ -118,6 +123,9 @@ public class PerfectHashTable<V> {
         final boolean[] used;
         final Object[] values;
 
+        /**
+         * Создаёт внутреннюю таблицу второго уровня
+         */
         private SecondaryTable(int size, HashFunction h2, int[] keys, boolean[] used, Object[] values) {
             this.size = size;
             this.h2 = h2;
@@ -126,10 +134,16 @@ public class PerfectHashTable<V> {
             this.values = values;
         }
 
+        /**
+         * Возвращает пустую таблицу
+         */
         static <V> SecondaryTable<V> empty() {
             return new SecondaryTable<>(0, new HashFunction(1, 0), new int[0], new boolean[0], new Object[0]);
         }
 
+        /**
+         * Строит таблицу второго уровня для бакета
+         */
         static <V> SecondaryTable<V> buildForBucket(int[] bucketKeys, Object[] bucketValues, SplittableRandom rnd) {
             int nj = bucketKeys.length;
             if (nj == 0) {

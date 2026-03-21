@@ -23,6 +23,9 @@ public class ExtendableHashTable implements AutoCloseable {
     private long nextFreeOffset;
     private boolean closed;
 
+    /**
+     * Создаёт таблицу и подготавливает файл хранения
+     */
     public ExtendableHashTable(int bucketCapacity) {
         this.bucketCapacity = bucketCapacity;
         this.bucketRecordSize = bucketRecordSizeFor(bucketCapacity);
@@ -48,6 +51,9 @@ public class ExtendableHashTable implements AutoCloseable {
         writeDirectoryPointer(0, initialBucketOffset);
     }
 
+    /**
+     * Добавляет новую пару ключ-значение или обновляет
+     */
     public void put(int key, int value) {
         while (true) {
             int directoryIndex = directoryIndex(key);
@@ -57,17 +63,22 @@ public class ExtendableHashTable implements AutoCloseable {
             if (result == PutResult.INSERTED || result == PutResult.UPDATED) {
                 return;
             }
-
             splitBucket(directoryIndex);
         }
     }
 
+    /**
+     * Возвращает значение по ключу
+     */
     public Integer get(int key) {
         long bucketOffset = readDirectoryPointer(directoryIndex(key));
         int position = indexOf(bucketOffset, key);
         return (position == NOT_FOUND) ? null : readBucketValue(bucketOffset, position);
     }
 
+    /**
+     * Удаляет ключ
+     */
     public boolean remove(int key) {
         int directoryIndex = directoryIndex(key);
         long bucketOffset = readDirectoryPointer(directoryIndex);
@@ -111,6 +122,9 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Вычисляет индекс директории по ключу
+     */
     private int directoryIndex(int key) {
         if (globalDepth == 0) {
             return 0;
@@ -120,6 +134,9 @@ public class ExtendableHashTable implements AutoCloseable {
         return hash(key) & mask;
     }
 
+    /**
+     * Делит переполненный бакет на два
+     */
     private void splitBucket(int splitDirectoryIndex) {
         long oldBucketOffset = readDirectoryPointer(splitDirectoryIndex);
         int oldDepth = bucketLocalDepth(oldBucketOffset);
@@ -159,6 +176,9 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Пытается объединять совместимые бакеты после удаления записи
+     */
     private void tryMerge(int directoryIndex) {
         while (true) {
             long bucketOffset = readDirectoryPointer(directoryIndex);
@@ -214,6 +234,9 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Удваивает директории
+     */
     private void doubleDirectory() {
         if (globalDepth == MAX_GLOBAL_DEPTH) {
             throw new IllegalStateException("max globalDepth reached");
@@ -228,11 +251,17 @@ public class ExtendableHashTable implements AutoCloseable {
         writeHeaderInt(OFF_GLOBAL_DEPTH, globalDepth);
     }
 
+    /**
+     * Вычисляет хэш для ключа
+     */
     private int hash(int key) {
         int h = Integer.hashCode(key);
         return h ^ (h >>> 16);
     }
 
+    /**
+     * Вставляет или обновляет запись внутри одного бакета
+     */
     private PutResult putIntoBucket(long bucketOffset, int key, int value) {
         int position = indexOf(bucketOffset, key);
         if (position >= 0) {
@@ -251,6 +280,9 @@ public class ExtendableHashTable implements AutoCloseable {
         return PutResult.INSERTED;
     }
 
+    /**
+     * Ищет позицию ключа внутри бакета
+     */
     private int indexOf(long bucketOffset, int key) {
         int size = bucketSize(bucketOffset);
         for (int i = 0; i < size; i++) {
@@ -261,10 +293,16 @@ public class ExtendableHashTable implements AutoCloseable {
         return NOT_FOUND;
     }
 
+    /**
+     * Возвращает длину директории по глобальной глубине
+     */
     private int directoryLength() {
         return 1 << globalDepth;
     }
 
+    /**
+     * Создаёт временный файл
+     */
     private static Path createTempFile() {
         try {
             return Files.createTempFile("extendable-hash-", ".dat");
@@ -273,6 +311,9 @@ public class ExtendableHashTable implements AutoCloseable {
         }
     }
 
+    /**
+     * Увеличивает размер файла до нужного размера
+     */
     private void ensureMappedSize(long minSize) {
         if (minSize <= mappedSize) {
             return;
@@ -307,6 +348,9 @@ public class ExtendableHashTable implements AutoCloseable {
         mappedSize = newSize;
     }
 
+    /**
+     * Выделяет место под новый бакет
+     */
     private long allocateBucket(int localDepth) {
         long bucketOffset = nextFreeOffset;
         long updatedNextFree = bucketOffset + bucketRecordSize;
@@ -321,72 +365,120 @@ public class ExtendableHashTable implements AutoCloseable {
         return bucketOffset;
     }
 
+    /**
+     * Читает указатель на бакет из заданной ячейки директории
+     */
     private long readDirectoryPointer(int directoryIndex) {
         long offset = directoryOffset(directoryIndex);
         return buffer.getLong(toBufferIndex(offset));
     }
 
+    /**
+     * Записывает в ячейку директории смещение бакета
+     */
     private void writeDirectoryPointer(int directoryIndex, long bucketOffset) {
         long offset = directoryOffset(directoryIndex);
         buffer.putLong(toBufferIndex(offset), bucketOffset);
     }
 
+    /**
+     * Читает локальную глубину бакета
+     */
     private int bucketLocalDepth(long bucketOffset) {
         return readIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH);
     }
 
+    /**
+     * Записывает локальную глубину бакета
+     */
     private void writeBucketLocalDepth(long bucketOffset, int localDepth) {
         writeIntAt(bucketOffset + BUCKET_OFF_LOCAL_DEPTH, localDepth);
     }
 
+    /**
+     * Читает текущее количество записей в бакете
+     */
     private int bucketSize(long bucketOffset) {
         return readIntAt(bucketOffset + BUCKET_OFF_SIZE);
     }
 
+    /**
+     * Записывает количество занятых позиций в бакете
+     */
     private void writeBucketSize(long bucketOffset, int size) {
         writeIntAt(bucketOffset + BUCKET_OFF_SIZE, size);
     }
 
+    /**
+     * Читает ключ из бакета
+     */
     private int readBucketKey(long bucketOffset, int slot) {
         long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);
         return readIntAt(offset);
     }
 
+    /**
+     * Записывает ключ в бакет
+     */
     private void writeBucketKey(long bucketOffset, int slot, int key) {
         long offset = bucketKeysOffset(bucketOffset) + ((long) slot * Integer.BYTES);
         writeIntAt(offset, key);
     }
 
+    /**
+     * Читает значение из бакета
+     */
     private int readBucketValue(long bucketOffset, int slot) {
         long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);
         return readIntAt(offset);
     }
 
+    /**
+     * Записывает значение в бакет
+     */
     private void writeBucketValue(long bucketOffset, int slot, int value) {
         long offset = bucketValuesOffset(bucketOffset, bucketCapacity) + ((long) slot * Integer.BYTES);
         writeIntAt(offset, value);
     }
 
+    /**
+     * Записывает целое число в заголовок файла
+     */
     private void writeHeaderInt(int offset, int value) {
         buffer.putInt(offset, value);
     }
 
+    /**
+     * Записывает длинное число в заголовок файла
+     */
     private void writeHeaderLong(int offset, long value) {
         buffer.putLong(offset, value);
     }
 
+    /**
+     * Читает целое число в файле
+     */
     private int readIntAt(long offset) {
         return buffer.getInt(toBufferIndex(offset));
     }
 
+    /**
+     * Записывает целое число в файл
+     */
     private void writeIntAt(long offset, int value) {
         buffer.putInt(toBufferIndex(offset), value);
     }
 
+    /**
+     * Преобразует длинное смещение файла в индекс буфера
+     */
     private int toBufferIndex(long offset) {
         return (int) offset;
     }
 
+    /**
+     * Открывает файловый канал
+     */
     private static FileChannel openChannel(Path filePath, StandardOpenOption... options) {
         try {
             return FileChannel.open(filePath, options);

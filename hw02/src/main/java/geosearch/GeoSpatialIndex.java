@@ -22,10 +22,8 @@ public class GeoSpatialIndex<T> {
 
     public static final double DEFAULT_CELL_SIZE_METERS = 500.0;
 
-    private final int leafCapacity;
-    private final int maxDepth;
-    private final Node<T> root;
-    private final Map<String, IndexEntry<T>> byId = new HashMap<>();
+    private final QuadTree<T> tree;
+    private final Map<String, GeoObject<T>> byId = new HashMap<>();
 
     public GeoSpatialIndex() {
         this(DEFAULT_CELL_SIZE_METERS);
@@ -33,47 +31,40 @@ public class GeoSpatialIndex<T> {
 
     public GeoSpatialIndex(double cellSizeMeters) {
         validateCellSize(cellSizeMeters);
-        this.leafCapacity = DEFAULT_LEAF_CAPACITY;
-        this.maxDepth = computeMaxDepth(cellSizeMeters);
-        this.root = Node.leaf(MIN_LATITUDE, MAX_LATITUDE, MIN_LONGITUDE, MAX_LONGITUDE);
+        int maxDepth = computeMaxDepth(cellSizeMeters);
+        this.tree = new QuadTree<>(
+                MIN_LATITUDE,
+                MAX_LATITUDE,
+                MIN_LONGITUDE,
+                MAX_LONGITUDE,
+                DEFAULT_LEAF_CAPACITY,
+                maxDepth);
     }
 
     public void put(String id, double latitude, double longitude, T payload) {
-        GeoObject<T> object = new GeoObject<>(id, latitude, longitude, payload);
-
-        IndexEntry<T> oldEntry = byId.remove(id);
-        if (oldEntry != null) {
-            removeFromTree(root, oldEntry);
-        }
-
-        IndexEntry<T> newEntry = new IndexEntry<>(object);
-        insertIntoTree(root, newEntry, 0);
-        byId.put(id, newEntry);
+        put(new GeoObject<>(id, latitude, longitude, payload));
     }
 
     public void put(GeoObject<T> object) {
-        if (object == null) {
-            throw new IllegalArgumentException("object must not be null");
+        GeoObject<T> oldObject = byId.put(object.id(), object);
+        if (oldObject != null) {
+            tree.remove(oldObject);
         }
-        put(object.id(), object.latitude(), object.longitude(), object.payload());
+        tree.insert(object);
     }
 
     public boolean remove(String id) {
         validateId(id);
-        IndexEntry<T> entry = byId.remove(id);
-        if (entry == null) {
+        GeoObject<T> object = byId.remove(id);
+        if (object == null) {
             return false;
         }
-        return removeFromTree(root, entry);
+        return tree.remove(object);
     }
 
     public Optional<GeoObject<T>> getById(String id) {
         validateId(id);
-        IndexEntry<T> entry = byId.get(id);
-        if (entry == null) {
-            return Optional.empty();
-        }
-        return Optional.of(entry.object);
+        return Optional.ofNullable(byId.get(id));
     }
 
     public int size() {
@@ -102,22 +93,29 @@ public class GeoSpatialIndex<T> {
         }
 
         List<LonWindow> longitudeWindows = buildLongitudeWindows(longitude, longitudeDelta);
-        List<IndexEntry<T>> candidates = new ArrayList<>();
+        List<GeoObject<T>> candidates = new ArrayList<>();
         for (LonWindow window : longitudeWindows) {
-            collectInRange(root, minLatitude, maxLatitude, window.minLongitude, window.maxLongitude, candidates);
+            tree.collectInRange(
+                    minLatitude,
+                    maxLatitude,
+                    window.minLongitude,
+                    window.maxLongitude,
+                    candidates);
         }
 
         List<GeoSearchResult<T>> results = new ArrayList<>();
         Set<String> seenIds = new HashSet<>();
-        for (IndexEntry<T> candidate : candidates) {
-            String id = candidate.object.id();
-            if (!seenIds.add(id)) {
+        for (GeoObject<T> candidate : candidates) {
+            if (!seenIds.add(candidate.id())) {
                 continue;
             }
-            GeoObject<T> object = candidate.object;
-            double distanceMeters = haversineMeters(latitude, longitude, object.latitude(), object.longitude());
+            double distanceMeters = haversineMeters(
+                    latitude,
+                    longitude,
+                    candidate.latitude(),
+                    candidate.longitude());
             if (distanceMeters <= radiusMeters) {
-                results.add(new GeoSearchResult<>(object, distanceMeters));
+                results.add(new GeoSearchResult<>(candidate, distanceMeters));
             }
         }
 
@@ -126,107 +124,6 @@ public class GeoSpatialIndex<T> {
                 .thenComparing(result -> result.object().id()));
 
         return results;
-    }
-
-    private void insertIntoTree(Node<T> node, IndexEntry<T> entry, int depth) {
-        if (node.isLeaf()) {
-            node.entries.add(entry);
-            if (node.entries.size() > leafCapacity && depth < maxDepth) {
-                split(node, depth);
-            }
-            return;
-        }
-
-        Node<T> child = node.children[childIndex(node, entry.object.latitude(), entry.object.longitude())];
-        insertIntoTree(child, entry, depth + 1);
-    }
-
-    private void split(Node<T> node, int depth) {
-        double midLat = midpoint(node.latMin, node.latMax);
-        double midLon = midpoint(node.lonMin, node.lonMax);
-
-        @SuppressWarnings("unchecked")
-        Node<T>[] children = (Node<T>[]) new Node<?>[4];
-        children[0] = Node.leaf(node.latMin, midLat, node.lonMin, midLon); // SW
-        children[1] = Node.leaf(node.latMin, midLat, midLon, node.lonMax); // SE
-        children[2] = Node.leaf(midLat, node.latMax, node.lonMin, midLon); // NW
-        children[3] = Node.leaf(midLat, node.latMax, midLon, node.lonMax); // NE
-
-        List<IndexEntry<T>> oldEntries = node.entries;
-        node.entries = null;
-        node.children = children;
-
-        for (IndexEntry<T> entry : oldEntries) {
-            Node<T> child = node.children[childIndex(node, entry.object.latitude(), entry.object.longitude())];
-            insertIntoTree(child, entry, depth + 1);
-        }
-    }
-
-    private boolean removeFromTree(Node<T> node, IndexEntry<T> entry) {
-        if (node.isLeaf()) {
-            for (int i = 0; i < node.entries.size(); i++) {
-                if (node.entries.get(i).object.id().equals(entry.object.id())) {
-                    node.entries.remove(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        Node<T> child = node.children[childIndex(node, entry.object.latitude(), entry.object.longitude())];
-        return removeFromTree(child, entry);
-    }
-
-    private void collectInRange(
-            Node<T> node,
-            double minLatitude,
-            double maxLatitude,
-            double minLongitude,
-            double maxLongitude,
-            List<IndexEntry<T>> out) {
-
-        if (!intersects(node, minLatitude, maxLatitude, minLongitude, maxLongitude)) {
-            return;
-        }
-
-        if (node.isLeaf()) {
-            for (IndexEntry<T> entry : node.entries) {
-                double latitude = entry.object.latitude();
-                double longitude = entry.object.longitude();
-                if (latitude >= minLatitude && latitude <= maxLatitude
-                        && longitude >= minLongitude && longitude <= maxLongitude) {
-                    out.add(entry);
-                }
-            }
-            return;
-        }
-
-        for (Node<T> child : node.children) {
-            collectInRange(child, minLatitude, maxLatitude, minLongitude, maxLongitude, out);
-        }
-    }
-
-    private static boolean intersects(
-            Node<?> node,
-            double minLatitude,
-            double maxLatitude,
-            double minLongitude,
-            double maxLongitude) {
-
-        return node.latMax >= minLatitude && node.latMin <= maxLatitude
-                && node.lonMax >= minLongitude && node.lonMin <= maxLongitude;
-    }
-
-    private static int childIndex(Node<?> node, double latitude, double longitude) {
-        double midLat = midpoint(node.latMin, node.latMax);
-        double midLon = midpoint(node.lonMin, node.lonMax);
-        int row = latitude >= midLat ? 1 : 0;
-        int col = longitude >= midLon ? 1 : 0;
-        return row * 2 + col;
-    }
-
-    private static double midpoint(double left, double right) {
-        return left + (right - left) * 0.5;
     }
 
     private static int computeMaxDepth(double cellSizeMeters) {
@@ -307,38 +204,5 @@ public class GeoSpatialIndex<T> {
     }
 
     private record LonWindow(double minLongitude, double maxLongitude) {
-    }
-
-    private static final class IndexEntry<T> {
-        private final GeoObject<T> object;
-
-        private IndexEntry(GeoObject<T> object) {
-            this.object = object;
-        }
-    }
-
-    private static final class Node<T> {
-        private final double latMin;
-        private final double latMax;
-        private final double lonMin;
-        private final double lonMax;
-        private List<IndexEntry<T>> entries;
-        private Node<T>[] children;
-
-        private Node(double latMin, double latMax, double lonMin, double lonMax, List<IndexEntry<T>> entries) {
-            this.latMin = latMin;
-            this.latMax = latMax;
-            this.lonMin = lonMin;
-            this.lonMax = lonMax;
-            this.entries = entries;
-        }
-
-        private static <T> Node<T> leaf(double latMin, double latMax, double lonMin, double lonMax) {
-            return new Node<>(latMin, latMax, lonMin, lonMax, new ArrayList<>());
-        }
-
-        private boolean isLeaf() {
-            return children == null;
-        }
     }
 }

@@ -18,18 +18,30 @@ final class ExtendableHashFileFormat {
     private ExtendableHashFileFormat() {
     }
 
+    /**
+     * Размер одной бакета в байтах
+     */
     static int bucketRecordSizeFor(int bucketCapacity) {
         return BUCKET_HEADER_SIZE + (bucketCapacity * Integer.BYTES * 2);
     }
 
+    /**
+     * Смещение указателя нужной ячейки каталога
+     */
     static long directoryOffset(int directoryIndex) {
         return DIRECTORY_OFFSET + ((long) directoryIndex * Long.BYTES);
     }
 
+    /**
+     * Смещение начала области ключей внутри бакета
+     */
     static long bucketKeysOffset(long bucketOffset) {
         return bucketOffset + BUCKET_HEADER_SIZE;
     }
 
+    /**
+     * Смещение начала области значений внутри бакета
+     */
     static long bucketValuesOffset(long bucketOffset, int bucketCapacity) {
         return bucketKeysOffset(bucketOffset) + ((long) bucketCapacity * Integer.BYTES);
     }

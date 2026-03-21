@@ -50,6 +50,9 @@ public class LshBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Формирует пары близких текстов
+         */
         public void setupTrial() {
             texts = new String[docs];
             SplittableRandom rnd = new SplittableRandom(seed);
@@ -64,6 +67,9 @@ public class LshBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Перемешивает тексты
+         */
         public void setupIteration() {
             shuffle(texts, seed + iteration++);
         }
@@ -86,6 +92,9 @@ public class LshBenchmark {
         int iteration;
 
         @Setup(Level.Iteration)
+        /**
+         * Подготавливает структуру и базовый набор документов
+         */
         public void setupIteration() {
             long iterSeed = seed + iteration++;
             index = new MinHashLshIndex(5, 128, 32, seed);
@@ -117,6 +126,9 @@ public class LshBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Готовит структуру и запросы для замера отбора кандидатов
+         */
         public void setupTrial() {
             index = new MinHashLshIndex(5, 128, 32, seed);
             queries = new String[docs];
@@ -145,11 +157,17 @@ public class LshBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Перемешивает порядок запросов
+         */
         public void setupIteration() {
             shuffle(order, seed + iteration++);
             pos = 0;
         }
 
+        /**
+         * Возвращает следующий текст запроса
+         */
         String nextQuery() {
             String query = queries[order[pos]];
             pos++;
@@ -180,6 +198,9 @@ public class LshBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Готовит тексты и порядок их обхода для замера поиска пар
+         */
         public void setupTrial() {
             texts = new String[docs];
             order = new int[docs];
@@ -199,6 +220,9 @@ public class LshBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Строит структуру заново в новом порядке документов
+         */
         public void setupIteration() {
             shuffle(order, seed + iteration++);
             index = new MinHashLshIndex(5, 128, 32, seed);
@@ -229,6 +253,9 @@ public class LshBenchmark {
         int iteration;
 
         @Setup(Level.Trial)
+        /**
+         * Подготавливает данные для замера полного перебора
+         */
         public void setupTrial() {
             texts = new String[docs];
             order = new int[docs];
@@ -248,6 +275,9 @@ public class LshBenchmark {
         }
 
         @Setup(Level.Iteration)
+        /**
+         * Перестраивает структуру перед полным перебором
+         */
         public void setupIteration() {
             shuffle(order, seed + iteration++);
             index = new MinHashLshIndex(5, 128, 32, seed);
@@ -259,6 +289,9 @@ public class LshBenchmark {
     }
 
     @Benchmark
+    /**
+     * Замеряет построение структуры по подготовленным текстам
+     */
     public void buildIndex(BuildState state, Blackhole bh) {
         MinHashLshIndex index = new MinHashLshIndex(5, 128, 32, state.seed);
         for (int i = 0; i < state.docs; i++) {
@@ -268,25 +301,40 @@ public class LshBenchmark {
     }
 
     @Benchmark
+    /**
+     * Замеряет добавление одного нового документа
+     */
     public void addDocument(AddState state) {
         state.index.add(state.nextDocId++, randomText(state.rnd, state.wordsPerDoc));
     }
 
     @Benchmark
+    /**
+     * Замеряет получение кандидатов
+     */
     public int candidatesQuery(QueryState state) {
         return state.index.candidates(state.nextQuery()).size();
     }
 
     @Benchmark
+    /**
+     * Замеряет поиск близких пар
+     */
     public int nearDuplicatesLsh(LshDuplicatesState state) {
         return state.index.nearDuplicates(state.threshold).size();
     }
 
     @Benchmark
+    /**
+     * Замеряет поиск близких пар полным перебором
+     */
     public int nearDuplicatesFullScan(FullScanState state) {
         return state.index.nearDuplicatesFullScan(state.threshold).size();
     }
 
+    /**
+     * Перемешивает массив чисел
+     */
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
@@ -297,6 +345,9 @@ public class LshBenchmark {
         }
     }
 
+    /**
+     * Перемешивает массив строк
+     */
     private static void shuffle(String[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
@@ -307,6 +358,9 @@ public class LshBenchmark {
         }
     }
 
+    /**
+     * Генерирует случайный текст
+     */
     private static String randomText(SplittableRandom rnd, int words) {
         StringBuilder sb = new StringBuilder(words * 8);
         for (int i = 0; i < words; i++) {
@@ -318,6 +372,9 @@ public class LshBenchmark {
         return sb.toString();
     }
 
+    /**
+     * Изменяет оформление текста
+     */
     private static String noisyFormattingVariant(SplittableRandom rnd, String base) {
         String[] words = base.split(" ");
         String[] suffix = {"", "!", "!!", "...", ",", "??", ";", ":"};
