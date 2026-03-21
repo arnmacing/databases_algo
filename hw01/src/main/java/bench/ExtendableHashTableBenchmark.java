@@ -299,7 +299,7 @@ public class ExtendableHashTableBenchmark {
     }
 
     /**
-     * Предварительное чтение
+     * Предварительное чтение как часть warm up
      */
     private static void prefault(ExtendableHashTable ht, int[] keys) {
         for (int i = 0; i < keys.length; i += PREFETCH_STRIDE) {
