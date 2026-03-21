@@ -236,7 +236,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * чтение по ключу, который есть в таблице
+     * Чтение по ключу, который есть в таблице
      */
     public void getHit(ReadState s, Blackhole bh) {
         bh.consume(s.ht.get(s.nextPresent()));
@@ -244,7 +244,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * чтение по ключу, которого нет
+     * Чтение по ключу, которого нет
      */
     public void getMiss(ReadState s, Blackhole bh) {
         bh.consume(s.ht.get(s.nextAbsent()));
@@ -252,7 +252,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * вставку и удаление ключа
+     * Вставку и удаление ключа
      */
     public void putThenRemove(WriteState s) {
         int k = s.nextExtra();
@@ -262,7 +262,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * удаление и вставку ключа
+     * Удаление и вставку ключа
      */
     public void removeThenPut(WriteState s) {
         int k = s.nextBase();
@@ -272,7 +272,7 @@ public class ExtendableHashTableBenchmark {
 
     @Benchmark
     /**
-     * обновление значения ключа
+     * Обновление значения ключа
      */
     public void updateExisting(WriteState s, Blackhole bh) {
         int k = s.nextBase();
@@ -285,7 +285,7 @@ public class ExtendableHashTableBenchmark {
     @BenchmarkMode(Mode.SingleShotTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     /**
-     * построение таблицы
+     * Построение таблицы
      */
     public int buildFromScratch(BuildState s, Blackhole bh) {
         try (ExtendableHashTable ht = new ExtendableHashTable(s.bucketCapacity)) {
@@ -307,9 +307,6 @@ public class ExtendableHashTableBenchmark {
         }
     }
 
-    /**
-     * Перемешивает массив чисел
-     */
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {

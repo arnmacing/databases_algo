@@ -137,7 +137,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * чтение по существующему ключу
+     * Чтение по существующему ключу
      */
     public void getHit(LookupState state, Blackhole bh) {
         bh.consume(state.table.get(state.nextPresent()));
@@ -145,7 +145,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * чтение по отсутствующему ключу
+     * Чтение по отсутствующему ключу
      */
     public void getMiss(LookupState state, Blackhole bh) {
         bh.consume(state.table.get(state.nextAbsent()));
@@ -153,7 +153,7 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * проверку наличия существующего ключа
+     * Проверка наличия существующего ключа
      */
     public boolean containsHit(LookupState state) {
         return state.table.containsKey(state.nextPresent());
@@ -161,15 +161,12 @@ public class PerfectHashingBenchmark {
 
     @Benchmark
     /**
-     * проверку наличия отсутствующего ключа
+     * Проверка наличия отсутствующего ключа
      */
     public boolean containsMiss(LookupState state) {
         return state.table.containsKey(state.nextAbsent());
     }
 
-    /**
-     * Перемешивает массив
-     */
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
@@ -180,9 +177,6 @@ public class PerfectHashingBenchmark {
         }
     }
 
-    /**
-     * Перемешивает ключи и значения пар
-     */
     private static void shufflePairs(int[] keys, Integer[] values, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = keys.length - 1; i > 0; i--) {

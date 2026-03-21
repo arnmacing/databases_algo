@@ -290,7 +290,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * построение структуры по подготовленным текстам
+     * Построение структуры по подготовленным текстам
      */
     public void buildIndex(BuildState state, Blackhole bh) {
         MinHashLshIndex index = new MinHashLshIndex(5, 128, 32, state.seed);
@@ -302,7 +302,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * добавление одного нового документа
+     * Добавление документа
      */
     public void addDocument(AddState state) {
         state.index.add(state.nextDocId++, randomText(state.rnd, state.wordsPerDoc));
@@ -310,7 +310,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * получение кандидатов
+     * Получение кандидатов
      */
     public int candidatesQuery(QueryState state) {
         return state.index.candidates(state.nextQuery()).size();
@@ -318,7 +318,7 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * поиск близких пар
+     * Поиск близких пар
      */
     public int nearDuplicatesLsh(LshDuplicatesState state) {
         return state.index.nearDuplicates(state.threshold).size();
@@ -326,15 +326,12 @@ public class LshBenchmark {
 
     @Benchmark
     /**
-     * поиск близких пар полным перебором
+     * Поиск близких пар полным перебором
      */
     public int nearDuplicatesFullScan(FullScanState state) {
         return state.index.nearDuplicatesFullScan(state.threshold).size();
     }
 
-    /**
-     * Перемешивает массив чисел
-     */
     private static void shuffle(int[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
@@ -345,9 +342,6 @@ public class LshBenchmark {
         }
     }
 
-    /**
-     * Перемешивает массив строк
-     */
     private static void shuffle(String[] a, long seed) {
         SplittableRandom rnd = new SplittableRandom(seed);
         for (int i = a.length - 1; i > 0; i--) {
