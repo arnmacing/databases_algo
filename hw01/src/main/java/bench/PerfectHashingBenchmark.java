@@ -17,7 +17,7 @@ public class PerfectHashingBenchmark {
 
     @State(Scope.Benchmark)
     public static class BuildState {
-        @Param({"200000", "800000"})
+        @Param({"200000", "400000", "600000", "800000"})
         public int n;
 
         @Param({"42"})
@@ -55,7 +55,7 @@ public class PerfectHashingBenchmark {
 
     @State(Scope.Thread)
     public static class LookupState {
-        @Param({"200000", "800000"})
+        @Param({"200000", "400000", "600000", "800000"})
         public int n;
 
         @Param({"42"})
@@ -125,12 +125,30 @@ public class PerfectHashingBenchmark {
         }
     }
 
+    @State(Scope.Thread)
+    @AuxCounters(AuxCounters.Type.EVENTS)
+    public static class BuildAnalyticsState {
+        public long secondaryTableSize;
+        public long primaryCollisions;
+        public long expansionPermille;
+
+        @Setup(Level.Iteration)
+        public void reset() {
+            secondaryTableSize = 0L;
+            primaryCollisions = 0L;
+            expansionPermille = 0L;
+        }
+    }
+
     @Benchmark
     /**
      * время построения таблицы
      */
-    public int buildIndex(BuildState state, Blackhole bh) {
+    public int buildIndex(BuildState state, BuildAnalyticsState analytics, Blackhole bh) {
         PerfectHashTable<Integer> table = PerfectHashTable.build(state.keys, state.values, state.seed);
+        analytics.secondaryTableSize += table.secondaryTableSize();
+        analytics.primaryCollisions += table.primaryCollisionCount();
+        analytics.expansionPermille += Math.round(table.expansionFactor() * 1000.0);
         bh.consume(table.containsKey(state.keys[state.n / 2]));
         return table.size();
     }

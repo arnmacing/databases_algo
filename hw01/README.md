@@ -6,6 +6,11 @@
 
 Скрипт: `hw01/tools/jmh_run_with_system_metrics.py`
 
+### 1.0 Установить async-profiler (один раз)
+```bash
+brew install async-profiler
+```
+
 ### 1.1 Посмотреть список бенчмарков (без запуска)
 ```bash
 python3 hw01/tools/jmh_run_with_system_metrics.py \
@@ -35,11 +40,20 @@ python3 hw01/tools/jmh_run_with_system_metrics.py \
 python3 hw01/tools/jmh_run_with_system_metrics.py \
   --project-root . \
   --out-dir hw01/target/jmh-system-report \
-  --jmh-args '-wi 8 -i 12 -f 2' \
-  --sample-interval 1.0
+  --jmh-args '-wi 8 -i 12 -f 2'
 ```
 
-### 1.5 Пересборка графиков и markdown из уже сохраненных JSON/CSV (без перезапуска JMH)
+### 1.5 Явно указать путь к `libasyncProfiler` и события профилирования
+```bash
+python3 hw01/tools/jmh_run_with_system_metrics.py \
+  --project-root . \
+  --out-dir hw01/target/jmh-system-report \
+  --async-lib /opt/homebrew/opt/async-profiler/lib/libasyncProfiler.dylib \
+  --async-events cpu,alloc \
+  --async-output jfr,collapsed,flamegraph
+```
+
+### 1.6 Пересборка графиков и markdown из уже сохраненных JSON/CSV (без перезапуска JMH)
 ```bash
 python3 hw01/tools/jmh_run_with_system_metrics.py \
   --project-root . \
@@ -68,15 +82,11 @@ def repl(m):
     path = m.group("src")
     alt = (m.group("alt") or "").strip() or "image"
     width = (m.group("width") or "").strip()
-    if width == "920":
-        w = "95%"
-    elif width == "760":
-        w = "78%"
-    elif width:
-        w = f"{width}px"
-    else:
-        w = "80%"
-    return f"![{alt}]({path}){{ width={w} }}"
+    if width and width.isdigit():
+        return f"![{alt}]({path}){{ width={width}px }}"
+    if width:
+        return f"![{alt}]({path}){{ width={width} }}"
+    return f"![{alt}]({path}){{ width=760px }}"
 
 pattern = re.compile(r'<img\s+src="(?P<src>[^"]+)"(?:\s+alt="(?P<alt>[^"]*)")?(?:\s+width="(?P<width>[^"]+)")?\s*/?>')
 dst.write_text(pattern.sub(repl, text), encoding="utf-8")

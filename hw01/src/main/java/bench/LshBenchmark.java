@@ -37,7 +37,7 @@ public class LshBenchmark {
 
     @State(Scope.Benchmark)
     public static class BuildState {
-        @Param({"20000", "60000"})
+        @Param({"20000", "30000", "45000", "60000"})
         public int docs;
 
         @Param({"16"})
@@ -77,7 +77,7 @@ public class LshBenchmark {
 
     @State(Scope.Thread)
     public static class AddState {
-        @Param({"20000"})
+        @Param({"20000", "30000", "45000", "60000"})
         public int baseDocs;
 
         @Param({"16"})
@@ -110,7 +110,7 @@ public class LshBenchmark {
 
     @State(Scope.Thread)
     public static class QueryState {
-        @Param({"20000", "60000"})
+        @Param({"20000", "30000", "45000", "60000"})
         public int docs;
 
         @Param({"16"})
@@ -180,7 +180,7 @@ public class LshBenchmark {
 
     @State(Scope.Thread)
     public static class LshDuplicatesState {
-        @Param({"6000", "12000"})
+        @Param({"6000", "8000", "10000", "12000"})
         public int docs;
 
         @Param({"16"})
@@ -235,7 +235,7 @@ public class LshBenchmark {
 
     @State(Scope.Thread)
     public static class FullScanState {
-        @Param({"1500", "3000"})
+        @Param({"1500", "2000", "2500", "3000"})
         public int docs;
 
         @Param({"16"})

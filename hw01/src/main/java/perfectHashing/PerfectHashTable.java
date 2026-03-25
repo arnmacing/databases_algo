@@ -7,11 +7,21 @@ public class PerfectHashTable<V> {
     private final int n;
     private final HashFunction h1;
     private final SecondaryTable<V>[] level2;
+    private final long secondaryTableSize;
+    private final int primaryCollisionCount;
 
-    private PerfectHashTable(int n, HashFunction h1, SecondaryTable<V>[] level2) {
+    private PerfectHashTable(
+            int n,
+            HashFunction h1,
+            SecondaryTable<V>[] level2,
+            long secondaryTableSize,
+            int primaryCollisionCount
+    ) {
         this.n = n;
         this.h1 = h1;
         this.level2 = level2;
+        this.secondaryTableSize = secondaryTableSize;
+        this.primaryCollisionCount = primaryCollisionCount;
     }
 
     /**
@@ -24,6 +34,7 @@ public class PerfectHashTable<V> {
         HashFunction h1;
         int[][] keysByBucket;
         Object[][] valuesByBucket;
+        int[] acceptedSizes;
 
         while (true) {
             h1 = HashFunction.random(rnd);
@@ -55,17 +66,27 @@ public class PerfectHashTable<V> {
                 keysByBucket[bucket][p] = keys[i];
                 valuesByBucket[bucket][p] = values[i];
             }
+            acceptedSizes = sizes;
             break;
+        }
+
+        int primaryCollisionCount = 0;
+        for (int s : acceptedSizes) {
+            if (s > 1) {
+                primaryCollisionCount += s - 1;
+            }
         }
 
         @SuppressWarnings("unchecked")
         SecondaryTable<V>[] level2 = (SecondaryTable<V>[]) new SecondaryTable<?>[m];
 
+        long secondaryTableSize = 0L;
         for (int j = 0; j < m; j++) {
             level2[j] = SecondaryTable.buildForBucket(keysByBucket[j], valuesByBucket[j], rnd);
+            secondaryTableSize += level2[j].size;
         }
 
-        return new PerfectHashTable<>(n, h1, level2);
+        return new PerfectHashTable<>(n, h1, level2, secondaryTableSize, primaryCollisionCount);
     }
 
     /**
@@ -89,6 +110,30 @@ public class PerfectHashTable<V> {
      */
     public int size() {
         return n;
+    }
+
+    /**
+     * Суммарный размер таблиц второго уровня (сумма nj^2)
+     */
+    public long secondaryTableSize() {
+        return secondaryTableSize;
+    }
+
+    /**
+     * Число коллизий первого уровня: сумма (size(bucket) - 1) для непустых бакетов
+     */
+    public int primaryCollisionCount() {
+        return primaryCollisionCount;
+    }
+
+    /**
+     * Коэффициент расширения относительно числа ключей
+     */
+    public double expansionFactor() {
+        if (n == 0) {
+            return 0.0;
+        }
+        return (double) secondaryTableSize / (double) n;
     }
 
     static final class HashFunction {

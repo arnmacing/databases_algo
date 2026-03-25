@@ -32,6 +32,7 @@ import org.openjdk.jmh.results.ScalarResult;
 import org.openjdk.jmh.results.AggregationPolicy;
 import org.openjdk.jmh.runner.FailureAssistException;
 
+import bench.jmh_generated.PerfectHashingBenchmark_BuildAnalyticsState_jmhType;
 import bench.jmh_generated.PerfectHashingBenchmark_BuildState_jmhType;
 import bench.jmh_generated.PerfectHashingBenchmark_jmhType;
 public final class PerfectHashingBenchmark_buildIndex_jmhTest {
@@ -70,9 +71,11 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
             PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0 = _jmh_tryInit_f_perfecthashingbenchmark0_0(control);
+            PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1 = _jmh_tryInit_f_buildanalyticsstate2_1(control);
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            l_buildanalyticsstate2_1.reset();
             if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
                 try {
                     if (control.isFailing) throw new FailureAssistException();
@@ -93,21 +96,24 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 }
             }
 
+            l_buildanalyticsstate2_1.secondaryTableSize = 0;
+            l_buildanalyticsstate2_1.primaryCollisions = 0;
+            l_buildanalyticsstate2_1.expansionPermille = 0;
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
                 if (control.shouldYield) Thread.yield();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            buildIndex_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_buildstate1_G, l_perfecthashingbenchmark0_0);
+            buildIndex_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_buildstate1_G, l_buildanalyticsstate2_1, l_perfecthashingbenchmark0_0);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                    blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
                     if (control.shouldYield) Thread.yield();
                     res.allOps++;
                 }
@@ -159,6 +165,7 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 synchronized(this.getClass()) {
                     f_buildstate1_G = null;
                 }
+                f_buildanalyticsstate2_1 = null;
                 f_perfecthashingbenchmark0_0 = null;
             }
             res.allOps += res.measuredOps;
@@ -170,18 +177,21 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             res.measuredOps /= batchSize;
             BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
             results.add(new ThroughputResult(ResultRole.PRIMARY, "buildIndex", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new ScalarResult("secondaryTableSize", l_buildanalyticsstate2_1.secondaryTableSize, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("primaryCollisions", l_buildanalyticsstate2_1.primaryCollisions, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("expansionPermille", l_buildanalyticsstate2_1.expansionPermille, "#", AggregationPolicy.SUM));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void buildIndex_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
+    public static void buildIndex_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+            blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -201,9 +211,11 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
             PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0 = _jmh_tryInit_f_perfecthashingbenchmark0_0(control);
+            PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1 = _jmh_tryInit_f_buildanalyticsstate2_1(control);
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            l_buildanalyticsstate2_1.reset();
             if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
                 try {
                     if (control.isFailing) throw new FailureAssistException();
@@ -224,21 +236,24 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 }
             }
 
+            l_buildanalyticsstate2_1.secondaryTableSize = 0;
+            l_buildanalyticsstate2_1.primaryCollisions = 0;
+            l_buildanalyticsstate2_1.expansionPermille = 0;
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
                 if (control.shouldYield) Thread.yield();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            buildIndex_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_buildstate1_G, l_perfecthashingbenchmark0_0);
+            buildIndex_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_buildstate1_G, l_buildanalyticsstate2_1, l_perfecthashingbenchmark0_0);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                    blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
                     if (control.shouldYield) Thread.yield();
                     res.allOps++;
                 }
@@ -290,6 +305,7 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 synchronized(this.getClass()) {
                     f_buildstate1_G = null;
                 }
+                f_buildanalyticsstate2_1 = null;
                 f_perfecthashingbenchmark0_0 = null;
             }
             res.allOps += res.measuredOps;
@@ -301,18 +317,21 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             res.measuredOps /= batchSize;
             BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
             results.add(new AverageTimeResult(ResultRole.PRIMARY, "buildIndex", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new ScalarResult("secondaryTableSize", l_buildanalyticsstate2_1.secondaryTableSize, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("primaryCollisions", l_buildanalyticsstate2_1.primaryCollisions, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("expansionPermille", l_buildanalyticsstate2_1.expansionPermille, "#", AggregationPolicy.SUM));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void buildIndex_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
+    public static void buildIndex_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+            blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -332,9 +351,11 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
         if (threadParams.getSubgroupIndex() == 0) {
             RawResults res = new RawResults();
             PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0 = _jmh_tryInit_f_perfecthashingbenchmark0_0(control);
+            PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1 = _jmh_tryInit_f_buildanalyticsstate2_1(control);
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            l_buildanalyticsstate2_1.reset();
             if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
                 try {
                     if (control.isFailing) throw new FailureAssistException();
@@ -355,10 +376,13 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 }
             }
 
+            l_buildanalyticsstate2_1.secondaryTableSize = 0;
+            l_buildanalyticsstate2_1.primaryCollisions = 0;
+            l_buildanalyticsstate2_1.expansionPermille = 0;
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
                 if (control.shouldYield) Thread.yield();
                 res.allOps++;
             }
@@ -368,12 +392,12 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             int batchSize = iterationParams.getBatchSize();
             int opsPerInv = benchmarkParams.getOpsPerInvocation();
             SampleBuffer buffer = new SampleBuffer();
-            buildIndex_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_buildstate1_G, l_perfecthashingbenchmark0_0);
+            buildIndex_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_buildstate1_G, l_buildanalyticsstate2_1, l_perfecthashingbenchmark0_0);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                    blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
                     if (control.shouldYield) Thread.yield();
                     res.allOps++;
                 }
@@ -425,6 +449,7 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 synchronized(this.getClass()) {
                     f_buildstate1_G = null;
                 }
+                f_buildanalyticsstate2_1 = null;
                 f_perfecthashingbenchmark0_0 = null;
             }
             res.allOps += res.measuredOps * batchSize;
@@ -433,13 +458,16 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             res.measuredOps *= opsPerInv;
             BenchmarkTaskResult results = new BenchmarkTaskResult((long)res.allOps, (long)res.measuredOps);
             results.add(new SampleTimeResult(ResultRole.PRIMARY, "buildIndex", buffer, benchmarkParams.getTimeUnit()));
+            results.add(new ScalarResult("secondaryTableSize", l_buildanalyticsstate2_1.secondaryTableSize, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("primaryCollisions", l_buildanalyticsstate2_1.primaryCollisions, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("expansionPermille", l_buildanalyticsstate2_1.expansionPermille, "#", AggregationPolicy.SUM));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void buildIndex_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
+    public static void buildIndex_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
         long realTime = 0;
         long operations = 0;
         int rnd = (int)System.nanoTime();
@@ -454,7 +482,7 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
             }
             for (int b = 0; b < batchSize; b++) {
                 if (control.volatileSpoiler) return;
-                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+                blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
             }
             if (sample) {
                 buffer.add((System.nanoTime() - time) / opsPerInv);
@@ -482,9 +510,11 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
         }
         if (threadParams.getSubgroupIndex() == 0) {
             PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0 = _jmh_tryInit_f_perfecthashingbenchmark0_0(control);
+            PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1 = _jmh_tryInit_f_buildanalyticsstate2_1(control);
             PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G = _jmh_tryInit_f_buildstate1_G(control);
 
             control.preSetup();
+            l_buildanalyticsstate2_1.reset();
             if (PerfectHashingBenchmark_BuildState_jmhType.setupIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
                 try {
                     if (control.isFailing) throw new FailureAssistException();
@@ -505,11 +535,14 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 }
             }
 
+            l_buildanalyticsstate2_1.secondaryTableSize = 0;
+            l_buildanalyticsstate2_1.primaryCollisions = 0;
+            l_buildanalyticsstate2_1.expansionPermille = 0;
 
             notifyControl.startMeasurement = true;
             RawResults res = new RawResults();
             int batchSize = iterationParams.getBatchSize();
-            buildIndex_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_buildstate1_G, l_perfecthashingbenchmark0_0);
+            buildIndex_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_buildstate1_G, l_buildanalyticsstate2_1, l_perfecthashingbenchmark0_0);
             control.preTearDown();
             if (PerfectHashingBenchmark_BuildState_jmhType.tearIterationMutexUpdater.compareAndSet(l_buildstate1_G, 0, 1)) {
                 try {
@@ -555,24 +588,28 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 synchronized(this.getClass()) {
                     f_buildstate1_G = null;
                 }
+                f_buildanalyticsstate2_1 = null;
                 f_perfecthashingbenchmark0_0 = null;
             }
             int opsPerInv = control.benchmarkParams.getOpsPerInvocation();
             long totalOps = opsPerInv;
             BenchmarkTaskResult results = new BenchmarkTaskResult(totalOps, totalOps);
             results.add(new SingleShotResult(ResultRole.PRIMARY, "buildIndex", res.getTime(), totalOps, benchmarkParams.getTimeUnit()));
+            results.add(new ScalarResult("secondaryTableSize", l_buildanalyticsstate2_1.secondaryTableSize, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("primaryCollisions", l_buildanalyticsstate2_1.primaryCollisions, "#", AggregationPolicy.SUM));
+            results.add(new ScalarResult("expansionPermille", l_buildanalyticsstate2_1.expansionPermille, "#", AggregationPolicy.SUM));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void buildIndex_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
+    public static void buildIndex_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, PerfectHashingBenchmark_BuildState_jmhType l_buildstate1_G, PerfectHashingBenchmark_BuildAnalyticsState_jmhType l_buildanalyticsstate2_1, PerfectHashingBenchmark_jmhType l_perfecthashingbenchmark0_0) throws Throwable {
         long realTime = 0;
         result.startTime = System.nanoTime();
         for (int b = 0; b < batchSize; b++) {
             if (control.volatileSpoiler) return;
-            blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, blackhole));
+            blackhole.consume(l_perfecthashingbenchmark0_0.buildIndex(l_buildstate1_G, l_buildanalyticsstate2_1, blackhole));
         }
         result.stopTime = System.nanoTime();
         result.realTime = realTime;
@@ -608,6 +645,18 @@ public final class PerfectHashingBenchmark_buildIndex_jmhTest {
                 control.isFailing = true;
                 throw t;
             }
+        }
+        return val;
+    }
+    
+    PerfectHashingBenchmark_BuildAnalyticsState_jmhType f_buildanalyticsstate2_1;
+    
+    PerfectHashingBenchmark_BuildAnalyticsState_jmhType _jmh_tryInit_f_buildanalyticsstate2_1(InfraControl control) throws Throwable {
+        if (control.isFailing) throw new FailureAssistException();
+        PerfectHashingBenchmark_BuildAnalyticsState_jmhType val = f_buildanalyticsstate2_1;
+        if (val == null) {
+            val = new PerfectHashingBenchmark_BuildAnalyticsState_jmhType();
+            f_buildanalyticsstate2_1 = val;
         }
         return val;
     }

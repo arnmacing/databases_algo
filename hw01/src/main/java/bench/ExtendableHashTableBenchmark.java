@@ -18,10 +18,10 @@ public class ExtendableHashTableBenchmark {
 
     @State(Scope.Thread)
     public static class ReadState {
-        @Param({"8", "16"})
+        @Param({"8", "12", "16", "24"})
         public int bucketCapacity;
 
-        @Param({"200000", "350000"})
+        @Param({"150000", "200000", "250000", "300000", "350000"})
         public int n;
 
         @Param({"42"})
@@ -106,10 +106,10 @@ public class ExtendableHashTableBenchmark {
 
     @State(Scope.Thread)
     public static class WriteState {
-        @Param({"8", "16"})
+        @Param({"8", "12", "16", "24"})
         public int bucketCapacity;
 
-        @Param({"100000", "200000"})
+        @Param({"80000", "100000", "140000", "170000", "200000"})
         public int n;
 
         @Param({"42"})
@@ -201,10 +201,10 @@ public class ExtendableHashTableBenchmark {
 
     @State(Scope.Thread)
     public static class BuildState {
-        @Param({"8", "16"})
+        @Param({"8", "12", "16", "24"})
         public int bucketCapacity;
 
-        @Param({"200000", "350000"})
+        @Param({"150000", "250000", "350000"})
         public int n;
 
         @Param({"42"})
