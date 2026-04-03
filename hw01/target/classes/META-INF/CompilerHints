@@ -9,6 +9,7 @@ inline,bench/PerfectHashingBenchmark$BuildState.setupTrial
 inline,bench/PerfectHashingBenchmark$LookupState.setupIteration
 inline,bench/PerfectHashingBenchmark$LookupState.setupTrial
 inline,bench/PerfectHashingBenchmark.buildIndex
+inline,bench/PerfectHashingBenchmark.buildIndexMetrics
 inline,bench/PerfectHashingBenchmark.containsHit
 inline,bench/PerfectHashingBenchmark.containsMiss
 inline,bench/PerfectHashingBenchmark.getHit

@@ -156,6 +156,28 @@ public class PerfectHashingBenchmark {
     }
 
     @Benchmark
+    @BenchmarkMode(Mode.SingleShotTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @Warmup(iterations = 0)
+    @Measurement(iterations = 1)
+    @Fork(1)
+    public int buildIndexMetrics(
+            BuildState state,
+            BuildAnalyticsState analytics,
+            Blackhole bh
+    ) {
+        PerfectHashTable<Integer> table =
+                PerfectHashTable.build(state.keys, state.values, state.seed);
+
+        analytics.secondaryTableSize = table.secondaryTableSize();
+        analytics.primaryCollisions = table.primaryCollisionCount();
+        analytics.expansionPermille = Math.round(table.expansionFactor() * 1000.0);
+
+        bh.consume(table.containsKey(state.keys[state.n / 2]));
+        return table.size();
+    }
+
+    @Benchmark
     /**
      * Чтение по существующему ключу
      */

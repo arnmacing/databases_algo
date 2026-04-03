@@ -4,6 +4,7 @@ hw01,lsh,Pair,0,12,0,0,0,5,0,1,0,1
 hw01,extendableHashing,PutResult,0,34,0,0,0,4,0,1,0,1
 hw01,extendableHashing,ExtendableHashFileFormat,0,27,0,0,0,4,0,4,0,4
 hw01,extendableHashing,ExtendableHashTable,208,690,23,41,44,159,15,49,1,31
-hw01,perfectHashing,PerfectHashTable,20,266,3,15,6,45,5,12,3,5
-hw01,perfectHashing,PerfectHashTable.SecondaryTable,0,169,0,22,0,38,0,16,0,5
-hw01,perfectHashing,PerfectHashTable.HashFunction,0,48,0,2,0,9,0,4,0,3
+hw01,perfectHashing,PerfectHashTable,358,0,36,0,73,0,28,0,10,0
+hw01,perfectHashing,PerfectHashTable.FirstLevelPlan,15,0,0,0,6,0,1,0,1,0
+hw01,perfectHashing,PerfectHashTable.SecondaryTable,211,0,24,0,49,0,18,0,6,0
+hw01,perfectHashing,PerfectHashTable.HashFunction,48,0,2,0,9,0,4,0,3,0
