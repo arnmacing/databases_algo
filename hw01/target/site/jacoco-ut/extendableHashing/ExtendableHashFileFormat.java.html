@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExtendableHashFileFormat.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hw01</a> &gt; <a href="index.source.html" class="el_package">extendableHashing</a> &gt; <span class="el_source">ExtendableHashFileFormat.java</span></div><h1>ExtendableHashFileFormat.java</h1><pre class="source lang-java linenums">package extendableHashing;
+
+final class ExtendableHashFileFormat {
+    static final int MAX_GLOBAL_DEPTH = 16;
+    static final int DIRECTORY_CAPACITY = 1 &lt;&lt; MAX_GLOBAL_DEPTH;
+    static final int OFF_BUCKET_CAPACITY = 0;
+    static final int OFF_GLOBAL_DEPTH = OFF_BUCKET_CAPACITY + Integer.BYTES;
+    static final int OFF_NEXT_FREE = OFF_GLOBAL_DEPTH + Integer.BYTES;
+    static final int HEADER_SIZE = OFF_NEXT_FREE + Long.BYTES;
+    static final long DIRECTORY_OFFSET = HEADER_SIZE;
+    static final long DIRECTORY_BYTES = (long) DIRECTORY_CAPACITY * Long.BYTES;
+    static final long BUCKET_REGION_OFFSET = DIRECTORY_OFFSET + DIRECTORY_BYTES;
+    static final long MIN_FILE_SIZE = BUCKET_REGION_OFFSET + 4096L;
+    static final int BUCKET_OFF_LOCAL_DEPTH = 0;
+    static final int BUCKET_OFF_SIZE = 4;
+    static final int BUCKET_HEADER_SIZE = 8;
+
+    private ExtendableHashFileFormat() {
+    }
+
+    /**
+     * Размер одной бакета в байтах
+     */
+    static int bucketRecordSizeFor(int bucketCapacity) {
+<span class="fc" id="L25">        return BUCKET_HEADER_SIZE + (bucketCapacity * Integer.BYTES * 2);</span>
+    }
+
+    /**
+     * Смещение указателя нужной ячейки каталога
+     */
+    static long directoryOffset(int directoryIndex) {
+<span class="fc" id="L32">        return DIRECTORY_OFFSET + ((long) directoryIndex * Long.BYTES);</span>
+    }
+
+    /**
+     * Смещение начала области ключей внутри бакета
+     */
+    static long bucketKeysOffset(long bucketOffset) {
+<span class="fc" id="L39">        return bucketOffset + BUCKET_HEADER_SIZE;</span>
+    }
+
+    /**
+     * Смещение начала области значений внутри бакета
+     */
+    static long bucketValuesOffset(long bucketOffset, int bucketCapacity) {
+<span class="fc" id="L46">        return bucketKeysOffset(bucketOffset) + ((long) bucketCapacity * Integer.BYTES);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

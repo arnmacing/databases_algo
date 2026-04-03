@@ -4,6 +4,13 @@ import java.util.SplittableRandom;
 
 public class PerfectHashTable<V> {
     private static final int P = 2_147_483_647;
+    private static final long MAX_SUM_SQUARES_FACTOR = 4L;
+    private static final int H1_CANDIDATES_PER_ROUND = 16;
+
+    private static final int[] EMPTY_INT_ARRAY = new int[0];
+    private static final boolean[] EMPTY_BOOL_ARRAY = new boolean[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
     private final int n;
     private final HashFunction h1;
     private final SecondaryTable<V>[] level2;
@@ -31,49 +38,30 @@ public class PerfectHashTable<V> {
         int n = keys.length;
         int m = Math.max(1, n);
         SplittableRandom rnd = new SplittableRandom(seed);
-        HashFunction h1;
-        int[][] keysByBucket;
-        Object[][] valuesByBucket;
-        int[] acceptedSizes;
 
-        while (true) {
-            h1 = HashFunction.random(rnd);
-            int[] sizes = new int[m];
-            for (int key : keys) {
-                sizes[h1.mod(key, m)]++;
-            }
+        FirstLevelPlan plan = chooseBestFirstLevel(keys, m, rnd);
 
-            long sumSquares = 0L;
-            for (int s : sizes) {
-                sumSquares += (long) s * s;
-            }
-            if (sumSquares > 4L * n) {
-                continue;
-            }
+        int[][] keysByBucket = new int[m][];
+        Object[][] valuesByBucket = new Object[m][];
+        int[] pos = new int[m];
 
-            keysByBucket = new int[m][];
-            valuesByBucket = new Object[m][];
-            int[] pos = new int[m];
+        for (int j = 0; j < m; j++) {
+            int size = plan.sizes[j];
+            keysByBucket[j] = (size == 0) ? EMPTY_INT_ARRAY : new int[size];
+            valuesByBucket[j] = (size == 0) ? EMPTY_OBJECT_ARRAY : new Object[size];
+        }
 
-            for (int j = 0; j < m; j++) {
-                keysByBucket[j] = new int[sizes[j]];
-                valuesByBucket[j] = new Object[sizes[j]];
-            }
-
-            for (int i = 0; i < n; i++) {
-                int bucket = h1.mod(keys[i], m);
-                int p = pos[bucket]++;
-                keysByBucket[bucket][p] = keys[i];
-                valuesByBucket[bucket][p] = values[i];
-            }
-            acceptedSizes = sizes;
-            break;
+        for (int i = 0; i < n; i++) {
+            int bucket = plan.h1.mod(keys[i], m);
+            int p = pos[bucket]++;
+            keysByBucket[bucket][p] = keys[i];
+            valuesByBucket[bucket][p] = values[i];
         }
 
         int primaryCollisionCount = 0;
-        for (int s : acceptedSizes) {
-            if (s > 1) {
-                primaryCollisionCount += s - 1;
+        for (int size : plan.sizes) {
+            if (size > 1) {
+                primaryCollisionCount += size - 1;
             }
         }
 
@@ -86,7 +74,13 @@ public class PerfectHashTable<V> {
             secondaryTableSize += level2[j].size;
         }
 
-        return new PerfectHashTable<>(n, h1, level2, secondaryTableSize, primaryCollisionCount);
+        return new PerfectHashTable<>(
+                n,
+                plan.h1,
+                level2,
+                secondaryTableSize,
+                primaryCollisionCount
+        );
     }
 
     /**
@@ -136,6 +130,70 @@ public class PerfectHashTable<V> {
         return (double) secondaryTableSize / (double) n;
     }
 
+    private static FirstLevelPlan chooseBestFirstLevel(
+            int[] keys,
+            int m,
+            SplittableRandom rnd
+    ) {
+        long limit = MAX_SUM_SQUARES_FACTOR * keys.length;
+
+        while (true) {
+            FirstLevelPlan best = null;
+
+            for (int attempt = 0; attempt < H1_CANDIDATES_PER_ROUND; attempt++) {
+                HashFunction h1 = HashFunction.random(rnd);
+                int[] sizes = new int[m];
+
+                for (int key : keys) {
+                    sizes[h1.mod(key, m)]++;
+                }
+
+                long sumSquares = 0L;
+                int maxBucketSize = 0;
+                for (int size : sizes) {
+                    sumSquares += (long) size * size;
+                    if (size > maxBucketSize) {
+                        maxBucketSize = size;
+                    }
+                }
+
+                if (sumSquares > limit) {
+                    continue;
+                }
+
+                if (best == null
+                        || sumSquares < best.sumSquares
+                        || (sumSquares == best.sumSquares
+                        && maxBucketSize < best.maxBucketSize)) {
+                    best = new FirstLevelPlan(h1, sizes, sumSquares, maxBucketSize);
+                }
+            }
+
+            if (best != null) {
+                return best;
+            }
+        }
+    }
+
+    private static final class FirstLevelPlan {
+        final HashFunction h1;
+        final int[] sizes;
+        final long sumSquares;
+        final int maxBucketSize;
+
+        FirstLevelPlan(
+                HashFunction h1,
+                int[] sizes,
+                long sumSquares,
+                int maxBucketSize
+        ) {
+            this.h1 = h1;
+            this.sizes = sizes;
+            this.sumSquares = sumSquares;
+            this.maxBucketSize = maxBucketSize;
+        }
+    }
+
     static final class HashFunction {
         final int a;
         final int b;
@@ -168,10 +226,13 @@ public class PerfectHashTable<V> {
         final boolean[] used;
         final Object[] values;
 
-        /**
-         * Создаёт внутреннюю таблицу второго уровня
-         */
-        private SecondaryTable(int size, HashFunction h2, int[] keys, boolean[] used, Object[] values) {
+        private SecondaryTable(
+                int size,
+                HashFunction h2,
+                int[] keys,
+                boolean[] used,
+                Object[] values
+        ) {
             this.size = size;
             this.h2 = h2;
             this.keys = keys;
@@ -183,16 +244,42 @@ public class PerfectHashTable<V> {
          * Возвращает пустую таблицу
          */
         static <V> SecondaryTable<V> empty() {
-            return new SecondaryTable<>(0, new HashFunction(1, 0), new int[0], new boolean[0], new Object[0]);
+            return new SecondaryTable<>(
+                    0,
+                    new HashFunction(1, 0),
+                    EMPTY_INT_ARRAY,
+                    EMPTY_BOOL_ARRAY,
+                    EMPTY_OBJECT_ARRAY
+            );
+        }
+
+        /**
+         * Возвращает таблицу для одного ключа без подбора второй функции
+         */
+        static <V> SecondaryTable<V> singleton(int key, Object value) {
+            int[] keys = new int[]{key};
+            boolean[] used = new boolean[]{true};
+            Object[] values = new Object[]{value};
+
+            return new SecondaryTable<>(1, new HashFunction(1, 0), keys, used, values);
         }
 
         /**
          * Строит таблицу второго уровня для бакета
          */
-        static <V> SecondaryTable<V> buildForBucket(int[] bucketKeys, Object[] bucketValues, SplittableRandom rnd) {
+        static <V> SecondaryTable<V> buildForBucket(
+                int[] bucketKeys,
+                Object[] bucketValues,
+                SplittableRandom rnd
+        ) {
             int nj = bucketKeys.length;
+
             if (nj == 0) {
                 return empty();
+            }
+
+            if (nj == 1) {
+                return singleton(bucketKeys[0], bucketValues[0]);
             }
 
             int size = nj * nj;

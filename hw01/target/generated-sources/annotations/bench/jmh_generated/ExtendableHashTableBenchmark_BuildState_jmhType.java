@@ -1,0 +1,4 @@
+package bench.jmh_generated;
+public class ExtendableHashTableBenchmark_BuildState_jmhType extends ExtendableHashTableBenchmark_BuildState_jmhType_B3 {
+}
+

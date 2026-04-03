@@ -1,0 +1,3775 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 80000, seed = 42)
+
+# Run progress: 0,00% complete, ETA 00:53:20
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 40,271 ops/us
+# Warmup Iteration   2: 40,994 ops/us
+# Warmup Iteration   3: 41,807 ops/us
+# Warmup Iteration   4: 39,764 ops/us
+# Warmup Iteration   5: 41,834 ops/us
+# Warmup Iteration   6: 41,059 ops/us
+# Warmup Iteration   7: 42,508 ops/us
+# Warmup Iteration   8: 42,540 ops/us
+Iteration   1: 41,952 ops/us
+Iteration   2: 42,998 ops/us
+Iteration   3: 40,392 ops/us
+Iteration   4: 41,692 ops/us
+Iteration   5: 39,968 ops/us
+Iteration   6: 41,125 ops/us
+Iteration   7: 39,978 ops/us
+Iteration   8: 40,734 ops/us
+Iteration   9: 40,666 ops/us
+Iteration  10: 42,788 ops/us
+Iteration  11: 41,682 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+41,555 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 1,25% complete, ETA 00:53:14
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 42,078 ops/us
+# Warmup Iteration   2: 41,587 ops/us
+# Warmup Iteration   3: 41,289 ops/us
+# Warmup Iteration   4: 41,808 ops/us
+# Warmup Iteration   5: 39,533 ops/us
+# Warmup Iteration   6: 40,226 ops/us
+# Warmup Iteration   7: 40,343 ops/us
+# Warmup Iteration   8: 40,485 ops/us
+Iteration   1: 40,235 ops/us
+Iteration   2: 41,765 ops/us
+Iteration   3: 40,850 ops/us
+Iteration   4: 40,201 ops/us
+Iteration   5: 41,447 ops/us
+Iteration   6: 40,403 ops/us
+Iteration   7: 40,820 ops/us
+Iteration   8: 41,650 ops/us
+Iteration   9: 40,504 ops/us
+Iteration  10: 42,289 ops/us
+Iteration  11: 40,357 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+42,876 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  41,205 ±(99.9%) 0,712 ops/us [Average]
+  (min, avg, max) = (39,968, 41,205, 42,998), stdev = 0,925
+  CI (99.9%): [40,493, 41,917] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 100000, seed = 42)
+
+# Run progress: 2,50% complete, ETA 00:52:34
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 49,595 ops/us
+# Warmup Iteration   2: 48,744 ops/us
+# Warmup Iteration   3: 49,121 ops/us
+# Warmup Iteration   4: 48,372 ops/us
+# Warmup Iteration   5: 49,040 ops/us
+# Warmup Iteration   6: 48,345 ops/us
+# Warmup Iteration   7: 47,602 ops/us
+# Warmup Iteration   8: 48,206 ops/us
+Iteration   1: 49,075 ops/us
+Iteration   2: 47,954 ops/us
+Iteration   3: 49,619 ops/us
+Iteration   4: 48,259 ops/us
+Iteration   5: 49,074 ops/us
+Iteration   6: 48,185 ops/us
+Iteration   7: 48,899 ops/us
+Iteration   8: 48,148 ops/us
+Iteration   9: 49,075 ops/us
+Iteration  10: 48,817 ops/us
+Iteration  11: 49,077 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+47,604 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 3,75% complete, ETA 00:51:54
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 48,565 ops/us
+# Warmup Iteration   2: 47,659 ops/us
+# Warmup Iteration   3: 48,517 ops/us
+# Warmup Iteration   4: 48,668 ops/us
+# Warmup Iteration   5: 48,755 ops/us
+# Warmup Iteration   6: 49,212 ops/us
+# Warmup Iteration   7: 48,221 ops/us
+# Warmup Iteration   8: 46,678 ops/us
+Iteration   1: 49,317 ops/us
+Iteration   2: 48,376 ops/us
+Iteration   3: 46,917 ops/us
+Iteration   4: 48,708 ops/us
+Iteration   5: 49,098 ops/us
+Iteration   6: 48,812 ops/us
+Iteration   7: 48,834 ops/us
+Iteration   8: 49,180 ops/us
+Iteration   9: 49,306 ops/us
+Iteration  10: 48,785 ops/us
+Iteration  11: 48,591 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+48,000 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  48,655 ±(99.9%) 0,478 ops/us [Average]
+  (min, avg, max) = (46,917, 48,655, 49,619), stdev = 0,622
+  CI (99.9%): [48,176, 49,133] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 140000, seed = 42)
+
+# Run progress: 5,00% complete, ETA 00:51:13
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 47,193 ops/us
+# Warmup Iteration   2: 45,297 ops/us
+# Warmup Iteration   3: 46,320 ops/us
+# Warmup Iteration   4: 45,954 ops/us
+# Warmup Iteration   5: 45,311 ops/us
+# Warmup Iteration   6: 46,601 ops/us
+# Warmup Iteration   7: 45,621 ops/us
+# Warmup Iteration   8: 45,207 ops/us
+Iteration   1: 45,663 ops/us
+Iteration   2: 45,064 ops/us
+Iteration   3: 46,218 ops/us
+Iteration   4: 46,000 ops/us
+Iteration   5: 44,918 ops/us
+Iteration   6: 45,312 ops/us
+Iteration   7: 45,746 ops/us
+Iteration   8: 45,828 ops/us
+Iteration   9: 46,286 ops/us
+Iteration  10: 46,114 ops/us
+Iteration  11: 44,932 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+46,729 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 6,25% complete, ETA 00:50:33
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 46,018 ops/us
+# Warmup Iteration   2: 46,227 ops/us
+# Warmup Iteration   3: 45,664 ops/us
+# Warmup Iteration   4: 45,493 ops/us
+# Warmup Iteration   5: 44,654 ops/us
+# Warmup Iteration   6: 44,695 ops/us
+# Warmup Iteration   7: 46,299 ops/us
+# Warmup Iteration   8: 45,460 ops/us
+Iteration   1: 44,684 ops/us
+Iteration   2: 45,480 ops/us
+Iteration   3: 45,922 ops/us
+Iteration   4: 45,231 ops/us
+Iteration   5: 45,426 ops/us
+Iteration   6: 45,629 ops/us
+Iteration   7: 45,599 ops/us
+Iteration   8: 44,788 ops/us
+Iteration   9: 44,943 ops/us
+Iteration  10: 46,402 ops/us
+Iteration  11: 45,374 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+44,875 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  45,548 ±(99.9%) 0,433 ops/us [Average]
+  (min, avg, max) = (44,684, 45,548, 46,729), stdev = 0,563
+  CI (99.9%): [45,116, 45,981] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 170000, seed = 42)
+
+# Run progress: 7,50% complete, ETA 00:49:52
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 36,835 ops/us
+# Warmup Iteration   2: 37,368 ops/us
+# Warmup Iteration   3: 37,414 ops/us
+# Warmup Iteration   4: 38,219 ops/us
+# Warmup Iteration   5: 36,313 ops/us
+# Warmup Iteration   6: 37,674 ops/us
+# Warmup Iteration   7: 37,556 ops/us
+# Warmup Iteration   8: 38,975 ops/us
+Iteration   1: 38,508 ops/us
+Iteration   2: 37,504 ops/us
+Iteration   3: 36,751 ops/us
+Iteration   4: 36,468 ops/us
+Iteration   5: 38,540 ops/us
+Iteration   6: 37,601 ops/us
+Iteration   7: 38,386 ops/us
+Iteration   8: 36,394 ops/us
+Iteration   9: 36,795 ops/us
+Iteration  10: 37,160 ops/us
+Iteration  11: 37,393 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+37,409 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 8,75% complete, ETA 00:49:12
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 37,448 ops/us
+# Warmup Iteration   2: 36,957 ops/us
+# Warmup Iteration   3: 36,719 ops/us
+# Warmup Iteration   4: 36,473 ops/us
+# Warmup Iteration   5: 38,362 ops/us
+# Warmup Iteration   6: 37,161 ops/us
+# Warmup Iteration   7: 37,545 ops/us
+# Warmup Iteration   8: 37,959 ops/us
+Iteration   1: 37,165 ops/us
+Iteration   2: 37,260 ops/us
+Iteration   3: 35,708 ops/us
+Iteration   4: 37,696 ops/us
+Iteration   5: 36,816 ops/us
+Iteration   6: 37,447 ops/us
+Iteration   7: 36,707 ops/us
+Iteration   8: 38,173 ops/us
+Iteration   9: 37,634 ops/us
+Iteration  10: 37,223 ops/us
+Iteration  11: 37,492 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+37,423 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  37,319 ±(99.9%) 0,524 ops/us [Average]
+  (min, avg, max) = (35,708, 37,319, 38,540), stdev = 0,681
+  CI (99.9%): [36,795, 37,842] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 200000, seed = 42)
+
+# Run progress: 10,00% complete, ETA 00:48:32
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 44,233 ops/us
+# Warmup Iteration   2: 46,879 ops/us
+# Warmup Iteration   3: 46,198 ops/us
+# Warmup Iteration   4: 45,562 ops/us
+# Warmup Iteration   5: 45,897 ops/us
+# Warmup Iteration   6: 46,153 ops/us
+# Warmup Iteration   7: 45,599 ops/us
+# Warmup Iteration   8: 46,800 ops/us
+Iteration   1: 45,461 ops/us
+Iteration   2: 46,230 ops/us
+Iteration   3: 46,848 ops/us
+Iteration   4: 45,991 ops/us
+Iteration   5: 46,097 ops/us
+Iteration   6: 45,661 ops/us
+Iteration   7: 45,479 ops/us
+Iteration   8: 46,131 ops/us
+Iteration   9: 44,837 ops/us
+Iteration  10: 46,276 ops/us
+Iteration  11: 44,027 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+44,805 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 11,25% complete, ETA 00:47:51
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 46,424 ops/us
+# Warmup Iteration   2: 45,289 ops/us
+# Warmup Iteration   3: 46,082 ops/us
+# Warmup Iteration   4: 45,354 ops/us
+# Warmup Iteration   5: 45,989 ops/us
+# Warmup Iteration   6: 46,035 ops/us
+# Warmup Iteration   7: 45,745 ops/us
+# Warmup Iteration   8: 46,146 ops/us
+Iteration   1: 45,139 ops/us
+Iteration   2: 44,438 ops/us
+Iteration   3: 47,049 ops/us
+Iteration   4: 45,822 ops/us
+Iteration   5: 45,492 ops/us
+Iteration   6: 45,298 ops/us
+Iteration   7: 45,326 ops/us
+Iteration   8: 46,574 ops/us
+Iteration   9: 45,775 ops/us
+Iteration  10: 45,741 ops/us
+Iteration  11: 44,675 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+46,566 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  45,656 ±(99.9%) 0,588 ops/us [Average]
+  (min, avg, max) = (44,027, 45,656, 47,049), stdev = 0,764
+  CI (99.9%): [45,068, 46,243] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-8-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 80000, seed = 42)
+
+# Run progress: 12,50% complete, ETA 00:47:11
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 40,720 ops/us
+# Warmup Iteration   2: 41,298 ops/us
+# Warmup Iteration   3: 42,482 ops/us
+# Warmup Iteration   4: 42,421 ops/us
+# Warmup Iteration   5: 41,851 ops/us
+# Warmup Iteration   6: 41,645 ops/us
+# Warmup Iteration   7: 40,566 ops/us
+# Warmup Iteration   8: 41,155 ops/us
+Iteration   1: 43,007 ops/us
+Iteration   2: 41,192 ops/us
+Iteration   3: 41,268 ops/us
+Iteration   4: 41,246 ops/us
+Iteration   5: 41,366 ops/us
+Iteration   6: 41,820 ops/us
+Iteration   7: 42,151 ops/us
+Iteration   8: 43,083 ops/us
+Iteration   9: 41,164 ops/us
+Iteration  10: 41,388 ops/us
+Iteration  11: 43,115 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+41,807 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 13,75% complete, ETA 00:46:30
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 40,232 ops/us
+# Warmup Iteration   2: 42,281 ops/us
+# Warmup Iteration   3: 42,333 ops/us
+# Warmup Iteration   4: 43,230 ops/us
+# Warmup Iteration   5: 43,048 ops/us
+# Warmup Iteration   6: 41,123 ops/us
+# Warmup Iteration   7: 41,647 ops/us
+# Warmup Iteration   8: 41,539 ops/us
+Iteration   1: 42,841 ops/us
+Iteration   2: 42,778 ops/us
+Iteration   3: 41,016 ops/us
+Iteration   4: 42,364 ops/us
+Iteration   5: 42,659 ops/us
+Iteration   6: 41,744 ops/us
+Iteration   7: 42,375 ops/us
+Iteration   8: 41,879 ops/us
+Iteration   9: 41,880 ops/us
+Iteration  10: 41,641 ops/us
+Iteration  11: 42,276 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+42,676 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  42,031 ±(99.9%) 0,519 ops/us [Average]
+  (min, avg, max) = (41,016, 42,031, 43,115), stdev = 0,675
+  CI (99.9%): [41,512, 42,550] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 100000, seed = 42)
+
+# Run progress: 15,00% complete, ETA 00:45:50
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 47,036 ops/us
+# Warmup Iteration   2: 46,577 ops/us
+# Warmup Iteration   3: 47,441 ops/us
+# Warmup Iteration   4: 47,486 ops/us
+# Warmup Iteration   5: 46,758 ops/us
+# Warmup Iteration   6: 47,254 ops/us
+# Warmup Iteration   7: 47,341 ops/us
+# Warmup Iteration   8: 47,582 ops/us
+Iteration   1: 48,206 ops/us
+Iteration   2: 48,331 ops/us
+Iteration   3: 47,492 ops/us
+Iteration   4: 46,685 ops/us
+Iteration   5: 46,876 ops/us
+Iteration   6: 47,375 ops/us
+Iteration   7: 46,712 ops/us
+Iteration   8: 46,738 ops/us
+Iteration   9: 48,970 ops/us
+Iteration  10: 47,946 ops/us
+Iteration  11: 47,283 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+48,215 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 16,25% complete, ETA 00:45:09
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 47,895 ops/us
+# Warmup Iteration   2: 47,131 ops/us
+# Warmup Iteration   3: 47,608 ops/us
+# Warmup Iteration   4: 48,710 ops/us
+# Warmup Iteration   5: 49,083 ops/us
+# Warmup Iteration   6: 47,882 ops/us
+# Warmup Iteration   7: 46,202 ops/us
+# Warmup Iteration   8: 47,814 ops/us
+Iteration   1: 49,295 ops/us
+Iteration   2: 48,218 ops/us
+Iteration   3: 49,013 ops/us
+Iteration   4: 47,365 ops/us
+Iteration   5: 47,641 ops/us
+Iteration   6: 47,744 ops/us
+Iteration   7: 47,419 ops/us
+Iteration   8: 47,838 ops/us
+Iteration   9: 46,762 ops/us
+Iteration  10: 48,888 ops/us
+Iteration  11: 48,592 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+47,109 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  47,780 ±(99.9%) 0,612 ops/us [Average]
+  (min, avg, max) = (46,685, 47,780, 49,295), stdev = 0,796
+  CI (99.9%): [47,168, 48,392] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 140000, seed = 42)
+
+# Run progress: 17,50% complete, ETA 00:44:29
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 34,559 ops/us
+# Warmup Iteration   2: 35,684 ops/us
+# Warmup Iteration   3: 36,198 ops/us
+# Warmup Iteration   4: 36,447 ops/us
+# Warmup Iteration   5: 35,810 ops/us
+# Warmup Iteration   6: 36,223 ops/us
+# Warmup Iteration   7: 35,009 ops/us
+# Warmup Iteration   8: 35,203 ops/us
+Iteration   1: 37,065 ops/us
+Iteration   2: 35,858 ops/us
+Iteration   3: 36,259 ops/us
+Iteration   4: 35,274 ops/us
+Iteration   5: 36,322 ops/us
+Iteration   6: 35,316 ops/us
+Iteration   7: 36,492 ops/us
+Iteration   8: 35,288 ops/us
+Iteration   9: 37,043 ops/us
+Iteration  10: 35,369 ops/us
+Iteration  11: 36,386 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+35,301 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 18,75% complete, ETA 00:43:49
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 35,045 ops/us
+# Warmup Iteration   2: 35,996 ops/us
+# Warmup Iteration   3: 35,815 ops/us
+# Warmup Iteration   4: 35,254 ops/us
+# Warmup Iteration   5: 36,174 ops/us
+# Warmup Iteration   6: 35,826 ops/us
+# Warmup Iteration   7: 34,974 ops/us
+# Warmup Iteration   8: 35,013 ops/us
+Iteration   1: 35,912 ops/us
+Iteration   2: 35,806 ops/us
+Iteration   3: 34,829 ops/us
+Iteration   4: 36,363 ops/us
+Iteration   5: 35,194 ops/us
+Iteration   6: 36,008 ops/us
+Iteration   7: 35,431 ops/us
+Iteration   8: 34,879 ops/us
+Iteration   9: 35,593 ops/us
+Iteration  10: 35,164 ops/us
+Iteration  11: 36,549 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+34,962 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  35,778 ±(99.9%) 0,508 ops/us [Average]
+  (min, avg, max) = (34,829, 35,778, 37,065), stdev = 0,660
+  CI (99.9%): [35,270, 36,285] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 170000, seed = 42)
+
+# Run progress: 20,00% complete, ETA 00:43:08
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 37,652 ops/us
+# Warmup Iteration   2: 37,038 ops/us
+# Warmup Iteration   3: 36,907 ops/us
+# Warmup Iteration   4: 36,442 ops/us
+# Warmup Iteration   5: 36,407 ops/us
+# Warmup Iteration   6: 38,117 ops/us
+# Warmup Iteration   7: 38,329 ops/us
+# Warmup Iteration   8: 37,274 ops/us
+Iteration   1: 37,733 ops/us
+Iteration   2: 36,367 ops/us
+Iteration   3: 36,996 ops/us
+Iteration   4: 36,692 ops/us
+Iteration   5: 37,200 ops/us
+Iteration   6: 36,442 ops/us
+Iteration   7: 37,200 ops/us
+Iteration   8: 38,172 ops/us
+Iteration   9: 37,156 ops/us
+Iteration  10: 38,157 ops/us
+Iteration  11: 37,747 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+37,075 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 21,25% complete, ETA 00:42:28
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 36,679 ops/us
+# Warmup Iteration   2: 36,028 ops/us
+# Warmup Iteration   3: 37,206 ops/us
+# Warmup Iteration   4: 37,466 ops/us
+# Warmup Iteration   5: 37,227 ops/us
+# Warmup Iteration   6: 37,290 ops/us
+# Warmup Iteration   7: 38,384 ops/us
+# Warmup Iteration   8: 38,073 ops/us
+Iteration   1: 37,857 ops/us
+Iteration   2: 37,184 ops/us
+Iteration   3: 37,246 ops/us
+Iteration   4: 37,340 ops/us
+Iteration   5: 36,572 ops/us
+Iteration   6: 36,810 ops/us
+Iteration   7: 38,036 ops/us
+Iteration   8: 37,801 ops/us
+Iteration   9: 37,354 ops/us
+Iteration  10: 37,466 ops/us
+Iteration  11: 37,266 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+37,046 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  37,288 ±(99.9%) 0,394 ops/us [Average]
+  (min, avg, max) = (36,367, 37,288, 38,172), stdev = 0,512
+  CI (99.9%): [36,894, 37,682] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 200000, seed = 42)
+
+# Run progress: 22,50% complete, ETA 00:41:47
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 45,963 ops/us
+# Warmup Iteration   2: 45,754 ops/us
+# Warmup Iteration   3: 45,209 ops/us
+# Warmup Iteration   4: 45,891 ops/us
+# Warmup Iteration   5: 44,813 ops/us
+# Warmup Iteration   6: 44,528 ops/us
+# Warmup Iteration   7: 45,156 ops/us
+# Warmup Iteration   8: 45,857 ops/us
+Iteration   1: 46,033 ops/us
+Iteration   2: 45,148 ops/us
+Iteration   3: 45,796 ops/us
+Iteration   4: 43,998 ops/us
+Iteration   5: 45,901 ops/us
+Iteration   6: 44,236 ops/us
+Iteration   7: 45,152 ops/us
+Iteration   8: 45,096 ops/us
+Iteration   9: 45,508 ops/us
+Iteration  10: 44,879 ops/us
+Iteration  11: 45,003 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+46,016 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 23,75% complete, ETA 00:41:07
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 46,092 ops/us
+# Warmup Iteration   2: 44,773 ops/us
+# Warmup Iteration   3: 44,654 ops/us
+# Warmup Iteration   4: 45,163 ops/us
+# Warmup Iteration   5: 44,623 ops/us
+# Warmup Iteration   6: 44,365 ops/us
+# Warmup Iteration   7: 45,471 ops/us
+# Warmup Iteration   8: 44,154 ops/us
+Iteration   1: 46,297 ops/us
+Iteration   2: 46,083 ops/us
+Iteration   3: 44,126 ops/us
+Iteration   4: 44,395 ops/us
+Iteration   5: 44,207 ops/us
+Iteration   6: 45,383 ops/us
+Iteration   7: 45,386 ops/us
+Iteration   8: 44,941 ops/us
+Iteration   9: 46,087 ops/us
+Iteration  10: 44,224 ops/us
+Iteration  11: 44,470 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+45,679 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  45,169 ±(99.9%) 0,560 ops/us [Average]
+  (min, avg, max) = (43,998, 45,169, 46,297), stdev = 0,729
+  CI (99.9%): [44,608, 45,729] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-12-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 80000, seed = 42)
+
+# Run progress: 25,00% complete, ETA 00:40:27
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 41,271 ops/us
+# Warmup Iteration   2: 41,311 ops/us
+# Warmup Iteration   3: 40,745 ops/us
+# Warmup Iteration   4: 40,834 ops/us
+# Warmup Iteration   5: 41,720 ops/us
+# Warmup Iteration   6: 41,408 ops/us
+# Warmup Iteration   7: 41,291 ops/us
+# Warmup Iteration   8: 42,263 ops/us
+Iteration   1: 42,188 ops/us
+Iteration   2: 41,590 ops/us
+Iteration   3: 41,649 ops/us
+Iteration   4: 41,492 ops/us
+Iteration   5: 40,961 ops/us
+Iteration   6: 41,597 ops/us
+Iteration   7: 40,257 ops/us
+Iteration   8: 41,494 ops/us
+Iteration   9: 42,292 ops/us
+Iteration  10: 42,805 ops/us
+Iteration  11: 41,592 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+40,503 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 26,25% complete, ETA 00:39:46
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 41,433 ops/us
+# Warmup Iteration   2: 40,159 ops/us
+# Warmup Iteration   3: 41,077 ops/us
+# Warmup Iteration   4: 40,930 ops/us
+# Warmup Iteration   5: 41,044 ops/us
+# Warmup Iteration   6: 41,488 ops/us
+# Warmup Iteration   7: 42,633 ops/us
+# Warmup Iteration   8: 40,818 ops/us
+Iteration   1: 41,869 ops/us
+Iteration   2: 42,283 ops/us
+Iteration   3: 41,508 ops/us
+Iteration   4: 40,706 ops/us
+Iteration   5: 42,663 ops/us
+Iteration   6: 42,480 ops/us
+Iteration   7: 42,227 ops/us
+Iteration   8: 41,729 ops/us
+Iteration   9: 42,175 ops/us
+Iteration  10: 41,162 ops/us
+Iteration  11: 41,301 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+41,535 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  41,669 ±(99.9%) 0,504 ops/us [Average]
+  (min, avg, max) = (40,257, 41,669, 42,805), stdev = 0,655
+  CI (99.9%): [41,165, 42,173] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 100000, seed = 42)
+
+# Run progress: 27,50% complete, ETA 00:39:06
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 38,670 ops/us
+# Warmup Iteration   2: 37,485 ops/us
+# Warmup Iteration   3: 36,982 ops/us
+# Warmup Iteration   4: 39,011 ops/us
+# Warmup Iteration   5: 37,818 ops/us
+# Warmup Iteration   6: 38,036 ops/us
+# Warmup Iteration   7: 38,520 ops/us
+# Warmup Iteration   8: 38,383 ops/us
+Iteration   1: 37,719 ops/us
+Iteration   2: 38,432 ops/us
+Iteration   3: 38,457 ops/us
+Iteration   4: 37,877 ops/us
+Iteration   5: 38,081 ops/us
+Iteration   6: 38,967 ops/us
+Iteration   7: 38,610 ops/us
+Iteration   8: 38,542 ops/us
+Iteration   9: 38,247 ops/us
+Iteration  10: 37,892 ops/us
+Iteration  11: 38,043 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+38,074 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 28,75% complete, ETA 00:38:25
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 36,887 ops/us
+# Warmup Iteration   2: 37,664 ops/us
+# Warmup Iteration   3: 37,581 ops/us
+# Warmup Iteration   4: 37,712 ops/us
+# Warmup Iteration   5: 38,937 ops/us
+# Warmup Iteration   6: 37,408 ops/us
+# Warmup Iteration   7: 38,522 ops/us
+# Warmup Iteration   8: 38,366 ops/us
+Iteration   1: 37,289 ops/us
+Iteration   2: 38,567 ops/us
+Iteration   3: 37,049 ops/us
+Iteration   4: 38,324 ops/us
+Iteration   5: 37,957 ops/us
+Iteration   6: 37,827 ops/us
+Iteration   7: 38,504 ops/us
+Iteration   8: 38,483 ops/us
+Iteration   9: 38,622 ops/us
+Iteration  10: 38,471 ops/us
+Iteration  11: 37,864 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+37,804 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  38,154 ±(99.9%) 0,345 ops/us [Average]
+  (min, avg, max) = (37,049, 38,154, 38,967), stdev = 0,448
+  CI (99.9%): [37,809, 38,499] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 140000, seed = 42)
+
+# Run progress: 30,00% complete, ETA 00:37:45
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 35,425 ops/us
+# Warmup Iteration   2: 35,415 ops/us
+# Warmup Iteration   3: 34,978 ops/us
+# Warmup Iteration   4: 35,399 ops/us
+# Warmup Iteration   5: 35,356 ops/us
+# Warmup Iteration   6: 34,843 ops/us
+# Warmup Iteration   7: 35,094 ops/us
+# Warmup Iteration   8: 34,181 ops/us
+Iteration   1: 35,970 ops/us
+Iteration   2: 34,819 ops/us
+Iteration   3: 34,909 ops/us
+Iteration   4: 34,994 ops/us
+Iteration   5: 33,881 ops/us
+Iteration   6: 34,329 ops/us
+Iteration   7: 34,150 ops/us
+Iteration   8: 35,508 ops/us
+Iteration   9: 35,198 ops/us
+Iteration  10: 34,117 ops/us
+Iteration  11: 35,632 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+35,713 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 31,25% complete, ETA 00:37:04
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 35,234 ops/us
+# Warmup Iteration   2: 35,647 ops/us
+# Warmup Iteration   3: 35,246 ops/us
+# Warmup Iteration   4: 34,812 ops/us
+# Warmup Iteration   5: 35,599 ops/us
+# Warmup Iteration   6: 34,719 ops/us
+# Warmup Iteration   7: 34,975 ops/us
+# Warmup Iteration   8: 35,399 ops/us
+Iteration   1: 34,725 ops/us
+Iteration   2: 34,671 ops/us
+Iteration   3: 35,383 ops/us
+Iteration   4: 34,414 ops/us
+Iteration   5: 34,569 ops/us
+Iteration   6: 36,073 ops/us
+Iteration   7: 35,152 ops/us
+Iteration   8: 35,895 ops/us
+Iteration   9: 34,240 ops/us
+Iteration  10: 35,601 ops/us
+Iteration  11: 35,048 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+34,167 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  34,965 ±(99.9%) 0,503 ops/us [Average]
+  (min, avg, max) = (33,881, 34,965, 36,073), stdev = 0,654
+  CI (99.9%): [34,462, 35,468] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 170000, seed = 42)
+
+# Run progress: 32,50% complete, ETA 00:36:24
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 36,346 ops/us
+# Warmup Iteration   2: 36,248 ops/us
+# Warmup Iteration   3: 36,349 ops/us
+# Warmup Iteration   4: 36,923 ops/us
+# Warmup Iteration   5: 36,306 ops/us
+# Warmup Iteration   6: 36,641 ops/us
+# Warmup Iteration   7: 36,350 ops/us
+# Warmup Iteration   8: 35,536 ops/us
+Iteration   1: 36,008 ops/us
+Iteration   2: 35,560 ops/us
+Iteration   3: 36,442 ops/us
+Iteration   4: 36,874 ops/us
+Iteration   5: 36,267 ops/us
+Iteration   6: 36,888 ops/us
+Iteration   7: 36,318 ops/us
+Iteration   8: 36,863 ops/us
+Iteration   9: 37,088 ops/us
+Iteration  10: 36,394 ops/us
+Iteration  11: 37,297 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+37,088 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 33,75% complete, ETA 00:35:43
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 36,072 ops/us
+# Warmup Iteration   2: 35,752 ops/us
+# Warmup Iteration   3: 36,138 ops/us
+# Warmup Iteration   4: 36,696 ops/us
+# Warmup Iteration   5: 36,811 ops/us
+# Warmup Iteration   6: 36,218 ops/us
+# Warmup Iteration   7: 36,256 ops/us
+# Warmup Iteration   8: 36,816 ops/us
+Iteration   1: 36,488 ops/us
+Iteration   2: 35,983 ops/us
+Iteration   3: 35,506 ops/us
+Iteration   4: 36,651 ops/us
+Iteration   5: 36,940 ops/us
+Iteration   6: 37,312 ops/us
+Iteration   7: 36,687 ops/us
+Iteration   8: 36,841 ops/us
+Iteration   9: 35,052 ops/us
+Iteration  10: 35,585 ops/us
+Iteration  11: 37,355 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+36,800 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  36,512 ±(99.9%) 0,481 ops/us [Average]
+  (min, avg, max) = (35,052, 36,512, 37,355), stdev = 0,626
+  CI (99.9%): [36,031, 36,993] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 200000, seed = 42)
+
+# Run progress: 35,00% complete, ETA 00:35:03
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 36,737 ops/us
+# Warmup Iteration   2: 34,925 ops/us
+# Warmup Iteration   3: 36,556 ops/us
+# Warmup Iteration   4: 36,107 ops/us
+# Warmup Iteration   5: 36,403 ops/us
+# Warmup Iteration   6: 36,413 ops/us
+# Warmup Iteration   7: 35,198 ops/us
+# Warmup Iteration   8: 35,752 ops/us
+Iteration   1: 36,083 ops/us
+Iteration   2: 35,623 ops/us
+Iteration   3: 36,409 ops/us
+Iteration   4: 36,241 ops/us
+Iteration   5: 34,980 ops/us
+Iteration   6: 34,991 ops/us
+Iteration   7: 34,856 ops/us
+Iteration   8: 34,916 ops/us
+Iteration   9: 35,065 ops/us
+Iteration  10: 35,813 ops/us
+Iteration  11: 35,528 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+34,985 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 36,25% complete, ETA 00:34:23
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 35,382 ops/us
+# Warmup Iteration   2: 35,754 ops/us
+# Warmup Iteration   3: 35,288 ops/us
+# Warmup Iteration   4: 36,834 ops/us
+# Warmup Iteration   5: 36,608 ops/us
+# Warmup Iteration   6: 36,319 ops/us
+# Warmup Iteration   7: 35,827 ops/us
+# Warmup Iteration   8: 34,563 ops/us
+Iteration   1: 36,020 ops/us
+Iteration   2: 36,401 ops/us
+Iteration   3: 35,122 ops/us
+Iteration   4: 35,672 ops/us
+Iteration   5: 36,252 ops/us
+Iteration   6: 35,819 ops/us
+Iteration   7: 35,724 ops/us
+Iteration   8: 35,788 ops/us
+Iteration   9: 35,819 ops/us
+Iteration  10: 35,737 ops/us
+Iteration  11: 36,192 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+36,337 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  35,682 ±(99.9%) 0,398 ops/us [Average]
+  (min, avg, max) = (34,856, 35,682, 36,409), stdev = 0,518
+  CI (99.9%): [35,284, 36,080] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-16-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 80000, seed = 42)
+
+# Run progress: 37,50% complete, ETA 00:33:42
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 29,658 ops/us
+# Warmup Iteration   2: 29,711 ops/us
+# Warmup Iteration   3: 30,194 ops/us
+# Warmup Iteration   4: 30,054 ops/us
+# Warmup Iteration   5: 30,180 ops/us
+# Warmup Iteration   6: 30,121 ops/us
+# Warmup Iteration   7: 30,146 ops/us
+# Warmup Iteration   8: 29,832 ops/us
+Iteration   1: 30,206 ops/us
+Iteration   2: 29,758 ops/us
+Iteration   3: 30,160 ops/us
+Iteration   4: 30,030 ops/us
+Iteration   5: 30,033 ops/us
+Iteration   6: 29,980 ops/us
+Iteration   7: 29,699 ops/us
+Iteration   8: 29,679 ops/us
+Iteration   9: 30,051 ops/us
+Iteration  10: 30,041 ops/us
+Iteration  11: 30,396 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+30,193 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 38,75% complete, ETA 00:33:02
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 29,612 ops/us
+# Warmup Iteration   2: 30,219 ops/us
+# Warmup Iteration   3: 30,105 ops/us
+# Warmup Iteration   4: 30,282 ops/us
+# Warmup Iteration   5: 30,286 ops/us
+# Warmup Iteration   6: 30,269 ops/us
+# Warmup Iteration   7: 29,884 ops/us
+# Warmup Iteration   8: 30,055 ops/us
+Iteration   1: 30,273 ops/us
+Iteration   2: 30,271 ops/us
+Iteration   3: 30,432 ops/us
+Iteration   4: 30,479 ops/us
+Iteration   5: 30,458 ops/us
+Iteration   6: 30,417 ops/us
+Iteration   7: 30,091 ops/us
+Iteration   8: 30,155 ops/us
+Iteration   9: 30,267 ops/us
+Iteration  10: 30,138 ops/us
+Iteration  11: 30,094 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+30,069 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  30,140 ±(99.9%) 0,171 ops/us [Average]
+  (min, avg, max) = (29,679, 30,140, 30,479), stdev = 0,222
+  CI (99.9%): [29,970, 30,311] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 100000, seed = 42)
+
+# Run progress: 40,00% complete, ETA 00:32:21
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 37,844 ops/us
+# Warmup Iteration   2: 37,863 ops/us
+# Warmup Iteration   3: 37,595 ops/us
+# Warmup Iteration   4: 35,667 ops/us
+# Warmup Iteration   5: 36,064 ops/us
+# Warmup Iteration   6: 36,915 ops/us
+# Warmup Iteration   7: 36,751 ops/us
+# Warmup Iteration   8: 37,236 ops/us
+Iteration   1: 37,068 ops/us
+Iteration   2: 37,069 ops/us
+Iteration   3: 36,990 ops/us
+Iteration   4: 37,594 ops/us
+Iteration   5: 36,793 ops/us
+Iteration   6: 37,689 ops/us
+Iteration   7: 37,808 ops/us
+Iteration   8: 37,104 ops/us
+Iteration   9: 36,984 ops/us
+Iteration  10: 38,092 ops/us
+Iteration  11: 37,744 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+38,123 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 41,25% complete, ETA 00:31:41
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 37,852 ops/us
+# Warmup Iteration   2: 36,298 ops/us
+# Warmup Iteration   3: 36,276 ops/us
+# Warmup Iteration   4: 37,918 ops/us
+# Warmup Iteration   5: 37,306 ops/us
+# Warmup Iteration   6: 37,927 ops/us
+# Warmup Iteration   7: 36,816 ops/us
+# Warmup Iteration   8: 37,423 ops/us
+Iteration   1: 38,490 ops/us
+Iteration   2: 36,854 ops/us
+Iteration   3: 37,440 ops/us
+Iteration   4: 37,166 ops/us
+Iteration   5: 37,357 ops/us
+Iteration   6: 36,314 ops/us
+Iteration   7: 36,809 ops/us
+Iteration   8: 37,942 ops/us
+Iteration   9: 37,920 ops/us
+Iteration  10: 36,273 ops/us
+Iteration  11: 36,672 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+36,132 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  37,268 ±(99.9%) 0,482 ops/us [Average]
+  (min, avg, max) = (36,132, 37,268, 38,490), stdev = 0,627
+  CI (99.9%): [36,786, 37,750] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 140000, seed = 42)
+
+# Run progress: 42,50% complete, ETA 00:31:00
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 28,854 ops/us
+# Warmup Iteration   2: 29,316 ops/us
+# Warmup Iteration   3: 29,519 ops/us
+# Warmup Iteration   4: 30,131 ops/us
+# Warmup Iteration   5: 30,118 ops/us
+# Warmup Iteration   6: 30,120 ops/us
+# Warmup Iteration   7: 29,639 ops/us
+# Warmup Iteration   8: 29,871 ops/us
+Iteration   1: 29,588 ops/us
+Iteration   2: 29,934 ops/us
+Iteration   3: 29,823 ops/us
+Iteration   4: 30,289 ops/us
+Iteration   5: 29,294 ops/us
+Iteration   6: 30,298 ops/us
+Iteration   7: 29,529 ops/us
+Iteration   8: 30,222 ops/us
+Iteration   9: 29,189 ops/us
+Iteration  10: 29,966 ops/us
+Iteration  11: 29,699 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+29,860 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 43,75% complete, ETA 00:30:19
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 29,787 ops/us
+# Warmup Iteration   2: 29,496 ops/us
+# Warmup Iteration   3: 29,421 ops/us
+# Warmup Iteration   4: 28,895 ops/us
+# Warmup Iteration   5: 29,540 ops/us
+# Warmup Iteration   6: 29,390 ops/us
+# Warmup Iteration   7: 28,875 ops/us
+# Warmup Iteration   8: 29,840 ops/us
+Iteration   1: 29,798 ops/us
+Iteration   2: 29,256 ops/us
+Iteration   3: 29,440 ops/us
+Iteration   4: 29,517 ops/us
+Iteration   5: 30,115 ops/us
+Iteration   6: 29,059 ops/us
+Iteration   7: 29,653 ops/us
+Iteration   8: 28,969 ops/us
+Iteration   9: 29,702 ops/us
+Iteration  10: 29,761 ops/us
+Iteration  11: 29,533 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+28,936 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  29,643 ±(99.9%) 0,303 ops/us [Average]
+  (min, avg, max) = (28,936, 29,643, 30,298), stdev = 0,394
+  CI (99.9%): [29,340, 29,946] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 170000, seed = 42)
+
+# Run progress: 45,00% complete, ETA 00:29:39
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 27,545 ops/us
+# Warmup Iteration   2: 27,423 ops/us
+# Warmup Iteration   3: 27,811 ops/us
+# Warmup Iteration   4: 28,008 ops/us
+# Warmup Iteration   5: 28,296 ops/us
+# Warmup Iteration   6: 28,153 ops/us
+# Warmup Iteration   7: 28,139 ops/us
+# Warmup Iteration   8: 27,499 ops/us
+Iteration   1: 27,636 ops/us
+Iteration   2: 27,567 ops/us
+Iteration   3: 27,470 ops/us
+Iteration   4: 27,983 ops/us
+Iteration   5: 27,600 ops/us
+Iteration   6: 28,252 ops/us
+Iteration   7: 27,799 ops/us
+Iteration   8: 28,105 ops/us
+Iteration   9: 28,029 ops/us
+Iteration  10: 28,315 ops/us
+Iteration  11: 27,822 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+27,442 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 46,25% complete, ETA 00:28:58
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 27,365 ops/us
+# Warmup Iteration   2: 27,362 ops/us
+# Warmup Iteration   3: 27,398 ops/us
+# Warmup Iteration   4: 28,178 ops/us
+# Warmup Iteration   5: 28,356 ops/us
+# Warmup Iteration   6: 28,010 ops/us
+# Warmup Iteration   7: 27,326 ops/us
+# Warmup Iteration   8: 27,454 ops/us
+Iteration   1: 28,353 ops/us
+Iteration   2: 28,293 ops/us
+Iteration   3: 28,373 ops/us
+Iteration   4: 28,360 ops/us
+Iteration   5: 27,847 ops/us
+Iteration   6: 27,344 ops/us
+Iteration   7: 27,470 ops/us
+Iteration   8: 28,044 ops/us
+Iteration   9: 28,308 ops/us
+Iteration  10: 28,376 ops/us
+Iteration  11: 28,347 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+27,551 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  27,945 ±(99.9%) 0,279 ops/us [Average]
+  (min, avg, max) = (27,344, 27,945, 28,376), stdev = 0,362
+  CI (99.9%): [27,667, 28,224] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 200000, seed = 42)
+
+# Run progress: 47,50% complete, ETA 00:28:18
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 35,026 ops/us
+# Warmup Iteration   2: 35,688 ops/us
+# Warmup Iteration   3: 34,401 ops/us
+# Warmup Iteration   4: 34,979 ops/us
+# Warmup Iteration   5: 36,005 ops/us
+# Warmup Iteration   6: 34,083 ops/us
+# Warmup Iteration   7: 35,587 ops/us
+# Warmup Iteration   8: 36,241 ops/us
+Iteration   1: 34,976 ops/us
+Iteration   2: 35,487 ops/us
+Iteration   3: 34,652 ops/us
+Iteration   4: 35,421 ops/us
+Iteration   5: 35,243 ops/us
+Iteration   6: 35,885 ops/us
+Iteration   7: 34,661 ops/us
+Iteration   8: 34,497 ops/us
+Iteration   9: 34,489 ops/us
+Iteration  10: 35,049 ops/us
+Iteration  11: 35,119 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+36,132 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 48,75% complete, ETA 00:27:37
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 34,926 ops/us
+# Warmup Iteration   2: 34,658 ops/us
+# Warmup Iteration   3: 34,795 ops/us
+# Warmup Iteration   4: 35,937 ops/us
+# Warmup Iteration   5: 34,479 ops/us
+# Warmup Iteration   6: 35,362 ops/us
+# Warmup Iteration   7: 34,222 ops/us
+# Warmup Iteration   8: 35,891 ops/us
+Iteration   1: 35,962 ops/us
+Iteration   2: 35,630 ops/us
+Iteration   3: 34,754 ops/us
+Iteration   4: 34,212 ops/us
+Iteration   5: 35,239 ops/us
+Iteration   6: 35,619 ops/us
+Iteration   7: 34,256 ops/us
+Iteration   8: 35,886 ops/us
+Iteration   9: 34,856 ops/us
+Iteration  10: 35,637 ops/us
+Iteration  11: 35,882 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+35,889 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  35,226 ±(99.9%) 0,449 ops/us [Average]
+  (min, avg, max) = (34,212, 35,226, 36,132), stdev = 0,584
+  CI (99.9%): [34,777, 35,676] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-Throughput-bucketCapacity-24-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 80000, seed = 42)
+
+# Run progress: 50,00% complete, ETA 00:26:57
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,025 us/op
+# Warmup Iteration   2: 0,024 us/op
+# Warmup Iteration   3: 0,024 us/op
+# Warmup Iteration   4: 0,025 us/op
+# Warmup Iteration   5: 0,026 us/op
+# Warmup Iteration   6: 0,024 us/op
+# Warmup Iteration   7: 0,024 us/op
+# Warmup Iteration   8: 0,024 us/op
+Iteration   1: 0,024 us/op
+Iteration   2: 0,023 us/op
+Iteration   3: 0,026 us/op
+Iteration   4: 0,024 us/op
+Iteration   5: 0,024 us/op
+Iteration   6: 0,025 us/op
+Iteration   7: 0,023 us/op
+Iteration   8: 0,023 us/op
+Iteration   9: 0,025 us/op
+Iteration  10: 0,024 us/op
+Iteration  11: 0,025 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,024 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 51,25% complete, ETA 00:26:17
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,024 us/op
+# Warmup Iteration   2: 0,025 us/op
+# Warmup Iteration   3: 0,025 us/op
+# Warmup Iteration   4: 0,023 us/op
+# Warmup Iteration   5: 0,025 us/op
+# Warmup Iteration   6: 0,025 us/op
+# Warmup Iteration   7: 0,025 us/op
+# Warmup Iteration   8: 0,024 us/op
+Iteration   1: 0,025 us/op
+Iteration   2: 0,025 us/op
+Iteration   3: 0,024 us/op
+Iteration   4: 0,024 us/op
+Iteration   5: 0,024 us/op
+Iteration   6: 0,024 us/op
+Iteration   7: 0,026 us/op
+Iteration   8: 0,025 us/op
+Iteration   9: 0,024 us/op
+Iteration  10: 0,024 us/op
+Iteration  11: 0,025 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,026 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,024 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,023, 0,024, 0,026), stdev = 0,001
+  CI (99.9%): [0,024, 0,025] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 100000, seed = 42)
+
+# Run progress: 52,50% complete, ETA 00:25:36
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,021 us/op
+# Warmup Iteration   2: 0,021 us/op
+# Warmup Iteration   3: 0,021 us/op
+# Warmup Iteration   4: 0,020 us/op
+# Warmup Iteration   5: 0,021 us/op
+# Warmup Iteration   6: 0,021 us/op
+# Warmup Iteration   7: 0,021 us/op
+# Warmup Iteration   8: 0,020 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,020 us/op
+Iteration   3: 0,021 us/op
+Iteration   4: 0,020 us/op
+Iteration   5: 0,020 us/op
+Iteration   6: 0,021 us/op
+Iteration   7: 0,021 us/op
+Iteration   8: 0,020 us/op
+Iteration   9: 0,020 us/op
+Iteration  10: 0,021 us/op
+Iteration  11: 0,020 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,021 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 53,75% complete, ETA 00:24:56
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,021 us/op
+# Warmup Iteration   2: 0,021 us/op
+# Warmup Iteration   3: 0,021 us/op
+# Warmup Iteration   4: 0,020 us/op
+# Warmup Iteration   5: 0,020 us/op
+# Warmup Iteration   6: 0,021 us/op
+# Warmup Iteration   7: 0,021 us/op
+# Warmup Iteration   8: 0,021 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,021 us/op
+Iteration   3: 0,021 us/op
+Iteration   4: 0,021 us/op
+Iteration   5: 0,020 us/op
+Iteration   6: 0,021 us/op
+Iteration   7: 0,021 us/op
+Iteration   8: 0,021 us/op
+Iteration   9: 0,021 us/op
+Iteration  10: 0,020 us/op
+Iteration  11: 0,020 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,020 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,021 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,020, 0,021, 0,021), stdev = 0,001
+  CI (99.9%): [0,020, 0,021] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 140000, seed = 42)
+
+# Run progress: 55,00% complete, ETA 00:24:15
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,022 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,022 us/op
+# Warmup Iteration   4: 0,021 us/op
+# Warmup Iteration   5: 0,022 us/op
+# Warmup Iteration   6: 0,022 us/op
+# Warmup Iteration   7: 0,022 us/op
+# Warmup Iteration   8: 0,022 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,022 us/op
+Iteration   3: 0,022 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,023 us/op
+Iteration   6: 0,022 us/op
+Iteration   7: 0,022 us/op
+Iteration   8: 0,022 us/op
+Iteration   9: 0,022 us/op
+Iteration  10: 0,022 us/op
+Iteration  11: 0,022 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,022 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 56,25% complete, ETA 00:23:35
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,022 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,021 us/op
+# Warmup Iteration   4: 0,021 us/op
+# Warmup Iteration   5: 0,022 us/op
+# Warmup Iteration   6: 0,022 us/op
+# Warmup Iteration   7: 0,022 us/op
+# Warmup Iteration   8: 0,021 us/op
+Iteration   1: 0,022 us/op
+Iteration   2: 0,022 us/op
+Iteration   3: 0,022 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,023 us/op
+Iteration   6: 0,023 us/op
+Iteration   7: 0,022 us/op
+Iteration   8: 0,022 us/op
+Iteration   9: 0,022 us/op
+Iteration  10: 0,022 us/op
+Iteration  11: 0,022 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,022 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,022 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,021, 0,022, 0,023), stdev = 0,001
+  CI (99.9%): [0,022, 0,022] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 170000, seed = 42)
+
+# Run progress: 57,50% complete, ETA 00:22:54
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,026 us/op
+# Warmup Iteration   2: 0,027 us/op
+# Warmup Iteration   3: 0,026 us/op
+# Warmup Iteration   4: 0,028 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,026 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,026 us/op
+Iteration   2: 0,027 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,026 us/op
+Iteration   5: 0,027 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,026 us/op
+Iteration   8: 0,027 us/op
+Iteration   9: 0,027 us/op
+Iteration  10: 0,026 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 58,75% complete, ETA 00:22:14
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,027 us/op
+# Warmup Iteration   3: 0,026 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,026 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,026 us/op
+Iteration   2: 0,026 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,026 us/op
+Iteration   5: 0,026 us/op
+Iteration   6: 0,027 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,027 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,026 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,027 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,026, 0,027, 0,028), stdev = 0,001
+  CI (99.9%): [0,026, 0,027] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 8, n = 200000, seed = 42)
+
+# Run progress: 60,00% complete, ETA 00:21:34
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,022 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,022 us/op
+# Warmup Iteration   4: 0,022 us/op
+# Warmup Iteration   5: 0,022 us/op
+# Warmup Iteration   6: 0,022 us/op
+# Warmup Iteration   7: 0,022 us/op
+# Warmup Iteration   8: 0,022 us/op
+Iteration   1: 0,022 us/op
+Iteration   2: 0,021 us/op
+Iteration   3: 0,022 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,022 us/op
+Iteration   6: 0,021 us/op
+Iteration   7: 0,022 us/op
+Iteration   8: 0,022 us/op
+Iteration   9: 0,021 us/op
+Iteration  10: 0,022 us/op
+Iteration  11: 0,022 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,022 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 61,25% complete, ETA 00:20:53
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,022 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,022 us/op
+# Warmup Iteration   4: 0,022 us/op
+# Warmup Iteration   5: 0,023 us/op
+# Warmup Iteration   6: 0,022 us/op
+# Warmup Iteration   7: 0,022 us/op
+# Warmup Iteration   8: 0,022 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,022 us/op
+Iteration   3: 0,021 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,022 us/op
+Iteration   6: 0,022 us/op
+Iteration   7: 0,022 us/op
+Iteration   8: 0,022 us/op
+Iteration   9: 0,021 us/op
+Iteration  10: 0,021 us/op
+Iteration  11: 0,022 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,022 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,022 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,021, 0,022, 0,022), stdev = 0,001
+  CI (99.9%): [0,021, 0,022] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-8-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 80000, seed = 42)
+
+# Run progress: 62,50% complete, ETA 00:20:13
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,024 us/op
+# Warmup Iteration   2: 0,024 us/op
+# Warmup Iteration   3: 0,025 us/op
+# Warmup Iteration   4: 0,023 us/op
+# Warmup Iteration   5: 0,024 us/op
+# Warmup Iteration   6: 0,025 us/op
+# Warmup Iteration   7: 0,024 us/op
+# Warmup Iteration   8: 0,023 us/op
+Iteration   1: 0,024 us/op
+Iteration   2: 0,024 us/op
+Iteration   3: 0,023 us/op
+Iteration   4: 0,024 us/op
+Iteration   5: 0,025 us/op
+Iteration   6: 0,024 us/op
+Iteration   7: 0,024 us/op
+Iteration   8: 0,023 us/op
+Iteration   9: 0,023 us/op
+Iteration  10: 0,024 us/op
+Iteration  11: 0,024 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,024 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 63,75% complete, ETA 00:19:32
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,024 us/op
+# Warmup Iteration   2: 0,024 us/op
+# Warmup Iteration   3: 0,023 us/op
+# Warmup Iteration   4: 0,024 us/op
+# Warmup Iteration   5: 0,024 us/op
+# Warmup Iteration   6: 0,024 us/op
+# Warmup Iteration   7: 0,023 us/op
+# Warmup Iteration   8: 0,024 us/op
+Iteration   1: 0,023 us/op
+Iteration   2: 0,024 us/op
+Iteration   3: 0,024 us/op
+Iteration   4: 0,024 us/op
+Iteration   5: 0,024 us/op
+Iteration   6: 0,025 us/op
+Iteration   7: 0,024 us/op
+Iteration   8: 0,024 us/op
+Iteration   9: 0,024 us/op
+Iteration  10: 0,024 us/op
+Iteration  11: 0,024 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,023 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,024 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,023, 0,024, 0,025), stdev = 0,001
+  CI (99.9%): [0,024, 0,024] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 100000, seed = 42)
+
+# Run progress: 65,00% complete, ETA 00:18:52
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,021 us/op
+# Warmup Iteration   2: 0,021 us/op
+# Warmup Iteration   3: 0,022 us/op
+# Warmup Iteration   4: 0,021 us/op
+# Warmup Iteration   5: 0,021 us/op
+# Warmup Iteration   6: 0,021 us/op
+# Warmup Iteration   7: 0,021 us/op
+# Warmup Iteration   8: 0,022 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,021 us/op
+Iteration   3: 0,020 us/op
+Iteration   4: 0,021 us/op
+Iteration   5: 0,021 us/op
+Iteration   6: 0,021 us/op
+Iteration   7: 0,020 us/op
+Iteration   8: 0,021 us/op
+Iteration   9: 0,021 us/op
+Iteration  10: 0,020 us/op
+Iteration  11: 0,020 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,020 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 66,25% complete, ETA 00:18:11
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,021 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,021 us/op
+# Warmup Iteration   4: 0,022 us/op
+# Warmup Iteration   5: 0,021 us/op
+# Warmup Iteration   6: 0,021 us/op
+# Warmup Iteration   7: 0,021 us/op
+# Warmup Iteration   8: 0,021 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,021 us/op
+Iteration   3: 0,021 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,021 us/op
+Iteration   6: 0,020 us/op
+Iteration   7: 0,020 us/op
+Iteration   8: 0,021 us/op
+Iteration   9: 0,021 us/op
+Iteration  10: 0,020 us/op
+Iteration  11: 0,020 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,020 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,021 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,020, 0,021, 0,022), stdev = 0,001
+  CI (99.9%): [0,020, 0,021] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 140000, seed = 42)
+
+# Run progress: 67,50% complete, ETA 00:17:31
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,027 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,029 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,027 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,029 us/op
+Iteration   9: 0,029 us/op
+Iteration  10: 0,027 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,029 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 68,75% complete, ETA 00:16:51
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,029 us/op
+# Warmup Iteration   2: 0,027 us/op
+# Warmup Iteration   3: 0,027 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,029 us/op
+# Warmup Iteration   8: 0,028 us/op
+Iteration   1: 0,027 us/op
+Iteration   2: 0,027 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,027 us/op
+Iteration   8: 0,029 us/op
+Iteration   9: 0,027 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,029 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,028 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,027, 0,028, 0,029), stdev = 0,001
+  CI (99.9%): [0,028, 0,028] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 170000, seed = 42)
+
+# Run progress: 70,00% complete, ETA 00:16:10
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,027 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,026 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,027 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,026 us/op
+Iteration   2: 0,027 us/op
+Iteration   3: 0,026 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,027 us/op
+Iteration   7: 0,026 us/op
+Iteration   8: 0,026 us/op
+Iteration   9: 0,026 us/op
+Iteration  10: 0,027 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 71,25% complete, ETA 00:15:30
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,027 us/op
+# Warmup Iteration   3: 0,027 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,026 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,027 us/op
+Iteration   2: 0,026 us/op
+Iteration   3: 0,026 us/op
+Iteration   4: 0,027 us/op
+Iteration   5: 0,027 us/op
+Iteration   6: 0,026 us/op
+Iteration   7: 0,027 us/op
+Iteration   8: 0,026 us/op
+Iteration   9: 0,027 us/op
+Iteration  10: 0,026 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,027 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,026, 0,027, 0,028), stdev = 0,001
+  CI (99.9%): [0,026, 0,027] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 12, n = 200000, seed = 42)
+
+# Run progress: 72,50% complete, ETA 00:14:49
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,022 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,022 us/op
+# Warmup Iteration   4: 0,022 us/op
+# Warmup Iteration   5: 0,023 us/op
+# Warmup Iteration   6: 0,022 us/op
+# Warmup Iteration   7: 0,022 us/op
+# Warmup Iteration   8: 0,022 us/op
+Iteration   1: 0,022 us/op
+Iteration   2: 0,023 us/op
+Iteration   3: 0,022 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,022 us/op
+Iteration   6: 0,023 us/op
+Iteration   7: 0,022 us/op
+Iteration   8: 0,022 us/op
+Iteration   9: 0,022 us/op
+Iteration  10: 0,022 us/op
+Iteration  11: 0,022 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,023 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 73,75% complete, ETA 00:14:09
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,022 us/op
+# Warmup Iteration   2: 0,022 us/op
+# Warmup Iteration   3: 0,022 us/op
+# Warmup Iteration   4: 0,022 us/op
+# Warmup Iteration   5: 0,022 us/op
+# Warmup Iteration   6: 0,022 us/op
+# Warmup Iteration   7: 0,023 us/op
+# Warmup Iteration   8: 0,022 us/op
+Iteration   1: 0,021 us/op
+Iteration   2: 0,022 us/op
+Iteration   3: 0,022 us/op
+Iteration   4: 0,022 us/op
+Iteration   5: 0,021 us/op
+Iteration   6: 0,022 us/op
+Iteration   7: 0,022 us/op
+Iteration   8: 0,023 us/op
+Iteration   9: 0,022 us/op
+Iteration  10: 0,023 us/op
+Iteration  11: 0,021 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,021 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,022 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,021, 0,022, 0,023), stdev = 0,001
+  CI (99.9%): [0,022, 0,023] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-12-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 80000, seed = 42)
+
+# Run progress: 75,00% complete, ETA 00:13:28
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,024 us/op
+# Warmup Iteration   2: 0,024 us/op
+# Warmup Iteration   3: 0,025 us/op
+# Warmup Iteration   4: 0,024 us/op
+# Warmup Iteration   5: 0,025 us/op
+# Warmup Iteration   6: 0,024 us/op
+# Warmup Iteration   7: 0,024 us/op
+# Warmup Iteration   8: 0,024 us/op
+Iteration   1: 0,024 us/op
+Iteration   2: 0,024 us/op
+Iteration   3: 0,024 us/op
+Iteration   4: 0,024 us/op
+Iteration   5: 0,024 us/op
+Iteration   6: 0,024 us/op
+Iteration   7: 0,024 us/op
+Iteration   8: 0,024 us/op
+Iteration   9: 0,024 us/op
+Iteration  10: 0,024 us/op
+Iteration  11: 0,025 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,024 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 76,25% complete, ETA 00:12:48
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,024 us/op
+# Warmup Iteration   2: 0,025 us/op
+# Warmup Iteration   3: 0,024 us/op
+# Warmup Iteration   4: 0,025 us/op
+# Warmup Iteration   5: 0,024 us/op
+# Warmup Iteration   6: 0,024 us/op
+# Warmup Iteration   7: 0,024 us/op
+# Warmup Iteration   8: 0,025 us/op
+Iteration   1: 0,024 us/op
+Iteration   2: 0,024 us/op
+Iteration   3: 0,024 us/op
+Iteration   4: 0,024 us/op
+Iteration   5: 0,024 us/op
+Iteration   6: 0,024 us/op
+Iteration   7: 0,024 us/op
+Iteration   8: 0,024 us/op
+Iteration   9: 0,024 us/op
+Iteration  10: 0,024 us/op
+Iteration  11: 0,024 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,025 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,024 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,024, 0,024, 0,025), stdev = 0,001
+  CI (99.9%): [0,024, 0,024] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 100000, seed = 42)
+
+# Run progress: 77,50% complete, ETA 00:12:07
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,026 us/op
+# Warmup Iteration   2: 0,026 us/op
+# Warmup Iteration   3: 0,026 us/op
+# Warmup Iteration   4: 0,026 us/op
+# Warmup Iteration   5: 0,026 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,026 us/op
+# Warmup Iteration   8: 0,026 us/op
+Iteration   1: 0,026 us/op
+Iteration   2: 0,026 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,026 us/op
+Iteration   5: 0,027 us/op
+Iteration   6: 0,027 us/op
+Iteration   7: 0,026 us/op
+Iteration   8: 0,026 us/op
+Iteration   9: 0,026 us/op
+Iteration  10: 0,027 us/op
+Iteration  11: 0,026 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 78,75% complete, ETA 00:11:27
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,027 us/op
+# Warmup Iteration   2: 0,026 us/op
+# Warmup Iteration   3: 0,026 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,026 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,026 us/op
+# Warmup Iteration   8: 0,026 us/op
+Iteration   1: 0,027 us/op
+Iteration   2: 0,026 us/op
+Iteration   3: 0,026 us/op
+Iteration   4: 0,027 us/op
+Iteration   5: 0,026 us/op
+Iteration   6: 0,026 us/op
+Iteration   7: 0,027 us/op
+Iteration   8: 0,026 us/op
+Iteration   9: 0,026 us/op
+Iteration  10: 0,026 us/op
+Iteration  11: 0,026 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,026 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,026, 0,026, 0,027), stdev = 0,001
+  CI (99.9%): [0,026, 0,027] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 140000, seed = 42)
+
+# Run progress: 80,00% complete, ETA 00:10:47
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,029 us/op
+# Warmup Iteration   2: 0,029 us/op
+# Warmup Iteration   3: 0,028 us/op
+# Warmup Iteration   4: 0,028 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,029 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,029 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,027 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,027 us/op
+Iteration   8: 0,029 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,029 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 81,25% complete, ETA 00:10:06
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,029 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,029 us/op
+# Warmup Iteration   4: 0,029 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,030 us/op
+# Warmup Iteration   7: 0,029 us/op
+# Warmup Iteration   8: 0,029 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,029 us/op
+Iteration   4: 0,029 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,029 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,029 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,028 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,027, 0,028, 0,029), stdev = 0,001
+  CI (99.9%): [0,028, 0,029] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 170000, seed = 42)
+
+# Run progress: 82,50% complete, ETA 00:09:26
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,028 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,027 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,028 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 83,75% complete, ETA 00:08:45
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,028 us/op
+# Warmup Iteration   4: 0,028 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,029 us/op
+# Warmup Iteration   7: 0,027 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,027 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,027 us/op
+Iteration   5: 0,027 us/op
+Iteration   6: 0,027 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,027 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,028 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,027 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,027, 0,027, 0,028), stdev = 0,001
+  CI (99.9%): [0,027, 0,028] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 16, n = 200000, seed = 42)
+
+# Run progress: 85,00% complete, ETA 00:08:05
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,028 us/op
+# Warmup Iteration   4: 0,029 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,028 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,029 us/op
+Iteration   6: 0,029 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,028 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 86,25% complete, ETA 00:07:24
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,027 us/op
+# Warmup Iteration   3: 0,029 us/op
+# Warmup Iteration   4: 0,027 us/op
+# Warmup Iteration   5: 0,029 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,028 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,029 us/op
+Iteration   5: 0,027 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,029 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,028 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,027, 0,028, 0,029), stdev = 0,001
+  CI (99.9%): [0,028, 0,028] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-16-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 80000, seed = 42)
+
+# Run progress: 87,50% complete, ETA 00:06:44
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,034 us/op
+# Warmup Iteration   2: 0,034 us/op
+# Warmup Iteration   3: 0,033 us/op
+# Warmup Iteration   4: 0,034 us/op
+# Warmup Iteration   5: 0,033 us/op
+# Warmup Iteration   6: 0,033 us/op
+# Warmup Iteration   7: 0,033 us/op
+# Warmup Iteration   8: 0,033 us/op
+Iteration   1: 0,033 us/op
+Iteration   2: 0,033 us/op
+Iteration   3: 0,033 us/op
+Iteration   4: 0,033 us/op
+Iteration   5: 0,033 us/op
+Iteration   6: 0,033 us/op
+Iteration   7: 0,033 us/op
+Iteration   8: 0,033 us/op
+Iteration   9: 0,033 us/op
+Iteration  10: 0,033 us/op
+Iteration  11: 0,034 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,033 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 88,75% complete, ETA 00:06:04
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,034 us/op
+# Warmup Iteration   2: 0,034 us/op
+# Warmup Iteration   3: 0,034 us/op
+# Warmup Iteration   4: 0,033 us/op
+# Warmup Iteration   5: 0,033 us/op
+# Warmup Iteration   6: 0,033 us/op
+# Warmup Iteration   7: 0,034 us/op
+# Warmup Iteration   8: 0,033 us/op
+Iteration   1: 0,033 us/op
+Iteration   2: 0,033 us/op
+Iteration   3: 0,033 us/op
+Iteration   4: 0,033 us/op
+Iteration   5: 0,033 us/op
+Iteration   6: 0,033 us/op
+Iteration   7: 0,033 us/op
+Iteration   8: 0,033 us/op
+Iteration   9: 0,033 us/op
+Iteration  10: 0,033 us/op
+Iteration  11: 0,033 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,033 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,033 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,033, 0,033, 0,034), stdev = 0,001
+  CI (99.9%): [0,033, 0,033] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-80000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 100000, seed = 42)
+
+# Run progress: 90,00% complete, ETA 00:05:23
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,027 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,027 us/op
+# Warmup Iteration   4: 0,028 us/op
+# Warmup Iteration   5: 0,027 us/op
+# Warmup Iteration   6: 0,027 us/op
+# Warmup Iteration   7: 0,026 us/op
+# Warmup Iteration   8: 0,027 us/op
+Iteration   1: 0,026 us/op
+Iteration   2: 0,026 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,027 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,026 us/op
+Iteration   7: 0,027 us/op
+Iteration   8: 0,027 us/op
+Iteration   9: 0,027 us/op
+Iteration  10: 0,027 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 91,25% complete, ETA 00:04:43
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,027 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,027 us/op
+# Warmup Iteration   4: 0,026 us/op
+# Warmup Iteration   5: 0,026 us/op
+# Warmup Iteration   6: 0,026 us/op
+# Warmup Iteration   7: 0,027 us/op
+# Warmup Iteration   8: 0,028 us/op
+Iteration   1: 0,027 us/op
+Iteration   2: 0,027 us/op
+Iteration   3: 0,027 us/op
+Iteration   4: 0,027 us/op
+Iteration   5: 0,026 us/op
+Iteration   6: 0,027 us/op
+Iteration   7: 0,026 us/op
+Iteration   8: 0,027 us/op
+Iteration   9: 0,027 us/op
+Iteration  10: 0,027 us/op
+Iteration  11: 0,027 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,027 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,027 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,026, 0,027, 0,028), stdev = 0,001
+  CI (99.9%): [0,027, 0,027] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-100000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 140000, seed = 42)
+
+# Run progress: 92,50% complete, ETA 00:04:02
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,034 us/op
+# Warmup Iteration   2: 0,034 us/op
+# Warmup Iteration   3: 0,034 us/op
+# Warmup Iteration   4: 0,034 us/op
+# Warmup Iteration   5: 0,033 us/op
+# Warmup Iteration   6: 0,033 us/op
+# Warmup Iteration   7: 0,034 us/op
+# Warmup Iteration   8: 0,034 us/op
+Iteration   1: 0,033 us/op
+Iteration   2: 0,034 us/op
+Iteration   3: 0,034 us/op
+Iteration   4: 0,034 us/op
+Iteration   5: 0,034 us/op
+Iteration   6: 0,034 us/op
+Iteration   7: 0,034 us/op
+Iteration   8: 0,033 us/op
+Iteration   9: 0,034 us/op
+Iteration  10: 0,033 us/op
+Iteration  11: 0,033 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,033 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 93,75% complete, ETA 00:03:22
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,034 us/op
+# Warmup Iteration   2: 0,034 us/op
+# Warmup Iteration   3: 0,033 us/op
+# Warmup Iteration   4: 0,034 us/op
+# Warmup Iteration   5: 0,034 us/op
+# Warmup Iteration   6: 0,034 us/op
+# Warmup Iteration   7: 0,037 us/op
+# Warmup Iteration   8: 0,035 us/op
+Iteration   1: 0,034 us/op
+Iteration   2: 0,034 us/op
+Iteration   3: 0,034 us/op
+Iteration   4: 0,034 us/op
+Iteration   5: 0,034 us/op
+Iteration   6: 0,034 us/op
+Iteration   7: 0,034 us/op
+Iteration   8: 0,034 us/op
+Iteration   9: 0,034 us/op
+Iteration  10: 0,033 us/op
+Iteration  11: 0,033 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,034 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,034 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,033, 0,034, 0,034), stdev = 0,001
+  CI (99.9%): [0,033, 0,034] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-140000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 170000, seed = 42)
+
+# Run progress: 95,00% complete, ETA 00:02:41
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,037 us/op
+# Warmup Iteration   2: 0,036 us/op
+# Warmup Iteration   3: 0,036 us/op
+# Warmup Iteration   4: 0,036 us/op
+# Warmup Iteration   5: 0,036 us/op
+# Warmup Iteration   6: 0,036 us/op
+# Warmup Iteration   7: 0,036 us/op
+# Warmup Iteration   8: 0,036 us/op
+Iteration   1: 0,036 us/op
+Iteration   2: 0,036 us/op
+Iteration   3: 0,036 us/op
+Iteration   4: 0,036 us/op
+Iteration   5: 0,036 us/op
+Iteration   6: 0,036 us/op
+Iteration   7: 0,036 us/op
+Iteration   8: 0,037 us/op
+Iteration   9: 0,036 us/op
+Iteration  10: 0,035 us/op
+Iteration  11: 0,036 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,036 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 96,25% complete, ETA 00:02:01
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,036 us/op
+# Warmup Iteration   2: 0,037 us/op
+# Warmup Iteration   3: 0,036 us/op
+# Warmup Iteration   4: 0,035 us/op
+# Warmup Iteration   5: 0,036 us/op
+# Warmup Iteration   6: 0,036 us/op
+# Warmup Iteration   7: 0,035 us/op
+# Warmup Iteration   8: 0,035 us/op
+Iteration   1: 0,035 us/op
+Iteration   2: 0,036 us/op
+Iteration   3: 0,036 us/op
+Iteration   4: 0,037 us/op
+Iteration   5: 0,036 us/op
+Iteration   6: 0,036 us/op
+Iteration   7: 0,036 us/op
+Iteration   8: 0,036 us/op
+Iteration   9: 0,036 us/op
+Iteration  10: 0,036 us/op
+Iteration  11: 0,035 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,036 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,036 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,035, 0,036, 0,037), stdev = 0,001
+  CI (99.9%): [0,036, 0,036] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-170000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.ExtendableHashTableBenchmark.putThenRemove
+# Parameters: (bucketCapacity = 24, n = 200000, seed = 42)
+
+# Run progress: 97,50% complete, ETA 00:01:20
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,028 us/op
+# Warmup Iteration   4: 0,029 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,029 us/op
+# Warmup Iteration   8: 0,028 us/op
+Iteration   1: 0,029 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,029 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,029 us/op
+Iteration   7: 0,029 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,029 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,028 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 98,75% complete, ETA 00:00:40
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,029 us/op
+# Warmup Iteration   4: 0,028 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,029 us/op
+# Warmup Iteration   8: 0,029 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,029 us/op
+Iteration   3: 0,029 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,029 us/op
+Iteration   7: 0,029 us/op
+Iteration   8: 0,029 us/op
+Iteration   9: 0,029 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,029 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,029 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.putThenRemove":
+  0,028 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,028, 0,028, 0,029), stdev = 0,001
+  CI (99.9%): [0,028, 0,029] (assumes normal distribution)
+
+Secondary result "bench.ExtendableHashTableBenchmark.putThenRemove:async":
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-rerun-extendable/profiles/bench.ExtendableHashTableBenchmark.putThenRemove/alloc/bench.ExtendableHashTableBenchmark.putThenRemove-AverageTime-bucketCapacity-24-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# Run complete. Total time: 00:53:55
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                         (bucketCapacity)     (n)  (seed)   Mode  Cnt   Score    Error   Units
+ExtendableHashTableBenchmark.putThenRemove                       8   80000      42  thrpt   24  41,205 ±  0,712  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                 8   80000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  100000      42  thrpt   24  48,655 ±  0,478  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                 8  100000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  140000      42  thrpt   24  45,548 ±  0,433  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                 8  140000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  170000      42  thrpt   24  37,319 ±  0,524  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                 8  170000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  200000      42  thrpt   24  45,656 ±  0,588  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                 8  200000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12   80000      42  thrpt   24  42,031 ±  0,519  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                12   80000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  100000      42  thrpt   24  47,780 ±  0,612  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                12  100000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  140000      42  thrpt   24  35,778 ±  0,508  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                12  140000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  170000      42  thrpt   24  37,288 ±  0,394  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                12  170000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  200000      42  thrpt   24  45,169 ±  0,560  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                12  200000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16   80000      42  thrpt   24  41,669 ±  0,504  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                16   80000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  100000      42  thrpt   24  38,154 ±  0,345  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                16  100000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  140000      42  thrpt   24  34,965 ±  0,503  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                16  140000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  170000      42  thrpt   24  36,512 ±  0,481  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                16  170000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  200000      42  thrpt   24  35,682 ±  0,398  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                16  200000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24   80000      42  thrpt   24  30,140 ±  0,171  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                24   80000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  100000      42  thrpt   24  37,268 ±  0,482  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                24  100000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  140000      42  thrpt   24  29,643 ±  0,303  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                24  140000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  170000      42  thrpt   24  27,945 ±  0,279  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                24  170000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  200000      42  thrpt   24  35,226 ±  0,449  ops/us
+ExtendableHashTableBenchmark.putThenRemove:async                24  200000      42  thrpt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8   80000      42   avgt   24   0,024 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                 8   80000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  100000      42   avgt   24   0,021 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                 8  100000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  140000      42   avgt   24   0,022 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                 8  140000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  170000      42   avgt   24   0,027 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                 8  170000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                       8  200000      42   avgt   24   0,022 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                 8  200000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12   80000      42   avgt   24   0,024 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                12   80000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  100000      42   avgt   24   0,021 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                12  100000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  140000      42   avgt   24   0,028 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                12  140000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  170000      42   avgt   24   0,027 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                12  170000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      12  200000      42   avgt   24   0,022 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                12  200000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16   80000      42   avgt   24   0,024 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                16   80000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  100000      42   avgt   24   0,026 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                16  100000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  140000      42   avgt   24   0,028 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                16  140000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  170000      42   avgt   24   0,027 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                16  170000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      16  200000      42   avgt   24   0,028 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                16  200000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24   80000      42   avgt   24   0,033 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                24   80000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  100000      42   avgt   24   0,027 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                24  100000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  140000      42   avgt   24   0,034 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                24  140000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  170000      42   avgt   24   0,036 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                24  170000      42   avgt          NaN              ---
+ExtendableHashTableBenchmark.putThenRemove                      24  200000      42   avgt   24   0,028 ±  0,001   us/op
+ExtendableHashTableBenchmark.putThenRemove:async                24  200000      42   avgt          NaN              ---

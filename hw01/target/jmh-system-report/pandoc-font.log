@@ -1,0 +1,21 @@
+warning: accessing absolute path `/System/Library/Fonts/Supplemental/Arial Unicode.ttf`; build may not be reproducible in other environments
+warning: accessing absolute path `/System/Library/Fonts/Menlo.ttc`; build may not be reproducible in other environments
+warning: texput.tex:82: Underfull \hbox (badness 10000) in paragraph at lines 80--82
+warning: texput.tex:124: Overfull \hbox (17.95139pt too wide) in paragraph at lines 124--124
+warning: texput.tex:127: Overfull \hbox (13.52267pt too wide) in paragraph at lines 127--127
+warning: texput.tex:128: Overfull \hbox (10.73947pt too wide) in paragraph at lines 128--128
+warning: texput.tex:129: Overfull \hbox (5.1926pt too wide) in paragraph at lines 129--129
+warning: texput.tex:350: Overfull \hbox (15.1926pt too wide) in paragraph at lines 350--350
+warning: texput.tex:351: Overfull \hbox (45.20236pt too wide) in paragraph at lines 351--351
+warning: texput.tex:353: Overfull \hbox (22.41916pt too wide) in paragraph at lines 353--353
+warning: texput.tex:354: Overfull \hbox (1.85275pt too wide) in paragraph at lines 354--354
+warning: texput.tex:82: Underfull \hbox (badness 10000) in paragraph at lines 80--82
+warning: texput.tex:124: Overfull \hbox (17.95139pt too wide) in paragraph at lines 124--124
+warning: texput.tex:127: Overfull \hbox (13.52267pt too wide) in paragraph at lines 127--127
+warning: texput.tex:128: Overfull \hbox (10.73947pt too wide) in paragraph at lines 128--128
+warning: texput.tex:129: Overfull \hbox (5.1926pt too wide) in paragraph at lines 129--129
+warning: texput.tex:350: Overfull \hbox (15.1926pt too wide) in paragraph at lines 350--350
+warning: texput.tex:351: Overfull \hbox (45.20236pt too wide) in paragraph at lines 351--351
+warning: texput.tex:353: Overfull \hbox (22.41916pt too wide) in paragraph at lines 353--353
+warning: texput.tex:354: Overfull \hbox (1.85275pt too wide) in paragraph at lines 354--354
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.

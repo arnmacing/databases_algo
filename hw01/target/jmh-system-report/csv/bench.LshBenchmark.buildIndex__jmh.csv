@@ -1,0 +1,17 @@
+benchmark,metric,mode,score,scoreError,scoreUnit,docs,seed,wordsPerDoc
+bench.LshBenchmark.buildIndex,primary,thrpt,0.0016473973960889473,1.196542429609231e-05,ops/ms,20000,42,16
+bench.LshBenchmark.buildIndex,async,thrpt,NaN,NaN,---,20000,42,16
+bench.LshBenchmark.buildIndex,primary,thrpt,0.0010892546389450562,1.0826850738656265e-05,ops/ms,30000,42,16
+bench.LshBenchmark.buildIndex,async,thrpt,NaN,NaN,---,30000,42,16
+bench.LshBenchmark.buildIndex,primary,thrpt,0.0007150793834601408,1.2046358585621025e-05,ops/ms,45000,42,16
+bench.LshBenchmark.buildIndex,async,thrpt,NaN,NaN,---,45000,42,16
+bench.LshBenchmark.buildIndex,primary,thrpt,0.000521828906707699,8.213354231313786e-06,ops/ms,60000,42,16
+bench.LshBenchmark.buildIndex,async,thrpt,NaN,NaN,---,60000,42,16
+bench.LshBenchmark.buildIndex,primary,avgt,603.9111644895835,2.2408481072696795,ms/op,20000,42,16
+bench.LshBenchmark.buildIndex,async,avgt,NaN,NaN,---,20000,42,16
+bench.LshBenchmark.buildIndex,primary,avgt,921.1484137361113,6.928496284083958,ms/op,30000,42,16
+bench.LshBenchmark.buildIndex,async,avgt,NaN,NaN,---,30000,42,16
+bench.LshBenchmark.buildIndex,primary,avgt,1388.7939817500003,10.586246385497967,ms/op,45000,42,16
+bench.LshBenchmark.buildIndex,async,avgt,NaN,NaN,---,45000,42,16
+bench.LshBenchmark.buildIndex,primary,avgt,1865.4580823958331,12.257737851194106,ms/op,60000,42,16
+bench.LshBenchmark.buildIndex,async,avgt,NaN,NaN,---,60000,42,16

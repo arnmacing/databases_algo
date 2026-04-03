@@ -1,0 +1,1444 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 8, n = 150000, seed = 42)
+
+# Run progress: 0,00% complete, ETA 00:00:00
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 434,327 ms/op
+# Warmup Iteration   2: 426,123 ms/op
+# Warmup Iteration   3: 407,322 ms/op
+# Warmup Iteration   4: 406,824 ms/op
+# Warmup Iteration   5: 411,411 ms/op
+# Warmup Iteration   6: 401,909 ms/op
+# Warmup Iteration   7: 415,207 ms/op
+# Warmup Iteration   8: 412,803 ms/op
+Iteration   1: 415,601 ms/op
+Iteration   2: 416,364 ms/op
+Iteration   3: 416,959 ms/op
+Iteration   4: 425,014 ms/op
+Iteration   5: 416,537 ms/op
+Iteration   6: 409,956 ms/op
+Iteration   7: 415,921 ms/op
+Iteration   8: 414,807 ms/op
+Iteration   9: 413,866 ms/op
+Iteration  10: 406,120 ms/op
+Iteration  11: 411,372 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+412,243 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 4,17% complete, ETA 00:03:16
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 433,559 ms/op
+# Warmup Iteration   2: 425,702 ms/op
+# Warmup Iteration   3: 407,877 ms/op
+# Warmup Iteration   4: 407,148 ms/op
+# Warmup Iteration   5: 410,626 ms/op
+# Warmup Iteration   6: 402,207 ms/op
+# Warmup Iteration   7: 415,352 ms/op
+# Warmup Iteration   8: 412,846 ms/op
+Iteration   1: 415,040 ms/op
+Iteration   2: 417,073 ms/op
+Iteration   3: 416,896 ms/op
+Iteration   4: 424,966 ms/op
+Iteration   5: 417,828 ms/op
+Iteration   6: 409,143 ms/op
+Iteration   7: 415,681 ms/op
+Iteration   8: 414,303 ms/op
+Iteration   9: 413,640 ms/op
+Iteration  10: 406,011 ms/op
+Iteration  11: 411,221 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+411,287 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    414,494 ±(99.9%) 3,553 ms/op
+
+  Histogram, ms/op:
+    [400,000, 402,500) = 0 
+    [402,500, 405,000) = 0 
+    [405,000, 407,500) = 2 
+    [407,500, 410,000) = 2 
+    [410,000, 412,500) = 4 
+    [412,500, 415,000) = 4 
+    [415,000, 417,500) = 9 
+    [417,500, 420,000) = 1 
+    [420,000, 422,500) = 0 
+    [422,500, 425,000) = 1 
+    [425,000, 427,500) = 1 
+
+  Percentiles, ms/op:
+      p(0,0000) =    406,011 ms/op
+     p(50,0000) =    414,923 ms/op
+     p(90,0000) =    421,397 ms/op
+     p(95,0000) =    425,002 ms/op
+     p(99,0000) =    425,014 ms/op
+     p(99,9000) =    425,014 ms/op
+     p(99,9900) =    425,014 ms/op
+     p(99,9990) =    425,014 ms/op
+     p(99,9999) =    425,014 ms/op
+    p(100,0000) =    425,014 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-150000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 8, n = 250000, seed = 42)
+
+# Run progress: 8,33% complete, ETA 00:03:08
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 464,725 ms/op
+# Warmup Iteration   2: 425,895 ms/op
+# Warmup Iteration   3: 425,139 ms/op
+# Warmup Iteration   4: 434,856 ms/op
+# Warmup Iteration   5: 426,131 ms/op
+# Warmup Iteration   6: 423,094 ms/op
+# Warmup Iteration   7: 435,540 ms/op
+# Warmup Iteration   8: 423,585 ms/op
+Iteration   1: 432,886 ms/op
+Iteration   2: 420,023 ms/op
+Iteration   3: 429,321 ms/op
+Iteration   4: 442,269 ms/op
+Iteration   5: 422,930 ms/op
+Iteration   6: 418,379 ms/op
+Iteration   7: 424,652 ms/op
+Iteration   8: 428,106 ms/op
+Iteration   9: 420,995 ms/op
+Iteration  10: 438,333 ms/op
+Iteration  11: 423,137 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+428,006 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 12,50% complete, ETA 00:03:01
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 464,169 ms/op
+# Warmup Iteration   2: 425,442 ms/op
+# Warmup Iteration   3: 425,461 ms/op
+# Warmup Iteration   4: 431,738 ms/op
+# Warmup Iteration   5: 426,255 ms/op
+# Warmup Iteration   6: 422,892 ms/op
+# Warmup Iteration   7: 434,447 ms/op
+# Warmup Iteration   8: 422,528 ms/op
+Iteration   1: 433,443 ms/op
+Iteration   2: 418,556 ms/op
+Iteration   3: 429,073 ms/op
+Iteration   4: 442,600 ms/op
+Iteration   5: 422,491 ms/op
+Iteration   6: 420,603 ms/op
+Iteration   7: 424,931 ms/op
+Iteration   8: 427,739 ms/op
+Iteration   9: 420,273 ms/op
+Iteration  10: 438,707 ms/op
+Iteration  11: 423,586 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+428,246 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    427,470 ±(99.9%) 5,594 ms/op
+
+  Histogram, ms/op:
+    [410,000, 412,500) = 0 
+    [412,500, 415,000) = 0 
+    [415,000, 417,500) = 0 
+    [417,500, 420,000) = 2 
+    [420,000, 422,500) = 5 
+    [422,500, 425,000) = 5 
+    [425,000, 427,500) = 0 
+    [427,500, 430,000) = 6 
+    [430,000, 432,500) = 0 
+    [432,500, 435,000) = 2 
+    [435,000, 437,500) = 0 
+    [437,500, 440,000) = 2 
+    [440,000, 442,500) = 1 
+    [442,500, 445,000) = 1 
+    [445,000, 447,500) = 0 
+
+  Percentiles, ms/op:
+      p(0,0000) =    418,379 ms/op
+     p(50,0000) =    426,335 ms/op
+     p(90,0000) =    440,488 ms/op
+     p(95,0000) =    442,517 ms/op
+     p(99,0000) =    442,600 ms/op
+     p(99,9000) =    442,600 ms/op
+     p(99,9900) =    442,600 ms/op
+     p(99,9990) =    442,600 ms/op
+     p(99,9999) =    442,600 ms/op
+    p(100,0000) =    442,600 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-250000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 8, n = 350000, seed = 42)
+
+# Run progress: 16,67% complete, ETA 00:02:54
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 1702,476 ms/op
+# Warmup Iteration   2: 1709,348 ms/op
+# Warmup Iteration   3: 1730,612 ms/op
+# Warmup Iteration   4: 1668,079 ms/op
+# Warmup Iteration   5: 1635,424 ms/op
+# Warmup Iteration   6: 1725,394 ms/op
+# Warmup Iteration   7: 1684,602 ms/op
+# Warmup Iteration   8: 1708,446 ms/op
+Iteration   1: 1729,631 ms/op
+Iteration   2: 1732,967 ms/op
+Iteration   3: 1708,844 ms/op
+Iteration   4: 1709,845 ms/op
+Iteration   5: 1739,629 ms/op
+Iteration   6: 1711,199 ms/op
+Iteration   7: 1712,743 ms/op
+Iteration   8: 1687,994 ms/op
+Iteration   9: 1684,748 ms/op
+Iteration  10: 1657,812 ms/op
+Iteration  11: 1673,178 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+1702,075 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 20,83% complete, ETA 00:04:22
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 1700,365 ms/op
+# Warmup Iteration   2: 1710,511 ms/op
+# Warmup Iteration   3: 1730,151 ms/op
+# Warmup Iteration   4: 1668,287 ms/op
+# Warmup Iteration   5: 1632,669 ms/op
+# Warmup Iteration   6: 1723,309 ms/op
+# Warmup Iteration   7: 1684,501 ms/op
+# Warmup Iteration   8: 1708,400 ms/op
+Iteration   1: 1727,187 ms/op
+Iteration   2: 1731,997 ms/op
+Iteration   3: 1708,831 ms/op
+Iteration   4: 1710,138 ms/op
+Iteration   5: 1740,066 ms/op
+Iteration   6: 1712,215 ms/op
+Iteration   7: 1713,589 ms/op
+Iteration   8: 1689,006 ms/op
+Iteration   9: 1683,779 ms/op
+Iteration  10: 1657,633 ms/op
+Iteration  11: 1674,228 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+1705,708 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =   1704,377 ±(99.9%) 18,408 ms/op
+
+  Histogram, ms/op:
+    [1650,000, 1660,000) = 2 
+    [1660,000, 1670,000) = 0 
+    [1670,000, 1680,000) = 2 
+    [1680,000, 1690,000) = 4 
+    [1690,000, 1700,000) = 0 
+    [1700,000, 1710,000) = 5 
+    [1710,000, 1720,000) = 5 
+    [1720,000, 1730,000) = 2 
+    [1730,000, 1740,000) = 3 
+
+  Percentiles, ms/op:
+      p(0,0000) =   1657,633 ms/op
+     p(50,0000) =   1709,345 ms/op
+     p(90,0000) =   1736,298 ms/op
+     p(95,0000) =   1739,957 ms/op
+     p(99,0000) =   1740,066 ms/op
+     p(99,9000) =   1740,066 ms/op
+     p(99,9900) =   1740,066 ms/op
+     p(99,9990) =   1740,066 ms/op
+     p(99,9999) =   1740,066 ms/op
+    p(100,0000) =   1740,066 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-8-n-350000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 12, n = 150000, seed = 42)
+
+# Run progress: 25,00% complete, ETA 00:05:10
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 135,234 ms/op
+# Warmup Iteration   2: 118,572 ms/op
+# Warmup Iteration   3: 110,124 ms/op
+# Warmup Iteration   4: 106,940 ms/op
+# Warmup Iteration   5: 105,654 ms/op
+# Warmup Iteration   6: 108,920 ms/op
+# Warmup Iteration   7: 107,261 ms/op
+# Warmup Iteration   8: 103,944 ms/op
+Iteration   1: 104,089 ms/op
+Iteration   2: 105,403 ms/op
+Iteration   3: 106,502 ms/op
+Iteration   4: 104,273 ms/op
+Iteration   5: 105,129 ms/op
+Iteration   6: 105,976 ms/op
+Iteration   7: 103,643 ms/op
+Iteration   8: 102,847 ms/op
+Iteration   9: 106,624 ms/op
+Iteration  10: 104,964 ms/op
+Iteration  11: 104,852 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+105,267 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 29,17% complete, ETA 00:04:16
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 136,152 ms/op
+# Warmup Iteration   2: 118,604 ms/op
+# Warmup Iteration   3: 109,918 ms/op
+# Warmup Iteration   4: 106,356 ms/op
+# Warmup Iteration   5: 104,905 ms/op
+# Warmup Iteration   6: 109,175 ms/op
+# Warmup Iteration   7: 107,281 ms/op
+# Warmup Iteration   8: 104,504 ms/op
+Iteration   1: 103,918 ms/op
+Iteration   2: 105,171 ms/op
+Iteration   3: 107,009 ms/op
+Iteration   4: 104,517 ms/op
+Iteration   5: 104,741 ms/op
+Iteration   6: 105,869 ms/op
+Iteration   7: 104,295 ms/op
+Iteration   8: 103,140 ms/op
+Iteration   9: 106,816 ms/op
+Iteration  10: 105,810 ms/op
+Iteration  11: 104,524 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+105,120 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    105,021 ±(99.9%) 0,854 ms/op
+
+  Histogram, ms/op:
+    [102,000, 102,500) = 0 
+    [102,500, 103,000) = 1 
+    [103,000, 103,500) = 1 
+    [103,500, 104,000) = 2 
+    [104,000, 104,500) = 3 
+    [104,500, 105,000) = 5 
+    [105,000, 105,500) = 5 
+    [105,500, 106,000) = 3 
+    [106,000, 106,500) = 0 
+    [106,500, 107,000) = 3 
+    [107,000, 107,500) = 1 
+
+  Percentiles, ms/op:
+      p(0,0000) =    102,847 ms/op
+     p(50,0000) =    105,042 ms/op
+     p(90,0000) =    106,720 ms/op
+     p(95,0000) =    106,961 ms/op
+     p(99,0000) =    107,009 ms/op
+     p(99,9000) =    107,009 ms/op
+     p(99,9900) =    107,009 ms/op
+     p(99,9990) =    107,009 ms/op
+     p(99,9999) =    107,009 ms/op
+    p(100,0000) =    107,009 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-150000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 12, n = 250000, seed = 42)
+
+# Run progress: 33,33% complete, ETA 00:03:36
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 438,591 ms/op
+# Warmup Iteration   2: 415,102 ms/op
+# Warmup Iteration   3: 395,963 ms/op
+# Warmup Iteration   4: 401,523 ms/op
+# Warmup Iteration   5: 400,252 ms/op
+# Warmup Iteration   6: 395,200 ms/op
+# Warmup Iteration   7: 402,329 ms/op
+# Warmup Iteration   8: 404,065 ms/op
+Iteration   1: 399,721 ms/op
+Iteration   2: 397,266 ms/op
+Iteration   3: 397,410 ms/op
+Iteration   4: 392,980 ms/op
+Iteration   5: 400,677 ms/op
+Iteration   6: 401,627 ms/op
+Iteration   7: 393,076 ms/op
+Iteration   8: 407,077 ms/op
+Iteration   9: 398,936 ms/op
+Iteration  10: 389,747 ms/op
+Iteration  11: 392,954 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+398,176 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 37,50% complete, ETA 00:03:14
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 439,451 ms/op
+# Warmup Iteration   2: 415,138 ms/op
+# Warmup Iteration   3: 396,019 ms/op
+# Warmup Iteration   4: 401,148 ms/op
+# Warmup Iteration   5: 400,101 ms/op
+# Warmup Iteration   6: 395,109 ms/op
+# Warmup Iteration   7: 402,120 ms/op
+# Warmup Iteration   8: 404,534 ms/op
+Iteration   1: 399,504 ms/op
+Iteration   2: 397,557 ms/op
+Iteration   3: 396,805 ms/op
+Iteration   4: 393,337 ms/op
+Iteration   5: 403,920 ms/op
+Iteration   6: 402,783 ms/op
+Iteration   7: 392,818 ms/op
+Iteration   8: 406,946 ms/op
+Iteration   9: 399,235 ms/op
+Iteration  10: 389,391 ms/op
+Iteration  11: 393,312 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+397,994 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    397,635 ±(99.9%) 3,710 ms/op
+
+  Histogram, ms/op:
+    [380,000, 382,500) = 0 
+    [382,500, 385,000) = 0 
+    [385,000, 387,500) = 0 
+    [387,500, 390,000) = 2 
+    [390,000, 392,500) = 0 
+    [392,500, 395,000) = 6 
+    [395,000, 397,500) = 3 
+    [397,500, 400,000) = 7 
+    [400,000, 402,500) = 2 
+    [402,500, 405,000) = 2 
+    [405,000, 407,500) = 2 
+
+  Percentiles, ms/op:
+      p(0,0000) =    389,391 ms/op
+     p(50,0000) =    397,776 ms/op
+     p(90,0000) =    405,433 ms/op
+     p(95,0000) =    407,045 ms/op
+     p(99,0000) =    407,077 ms/op
+     p(99,9000) =    407,077 ms/op
+     p(99,9900) =    407,077 ms/op
+     p(99,9990) =    407,077 ms/op
+     p(99,9999) =    407,077 ms/op
+    p(100,0000) =    407,077 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-250000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 12, n = 350000, seed = 42)
+
+# Run progress: 41,67% complete, ETA 00:02:54
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 439,540 ms/op
+# Warmup Iteration   2: 449,951 ms/op
+# Warmup Iteration   3: 412,234 ms/op
+# Warmup Iteration   4: 421,159 ms/op
+# Warmup Iteration   5: 405,261 ms/op
+# Warmup Iteration   6: 407,931 ms/op
+# Warmup Iteration   7: 411,197 ms/op
+# Warmup Iteration   8: 427,903 ms/op
+Iteration   1: 410,931 ms/op
+Iteration   2: 411,872 ms/op
+Iteration   3: 410,548 ms/op
+Iteration   4: 417,756 ms/op
+Iteration   5: 423,458 ms/op
+Iteration   6: 407,517 ms/op
+Iteration   7: 411,133 ms/op
+Iteration   8: 409,407 ms/op
+Iteration   9: 420,222 ms/op
+Iteration  10: 410,244 ms/op
+Iteration  11: 404,912 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+410,539 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 45,83% complete, ETA 00:02:37
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 440,794 ms/op
+# Warmup Iteration   2: 450,341 ms/op
+# Warmup Iteration   3: 413,277 ms/op
+# Warmup Iteration   4: 421,514 ms/op
+# Warmup Iteration   5: 406,865 ms/op
+# Warmup Iteration   6: 407,605 ms/op
+# Warmup Iteration   7: 412,583 ms/op
+# Warmup Iteration   8: 429,165 ms/op
+Iteration   1: 410,340 ms/op
+Iteration   2: 411,103 ms/op
+Iteration   3: 411,898 ms/op
+Iteration   4: 418,368 ms/op
+Iteration   5: 424,025 ms/op
+Iteration   6: 407,927 ms/op
+Iteration   7: 410,123 ms/op
+Iteration   8: 409,372 ms/op
+Iteration   9: 421,666 ms/op
+Iteration  10: 411,253 ms/op
+Iteration  11: 405,616 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+411,346 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    412,566 ±(99.9%) 4,125 ms/op
+
+  Histogram, ms/op:
+    [400,000, 402,500) = 0 
+    [402,500, 405,000) = 1 
+    [405,000, 407,500) = 1 
+    [407,500, 410,000) = 4 
+    [410,000, 412,500) = 12 
+    [412,500, 415,000) = 0 
+    [415,000, 417,500) = 0 
+    [417,500, 420,000) = 2 
+    [420,000, 422,500) = 2 
+    [422,500, 425,000) = 2 
+    [425,000, 427,500) = 0 
+
+  Percentiles, ms/op:
+      p(0,0000) =    404,912 ms/op
+     p(50,0000) =    411,017 ms/op
+     p(90,0000) =    422,562 ms/op
+     p(95,0000) =    423,883 ms/op
+     p(99,0000) =    424,025 ms/op
+     p(99,9000) =    424,025 ms/op
+     p(99,9900) =    424,025 ms/op
+     p(99,9990) =    424,025 ms/op
+     p(99,9999) =    424,025 ms/op
+    p(100,0000) =    424,025 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-12-n-350000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 16, n = 150000, seed = 42)
+
+# Run progress: 50,00% complete, ETA 00:02:21
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 127,571 ms/op
+# Warmup Iteration   2: 112,041 ms/op
+# Warmup Iteration   3: 95,403 ms/op
+# Warmup Iteration   4: 100,242 ms/op
+# Warmup Iteration   5: 98,804 ms/op
+# Warmup Iteration   6: 97,719 ms/op
+# Warmup Iteration   7: 94,504 ms/op
+# Warmup Iteration   8: 95,953 ms/op
+Iteration   1: 95,142 ms/op
+Iteration   2: 95,832 ms/op
+Iteration   3: 94,840 ms/op
+Iteration   4: 94,968 ms/op
+Iteration   5: 101,463 ms/op
+Iteration   6: 93,998 ms/op
+Iteration   7: 99,381 ms/op
+Iteration   8: 98,126 ms/op
+Iteration   9: 93,860 ms/op
+Iteration  10: 94,159 ms/op
+Iteration  11: 96,212 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+98,778 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 54,17% complete, ETA 00:02:02
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 127,155 ms/op
+# Warmup Iteration   2: 113,274 ms/op
+# Warmup Iteration   3: 96,715 ms/op
+# Warmup Iteration   4: 101,337 ms/op
+# Warmup Iteration   5: 100,155 ms/op
+# Warmup Iteration   6: 98,997 ms/op
+# Warmup Iteration   7: 95,588 ms/op
+# Warmup Iteration   8: 97,120 ms/op
+Iteration   1: 95,682 ms/op
+Iteration   2: 97,147 ms/op
+Iteration   3: 96,211 ms/op
+Iteration   4: 98,349 ms/op
+Iteration   5: 103,349 ms/op
+Iteration   6: 94,756 ms/op
+Iteration   7: 100,758 ms/op
+Iteration   8: 100,335 ms/op
+Iteration   9: 94,730 ms/op
+Iteration  10: 95,424 ms/op
+Iteration  11: 97,313 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+99,831 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =     97,110 ±(99.9%) 2,038 ms/op
+
+  Histogram, ms/op:
+    [ 93,000,  94,000) = 2 
+    [ 94,000,  95,000) = 5 
+    [ 95,000,  96,000) = 4 
+    [ 96,000,  97,000) = 2 
+    [ 97,000,  98,000) = 2 
+    [ 98,000,  99,000) = 3 
+    [ 99,000, 100,000) = 2 
+    [100,000, 101,000) = 2 
+    [101,000, 102,000) = 1 
+    [102,000, 103,000) = 0 
+
+  Percentiles, ms/op:
+      p(0,0000) =     93,860 ms/op
+     p(50,0000) =     96,211 ms/op
+     p(90,0000) =    101,110 ms/op
+     p(95,0000) =    102,878 ms/op
+     p(99,0000) =    103,349 ms/op
+     p(99,9000) =    103,349 ms/op
+     p(99,9900) =    103,349 ms/op
+     p(99,9990) =    103,349 ms/op
+     p(99,9999) =    103,349 ms/op
+    p(100,0000) =    103,349 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-150000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 16, n = 250000, seed = 42)
+
+# Run progress: 58,33% complete, ETA 00:01:44
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 134,489 ms/op
+# Warmup Iteration   2: 122,069 ms/op
+# Warmup Iteration   3: 105,905 ms/op
+# Warmup Iteration   4: 104,134 ms/op
+# Warmup Iteration   5: 107,718 ms/op
+# Warmup Iteration   6: 109,971 ms/op
+# Warmup Iteration   7: 103,332 ms/op
+# Warmup Iteration   8: 105,099 ms/op
+Iteration   1: 111,260 ms/op
+Iteration   2: 104,500 ms/op
+Iteration   3: 105,221 ms/op
+Iteration   4: 109,229 ms/op
+Iteration   5: 105,791 ms/op
+Iteration   6: 106,669 ms/op
+Iteration   7: 108,113 ms/op
+Iteration   8: 106,184 ms/op
+Iteration   9: 106,563 ms/op
+Iteration  10: 108,232 ms/op
+Iteration  11: 109,353 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+103,825 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 62,50% complete, ETA 00:01:29
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 134,361 ms/op
+# Warmup Iteration   2: 122,070 ms/op
+# Warmup Iteration   3: 106,103 ms/op
+# Warmup Iteration   4: 104,159 ms/op
+# Warmup Iteration   5: 107,003 ms/op
+# Warmup Iteration   6: 109,716 ms/op
+# Warmup Iteration   7: 104,162 ms/op
+# Warmup Iteration   8: 105,493 ms/op
+Iteration   1: 110,707 ms/op
+Iteration   2: 103,898 ms/op
+Iteration   3: 105,157 ms/op
+Iteration   4: 109,554 ms/op
+Iteration   5: 106,072 ms/op
+Iteration   6: 107,215 ms/op
+Iteration   7: 107,657 ms/op
+Iteration   8: 107,135 ms/op
+Iteration   9: 107,099 ms/op
+Iteration  10: 107,824 ms/op
+Iteration  11: 109,575 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+103,491 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    107,097 ±(99.9%) 1,662 ms/op
+
+  Histogram, ms/op:
+    [103,000, 103,500) = 1 
+    [103,500, 104,000) = 2 
+    [104,000, 104,500) = 1 
+    [104,500, 105,000) = 0 
+    [105,000, 105,500) = 2 
+    [105,500, 106,000) = 1 
+    [106,000, 106,500) = 2 
+    [106,500, 107,000) = 2 
+    [107,000, 107,500) = 3 
+    [107,500, 108,000) = 2 
+    [108,000, 108,500) = 2 
+    [108,500, 109,000) = 0 
+    [109,000, 109,500) = 2 
+    [109,500, 110,000) = 2 
+    [110,000, 110,500) = 0 
+    [110,500, 111,000) = 1 
+    [111,000, 111,500) = 1 
+
+  Percentiles, ms/op:
+      p(0,0000) =    103,491 ms/op
+     p(50,0000) =    107,117 ms/op
+     p(90,0000) =    110,141 ms/op
+     p(95,0000) =    111,121 ms/op
+     p(99,0000) =    111,260 ms/op
+     p(99,9000) =    111,260 ms/op
+     p(99,9900) =    111,260 ms/op
+     p(99,9990) =    111,260 ms/op
+     p(99,9999) =    111,260 ms/op
+    p(100,0000) =    111,260 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-250000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 16, n = 350000, seed = 42)
+
+# Run progress: 66,67% complete, ETA 00:01:15
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 412,359 ms/op
+# Warmup Iteration   2: 411,650 ms/op
+# Warmup Iteration   3: 384,878 ms/op
+# Warmup Iteration   4: 401,270 ms/op
+# Warmup Iteration   5: 391,955 ms/op
+# Warmup Iteration   6: 383,639 ms/op
+# Warmup Iteration   7: 401,501 ms/op
+# Warmup Iteration   8: 394,053 ms/op
+Iteration   1: 404,186 ms/op
+Iteration   2: 392,048 ms/op
+Iteration   3: 397,070 ms/op
+Iteration   4: 392,683 ms/op
+Iteration   5: 390,651 ms/op
+Iteration   6: 388,722 ms/op
+Iteration   7: 413,994 ms/op
+Iteration   8: 393,831 ms/op
+Iteration   9: 390,582 ms/op
+Iteration  10: 389,961 ms/op
+Iteration  11: 397,063 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+388,705 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 70,83% complete, ETA 00:01:05
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 414,321 ms/op
+# Warmup Iteration   2: 409,425 ms/op
+# Warmup Iteration   3: 384,408 ms/op
+# Warmup Iteration   4: 401,308 ms/op
+# Warmup Iteration   5: 392,650 ms/op
+# Warmup Iteration   6: 387,936 ms/op
+# Warmup Iteration   7: 400,405 ms/op
+# Warmup Iteration   8: 396,136 ms/op
+Iteration   1: 404,159 ms/op
+Iteration   2: 392,089 ms/op
+Iteration   3: 396,312 ms/op
+Iteration   4: 391,863 ms/op
+Iteration   5: 390,384 ms/op
+Iteration   6: 388,852 ms/op
+Iteration   7: 412,371 ms/op
+Iteration   8: 393,799 ms/op
+Iteration   9: 391,610 ms/op
+Iteration  10: 389,611 ms/op
+Iteration  11: 396,634 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+390,245 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    394,893 ±(99.9%) 5,423 ms/op
+
+  Histogram, ms/op:
+    [380,000, 382,500) = 0 
+    [382,500, 385,000) = 0 
+    [385,000, 387,500) = 0 
+    [387,500, 390,000) = 5 
+    [390,000, 392,500) = 8 
+    [392,500, 395,000) = 3 
+    [395,000, 397,500) = 4 
+    [397,500, 400,000) = 0 
+    [400,000, 402,500) = 0 
+    [402,500, 405,000) = 2 
+    [405,000, 407,500) = 0 
+    [407,500, 410,000) = 0 
+    [410,000, 412,500) = 1 
+    [412,500, 415,000) = 1 
+    [415,000, 417,500) = 0 
+
+  Percentiles, ms/op:
+      p(0,0000) =    388,705 ms/op
+     p(50,0000) =    392,069 ms/op
+     p(90,0000) =    408,278 ms/op
+     p(95,0000) =    413,588 ms/op
+     p(99,0000) =    413,994 ms/op
+     p(99,9000) =    413,994 ms/op
+     p(99,9900) =    413,994 ms/op
+     p(99,9990) =    413,994 ms/op
+     p(99,9999) =    413,994 ms/op
+    p(100,0000) =    413,994 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-16-n-350000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 24, n = 150000, seed = 42)
+
+# Run progress: 75,00% complete, ETA 00:00:55
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 54,014 ms/op
+# Warmup Iteration   2: 41,203 ms/op
+# Warmup Iteration   3: 30,006 ms/op
+# Warmup Iteration   4: 29,387 ms/op
+# Warmup Iteration   5: 29,319 ms/op
+# Warmup Iteration   6: 29,683 ms/op
+# Warmup Iteration   7: 28,392 ms/op
+# Warmup Iteration   8: 30,608 ms/op
+Iteration   1: 29,503 ms/op
+Iteration   2: 28,228 ms/op
+Iteration   3: 28,922 ms/op
+Iteration   4: 28,125 ms/op
+Iteration   5: 28,399 ms/op
+Iteration   6: 28,380 ms/op
+Iteration   7: 28,539 ms/op
+Iteration   8: 28,589 ms/op
+Iteration   9: 28,383 ms/op
+Iteration  10: 29,392 ms/op
+Iteration  11: 30,060 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+28,334 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 79,17% complete, ETA 00:00:44
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 53,886 ms/op
+# Warmup Iteration   2: 41,783 ms/op
+# Warmup Iteration   3: 29,997 ms/op
+# Warmup Iteration   4: 29,262 ms/op
+# Warmup Iteration   5: 29,580 ms/op
+# Warmup Iteration   6: 29,762 ms/op
+# Warmup Iteration   7: 28,625 ms/op
+# Warmup Iteration   8: 30,585 ms/op
+Iteration   1: 29,618 ms/op
+Iteration   2: 28,207 ms/op
+Iteration   3: 28,897 ms/op
+Iteration   4: 28,127 ms/op
+Iteration   5: 28,475 ms/op
+Iteration   6: 28,247 ms/op
+Iteration   7: 28,158 ms/op
+Iteration   8: 28,307 ms/op
+Iteration   9: 28,407 ms/op
+Iteration  10: 29,370 ms/op
+Iteration  11: 30,412 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+28,441 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =     28,730 ±(99.9%) 0,500 ms/op
+
+  Histogram, ms/op:
+    [28,000, 28,250) = 6 
+    [28,250, 28,500) = 8 
+    [28,500, 28,750) = 2 
+    [28,750, 29,000) = 2 
+    [29,000, 29,250) = 0 
+    [29,250, 29,500) = 2 
+    [29,500, 29,750) = 2 
+    [29,750, 30,000) = 0 
+    [30,000, 30,250) = 1 
+    [30,250, 30,500) = 1 
+    [30,500, 30,750) = 0 
+
+  Percentiles, ms/op:
+      p(0,0000) =     28,125 ms/op
+     p(50,0000) =     28,424 ms/op
+     p(90,0000) =     29,839 ms/op
+     p(95,0000) =     30,324 ms/op
+     p(99,0000) =     30,412 ms/op
+     p(99,9000) =     30,412 ms/op
+     p(99,9900) =     30,412 ms/op
+     p(99,9990) =     30,412 ms/op
+     p(99,9999) =     30,412 ms/op
+    p(100,0000) =     30,412 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-150000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 24, n = 250000, seed = 42)
+
+# Run progress: 83,33% complete, ETA 00:00:33
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 121,500 ms/op
+# Warmup Iteration   2: 110,480 ms/op
+# Warmup Iteration   3: 97,417 ms/op
+# Warmup Iteration   4: 98,734 ms/op
+# Warmup Iteration   5: 95,710 ms/op
+# Warmup Iteration   6: 99,610 ms/op
+# Warmup Iteration   7: 96,191 ms/op
+# Warmup Iteration   8: 97,265 ms/op
+Iteration   1: 98,468 ms/op
+Iteration   2: 98,031 ms/op
+Iteration   3: 98,979 ms/op
+Iteration   4: 98,199 ms/op
+Iteration   5: 103,938 ms/op
+Iteration   6: 98,377 ms/op
+Iteration   7: 97,198 ms/op
+Iteration   8: 98,274 ms/op
+Iteration   9: 96,112 ms/op
+Iteration  10: 102,184 ms/op
+Iteration  11: 99,563 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+96,413 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 87,50% complete, ETA 00:00:24
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 121,348 ms/op
+# Warmup Iteration   2: 110,172 ms/op
+# Warmup Iteration   3: 97,399 ms/op
+# Warmup Iteration   4: 98,882 ms/op
+# Warmup Iteration   5: 94,842 ms/op
+# Warmup Iteration   6: 99,601 ms/op
+# Warmup Iteration   7: 96,355 ms/op
+# Warmup Iteration   8: 96,136 ms/op
+Iteration   1: 98,276 ms/op
+Iteration   2: 98,201 ms/op
+Iteration   3: 99,393 ms/op
+Iteration   4: 97,830 ms/op
+Iteration   5: 103,780 ms/op
+Iteration   6: 98,492 ms/op
+Iteration   7: 96,749 ms/op
+Iteration   8: 98,461 ms/op
+Iteration   9: 96,578 ms/op
+Iteration  10: 102,067 ms/op
+Iteration  11: 99,087 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+96,686 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =     98,806 ±(99.9%) 1,657 ms/op
+
+  Histogram, ms/op:
+    [ 96,000,  96,500) = 2 
+    [ 96,500,  97,000) = 3 
+    [ 97,000,  97,500) = 1 
+    [ 97,500,  98,000) = 1 
+    [ 98,000,  98,500) = 9 
+    [ 98,500,  99,000) = 1 
+    [ 99,000,  99,500) = 2 
+    [ 99,500, 100,000) = 1 
+    [100,000, 100,500) = 0 
+    [100,500, 101,000) = 0 
+    [101,000, 101,500) = 0 
+    [101,500, 102,000) = 0 
+    [102,000, 102,500) = 2 
+    [102,500, 103,000) = 0 
+    [103,000, 103,500) = 0 
+
+  Percentiles, ms/op:
+      p(0,0000) =     96,112 ms/op
+     p(50,0000) =     98,327 ms/op
+     p(90,0000) =    102,982 ms/op
+     p(95,0000) =    103,899 ms/op
+     p(99,0000) =    103,938 ms/op
+     p(99,9000) =    103,938 ms/op
+     p(99,9900) =    103,938 ms/op
+     p(99,9990) =    103,938 ms/op
+     p(99,9999) =    103,938 ms/op
+    p(100,0000) =    103,938 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-250000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread
+# Benchmark mode: Single shot invocation time
+# Benchmark: bench.ExtendableHashTableBenchmark.buildFromScratch
+# Parameters: (bucketCapacity = 24, n = 350000, seed = 42)
+
+# Run progress: 91,67% complete, ETA 00:00:15
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 130,014 ms/op
+# Warmup Iteration   2: 118,031 ms/op
+# Warmup Iteration   3: 105,354 ms/op
+# Warmup Iteration   4: 107,452 ms/op
+# Warmup Iteration   5: 104,412 ms/op
+# Warmup Iteration   6: 101,585 ms/op
+# Warmup Iteration   7: 102,787 ms/op
+# Warmup Iteration   8: 103,767 ms/op
+Iteration   1: 104,505 ms/op
+Iteration   2: 105,776 ms/op
+Iteration   3: 105,451 ms/op
+Iteration   4: 103,542 ms/op
+Iteration   5: 102,045 ms/op
+Iteration   6: 109,323 ms/op
+Iteration   7: 108,669 ms/op
+Iteration   8: 101,801 ms/op
+Iteration   9: 110,504 ms/op
+Iteration  10: 106,688 ms/op
+Iteration  11: 104,939 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+104,257 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 95,83% complete, ETA 00:00:07
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 130,635 ms/op
+# Warmup Iteration   2: 118,290 ms/op
+# Warmup Iteration   3: 105,875 ms/op
+# Warmup Iteration   4: 107,260 ms/op
+# Warmup Iteration   5: 104,124 ms/op
+# Warmup Iteration   6: 101,295 ms/op
+# Warmup Iteration   7: 102,188 ms/op
+# Warmup Iteration   8: 103,060 ms/op
+Iteration   1: 103,968 ms/op
+Iteration   2: 106,050 ms/op
+Iteration   3: 105,404 ms/op
+Iteration   4: 103,557 ms/op
+Iteration   5: 101,806 ms/op
+Iteration   6: 109,536 ms/op
+Iteration   7: 109,360 ms/op
+Iteration   8: 101,822 ms/op
+Iteration   9: 110,229 ms/op
+Iteration  10: 106,443 ms/op
+Iteration  11: 104,570 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+104,483 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.ExtendableHashTableBenchmark.buildFromScratch":
+  N = 24
+  mean =    105,614 ±(99.9%) 2,110 ms/op
+
+  Histogram, ms/op:
+    [101,000, 102,000) = 3 
+    [102,000, 103,000) = 1 
+    [103,000, 104,000) = 3 
+    [104,000, 105,000) = 5 
+    [105,000, 106,000) = 3 
+    [106,000, 107,000) = 3 
+    [107,000, 108,000) = 0 
+    [108,000, 109,000) = 1 
+    [109,000, 110,000) = 3 
+
+  Percentiles, ms/op:
+      p(0,0000) =    101,801 ms/op
+     p(50,0000) =    105,171 ms/op
+     p(90,0000) =    109,883 ms/op
+     p(95,0000) =    110,436 ms/op
+     p(99,0000) =    110,504 ms/op
+     p(99,9000) =    110,504 ms/op
+     p(99,9900) =    110,504 ms/op
+     p(99,9990) =    110,504 ms/op
+     p(99,9999) =    110,504 ms/op
+    p(100,0000) =    110,504 ms/op
+
+Secondary result "bench.ExtendableHashTableBenchmark.buildFromScratch:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.ExtendableHashTableBenchmark.buildFromScratch/alloc/bench.ExtendableHashTableBenchmark.buildFromScratch-SingleShotTime-bucketCapacity-24-n-350000-seed-42/flame-alloc-reverse.html
+
+
+# Run complete. Total time: 00:02:58
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                            (bucketCapacity)     (n)  (seed)  Mode  Cnt     Score    Error  Units
+ExtendableHashTableBenchmark.buildFromScratch                       8  150000      42    ss   24   414,494 ±  3,553  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                 8  150000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                       8  250000      42    ss   24   427,470 ±  5,594  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                 8  250000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                       8  350000      42    ss   24  1704,377 ± 18,408  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                 8  350000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      12  150000      42    ss   24   105,021 ±  0,854  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                12  150000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      12  250000      42    ss   24   397,635 ±  3,710  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                12  250000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      12  350000      42    ss   24   412,566 ±  4,125  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                12  350000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      16  150000      42    ss   24    97,110 ±  2,038  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                16  150000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      16  250000      42    ss   24   107,097 ±  1,662  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                16  250000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      16  350000      42    ss   24   394,893 ±  5,423  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                16  350000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      24  150000      42    ss   24    28,730 ±  0,500  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                24  150000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      24  250000      42    ss   24    98,806 ±  1,657  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                24  250000      42    ss            NaN             ---
+ExtendableHashTableBenchmark.buildFromScratch                      24  350000      42    ss   24   105,614 ±  2,110  ms/op
+ExtendableHashTableBenchmark.buildFromScratch:async                24  350000      42    ss            NaN             ---

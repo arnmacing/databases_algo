@@ -1,0 +1,17 @@
+benchmark,metric,mode,score,scoreError,scoreUnit,docs,seed,threshold,wordsPerDoc
+bench.LshBenchmark.nearDuplicatesFullScan,primary,thrpt,0.0012082978302933997,5.3762592022472274e-06,ops/ms,1500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,thrpt,NaN,NaN,---,1500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,thrpt,0.0006737356695423321,4.223879053212868e-06,ops/ms,2000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,thrpt,NaN,NaN,---,2000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,thrpt,0.00043222921617061565,2.2263052900038808e-06,ops/ms,2500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,thrpt,NaN,NaN,---,2500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,thrpt,0.00029505573895551154,1.925249162245519e-06,ops/ms,3000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,thrpt,NaN,NaN,---,3000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,avgt,829.6574722083333,6.64050886417703,ms/op,1500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,avgt,NaN,NaN,---,1500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,avgt,1472.302194416667,8.680678876591546,ms/op,2000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,avgt,NaN,NaN,---,2000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,avgt,2327.187519125,9.810472970027288,ms/op,2500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,avgt,NaN,NaN,---,2500,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,primary,avgt,3382.2316040416667,10.124209782186426,ms/op,3000,42,0.9,16
+bench.LshBenchmark.nearDuplicatesFullScan,async,avgt,NaN,NaN,---,3000,42,0.9,16

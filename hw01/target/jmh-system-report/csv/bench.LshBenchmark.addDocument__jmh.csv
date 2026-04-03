@@ -1,0 +1,17 @@
+benchmark,metric,mode,score,scoreError,scoreUnit,baseDocs,seed,wordsPerDoc
+bench.LshBenchmark.addDocument,primary,thrpt,29.361221973807805,0.413975153961939,ops/ms,20000,42,16
+bench.LshBenchmark.addDocument,async,thrpt,NaN,NaN,---,20000,42,16
+bench.LshBenchmark.addDocument,primary,thrpt,29.905478693210615,0.44070839175613924,ops/ms,30000,42,16
+bench.LshBenchmark.addDocument,async,thrpt,NaN,NaN,---,30000,42,16
+bench.LshBenchmark.addDocument,primary,thrpt,29.85574516115446,0.4631809131016047,ops/ms,45000,42,16
+bench.LshBenchmark.addDocument,async,thrpt,NaN,NaN,---,45000,42,16
+bench.LshBenchmark.addDocument,primary,thrpt,29.509547318544623,0.4778030791802103,ops/ms,60000,42,16
+bench.LshBenchmark.addDocument,async,thrpt,NaN,NaN,---,60000,42,16
+bench.LshBenchmark.addDocument,primary,avgt,0.033956319932901866,0.0006158331813721473,ms/op,20000,42,16
+bench.LshBenchmark.addDocument,async,avgt,NaN,NaN,---,20000,42,16
+bench.LshBenchmark.addDocument,primary,avgt,0.033908224572759195,0.00041126313913742303,ms/op,30000,42,16
+bench.LshBenchmark.addDocument,async,avgt,NaN,NaN,---,30000,42,16
+bench.LshBenchmark.addDocument,primary,avgt,0.033849511147990334,0.000415969526637294,ms/op,45000,42,16
+bench.LshBenchmark.addDocument,async,avgt,NaN,NaN,---,45000,42,16
+bench.LshBenchmark.addDocument,primary,avgt,0.033871837057063356,0.0004442819242302997,ms/op,60000,42,16
+bench.LshBenchmark.addDocument,async,avgt,NaN,NaN,---,60000,42,16

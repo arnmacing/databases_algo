@@ -1,0 +1,17 @@
+benchmark,metric,mode,score,scoreError,scoreUnit,n,seed
+bench.PerfectHashingBenchmark.getMiss,primary,thrpt,77.96747642802039,0.6976866459914286,ops/us,200000,42
+bench.PerfectHashingBenchmark.getMiss,async,thrpt,NaN,NaN,---,200000,42
+bench.PerfectHashingBenchmark.getMiss,primary,thrpt,38.55140771776683,0.1942119718760474,ops/us,400000,42
+bench.PerfectHashingBenchmark.getMiss,async,thrpt,NaN,NaN,---,400000,42
+bench.PerfectHashingBenchmark.getMiss,primary,thrpt,40.892854509919395,0.18006975989920648,ops/us,600000,42
+bench.PerfectHashingBenchmark.getMiss,async,thrpt,NaN,NaN,---,600000,42
+bench.PerfectHashingBenchmark.getMiss,primary,thrpt,30.88721456088062,0.5392909839409809,ops/us,800000,42
+bench.PerfectHashingBenchmark.getMiss,async,thrpt,NaN,NaN,---,800000,42
+bench.PerfectHashingBenchmark.getMiss,primary,avgt,0.01280130245535848,0.0001961103472046435,us/op,200000,42
+bench.PerfectHashingBenchmark.getMiss,async,avgt,NaN,NaN,---,200000,42
+bench.PerfectHashingBenchmark.getMiss,primary,avgt,0.025715416164510275,0.00042799860884084055,us/op,400000,42
+bench.PerfectHashingBenchmark.getMiss,async,avgt,NaN,NaN,---,400000,42
+bench.PerfectHashingBenchmark.getMiss,primary,avgt,0.024660802835754798,0.00016906968799938358,us/op,600000,42
+bench.PerfectHashingBenchmark.getMiss,async,avgt,NaN,NaN,---,600000,42
+bench.PerfectHashingBenchmark.getMiss,primary,avgt,0.03277513110411439,0.000539536017982525,us/op,800000,42
+bench.PerfectHashingBenchmark.getMiss,async,avgt,NaN,NaN,---,800000,42

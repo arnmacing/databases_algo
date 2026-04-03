@@ -1,0 +1,767 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 200000, seed = 42)
+
+# Run progress: 0,00% complete, ETA 00:10:40
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 53,319 ops/us
+# Warmup Iteration   2: 60,593 ops/us
+# Warmup Iteration   3: 60,458 ops/us
+# Warmup Iteration   4: 53,279 ops/us
+# Warmup Iteration   5: 62,021 ops/us
+# Warmup Iteration   6: 55,625 ops/us
+# Warmup Iteration   7: 59,260 ops/us
+# Warmup Iteration   8: 60,196 ops/us
+Iteration   1: 61,518 ops/us
+Iteration   2: 55,533 ops/us
+Iteration   3: 58,898 ops/us
+Iteration   4: 57,281 ops/us
+Iteration   5: 57,473 ops/us
+Iteration   6: 59,852 ops/us
+Iteration   7: 54,986 ops/us
+Iteration   8: 60,189 ops/us
+Iteration   9: 60,447 ops/us
+Iteration  10: 56,095 ops/us
+Iteration  11: 60,376 ops/us
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+60,174 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 6,25% complete, ETA 00:11:12
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 54,163 ops/us
+# Warmup Iteration   2: 60,114 ops/us
+# Warmup Iteration   3: 59,302 ops/us
+# Warmup Iteration   4: 51,998 ops/us
+# Warmup Iteration   5: 60,063 ops/us
+# Warmup Iteration   6: 56,173 ops/us
+# Warmup Iteration   7: 56,800 ops/us
+# Warmup Iteration   8: 61,199 ops/us
+Iteration   1: 60,120 ops/us
+Iteration   2: 53,983 ops/us
+Iteration   3: 55,913 ops/us
+Iteration   4: 57,376 ops/us
+Iteration   5: 56,874 ops/us
+Iteration   6: 56,951 ops/us
+Iteration   7: 57,753 ops/us
+Iteration   8: 57,746 ops/us
+Iteration   9: 57,505 ops/us
+Iteration  10: 57,164 ops/us
+Iteration  11: 57,040 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+57,445 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  57,862 ±(99.9%) 1,495 ops/us [Average]
+  (min, avg, max) = (53,983, 57,862, 61,518), stdev = 1,944
+  CI (99.9%): [56,367, 59,357] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 400000, seed = 42)
+
+# Run progress: 12,50% complete, ETA 00:10:28
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 34,983 ops/us
+# Warmup Iteration   2: 35,398 ops/us
+# Warmup Iteration   3: 35,401 ops/us
+# Warmup Iteration   4: 35,710 ops/us
+# Warmup Iteration   5: 35,644 ops/us
+# Warmup Iteration   6: 36,208 ops/us
+# Warmup Iteration   7: 36,076 ops/us
+# Warmup Iteration   8: 36,240 ops/us
+Iteration   1: 36,448 ops/us
+Iteration   2: 36,256 ops/us
+Iteration   3: 36,283 ops/us
+Iteration   4: 35,852 ops/us
+Iteration   5: 35,831 ops/us
+Iteration   6: 35,518 ops/us
+Iteration   7: 35,786 ops/us
+Iteration   8: 35,888 ops/us
+Iteration   9: 35,878 ops/us
+Iteration  10: 36,142 ops/us
+Iteration  11: 36,139 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+36,010 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 18,75% complete, ETA 00:09:23
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 35,214 ops/us
+# Warmup Iteration   2: 35,050 ops/us
+# Warmup Iteration   3: 34,579 ops/us
+# Warmup Iteration   4: 34,886 ops/us
+# Warmup Iteration   5: 35,020 ops/us
+# Warmup Iteration   6: 34,902 ops/us
+# Warmup Iteration   7: 35,552 ops/us
+# Warmup Iteration   8: 35,482 ops/us
+Iteration   1: 35,426 ops/us
+Iteration   2: 35,435 ops/us
+Iteration   3: 35,376 ops/us
+Iteration   4: 35,341 ops/us
+Iteration   5: 35,363 ops/us
+Iteration   6: 35,514 ops/us
+Iteration   7: 35,575 ops/us
+Iteration   8: 35,493 ops/us
+Iteration   9: 35,617 ops/us
+Iteration  10: 35,662 ops/us
+Iteration  11: 35,446 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+35,537 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  35,742 ±(99.9%) 0,253 ops/us [Average]
+  (min, avg, max) = (35,341, 35,742, 36,448), stdev = 0,329
+  CI (99.9%): [35,490, 35,995] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-400000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 600000, seed = 42)
+
+# Run progress: 25,00% complete, ETA 00:08:31
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 30,362 ops/us
+# Warmup Iteration   2: 30,744 ops/us
+# Warmup Iteration   3: 30,646 ops/us
+# Warmup Iteration   4: 30,424 ops/us
+# Warmup Iteration   5: 30,497 ops/us
+# Warmup Iteration   6: 30,245 ops/us
+# Warmup Iteration   7: 30,453 ops/us
+# Warmup Iteration   8: 30,677 ops/us
+Iteration   1: 30,703 ops/us
+Iteration   2: 30,337 ops/us
+Iteration   3: 30,365 ops/us
+Iteration   4: 30,088 ops/us
+Iteration   5: 30,495 ops/us
+Iteration   6: 30,489 ops/us
+Iteration   7: 30,668 ops/us
+Iteration   8: 30,365 ops/us
+Iteration   9: 30,353 ops/us
+Iteration  10: 30,417 ops/us
+Iteration  11: 30,618 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+30,509 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 31,25% complete, ETA 00:07:44
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 32,270 ops/us
+# Warmup Iteration   2: 32,460 ops/us
+# Warmup Iteration   3: 32,272 ops/us
+# Warmup Iteration   4: 32,155 ops/us
+# Warmup Iteration   5: 32,079 ops/us
+# Warmup Iteration   6: 32,009 ops/us
+# Warmup Iteration   7: 32,191 ops/us
+# Warmup Iteration   8: 31,980 ops/us
+Iteration   1: 32,230 ops/us
+Iteration   2: 31,838 ops/us
+Iteration   3: 32,188 ops/us
+Iteration   4: 32,096 ops/us
+Iteration   5: 32,136 ops/us
+Iteration   6: 32,064 ops/us
+Iteration   7: 32,070 ops/us
+Iteration   8: 31,980 ops/us
+Iteration   9: 32,175 ops/us
+Iteration  10: 31,784 ops/us
+Iteration  11: 31,715 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+31,417 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  31,213 ±(99.9%) 0,619 ops/us [Average]
+  (min, avg, max) = (30,088, 31,213, 32,230), stdev = 0,805
+  CI (99.9%): [30,594, 31,831] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-600000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 800000, seed = 42)
+
+# Run progress: 37,50% complete, ETA 00:06:59
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 29,116 ops/us
+# Warmup Iteration   2: 29,322 ops/us
+# Warmup Iteration   3: 29,100 ops/us
+# Warmup Iteration   4: 28,928 ops/us
+# Warmup Iteration   5: 28,727 ops/us
+# Warmup Iteration   6: 28,852 ops/us
+# Warmup Iteration   7: 28,774 ops/us
+# Warmup Iteration   8: 28,717 ops/us
+Iteration   1: 29,013 ops/us
+Iteration   2: 29,122 ops/us
+Iteration   3: 29,215 ops/us
+Iteration   4: 29,226 ops/us
+Iteration   5: 29,307 ops/us
+Iteration   6: 29,288 ops/us
+Iteration   7: 29,164 ops/us
+Iteration   8: 29,344 ops/us
+Iteration   9: 29,355 ops/us
+Iteration  10: 29,126 ops/us
+Iteration  11: 29,115 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+29,010 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 43,75% complete, ETA 00:06:15
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 29,118 ops/us
+# Warmup Iteration   2: 29,061 ops/us
+# Warmup Iteration   3: 29,267 ops/us
+# Warmup Iteration   4: 29,323 ops/us
+# Warmup Iteration   5: 29,066 ops/us
+# Warmup Iteration   6: 28,930 ops/us
+# Warmup Iteration   7: 29,187 ops/us
+# Warmup Iteration   8: 29,139 ops/us
+Iteration   1: 28,615 ops/us
+Iteration   2: 28,547 ops/us
+Iteration   3: 29,139 ops/us
+Iteration   4: 28,946 ops/us
+Iteration   5: 29,102 ops/us
+Iteration   6: 29,082 ops/us
+Iteration   7: 29,109 ops/us
+Iteration   8: 28,981 ops/us
+Iteration   9: 29,234 ops/us
+Iteration  10: 29,321 ops/us
+Iteration  11: 29,072 ops/us
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+28,764 ops/us
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  29,092 ±(99.9%) 0,161 ops/us [Average]
+  (min, avg, max) = (28,547, 29,092, 29,355), stdev = 0,210
+  CI (99.9%): [28,930, 29,253] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-Throughput-n-800000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 200000, seed = 42)
+
+# Run progress: 50,00% complete, ETA 00:05:32
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,017 us/op
+# Warmup Iteration   2: 0,017 us/op
+# Warmup Iteration   3: 0,017 us/op
+# Warmup Iteration   4: 0,017 us/op
+# Warmup Iteration   5: 0,017 us/op
+# Warmup Iteration   6: 0,017 us/op
+# Warmup Iteration   7: 0,017 us/op
+# Warmup Iteration   8: 0,017 us/op
+Iteration   1: 0,017 us/op
+Iteration   2: 0,017 us/op
+Iteration   3: 0,017 us/op
+Iteration   4: 0,017 us/op
+Iteration   5: 0,017 us/op
+Iteration   6: 0,017 us/op
+Iteration   7: 0,017 us/op
+Iteration   8: 0,018 us/op
+Iteration   9: 0,017 us/op
+Iteration  10: 0,017 us/op
+Iteration  11: 0,017 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,017 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 56,25% complete, ETA 00:04:49
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,018 us/op
+# Warmup Iteration   2: 0,017 us/op
+# Warmup Iteration   3: 0,017 us/op
+# Warmup Iteration   4: 0,017 us/op
+# Warmup Iteration   5: 0,017 us/op
+# Warmup Iteration   6: 0,017 us/op
+# Warmup Iteration   7: 0,017 us/op
+# Warmup Iteration   8: 0,017 us/op
+Iteration   1: 0,017 us/op
+Iteration   2: 0,017 us/op
+Iteration   3: 0,018 us/op
+Iteration   4: 0,017 us/op
+Iteration   5: 0,017 us/op
+Iteration   6: 0,017 us/op
+Iteration   7: 0,017 us/op
+Iteration   8: 0,017 us/op
+Iteration   9: 0,017 us/op
+Iteration  10: 0,017 us/op
+Iteration  11: 0,017 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,017 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  0,017 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,017, 0,017, 0,018), stdev = 0,001
+  CI (99.9%): [0,017, 0,017] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-200000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 400000, seed = 42)
+
+# Run progress: 62,50% complete, ETA 00:04:07
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,028 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,028 us/op
+# Warmup Iteration   4: 0,029 us/op
+# Warmup Iteration   5: 0,029 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,028 us/op
+Iteration   1: 0,028 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,028 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,028 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 68,75% complete, ETA 00:03:26
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,029 us/op
+# Warmup Iteration   2: 0,028 us/op
+# Warmup Iteration   3: 0,029 us/op
+# Warmup Iteration   4: 0,029 us/op
+# Warmup Iteration   5: 0,028 us/op
+# Warmup Iteration   6: 0,028 us/op
+# Warmup Iteration   7: 0,028 us/op
+# Warmup Iteration   8: 0,029 us/op
+Iteration   1: 0,029 us/op
+Iteration   2: 0,028 us/op
+Iteration   3: 0,028 us/op
+Iteration   4: 0,029 us/op
+Iteration   5: 0,028 us/op
+Iteration   6: 0,028 us/op
+Iteration   7: 0,028 us/op
+Iteration   8: 0,028 us/op
+Iteration   9: 0,028 us/op
+Iteration  10: 0,028 us/op
+Iteration  11: 0,028 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,028 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  0,028 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,028, 0,028, 0,029), stdev = 0,001
+  CI (99.9%): [0,028, 0,028] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-400000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 600000, seed = 42)
+
+# Run progress: 75,00% complete, ETA 00:02:44
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,033 us/op
+# Warmup Iteration   2: 0,033 us/op
+# Warmup Iteration   3: 0,033 us/op
+# Warmup Iteration   4: 0,033 us/op
+# Warmup Iteration   5: 0,033 us/op
+# Warmup Iteration   6: 0,033 us/op
+# Warmup Iteration   7: 0,033 us/op
+# Warmup Iteration   8: 0,033 us/op
+Iteration   1: 0,033 us/op
+Iteration   2: 0,033 us/op
+Iteration   3: 0,033 us/op
+Iteration   4: 0,033 us/op
+Iteration   5: 0,033 us/op
+Iteration   6: 0,033 us/op
+Iteration   7: 0,033 us/op
+Iteration   8: 0,033 us/op
+Iteration   9: 0,033 us/op
+Iteration  10: 0,033 us/op
+Iteration  11: 0,033 us/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,033 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 81,25% complete, ETA 00:02:03
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,033 us/op
+# Warmup Iteration   2: 0,033 us/op
+# Warmup Iteration   3: 0,033 us/op
+# Warmup Iteration   4: 0,033 us/op
+# Warmup Iteration   5: 0,033 us/op
+# Warmup Iteration   6: 0,033 us/op
+# Warmup Iteration   7: 0,034 us/op
+# Warmup Iteration   8: 0,033 us/op
+Iteration   1: 0,033 us/op
+Iteration   2: 0,033 us/op
+Iteration   3: 0,033 us/op
+Iteration   4: 0,033 us/op
+Iteration   5: 0,033 us/op
+Iteration   6: 0,033 us/op
+Iteration   7: 0,033 us/op
+Iteration   8: 0,033 us/op
+Iteration   9: 0,033 us/op
+Iteration  10: 0,033 us/op
+Iteration  11: 0,034 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,033 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  0,033 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,033, 0,033, 0,034), stdev = 0,001
+  CI (99.9%): [0,033, 0,033] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-600000-seed-42/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.getHit
+# Parameters: (n = 800000, seed = 42)
+
+# Run progress: 87,50% complete, ETA 00:01:22
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,035 us/op
+# Warmup Iteration   2: 0,034 us/op
+# Warmup Iteration   3: 0,035 us/op
+# Warmup Iteration   4: 0,034 us/op
+# Warmup Iteration   5: 0,034 us/op
+# Warmup Iteration   6: 0,034 us/op
+# Warmup Iteration   7: 0,034 us/op
+# Warmup Iteration   8: 0,035 us/op
+Iteration   1: 0,035 us/op
+Iteration   2: 0,034 us/op
+Iteration   3: 0,034 us/op
+Iteration   4: 0,035 us/op
+Iteration   5: 0,035 us/op
+Iteration   6: 0,035 us/op
+Iteration   7: 0,035 us/op
+Iteration   8: 0,034 us/op
+Iteration   9: 0,035 us/op
+Iteration  10: 0,034 us/op
+Iteration  11: 0,035 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,034 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 93,75% complete, ETA 00:00:41
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,034 us/op
+# Warmup Iteration   2: 0,035 us/op
+# Warmup Iteration   3: 0,035 us/op
+# Warmup Iteration   4: 0,035 us/op
+# Warmup Iteration   5: 0,034 us/op
+# Warmup Iteration   6: 0,034 us/op
+# Warmup Iteration   7: 0,034 us/op
+# Warmup Iteration   8: 0,035 us/op
+Iteration   1: 0,034 us/op
+Iteration   2: 0,034 us/op
+Iteration   3: 0,034 us/op
+Iteration   4: 0,034 us/op
+Iteration   5: 0,034 us/op
+Iteration   6: 0,035 us/op
+Iteration   7: 0,034 us/op
+Iteration   8: 0,034 us/op
+Iteration   9: 0,035 us/op
+Iteration  10: 0,035 us/op
+Iteration  11: 0,035 us/op
+Iteration  12: [INFO] No samples were collected
+[INFO] No samples were collected
+[INFO] No samples were collected
+0,035 us/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.getHit":
+  0,035 ±(99.9%) 0,001 us/op [Average]
+  (min, avg, max) = (0,034, 0,035, 0,035), stdev = 0,001
+  CI (99.9%): [0,034, 0,035] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.getHit:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.getHit/alloc/bench.PerfectHashingBenchmark.getHit-AverageTime-n-800000-seed-42/flame-alloc-reverse.html
+
+
+# Run complete. Total time: 00:10:56
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                (n)  (seed)   Mode  Cnt   Score    Error   Units
+PerfectHashingBenchmark.getHit        200000      42  thrpt   24  57,862 ±  1,495  ops/us
+PerfectHashingBenchmark.getHit:async  200000      42  thrpt          NaN              ---
+PerfectHashingBenchmark.getHit        400000      42  thrpt   24  35,742 ±  0,253  ops/us
+PerfectHashingBenchmark.getHit:async  400000      42  thrpt          NaN              ---
+PerfectHashingBenchmark.getHit        600000      42  thrpt   24  31,213 ±  0,619  ops/us
+PerfectHashingBenchmark.getHit:async  600000      42  thrpt          NaN              ---
+PerfectHashingBenchmark.getHit        800000      42  thrpt   24  29,092 ±  0,161  ops/us
+PerfectHashingBenchmark.getHit:async  800000      42  thrpt          NaN              ---
+PerfectHashingBenchmark.getHit        200000      42   avgt   24   0,017 ±  0,001   us/op
+PerfectHashingBenchmark.getHit:async  200000      42   avgt          NaN              ---
+PerfectHashingBenchmark.getHit        400000      42   avgt   24   0,028 ±  0,001   us/op
+PerfectHashingBenchmark.getHit:async  400000      42   avgt          NaN              ---
+PerfectHashingBenchmark.getHit        600000      42   avgt   24   0,033 ±  0,001   us/op
+PerfectHashingBenchmark.getHit:async  600000      42   avgt          NaN              ---
+PerfectHashingBenchmark.getHit        800000      42   avgt   24   0,035 ±  0,001   us/op
+PerfectHashingBenchmark.getHit:async  800000      42   avgt          NaN              ---

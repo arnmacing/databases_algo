@@ -1,0 +1,765 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 1500, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 0,00% complete, ETA 00:10:40
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,001 ops/ms
+# Warmup Iteration   2: 0,001 ops/ms
+# Warmup Iteration   3: 0,001 ops/ms
+# Warmup Iteration   4: 0,001 ops/ms
+# Warmup Iteration   5: 0,001 ops/ms
+# Warmup Iteration   6: 0,001 ops/ms
+# Warmup Iteration   7: 0,001 ops/ms
+# Warmup Iteration   8: 0,001 ops/ms
+Iteration   1: 0,001 ops/ms
+Iteration   2: 0,001 ops/ms
+Iteration   3: 0,001 ops/ms
+Iteration   4: 0,001 ops/ms
+Iteration   5: 0,001 ops/ms
+Iteration   6: 0,001 ops/ms
+Iteration   7: 0,001 ops/ms
+Iteration   8: 0,001 ops/ms
+Iteration   9: 0,001 ops/ms
+Iteration  10: 0,001 ops/ms
+Iteration  11: 0,001 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,001 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 6,25% complete, ETA 00:12:45
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,001 ops/ms
+# Warmup Iteration   2: 0,001 ops/ms
+# Warmup Iteration   3: 0,001 ops/ms
+# Warmup Iteration   4: 0,001 ops/ms
+# Warmup Iteration   5: 0,001 ops/ms
+# Warmup Iteration   6: 0,001 ops/ms
+# Warmup Iteration   7: 0,001 ops/ms
+# Warmup Iteration   8: 0,001 ops/ms
+Iteration   1: 0,001 ops/ms
+Iteration   2: 0,001 ops/ms
+Iteration   3: 0,001 ops/ms
+Iteration   4: 0,001 ops/ms
+Iteration   5: 0,001 ops/ms
+Iteration   6: 0,001 ops/ms
+Iteration   7: 0,001 ops/ms
+Iteration   8: 0,001 ops/ms
+Iteration   9: 0,001 ops/ms
+Iteration  10: 0,001 ops/ms
+Iteration  11: 0,001 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,001 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  0,001 ±(99.9%) 0,001 ops/ms [Average]
+  (min, avg, max) = (0,001, 0,001, 0,001), stdev = 0,001
+  CI (99.9%): [0,001, 0,001] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 2000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 12,50% complete, ETA 00:11:52
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,001 ops/ms
+# Warmup Iteration   2: 0,001 ops/ms
+# Warmup Iteration   3: 0,001 ops/ms
+# Warmup Iteration   4: 0,001 ops/ms
+# Warmup Iteration   5: 0,001 ops/ms
+# Warmup Iteration   6: 0,001 ops/ms
+# Warmup Iteration   7: 0,001 ops/ms
+# Warmup Iteration   8: 0,001 ops/ms
+Iteration   1: 0,001 ops/ms
+Iteration   2: 0,001 ops/ms
+Iteration   3: 0,001 ops/ms
+Iteration   4: 0,001 ops/ms
+Iteration   5: 0,001 ops/ms
+Iteration   6: 0,001 ops/ms
+Iteration   7: 0,001 ops/ms
+Iteration   8: 0,001 ops/ms
+Iteration   9: 0,001 ops/ms
+Iteration  10: 0,001 ops/ms
+Iteration  11: 0,001 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,001 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 18,75% complete, ETA 00:11:44
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,001 ops/ms
+# Warmup Iteration   2: 0,001 ops/ms
+# Warmup Iteration   3: 0,001 ops/ms
+# Warmup Iteration   4: 0,001 ops/ms
+# Warmup Iteration   5: 0,001 ops/ms
+# Warmup Iteration   6: 0,001 ops/ms
+# Warmup Iteration   7: 0,001 ops/ms
+# Warmup Iteration   8: 0,001 ops/ms
+Iteration   1: 0,001 ops/ms
+Iteration   2: 0,001 ops/ms
+Iteration   3: 0,001 ops/ms
+Iteration   4: 0,001 ops/ms
+Iteration   5: 0,001 ops/ms
+Iteration   6: 0,001 ops/ms
+Iteration   7: 0,001 ops/ms
+Iteration   8: 0,001 ops/ms
+Iteration   9: 0,001 ops/ms
+Iteration  10: 0,001 ops/ms
+Iteration  11: 0,001 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,001 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  0,001 ±(99.9%) 0,001 ops/ms [Average]
+  (min, avg, max) = (0,001, 0,001, 0,001), stdev = 0,001
+  CI (99.9%): [0,001, 0,001] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 2500, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 25,00% complete, ETA 00:11:09
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻³ ops/ms
+# Warmup Iteration   2: ≈ 10⁻³ ops/ms
+# Warmup Iteration   3: ≈ 10⁻³ ops/ms
+# Warmup Iteration   4: ≈ 10⁻³ ops/ms
+# Warmup Iteration   5: ≈ 10⁻³ ops/ms
+# Warmup Iteration   6: ≈ 10⁻³ ops/ms
+# Warmup Iteration   7: ≈ 10⁻³ ops/ms
+# Warmup Iteration   8: ≈ 10⁻³ ops/ms
+Iteration   1: ≈ 10⁻³ ops/ms
+Iteration   2: ≈ 10⁻³ ops/ms
+Iteration   3: ≈ 10⁻³ ops/ms
+Iteration   4: ≈ 10⁻³ ops/ms
+Iteration   5: ≈ 10⁻³ ops/ms
+Iteration   6: ≈ 10⁻³ ops/ms
+Iteration   7: ≈ 10⁻³ ops/ms
+Iteration   8: ≈ 10⁻³ ops/ms
+Iteration   9: ≈ 10⁻³ ops/ms
+Iteration  10: ≈ 10⁻³ ops/ms
+Iteration  11: ≈ 10⁻³ ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻³ ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 31,25% complete, ETA 00:09:57
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻³ ops/ms
+# Warmup Iteration   2: ≈ 10⁻³ ops/ms
+# Warmup Iteration   3: ≈ 10⁻³ ops/ms
+# Warmup Iteration   4: ≈ 10⁻³ ops/ms
+# Warmup Iteration   5: ≈ 10⁻³ ops/ms
+# Warmup Iteration   6: ≈ 10⁻³ ops/ms
+# Warmup Iteration   7: ≈ 10⁻³ ops/ms
+# Warmup Iteration   8: ≈ 10⁻³ ops/ms
+Iteration   1: ≈ 10⁻³ ops/ms
+Iteration   2: ≈ 10⁻³ ops/ms
+Iteration   3: ≈ 10⁻³ ops/ms
+Iteration   4: ≈ 10⁻³ ops/ms
+Iteration   5: ≈ 10⁻³ ops/ms
+Iteration   6: ≈ 10⁻³ ops/ms
+Iteration   7: ≈ 10⁻³ ops/ms
+Iteration   8: ≈ 10⁻³ ops/ms
+Iteration   9: ≈ 10⁻³ ops/ms
+Iteration  10: ≈ 10⁻³ ops/ms
+Iteration  11: ≈ 10⁻³ ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻³ ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  ≈ 10⁻³ ops/ms
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 3000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 37,50% complete, ETA 00:08:52
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   2: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   3: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   4: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   5: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   6: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   7: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   8: ≈ 10⁻⁴ ops/ms
+Iteration   1: ≈ 10⁻⁴ ops/ms
+Iteration   2: ≈ 10⁻⁴ ops/ms
+Iteration   3: ≈ 10⁻⁴ ops/ms
+Iteration   4: ≈ 10⁻⁴ ops/ms
+Iteration   5: ≈ 10⁻⁴ ops/ms
+Iteration   6: ≈ 10⁻⁴ ops/ms
+Iteration   7: ≈ 10⁻⁴ ops/ms
+Iteration   8: ≈ 10⁻⁴ ops/ms
+Iteration   9: ≈ 10⁻⁴ ops/ms
+Iteration  10: ≈ 10⁻⁴ ops/ms
+Iteration  11: ≈ 10⁻⁴ ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁴ ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 43,75% complete, ETA 00:08:21
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   2: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   3: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   4: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   5: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   6: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   7: ≈ 10⁻⁴ ops/ms
+# Warmup Iteration   8: ≈ 10⁻⁴ ops/ms
+Iteration   1: ≈ 10⁻⁴ ops/ms
+Iteration   2: ≈ 10⁻⁴ ops/ms
+Iteration   3: ≈ 10⁻⁴ ops/ms
+Iteration   4: ≈ 10⁻⁴ ops/ms
+Iteration   5: ≈ 10⁻⁴ ops/ms
+Iteration   6: ≈ 10⁻⁴ ops/ms
+Iteration   7: ≈ 10⁻⁴ ops/ms
+Iteration   8: ≈ 10⁻⁴ ops/ms
+Iteration   9: ≈ 10⁻⁴ ops/ms
+Iteration  10: ≈ 10⁻⁴ ops/ms
+Iteration  11: ≈ 10⁻⁴ ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁴ ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  ≈ 10⁻⁴ ops/ms
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-Throughput-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 1500, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 50,00% complete, ETA 00:07:39
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 827,184 ms/op
+# Warmup Iteration   2: 837,180 ms/op
+# Warmup Iteration   3: 825,282 ms/op
+# Warmup Iteration   4: 816,962 ms/op
+# Warmup Iteration   5: 822,196 ms/op
+# Warmup Iteration   6: 823,501 ms/op
+# Warmup Iteration   7: 820,178 ms/op
+# Warmup Iteration   8: 819,347 ms/op
+Iteration   1: 823,208 ms/op
+Iteration   2: 818,003 ms/op
+Iteration   3: 833,040 ms/op
+Iteration   4: 832,487 ms/op
+Iteration   5: 828,477 ms/op
+Iteration   6: 826,003 ms/op
+Iteration   7: 826,538 ms/op
+Iteration   8: 818,019 ms/op
+Iteration   9: 830,033 ms/op
+Iteration  10: 864,079 ms/op
+Iteration  11: 832,559 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+823,670 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 56,25% complete, ETA 00:06:36
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 829,466 ms/op
+# Warmup Iteration   2: 833,734 ms/op
+# Warmup Iteration   3: 833,078 ms/op
+# Warmup Iteration   4: 823,837 ms/op
+# Warmup Iteration   5: 821,201 ms/op
+# Warmup Iteration   6: 827,036 ms/op
+# Warmup Iteration   7: 821,806 ms/op
+# Warmup Iteration   8: 823,405 ms/op
+Iteration   1: 825,739 ms/op
+Iteration   2: 828,664 ms/op
+Iteration   3: 833,105 ms/op
+Iteration   4: 828,469 ms/op
+Iteration   5: 827,648 ms/op
+Iteration   6: 831,178 ms/op
+Iteration   7: 835,721 ms/op
+Iteration   8: 823,915 ms/op
+Iteration   9: 834,250 ms/op
+Iteration  10: 829,536 ms/op
+Iteration  11: 828,475 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+828,964 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  829,657 ±(99.9%) 6,641 ms/op [Average]
+  (min, avg, max) = (818,003, 829,657, 864,079), stdev = 8,635
+  CI (99.9%): [823,017, 836,298] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-1500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 2000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 62,50% complete, ETA 00:05:36
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 1494,763 ms/op
+# Warmup Iteration   2: 1476,696 ms/op
+# Warmup Iteration   3: 1475,007 ms/op
+# Warmup Iteration   4: 1482,578 ms/op
+# Warmup Iteration   5: 1475,987 ms/op
+# Warmup Iteration   6: 1475,394 ms/op
+# Warmup Iteration   7: 1480,409 ms/op
+# Warmup Iteration   8: 1482,389 ms/op
+Iteration   1: 1495,454 ms/op
+Iteration   2: 1487,955 ms/op
+Iteration   3: 1470,679 ms/op
+Iteration   4: 1473,325 ms/op
+Iteration   5: 1475,874 ms/op
+Iteration   6: 1473,659 ms/op
+Iteration   7: 1466,518 ms/op
+Iteration   8: 1464,242 ms/op
+Iteration   9: 1470,928 ms/op
+Iteration  10: 1476,070 ms/op
+Iteration  11: 1486,824 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+1488,401 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 68,75% complete, ETA 00:04:42
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 1496,809 ms/op
+# Warmup Iteration   2: 1483,432 ms/op
+# Warmup Iteration   3: 1469,547 ms/op
+# Warmup Iteration   4: 1464,028 ms/op
+# Warmup Iteration   5: 1458,696 ms/op
+# Warmup Iteration   6: 1467,605 ms/op
+# Warmup Iteration   7: 1484,935 ms/op
+# Warmup Iteration   8: 1480,926 ms/op
+Iteration   1: 1478,883 ms/op
+Iteration   2: 1481,189 ms/op
+Iteration   3: 1470,061 ms/op
+Iteration   4: 1476,423 ms/op
+Iteration   5: 1466,370 ms/op
+Iteration   6: 1458,634 ms/op
+Iteration   7: 1456,160 ms/op
+Iteration   8: 1455,448 ms/op
+Iteration   9: 1457,120 ms/op
+Iteration  10: 1452,976 ms/op
+Iteration  11: 1477,394 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+1474,666 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  1472,302 ±(99.9%) 8,681 ms/op [Average]
+  (min, avg, max) = (1452,976, 1472,302, 1495,454), stdev = 11,287
+  CI (99.9%): [1463,622, 1480,983] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 2500, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 75,00% complete, ETA 00:03:47
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 2368,530 ms/op
+# Warmup Iteration   2: 2376,411 ms/op
+# Warmup Iteration   3: 2340,205 ms/op
+# Warmup Iteration   4: 2291,325 ms/op
+# Warmup Iteration   5: 2335,563 ms/op
+# Warmup Iteration   6: 2324,607 ms/op
+# Warmup Iteration   7: 2347,974 ms/op
+# Warmup Iteration   8: 2328,258 ms/op
+Iteration   1: 2335,177 ms/op
+Iteration   2: 2327,400 ms/op
+Iteration   3: 2332,472 ms/op
+Iteration   4: 2350,800 ms/op
+Iteration   5: 2341,069 ms/op
+Iteration   6: 2331,838 ms/op
+Iteration   7: 2348,592 ms/op
+Iteration   8: 2340,684 ms/op
+Iteration   9: 2333,785 ms/op
+Iteration  10: 2335,052 ms/op
+Iteration  11: 2335,826 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+2338,606 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 81,25% complete, ETA 00:02:48
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 2383,834 ms/op
+# Warmup Iteration   2: 2417,316 ms/op
+# Warmup Iteration   3: 2370,186 ms/op
+# Warmup Iteration   4: 2311,752 ms/op
+# Warmup Iteration   5: 2311,417 ms/op
+# Warmup Iteration   6: 2321,439 ms/op
+# Warmup Iteration   7: 2322,303 ms/op
+# Warmup Iteration   8: 2309,307 ms/op
+Iteration   1: 2323,789 ms/op
+Iteration   2: 2306,655 ms/op
+Iteration   3: 2314,954 ms/op
+Iteration   4: 2323,114 ms/op
+Iteration   5: 2321,925 ms/op
+Iteration   6: 2305,389 ms/op
+Iteration   7: 2330,128 ms/op
+Iteration   8: 2319,641 ms/op
+Iteration   9: 2318,035 ms/op
+Iteration  10: 2308,065 ms/op
+Iteration  11: 2313,822 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+2315,682 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  2327,188 ±(99.9%) 9,810 ms/op [Average]
+  (min, avg, max) = (2305,389, 2327,188, 2350,800), stdev = 12,756
+  CI (99.9%): [2317,377, 2336,998] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-2500-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesFullScan
+# Parameters: (docs = 3000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 87,50% complete, ETA 00:01:51
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 3339,727 ms/op
+# Warmup Iteration   2: 3391,637 ms/op
+# Warmup Iteration   3: 3401,351 ms/op
+# Warmup Iteration   4: 3382,366 ms/op
+# Warmup Iteration   5: 3418,987 ms/op
+# Warmup Iteration   6: 3395,377 ms/op
+# Warmup Iteration   7: 3413,927 ms/op
+# Warmup Iteration   8: 3400,959 ms/op
+Iteration   1: 3382,389 ms/op
+Iteration   2: 3409,911 ms/op
+Iteration   3: 3390,805 ms/op
+Iteration   4: 3392,744 ms/op
+Iteration   5: 3399,433 ms/op
+Iteration   6: 3384,501 ms/op
+Iteration   7: 3378,931 ms/op
+Iteration   8: 3392,801 ms/op
+Iteration   9: 3379,125 ms/op
+Iteration  10: 3396,387 ms/op
+Iteration  11: 3401,445 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+3377,288 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 93,75% complete, ETA 00:00:56
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 3383,441 ms/op
+# Warmup Iteration   2: 3362,342 ms/op
+# Warmup Iteration   3: 3385,584 ms/op
+# Warmup Iteration   4: 3352,554 ms/op
+# Warmup Iteration   5: 3387,721 ms/op
+# Warmup Iteration   6: 3369,751 ms/op
+# Warmup Iteration   7: 3373,265 ms/op
+# Warmup Iteration   8: 3344,282 ms/op
+Iteration   1: 3347,976 ms/op
+Iteration   2: 3380,122 ms/op
+Iteration   3: 3372,711 ms/op
+Iteration   4: 3371,432 ms/op
+Iteration   5: 3386,870 ms/op
+Iteration   6: 3386,677 ms/op
+Iteration   7: 3370,036 ms/op
+Iteration   8: 3371,264 ms/op
+Iteration   9: 3372,668 ms/op
+Iteration  10: 3383,186 ms/op
+Iteration  11: 3376,201 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+3368,656 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesFullScan":
+  3382,232 ±(99.9%) 10,124 ms/op [Average]
+  (min, avg, max) = (3347,976, 3382,232, 3409,911), stdev = 13,164
+  CI (99.9%): [3372,107, 3392,356] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesFullScan:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-cpu.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-cpu.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesFullScan/cpu/bench.LshBenchmark.nearDuplicatesFullScan-AverageTime-docs-3000-seed-42-threshold-0.9-wordsPerDoc-16/flame-cpu-reverse.html
+
+
+# Run complete. Total time: 00:15:18
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                  (docs)  (seed)  (threshold)  (wordsPerDoc)   Mode  Cnt     Score    Error   Units
+LshBenchmark.nearDuplicatesFullScan          1500      42          0.9             16  thrpt   24     0,001 ±  0,001  ops/ms
+LshBenchmark.nearDuplicatesFullScan:async    1500      42          0.9             16  thrpt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          2000      42          0.9             16  thrpt   24     0,001 ±  0,001  ops/ms
+LshBenchmark.nearDuplicatesFullScan:async    2000      42          0.9             16  thrpt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          2500      42          0.9             16  thrpt   24    ≈ 10⁻³           ops/ms
+LshBenchmark.nearDuplicatesFullScan:async    2500      42          0.9             16  thrpt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          3000      42          0.9             16  thrpt   24    ≈ 10⁻⁴           ops/ms
+LshBenchmark.nearDuplicatesFullScan:async    3000      42          0.9             16  thrpt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          1500      42          0.9             16   avgt   24   829,657 ±  6,641   ms/op
+LshBenchmark.nearDuplicatesFullScan:async    1500      42          0.9             16   avgt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          2000      42          0.9             16   avgt   24  1472,302 ±  8,681   ms/op
+LshBenchmark.nearDuplicatesFullScan:async    2000      42          0.9             16   avgt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          2500      42          0.9             16   avgt   24  2327,188 ±  9,810   ms/op
+LshBenchmark.nearDuplicatesFullScan:async    2500      42          0.9             16   avgt            NaN              ---
+LshBenchmark.nearDuplicatesFullScan          3000      42          0.9             16   avgt   24  3382,232 ± 10,124   ms/op
+LshBenchmark.nearDuplicatesFullScan:async    3000      42          0.9             16   avgt            NaN              ---
+
+Benchmark result is saved to /Users/makuninaarina/IdeaProjects/Databases Algo/hw01/target/jmh-system-report/json/bench.LshBenchmark.nearDuplicatesFullScan.json

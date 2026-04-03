@@ -1,0 +1,767 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 6000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 0,00% complete, ETA 00:10:40
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,055 ops/ms
+# Warmup Iteration   2: 0,055 ops/ms
+# Warmup Iteration   3: 0,055 ops/ms
+# Warmup Iteration   4: 0,055 ops/ms
+# Warmup Iteration   5: 0,055 ops/ms
+# Warmup Iteration   6: 0,056 ops/ms
+# Warmup Iteration   7: 0,055 ops/ms
+# Warmup Iteration   8: 0,055 ops/ms
+Iteration   1: 0,056 ops/ms
+Iteration   2: 0,055 ops/ms
+Iteration   3: 0,055 ops/ms
+Iteration   4: 0,056 ops/ms
+Iteration   5: 0,056 ops/ms
+Iteration   6: 0,056 ops/ms
+Iteration   7: 0,056 ops/ms
+Iteration   8: 0,055 ops/ms
+Iteration   9: 0,056 ops/ms
+Iteration  10: 0,056 ops/ms
+Iteration  11: 0,056 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,055 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 6,25% complete, ETA 00:11:05
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,055 ops/ms
+# Warmup Iteration   2: 0,056 ops/ms
+# Warmup Iteration   3: 0,056 ops/ms
+# Warmup Iteration   4: 0,055 ops/ms
+# Warmup Iteration   5: 0,055 ops/ms
+# Warmup Iteration   6: 0,056 ops/ms
+# Warmup Iteration   7: 0,056 ops/ms
+# Warmup Iteration   8: 0,056 ops/ms
+Iteration   1: 0,055 ops/ms
+Iteration   2: 0,056 ops/ms
+Iteration   3: 0,056 ops/ms
+Iteration   4: 0,056 ops/ms
+Iteration   5: 0,057 ops/ms
+Iteration   6: 0,056 ops/ms
+Iteration   7: 0,056 ops/ms
+Iteration   8: 0,056 ops/ms
+Iteration   9: 0,056 ops/ms
+Iteration  10: 0,056 ops/ms
+Iteration  11: 0,056 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,057 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  0,056 ±(99.9%) 0,001 ops/ms [Average]
+  (min, avg, max) = (0,055, 0,056, 0,057), stdev = 0,001
+  CI (99.9%): [0,056, 0,056] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 8000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 12,50% complete, ETA 00:10:20
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,032 ops/ms
+# Warmup Iteration   2: 0,033 ops/ms
+# Warmup Iteration   3: 0,032 ops/ms
+# Warmup Iteration   4: 0,033 ops/ms
+# Warmup Iteration   5: 0,033 ops/ms
+# Warmup Iteration   6: 0,033 ops/ms
+# Warmup Iteration   7: 0,033 ops/ms
+# Warmup Iteration   8: 0,033 ops/ms
+Iteration   1: 0,033 ops/ms
+Iteration   2: 0,033 ops/ms
+Iteration   3: 0,033 ops/ms
+Iteration   4: 0,033 ops/ms
+Iteration   5: 0,033 ops/ms
+Iteration   6: 0,033 ops/ms
+Iteration   7: 0,033 ops/ms
+Iteration   8: 0,033 ops/ms
+Iteration   9: 0,033 ops/ms
+Iteration  10: 0,033 ops/ms
+Iteration  11: 0,033 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,033 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 18,75% complete, ETA 00:09:42
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,031 ops/ms
+# Warmup Iteration   2: 0,032 ops/ms
+# Warmup Iteration   3: 0,031 ops/ms
+# Warmup Iteration   4: 0,031 ops/ms
+# Warmup Iteration   5: 0,032 ops/ms
+# Warmup Iteration   6: 0,032 ops/ms
+# Warmup Iteration   7: 0,032 ops/ms
+# Warmup Iteration   8: 0,032 ops/ms
+Iteration   1: 0,031 ops/ms
+Iteration   2: 0,032 ops/ms
+Iteration   3: 0,032 ops/ms
+Iteration   4: 0,032 ops/ms
+Iteration   5: 0,031 ops/ms
+Iteration   6: 0,031 ops/ms
+Iteration   7: 0,032 ops/ms
+Iteration   8: 0,031 ops/ms
+Iteration   9: 0,032 ops/ms
+Iteration  10: 0,031 ops/ms
+Iteration  11: 0,031 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,031 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  0,032 ±(99.9%) 0,001 ops/ms [Average]
+  (min, avg, max) = (0,031, 0,032, 0,033), stdev = 0,001
+  CI (99.9%): [0,032, 0,033] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 10000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 25,00% complete, ETA 00:08:59
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,021 ops/ms
+# Warmup Iteration   2: 0,021 ops/ms
+# Warmup Iteration   3: 0,022 ops/ms
+# Warmup Iteration   4: 0,021 ops/ms
+# Warmup Iteration   5: 0,021 ops/ms
+# Warmup Iteration   6: 0,021 ops/ms
+# Warmup Iteration   7: 0,021 ops/ms
+# Warmup Iteration   8: 0,021 ops/ms
+Iteration   1: 0,021 ops/ms
+Iteration   2: 0,021 ops/ms
+Iteration   3: 0,021 ops/ms
+Iteration   4: 0,021 ops/ms
+Iteration   5: 0,021 ops/ms
+Iteration   6: 0,021 ops/ms
+Iteration   7: 0,021 ops/ms
+Iteration   8: 0,021 ops/ms
+Iteration   9: 0,021 ops/ms
+Iteration  10: 0,021 ops/ms
+Iteration  11: 0,021 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,021 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 31,25% complete, ETA 00:08:19
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,021 ops/ms
+# Warmup Iteration   2: 0,022 ops/ms
+# Warmup Iteration   3: 0,022 ops/ms
+# Warmup Iteration   4: 0,022 ops/ms
+# Warmup Iteration   5: 0,021 ops/ms
+# Warmup Iteration   6: 0,021 ops/ms
+# Warmup Iteration   7: 0,021 ops/ms
+# Warmup Iteration   8: 0,022 ops/ms
+Iteration   1: 0,021 ops/ms
+Iteration   2: 0,021 ops/ms
+Iteration   3: 0,022 ops/ms
+Iteration   4: 0,021 ops/ms
+Iteration   5: 0,021 ops/ms
+Iteration   6: 0,022 ops/ms
+Iteration   7: 0,022 ops/ms
+Iteration   8: 0,021 ops/ms
+Iteration   9: 0,021 ops/ms
+Iteration  10: 0,022 ops/ms
+Iteration  11: 0,021 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,021 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  0,021 ±(99.9%) 0,001 ops/ms [Average]
+  (min, avg, max) = (0,021, 0,021, 0,022), stdev = 0,001
+  CI (99.9%): [0,021, 0,021] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 12000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 37,50% complete, ETA 00:07:36
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,014 ops/ms
+# Warmup Iteration   2: 0,014 ops/ms
+# Warmup Iteration   3: 0,013 ops/ms
+# Warmup Iteration   4: 0,013 ops/ms
+# Warmup Iteration   5: 0,014 ops/ms
+# Warmup Iteration   6: 0,013 ops/ms
+# Warmup Iteration   7: 0,014 ops/ms
+# Warmup Iteration   8: 0,014 ops/ms
+Iteration   1: 0,014 ops/ms
+Iteration   2: 0,014 ops/ms
+Iteration   3: 0,014 ops/ms
+Iteration   4: 0,014 ops/ms
+Iteration   5: 0,014 ops/ms
+Iteration   6: 0,013 ops/ms
+Iteration   7: 0,014 ops/ms
+Iteration   8: 0,014 ops/ms
+Iteration   9: 0,013 ops/ms
+Iteration  10: 0,013 ops/ms
+Iteration  11: 0,014 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,014 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 43,75% complete, ETA 00:06:55
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 0,013 ops/ms
+# Warmup Iteration   2: 0,013 ops/ms
+# Warmup Iteration   3: 0,013 ops/ms
+# Warmup Iteration   4: 0,013 ops/ms
+# Warmup Iteration   5: 0,014 ops/ms
+# Warmup Iteration   6: 0,013 ops/ms
+# Warmup Iteration   7: 0,013 ops/ms
+# Warmup Iteration   8: 0,014 ops/ms
+Iteration   1: 0,013 ops/ms
+Iteration   2: 0,014 ops/ms
+Iteration   3: 0,013 ops/ms
+Iteration   4: 0,013 ops/ms
+Iteration   5: 0,013 ops/ms
+Iteration   6: 0,013 ops/ms
+Iteration   7: 0,014 ops/ms
+Iteration   8: 0,014 ops/ms
+Iteration   9: 0,014 ops/ms
+Iteration  10: 0,013 ops/ms
+Iteration  11: 0,014 ops/ms
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+0,014 ops/ms
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  0,014 ±(99.9%) 0,001 ops/ms [Average]
+  (min, avg, max) = (0,013, 0,014, 0,014), stdev = 0,001
+  CI (99.9%): [0,013, 0,014] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-Throughput-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 6000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 50,00% complete, ETA 00:06:12
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 18,165 ms/op
+# Warmup Iteration   2: 18,013 ms/op
+# Warmup Iteration   3: 17,815 ms/op
+# Warmup Iteration   4: 18,002 ms/op
+# Warmup Iteration   5: 17,968 ms/op
+# Warmup Iteration   6: 17,804 ms/op
+# Warmup Iteration   7: 17,926 ms/op
+# Warmup Iteration   8: 18,083 ms/op
+Iteration   1: 17,790 ms/op
+Iteration   2: 17,752 ms/op
+Iteration   3: 18,006 ms/op
+Iteration   4: 18,028 ms/op
+Iteration   5: 18,122 ms/op
+Iteration   6: 18,015 ms/op
+Iteration   7: 18,033 ms/op
+Iteration   8: 17,722 ms/op
+Iteration   9: 17,704 ms/op
+Iteration  10: 17,712 ms/op
+Iteration  11: 17,781 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+17,867 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 56,25% complete, ETA 00:05:23
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 18,173 ms/op
+# Warmup Iteration   2: 18,010 ms/op
+# Warmup Iteration   3: 17,718 ms/op
+# Warmup Iteration   4: 18,030 ms/op
+# Warmup Iteration   5: 17,983 ms/op
+# Warmup Iteration   6: 17,690 ms/op
+# Warmup Iteration   7: 17,836 ms/op
+# Warmup Iteration   8: 17,735 ms/op
+Iteration   1: 17,566 ms/op
+Iteration   2: 17,847 ms/op
+Iteration   3: 17,675 ms/op
+Iteration   4: 17,389 ms/op
+Iteration   5: 17,561 ms/op
+Iteration   6: 17,768 ms/op
+Iteration   7: 17,577 ms/op
+Iteration   8: 17,831 ms/op
+Iteration   9: 17,535 ms/op
+Iteration  10: 17,924 ms/op
+Iteration  11: 17,492 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+17,713 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  17,767 ±(99.9%) 0,147 ms/op [Average]
+  (min, avg, max) = (17,389, 17,767, 18,122), stdev = 0,191
+  CI (99.9%): [17,620, 17,914] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-6000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 8000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 62,50% complete, ETA 00:04:36
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 31,170 ms/op
+# Warmup Iteration   2: 30,482 ms/op
+# Warmup Iteration   3: 30,924 ms/op
+# Warmup Iteration   4: 30,758 ms/op
+# Warmup Iteration   5: 30,948 ms/op
+# Warmup Iteration   6: 30,569 ms/op
+# Warmup Iteration   7: 30,728 ms/op
+# Warmup Iteration   8: 30,679 ms/op
+Iteration   1: 31,026 ms/op
+Iteration   2: 31,177 ms/op
+Iteration   3: 30,716 ms/op
+Iteration   4: 30,571 ms/op
+Iteration   5: 30,718 ms/op
+Iteration   6: 30,847 ms/op
+Iteration   7: 30,664 ms/op
+Iteration   8: 30,977 ms/op
+Iteration   9: 30,591 ms/op
+Iteration  10: 31,099 ms/op
+Iteration  11: 30,647 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+30,880 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 68,75% complete, ETA 00:03:50
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 32,132 ms/op
+# Warmup Iteration   2: 31,471 ms/op
+# Warmup Iteration   3: 32,009 ms/op
+# Warmup Iteration   4: 31,913 ms/op
+# Warmup Iteration   5: 31,567 ms/op
+# Warmup Iteration   6: 31,504 ms/op
+# Warmup Iteration   7: 32,023 ms/op
+# Warmup Iteration   8: 32,105 ms/op
+Iteration   1: 32,199 ms/op
+Iteration   2: 31,867 ms/op
+Iteration   3: 31,821 ms/op
+Iteration   4: 31,887 ms/op
+Iteration   5: 31,498 ms/op
+Iteration   6: 32,052 ms/op
+Iteration   7: 31,788 ms/op
+Iteration   8: 31,931 ms/op
+Iteration   9: 31,686 ms/op
+Iteration  10: 31,740 ms/op
+Iteration  11: 31,881 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+31,813 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  31,336 ±(99.9%) 0,426 ms/op [Average]
+  (min, avg, max) = (30,571, 31,336, 32,199), stdev = 0,554
+  CI (99.9%): [30,910, 31,762] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-8000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 10000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 75,00% complete, ETA 00:03:04
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 47,064 ms/op
+# Warmup Iteration   2: 46,848 ms/op
+# Warmup Iteration   3: 46,157 ms/op
+# Warmup Iteration   4: 46,798 ms/op
+# Warmup Iteration   5: 47,916 ms/op
+# Warmup Iteration   6: 47,181 ms/op
+# Warmup Iteration   7: 47,766 ms/op
+# Warmup Iteration   8: 46,356 ms/op
+Iteration   1: 47,143 ms/op
+Iteration   2: 47,498 ms/op
+Iteration   3: 46,669 ms/op
+Iteration   4: 47,474 ms/op
+Iteration   5: 46,750 ms/op
+Iteration   6: 47,176 ms/op
+Iteration   7: 47,336 ms/op
+Iteration   8: 47,172 ms/op
+Iteration   9: 46,728 ms/op
+Iteration  10: 46,390 ms/op
+Iteration  11: 46,960 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+47,764 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 81,25% complete, ETA 00:02:18
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 46,489 ms/op
+# Warmup Iteration   2: 46,652 ms/op
+# Warmup Iteration   3: 45,450 ms/op
+# Warmup Iteration   4: 46,348 ms/op
+# Warmup Iteration   5: 47,849 ms/op
+# Warmup Iteration   6: 47,268 ms/op
+# Warmup Iteration   7: 47,472 ms/op
+# Warmup Iteration   8: 45,887 ms/op
+Iteration   1: 46,466 ms/op
+Iteration   2: 47,160 ms/op
+Iteration   3: 47,100 ms/op
+Iteration   4: 46,128 ms/op
+Iteration   5: 46,370 ms/op
+Iteration   6: 46,863 ms/op
+Iteration   7: 46,381 ms/op
+Iteration   8: 46,695 ms/op
+Iteration   9: 47,018 ms/op
+Iteration  10: 47,503 ms/op
+Iteration  11: 47,689 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+47,094 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  46,980 ±(99.9%) 0,343 ms/op [Average]
+  (min, avg, max) = (46,128, 46,980, 47,764), stdev = 0,446
+  CI (99.9%): [46,637, 47,323] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-10000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.LshBenchmark.nearDuplicatesLsh
+# Parameters: (docs = 12000, seed = 42, threshold = 0.9, wordsPerDoc = 16)
+
+# Run progress: 87,50% complete, ETA 00:01:32
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 75,676 ms/op
+# Warmup Iteration   2: 74,238 ms/op
+# Warmup Iteration   3: 73,558 ms/op
+# Warmup Iteration   4: 73,761 ms/op
+# Warmup Iteration   5: 73,933 ms/op
+# Warmup Iteration   6: 74,167 ms/op
+# Warmup Iteration   7: 72,806 ms/op
+# Warmup Iteration   8: 75,441 ms/op
+Iteration   1: 73,918 ms/op
+Iteration   2: 74,024 ms/op
+Iteration   3: 73,919 ms/op
+Iteration   4: 74,454 ms/op
+Iteration   5: 73,176 ms/op
+Iteration   6: 74,621 ms/op
+Iteration   7: 75,282 ms/op
+Iteration   8: 73,565 ms/op
+Iteration   9: 74,480 ms/op
+Iteration  10: 74,146 ms/op
+Iteration  11: 73,259 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+75,050 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 93,75% complete, ETA 00:00:46
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 74,907 ms/op
+# Warmup Iteration   2: 74,606 ms/op
+# Warmup Iteration   3: 74,595 ms/op
+# Warmup Iteration   4: 72,826 ms/op
+# Warmup Iteration   5: 73,966 ms/op
+# Warmup Iteration   6: 80,501 ms/op
+# Warmup Iteration   7: 73,978 ms/op
+# Warmup Iteration   8: 73,287 ms/op
+Iteration   1: 73,967 ms/op
+Iteration   2: 73,121 ms/op
+Iteration   3: 74,030 ms/op
+Iteration   4: 73,530 ms/op
+Iteration   5: 74,566 ms/op
+Iteration   6: 72,882 ms/op
+Iteration   7: 73,636 ms/op
+Iteration   8: 73,043 ms/op
+Iteration   9: 72,663 ms/op
+Iteration  10: 73,803 ms/op
+Iteration  11: 73,413 ms/op
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+73,123 ms/op
+                 async: (text only)
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.LshBenchmark.nearDuplicatesLsh":
+  73,820 ±(99.9%) 0,527 ms/op [Average]
+  (min, avg, max) = (72,663, 73,820, 75,282), stdev = 0,685
+  CI (99.9%): [73,293, 74,347] (assumes normal distribution)
+
+Secondary result "bench.LshBenchmark.nearDuplicatesLsh:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.LshBenchmark.nearDuplicatesLsh/alloc/bench.LshBenchmark.nearDuplicatesLsh-AverageTime-docs-12000-seed-42-threshold-0.9-wordsPerDoc-16/flame-alloc-reverse.html
+
+
+# Run complete. Total time: 00:12:24
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                             (docs)  (seed)  (threshold)  (wordsPerDoc)   Mode  Cnt   Score    Error   Units
+LshBenchmark.nearDuplicatesLsh          6000      42          0.9             16  thrpt   24   0,056 ±  0,001  ops/ms
+LshBenchmark.nearDuplicatesLsh:async    6000      42          0.9             16  thrpt          NaN              ---
+LshBenchmark.nearDuplicatesLsh          8000      42          0.9             16  thrpt   24   0,032 ±  0,001  ops/ms
+LshBenchmark.nearDuplicatesLsh:async    8000      42          0.9             16  thrpt          NaN              ---
+LshBenchmark.nearDuplicatesLsh         10000      42          0.9             16  thrpt   24   0,021 ±  0,001  ops/ms
+LshBenchmark.nearDuplicatesLsh:async   10000      42          0.9             16  thrpt          NaN              ---
+LshBenchmark.nearDuplicatesLsh         12000      42          0.9             16  thrpt   24   0,014 ±  0,001  ops/ms
+LshBenchmark.nearDuplicatesLsh:async   12000      42          0.9             16  thrpt          NaN              ---
+LshBenchmark.nearDuplicatesLsh          6000      42          0.9             16   avgt   24  17,767 ±  0,147   ms/op
+LshBenchmark.nearDuplicatesLsh:async    6000      42          0.9             16   avgt          NaN              ---
+LshBenchmark.nearDuplicatesLsh          8000      42          0.9             16   avgt   24  31,336 ±  0,426   ms/op
+LshBenchmark.nearDuplicatesLsh:async    8000      42          0.9             16   avgt          NaN              ---
+LshBenchmark.nearDuplicatesLsh         10000      42          0.9             16   avgt   24  46,980 ±  0,343   ms/op
+LshBenchmark.nearDuplicatesLsh:async   10000      42          0.9             16   avgt          NaN              ---
+LshBenchmark.nearDuplicatesLsh         12000      42          0.9             16   avgt   24  73,820 ±  0,527   ms/op
+LshBenchmark.nearDuplicatesLsh:async   12000      42          0.9             16   avgt          NaN              ---

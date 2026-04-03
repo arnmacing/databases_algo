@@ -1,0 +1,17 @@
+benchmark,duration_s
+bench.ExtendableHashTableBenchmark.buildFromScratch,179.32473707199097
+bench.ExtendableHashTableBenchmark.getHit,3262.6362252235413
+bench.ExtendableHashTableBenchmark.getMiss,3264.2240459918976
+bench.ExtendableHashTableBenchmark.putThenRemove,3267.945270061493
+bench.ExtendableHashTableBenchmark.removeThenPut,3265.62837600708
+bench.ExtendableHashTableBenchmark.updateExisting,3265.671648979187
+bench.LshBenchmark.addDocument,1054.0762922763824
+bench.LshBenchmark.buildIndex,944.5897903442383
+bench.LshBenchmark.candidatesQuery,666.1983778476715
+bench.LshBenchmark.nearDuplicatesFullScan,918.392991065979
+bench.LshBenchmark.nearDuplicatesLsh,744.5287878513336
+bench.PerfectHashingBenchmark.buildIndex,655.8431718349457
+bench.PerfectHashingBenchmark.containsHit,648.491357088089
+bench.PerfectHashingBenchmark.containsMiss,648.4716110229492
+bench.PerfectHashingBenchmark.getHit,22799.97123503685
+bench.PerfectHashingBenchmark.getMiss,648.0072529315948

@@ -1,0 +1,1655 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 200000, seed = 42)
+
+# Run progress: 0,00% complete, ETA 00:10:40
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁴ ops/us
+Iteration   1: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration   2: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration   3: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  445089,000 #
+                 primaryCollisions:  17799288,000 #
+                 secondaryTableSize: 88998576,000 #
+
+Iteration   4: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration   5: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration   6: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration   7: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration   8: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  446756,000 #
+                 primaryCollisions:  17865952,000 #
+                 secondaryTableSize: 89331904,000 #
+
+Iteration   9: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  443422,000 #
+                 primaryCollisions:  17732624,000 #
+                 secondaryTableSize: 88665248,000 #
+
+Iteration  10: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  443422,000 #
+                 primaryCollisions:  17732624,000 #
+                 secondaryTableSize: 88665248,000 #
+
+Iteration  11: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  441755,000 #
+                 primaryCollisions:  17665960,000 #
+                 secondaryTableSize: 88331920,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁴ ops/us
+                 async:              (text only)
+                 expansionPermille:  441755,000 #
+                 primaryCollisions:  17665960,000 #
+                 secondaryTableSize: 88331920,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 6,25% complete, ETA 00:10:08
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁴ ops/us
+Iteration   1: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  450090,000 #
+                 primaryCollisions:  17999280,000 #
+                 secondaryTableSize: 89998560,000 #
+
+Iteration   2: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration   3: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  455091,000 #
+                 primaryCollisions:  18199272,000 #
+                 secondaryTableSize: 90998544,000 #
+
+Iteration   4: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  455091,000 #
+                 primaryCollisions:  18199272,000 #
+                 secondaryTableSize: 90998544,000 #
+
+Iteration   5: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  453424,000 #
+                 primaryCollisions:  18132608,000 #
+                 secondaryTableSize: 90665216,000 #
+
+Iteration   6: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration   7: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  453424,000 #
+                 primaryCollisions:  18132608,000 #
+                 secondaryTableSize: 90665216,000 #
+
+Iteration   8: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration   9: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  446756,000 #
+                 primaryCollisions:  17865952,000 #
+                 secondaryTableSize: 89331904,000 #
+
+Iteration  10: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration  11: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁴ ops/us
+                 async:              (text only)
+                 expansionPermille:  445089,000 #
+                 primaryCollisions:  17799288,000 #
+                 secondaryTableSize: 88998576,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  ≈ 10⁻⁴ ops/us
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-200000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  10767153,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (441755,000, 448631,375, 455091,000), stdev = 3911,393
+  CI (99.9%): [10767153,000, 10767153,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  430582776,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (17665960,000, 17940949,000, 18199272,000), stdev = 156418,163
+  CI (99.9%): [430582776,000, 430582776,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  2152965552,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (88331920,000, 89706898,000, 90998544,000), stdev = 782109,584
+  CI (99.9%): [2152965552,000, 2152965552,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 400000, seed = 42)
+
+# Run progress: 12,50% complete, ETA 00:09:27
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁴ ops/us
+Iteration   1: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   2: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   3: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   4: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   5: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68912,000 #
+                 primaryCollisions:  1984937,000 #
+                 secondaryTableSize: 27569874,000 #
+
+Iteration   6: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  73584,000 #
+                 primaryCollisions:  2119509,000 #
+                 secondaryTableSize: 29439018,000 #
+
+Iteration   7: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  67744,000 #
+                 primaryCollisions:  1951294,000 #
+                 secondaryTableSize: 27102588,000 #
+
+Iteration   8: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68912,000 #
+                 primaryCollisions:  1984937,000 #
+                 secondaryTableSize: 27569874,000 #
+
+Iteration   9: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  74752,000 #
+                 primaryCollisions:  2153152,000 #
+                 secondaryTableSize: 29906304,000 #
+
+Iteration  10: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  78256,000 #
+                 primaryCollisions:  2254081,000 #
+                 secondaryTableSize: 31308162,000 #
+
+Iteration  11: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  80592,000 #
+                 primaryCollisions:  2321367,000 #
+                 secondaryTableSize: 32242734,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁴ ops/us
+                 async:              (text only)
+                 expansionPermille:  80592,000 #
+                 primaryCollisions:  2321367,000 #
+                 secondaryTableSize: 32242734,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 18,75% complete, ETA 00:08:48
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁴ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁴ ops/us
+Iteration   1: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration   2: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  73584,000 #
+                 primaryCollisions:  2119509,000 #
+                 secondaryTableSize: 29439018,000 #
+
+Iteration   3: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  73584,000 #
+                 primaryCollisions:  2119509,000 #
+                 secondaryTableSize: 29439018,000 #
+
+Iteration   4: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  66576,000 #
+                 primaryCollisions:  1917651,000 #
+                 secondaryTableSize: 26635302,000 #
+
+Iteration   5: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   6: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  79424,000 #
+                 primaryCollisions:  2287724,000 #
+                 secondaryTableSize: 31775448,000 #
+
+Iteration   7: ≈ 10⁻⁴ ops/us
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration   8: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  74752,000 #
+                 primaryCollisions:  2153152,000 #
+                 secondaryTableSize: 29906304,000 #
+
+Iteration   9: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  73584,000 #
+                 primaryCollisions:  2119509,000 #
+                 secondaryTableSize: 29439018,000 #
+
+Iteration  10: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  71248,000 #
+                 primaryCollisions:  2052223,000 #
+                 secondaryTableSize: 28504446,000 #
+
+Iteration  11: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  74752,000 #
+                 primaryCollisions:  2153152,000 #
+                 secondaryTableSize: 29906304,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁴ ops/us
+                 async:              (text only)
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  ≈ 10⁻⁵ ops/us
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-400000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  1790544,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (66576,000, 74606,000, 80592,000), stdev = 3746,358
+  CI (99.9%): [1790544,000, 1790544,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  51574719,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (1917651,000, 2148946,625, 2321367,000), stdev = 107909,856
+  CI (99.9%): [51574719,000, 51574719,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  716349438,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (26635302,000, 29847893,250, 32242734,000), stdev = 1498818,915
+  CI (99.9%): [716349438,000, 716349438,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 600000, seed = 42)
+
+# Run progress: 25,00% complete, ETA 00:08:09
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁵ ops/us
+Iteration   1: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  69987,000 #
+                 primaryCollisions:  8693968,000 #
+                 secondaryTableSize: 41987936,000 #
+
+Iteration   2: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   3: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   4: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   5: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   6: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   7: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  71694,000 #
+                 primaryCollisions:  8906016,000 #
+                 secondaryTableSize: 43012032,000 #
+
+Iteration   8: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   9: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  69987,000 #
+                 primaryCollisions:  8693968,000 #
+                 secondaryTableSize: 41987936,000 #
+
+Iteration  10: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  69987,000 #
+                 primaryCollisions:  8693968,000 #
+                 secondaryTableSize: 41987936,000 #
+
+Iteration  11: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  64866,000 #
+                 primaryCollisions:  8057824,000 #
+                 secondaryTableSize: 38915648,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁵ ops/us
+                 async:              (text only)
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 31,25% complete, ETA 00:07:29
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁵ ops/us
+Iteration   1: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  63159,000 #
+                 primaryCollisions:  7845776,000 #
+                 secondaryTableSize: 37891552,000 #
+
+Iteration   2: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  61452,000 #
+                 primaryCollisions:  7633728,000 #
+                 secondaryTableSize: 36867456,000 #
+
+Iteration   3: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  63159,000 #
+                 primaryCollisions:  7845776,000 #
+                 secondaryTableSize: 37891552,000 #
+
+Iteration   4: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   5: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   6: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  69987,000 #
+                 primaryCollisions:  8693968,000 #
+                 secondaryTableSize: 41987936,000 #
+
+Iteration   7: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   8: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  63159,000 #
+                 primaryCollisions:  7845776,000 #
+                 secondaryTableSize: 37891552,000 #
+
+Iteration   9: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration  10: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration  11: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  69987,000 #
+                 primaryCollisions:  8693968,000 #
+                 secondaryTableSize: 41987936,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁵ ops/us
+                 async:              (text only)
+                 expansionPermille:  63159,000 #
+                 primaryCollisions:  7845776,000 #
+                 secondaryTableSize: 37891552,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  ≈ 10⁻⁵ ops/us
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-600000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  1611408,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (61452,000, 67142,000, 71694,000), stdev = 2741,694
+  CI (99.9%): [1611408,000, 1611408,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  200173312,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (7633728,000, 8340554,667, 8906016,000), stdev = 340580,388
+  CI (99.9%): [200173312,000, 200173312,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  966746624,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (36867456,000, 40281109,333, 43012032,000), stdev = 1644849,343
+  CI (99.9%): [966746624,000, 966746624,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 800000, seed = 42)
+
+# Run progress: 37,50% complete, ETA 00:06:48
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁵ ops/us
+Iteration   1: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   2: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   3: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  44671,000 #
+                 primaryCollisions:  5465269,000 #
+                 secondaryTableSize: 35730538,000 #
+
+Iteration   4: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  44671,000 #
+                 primaryCollisions:  5465269,000 #
+                 secondaryTableSize: 35730538,000 #
+
+Iteration   5: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration   6: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration   7: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration   8: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   9: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  44671,000 #
+                 primaryCollisions:  5465269,000 #
+                 secondaryTableSize: 35730538,000 #
+
+Iteration  10: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration  11: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁵ ops/us
+                 async:              (text only)
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 43,75% complete, ETA 00:06:08
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   2: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   3: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   4: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   5: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   6: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   7: ≈ 10⁻⁵ ops/us
+# Warmup Iteration   8: ≈ 10⁻⁵ ops/us
+Iteration   1: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration   2: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration   3: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration   4: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   5: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration   6: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   7: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   8: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration   9: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration  10: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration  11: ≈ 10⁻⁵ ops/us
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+≈ 10⁻⁵ ops/us
+                 async:              (text only)
+                 expansionPermille:  46112,000 #
+                 primaryCollisions:  5641568,000 #
+                 secondaryTableSize: 36883136,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  ≈ 10⁻⁵ ops/us
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-Throughput-n-800000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  1060576,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (41789,000, 44190,667, 46112,000), stdev = 1734,760
+  CI (99.9%): [1060576,000, 1060576,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  129756064,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (5112671,000, 5406502,667, 5641568,000), stdev = 212239,055
+  CI (99.9%): [129756064,000, 129756064,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  848312128,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (33425342,000, 35346338,667, 36883136,000), stdev = 1387564,935
+  CI (99.9%): [848312128,000, 848312128,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 200000, seed = 42)
+
+# Run progress: 50,00% complete, ETA 00:05:28
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 8241,533 us/op
+# Warmup Iteration   2: 7860,520 us/op
+# Warmup Iteration   3: 7776,492 us/op
+# Warmup Iteration   4: 7724,625 us/op
+# Warmup Iteration   5: 7812,287 us/op
+# Warmup Iteration   6: 7804,491 us/op
+# Warmup Iteration   7: 7712,616 us/op
+# Warmup Iteration   8: 7705,300 us/op
+Iteration   1: 7694,904 us/op
+                 expansionPermille:  435087,000 #
+                 primaryCollisions:  17399304,000 #
+                 secondaryTableSize: 86998608,000 #
+
+Iteration   2: 7681,001 us/op
+                 expansionPermille:  436754,000 #
+                 primaryCollisions:  17465968,000 #
+                 secondaryTableSize: 87331936,000 #
+
+Iteration   3: 7693,810 us/op
+                 expansionPermille:  435087,000 #
+                 primaryCollisions:  17399304,000 #
+                 secondaryTableSize: 86998608,000 #
+
+Iteration   4: 7690,477 us/op
+                 expansionPermille:  436754,000 #
+                 primaryCollisions:  17465968,000 #
+                 secondaryTableSize: 87331936,000 #
+
+Iteration   5: 7708,722 us/op
+                 expansionPermille:  435087,000 #
+                 primaryCollisions:  17399304,000 #
+                 secondaryTableSize: 86998608,000 #
+
+Iteration   6: 7700,593 us/op
+                 expansionPermille:  435087,000 #
+                 primaryCollisions:  17399304,000 #
+                 secondaryTableSize: 86998608,000 #
+
+Iteration   7: 7699,400 us/op
+                 expansionPermille:  433420,000 #
+                 primaryCollisions:  17332640,000 #
+                 secondaryTableSize: 86665280,000 #
+
+Iteration   8: 7723,576 us/op
+                 expansionPermille:  435087,000 #
+                 primaryCollisions:  17399304,000 #
+                 secondaryTableSize: 86998608,000 #
+
+Iteration   9: 7778,100 us/op
+                 expansionPermille:  431753,000 #
+                 primaryCollisions:  17265976,000 #
+                 secondaryTableSize: 86331952,000 #
+
+Iteration  10: 7779,303 us/op
+                 expansionPermille:  431753,000 #
+                 primaryCollisions:  17265976,000 #
+                 secondaryTableSize: 86331952,000 #
+
+Iteration  11: 7837,969 us/op
+                 expansionPermille:  428419,000 #
+                 primaryCollisions:  17132648,000 #
+                 secondaryTableSize: 85665296,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+7809,781 us/op
+                 async:              (text only)
+                 expansionPermille:  430086,000 #
+                 primaryCollisions:  17199312,000 #
+                 secondaryTableSize: 85998624,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 56,25% complete, ETA 00:04:46
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 7904,979 us/op
+# Warmup Iteration   2: 7432,221 us/op
+# Warmup Iteration   3: 7455,650 us/op
+# Warmup Iteration   4: 7417,266 us/op
+# Warmup Iteration   5: 7407,595 us/op
+# Warmup Iteration   6: 7410,869 us/op
+# Warmup Iteration   7: 7399,468 us/op
+# Warmup Iteration   8: 7403,537 us/op
+Iteration   1: 7399,186 us/op
+                 expansionPermille:  453424,000 #
+                 primaryCollisions:  18132608,000 #
+                 secondaryTableSize: 90665216,000 #
+
+Iteration   2: 7380,638 us/op
+                 expansionPermille:  453424,000 #
+                 primaryCollisions:  18132608,000 #
+                 secondaryTableSize: 90665216,000 #
+
+Iteration   3: 7413,544 us/op
+                 expansionPermille:  453424,000 #
+                 primaryCollisions:  18132608,000 #
+                 secondaryTableSize: 90665216,000 #
+
+Iteration   4: 7398,459 us/op
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration   5: 7407,738 us/op
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration   6: 7385,354 us/op
+                 expansionPermille:  455091,000 #
+                 primaryCollisions:  18199272,000 #
+                 secondaryTableSize: 90998544,000 #
+
+Iteration   7: 7415,413 us/op
+                 expansionPermille:  451757,000 #
+                 primaryCollisions:  18065944,000 #
+                 secondaryTableSize: 90331888,000 #
+
+Iteration   8: 7409,456 us/op
+                 expansionPermille:  453424,000 #
+                 primaryCollisions:  18132608,000 #
+                 secondaryTableSize: 90665216,000 #
+
+Iteration   9: 7452,292 us/op
+                 expansionPermille:  450090,000 #
+                 primaryCollisions:  17999280,000 #
+                 secondaryTableSize: 89998560,000 #
+
+Iteration  10: 7494,144 us/op
+                 expansionPermille:  448423,000 #
+                 primaryCollisions:  17932616,000 #
+                 secondaryTableSize: 89665232,000 #
+
+Iteration  11: 7516,795 us/op
+                 expansionPermille:  446756,000 #
+                 primaryCollisions:  17865952,000 #
+                 secondaryTableSize: 89331904,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+7511,920 us/op
+                 async:              (text only)
+                 expansionPermille:  446756,000 #
+                 primaryCollisions:  17865952,000 #
+                 secondaryTableSize: 89331904,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  7582,607 ±(99.9%) 124,406 us/op [Average]
+  (min, avg, max) = (7380,638, 7582,607, 7837,969), stdev = 161,762
+  CI (99.9%): [7458,202, 7707,013] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-200000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  10620457,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (428419,000, 442519,042, 455091,000), stdev = 9391,192
+  CI (99.9%): [10620457,000, 10620457,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  424716344,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (17132648,000, 17696514,333, 18199272,000), stdev = 375557,541
+  CI (99.9%): [424716344,000, 424716344,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  2123632688,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (85665296,000, 88484695,333, 90998544,000), stdev = 1877832,771
+  CI (99.9%): [2123632688,000, 2123632688,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 400000, seed = 42)
+
+# Run progress: 62,50% complete, ETA 00:04:05
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 30790,696 us/op
+# Warmup Iteration   2: 30010,926 us/op
+# Warmup Iteration   3: 30403,400 us/op
+# Warmup Iteration   4: 29084,853 us/op
+# Warmup Iteration   5: 30436,943 us/op
+# Warmup Iteration   6: 30048,678 us/op
+# Warmup Iteration   7: 31270,296 us/op
+# Warmup Iteration   8: 30174,987 us/op
+Iteration   1: 30053,705 us/op
+                 expansionPermille:  78256,000 #
+                 primaryCollisions:  2254081,000 #
+                 secondaryTableSize: 31308162,000 #
+
+Iteration   2: 30490,103 us/op
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration   3: 31356,174 us/op
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   4: 30461,444 us/op
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration   5: 32149,102 us/op
+                 expansionPermille:  73584,000 #
+                 primaryCollisions:  2119509,000 #
+                 secondaryTableSize: 29439018,000 #
+
+Iteration   6: 33091,935 us/op
+                 expansionPermille:  71248,000 #
+                 primaryCollisions:  2052223,000 #
+                 secondaryTableSize: 28504446,000 #
+
+Iteration   7: 31638,981 us/op
+                 expansionPermille:  74752,000 #
+                 primaryCollisions:  2153152,000 #
+                 secondaryTableSize: 29906304,000 #
+
+Iteration   8: 32187,022 us/op
+                 expansionPermille:  73584,000 #
+                 primaryCollisions:  2119509,000 #
+                 secondaryTableSize: 29439018,000 #
+
+Iteration   9: 31504,683 us/op
+                 expansionPermille:  74752,000 #
+                 primaryCollisions:  2153152,000 #
+                 secondaryTableSize: 29906304,000 #
+
+Iteration  10: 30397,993 us/op
+                 expansionPermille:  78256,000 #
+                 primaryCollisions:  2254081,000 #
+                 secondaryTableSize: 31308162,000 #
+
+Iteration  11: 30543,535 us/op
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+30430,590 us/op
+                 async:              (text only)
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 68,75% complete, ETA 00:03:24
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 32263,954 us/op
+# Warmup Iteration   2: 30182,095 us/op
+# Warmup Iteration   3: 29614,737 us/op
+# Warmup Iteration   4: 29727,664 us/op
+# Warmup Iteration   5: 29742,072 us/op
+# Warmup Iteration   6: 32844,546 us/op
+# Warmup Iteration   7: 34329,346 us/op
+# Warmup Iteration   8: 32369,023 us/op
+Iteration   1: 30171,182 us/op
+                 expansionPermille:  78256,000 #
+                 primaryCollisions:  2254081,000 #
+                 secondaryTableSize: 31308162,000 #
+
+Iteration   2: 29563,586 us/op
+                 expansionPermille:  79424,000 #
+                 primaryCollisions:  2287724,000 #
+                 secondaryTableSize: 31775448,000 #
+
+Iteration   3: 29724,723 us/op
+                 expansionPermille:  79424,000 #
+                 primaryCollisions:  2287724,000 #
+                 secondaryTableSize: 31775448,000 #
+
+Iteration   4: 31884,254 us/op
+                 expansionPermille:  75920,000 #
+                 primaryCollisions:  2186795,000 #
+                 secondaryTableSize: 30373590,000 #
+
+Iteration   5: 29391,655 us/op
+                 expansionPermille:  80592,000 #
+                 primaryCollisions:  2321367,000 #
+                 secondaryTableSize: 32242734,000 #
+
+Iteration   6: 34816,612 us/op
+                 expansionPermille:  67744,000 #
+                 primaryCollisions:  1951294,000 #
+                 secondaryTableSize: 27102588,000 #
+
+Iteration   7: 33986,037 us/op
+                 expansionPermille:  70080,000 #
+                 primaryCollisions:  2018580,000 #
+                 secondaryTableSize: 28037160,000 #
+
+Iteration   8: 34112,477 us/op
+                 expansionPermille:  70080,000 #
+                 primaryCollisions:  2018580,000 #
+                 secondaryTableSize: 28037160,000 #
+
+Iteration   9: 30569,324 us/op
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration  10: 30499,330 us/op
+                 expansionPermille:  77088,000 #
+                 primaryCollisions:  2220438,000 #
+                 secondaryTableSize: 30840876,000 #
+
+Iteration  11: 30106,996 us/op
+                 expansionPermille:  79424,000 #
+                 primaryCollisions:  2287724,000 #
+                 secondaryTableSize: 31775448,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+30318,636 us/op
+                 async:              (text only)
+                 expansionPermille:  78256,000 #
+                 primaryCollisions:  2254081,000 #
+                 secondaryTableSize: 31308162,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  31227,087 ±(99.9%) 1152,056 us/op [Average]
+  (min, avg, max) = (29391,655, 31227,087, 34816,612), stdev = 1497,998
+  CI (99.9%): [30075,031, 32379,142] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-400000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  1822080,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (67744,000, 75920,000, 80592,000), stdev = 3357,034
+  CI (99.9%): [1822080,000, 1822080,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  52483080,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (1951294,000, 2186795,000, 2321367,000), stdev = 96695,797
+  CI (99.9%): [52483080,000, 52483080,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  728966160,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (27102588,000, 30373590,000, 32242734,000), stdev = 1343060,734
+  CI (99.9%): [728966160,000, 728966160,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 600000, seed = 42)
+
+# Run progress: 75,00% complete, ETA 00:02:43
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 52836,140 us/op
+# Warmup Iteration   2: 52462,320 us/op
+# Warmup Iteration   3: 48354,992 us/op
+# Warmup Iteration   4: 51303,735 us/op
+# Warmup Iteration   5: 52087,506 us/op
+# Warmup Iteration   6: 50397,897 us/op
+# Warmup Iteration   7: 48483,952 us/op
+# Warmup Iteration   8: 47449,900 us/op
+Iteration   1: 47612,537 us/op
+                 expansionPermille:  73401,000 #
+                 primaryCollisions:  9118064,000 #
+                 secondaryTableSize: 44036128,000 #
+
+Iteration   2: 46010,784 us/op
+                 expansionPermille:  75108,000 #
+                 primaryCollisions:  9330112,000 #
+                 secondaryTableSize: 45060224,000 #
+
+Iteration   3: 48489,607 us/op
+                 expansionPermille:  71694,000 #
+                 primaryCollisions:  8906016,000 #
+                 secondaryTableSize: 43012032,000 #
+
+Iteration   4: 48433,580 us/op
+                 expansionPermille:  73401,000 #
+                 primaryCollisions:  9118064,000 #
+                 secondaryTableSize: 44036128,000 #
+
+Iteration   5: 52230,655 us/op
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   6: 51657,545 us/op
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   7: 48126,377 us/op
+                 expansionPermille:  71694,000 #
+                 primaryCollisions:  8906016,000 #
+                 secondaryTableSize: 43012032,000 #
+
+Iteration   8: 47511,422 us/op
+                 expansionPermille:  73401,000 #
+                 primaryCollisions:  9118064,000 #
+                 secondaryTableSize: 44036128,000 #
+
+Iteration   9: 47554,776 us/op
+                 expansionPermille:  73401,000 #
+                 primaryCollisions:  9118064,000 #
+                 secondaryTableSize: 44036128,000 #
+
+Iteration  10: 46352,710 us/op
+                 expansionPermille:  75108,000 #
+                 primaryCollisions:  9330112,000 #
+                 secondaryTableSize: 45060224,000 #
+
+Iteration  11: 48416,231 us/op
+                 expansionPermille:  71694,000 #
+                 primaryCollisions:  8906016,000 #
+                 secondaryTableSize: 43012032,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+47347,322 us/op
+                 async:              (text only)
+                 expansionPermille:  73401,000 #
+                 primaryCollisions:  9118064,000 #
+                 secondaryTableSize: 44036128,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 81,25% complete, ETA 00:02:02
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 52754,813 us/op
+# Warmup Iteration   2: 50300,968 us/op
+# Warmup Iteration   3: 51599,635 us/op
+# Warmup Iteration   4: 51026,179 us/op
+# Warmup Iteration   5: 53036,111 us/op
+# Warmup Iteration   6: 50876,138 us/op
+# Warmup Iteration   7: 48387,100 us/op
+# Warmup Iteration   8: 48945,327 us/op
+Iteration   1: 51173,738 us/op
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   2: 55217,468 us/op
+                 expansionPermille:  63159,000 #
+                 primaryCollisions:  7845776,000 #
+                 secondaryTableSize: 37891552,000 #
+
+Iteration   3: 50881,304 us/op
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   4: 52317,225 us/op
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   5: 53162,564 us/op
+                 expansionPermille:  66573,000 #
+                 primaryCollisions:  8269872,000 #
+                 secondaryTableSize: 39939744,000 #
+
+Iteration   6: 50338,430 us/op
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   7: 51055,819 us/op
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration   8: 49696,841 us/op
+                 expansionPermille:  71694,000 #
+                 primaryCollisions:  8906016,000 #
+                 secondaryTableSize: 43012032,000 #
+
+Iteration   9: 49563,741 us/op
+                 expansionPermille:  69987,000 #
+                 primaryCollisions:  8693968,000 #
+                 secondaryTableSize: 41987936,000 #
+
+Iteration  10: 48630,917 us/op
+                 expansionPermille:  71694,000 #
+                 primaryCollisions:  8906016,000 #
+                 secondaryTableSize: 43012032,000 #
+
+Iteration  11: 50815,141 us/op
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+50837,349 us/op
+                 async:              (text only)
+                 expansionPermille:  68280,000 #
+                 primaryCollisions:  8481920,000 #
+                 secondaryTableSize: 40963840,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  49726,420 ±(99.9%) 1758,898 us/op [Average]
+  (min, avg, max) = (46010,784, 49726,420, 55217,468), stdev = 2287,065
+  CI (99.9%): [47967,522, 51485,318] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-600000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  1684809,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (63159,000, 70200,375, 75108,000), stdev = 3195,983
+  CI (99.9%): [1684809,000, 1684809,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  209291376,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (7845776,000, 8720474,000, 9330112,000), stdev = 397013,364
+  CI (99.9%): [209291376,000, 209291376,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  1010782752,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (37891552,000, 42115948,000, 45060224,000), stdev = 1917395,111
+  CI (99.9%): [1010782752,000, 1010782752,000] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.12, Java HotSpot(TM) 64-Bit Server VM, 17.0.12+8-LTS-286
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk-17.0.12.jdk/Contents/Home/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 8 iterations, 2 s each
+# Measurement: 12 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: bench.PerfectHashingBenchmark.buildIndex
+# Parameters: (n = 800000, seed = 42)
+
+# Run progress: 87,50% complete, ETA 00:01:21
+# Fork: 1 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 76737,613 us/op
+# Warmup Iteration   2: 76368,662 us/op
+# Warmup Iteration   3: 72293,982 us/op
+# Warmup Iteration   4: 71194,747 us/op
+# Warmup Iteration   5: 72507,917 us/op
+# Warmup Iteration   6: 75169,213 us/op
+# Warmup Iteration   7: 83188,740 us/op
+# Warmup Iteration   8: 80922,445 us/op
+Iteration   1: 81022,888 us/op
+                 expansionPermille:  36025,000 #
+                 primaryCollisions:  4407475,000 #
+                 secondaryTableSize: 28814950,000 #
+
+Iteration   2: 71844,749 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration   3: 75426,159 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration   4: 75510,319 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration   5: 71736,506 us/op
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration   6: 74149,929 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration   7: 73221,134 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration   8: 79502,213 us/op
+                 expansionPermille:  37466,000 #
+                 primaryCollisions:  4583774,000 #
+                 secondaryTableSize: 29967548,000 #
+
+Iteration   9: 74363,110 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration  10: 70933,819 us/op
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration  11: 76055,528 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+70173,593 us/op
+                 async:              (text only)
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+# Run progress: 93,75% complete, ETA 00:00:41
+# Fork: 2 of 2
+# Preparing profilers: AsyncProfiler 
+# Warmup Iteration   1: 80956,595 us/op
+# Warmup Iteration   2: 77155,421 us/op
+# Warmup Iteration   3: 81354,087 us/op
+# Warmup Iteration   4: 80837,435 us/op
+# Warmup Iteration   5: 76149,421 us/op
+# Warmup Iteration   6: 74290,764 us/op
+# Warmup Iteration   7: 77493,346 us/op
+# Warmup Iteration   8: 67851,253 us/op
+Iteration   1: 73596,808 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration   2: 74454,577 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration   3: 73748,421 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration   4: 77864,202 us/op
+                 expansionPermille:  37466,000 #
+                 primaryCollisions:  4583774,000 #
+                 secondaryTableSize: 29967548,000 #
+
+Iteration   5: 70486,563 us/op
+                 expansionPermille:  43230,000 #
+                 primaryCollisions:  5288970,000 #
+                 secondaryTableSize: 34577940,000 #
+
+Iteration   6: 79145,651 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration   7: 72537,967 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration   8: 71482,680 us/op
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+Iteration   9: 79347,117 us/op
+                 expansionPermille:  37466,000 #
+                 primaryCollisions:  4583774,000 #
+                 secondaryTableSize: 29967548,000 #
+
+Iteration  10: 76196,556 us/op
+                 expansionPermille:  38907,000 #
+                 primaryCollisions:  4760073,000 #
+                 secondaryTableSize: 31120146,000 #
+
+Iteration  11: 72408,567 us/op
+                 expansionPermille:  40348,000 #
+                 primaryCollisions:  4936372,000 #
+                 secondaryTableSize: 32272744,000 #
+
+Iteration  12: [INFO] All samples were filtered out
+[INFO] All samples were filtered out
+[INFO] All samples were filtered out
+69998,802 us/op
+                 async:              (text only)
+                 expansionPermille:  41789,000 #
+                 primaryCollisions:  5112671,000 #
+                 secondaryTableSize: 33425342,000 #
+
+# Processing profiler results: AsyncProfiler 
+
+
+Result "bench.PerfectHashingBenchmark.buildIndex":
+  74383,661 ±(99.9%) 2451,974 us/op [Average]
+  (min, avg, max) = (69998,802, 74383,661, 81022,888), stdev = 3188,259
+  CI (99.9%): [71931,687, 76835,634] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:async":
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/flame-alloc-reverse.html
+Async profiler results:
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/jfr-alloc.jfr
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/collapsed-alloc.csv
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/flame-alloc-forward.html
+  target/jmh-system-report/profiles/bench.PerfectHashingBenchmark.buildIndex/alloc/bench.PerfectHashingBenchmark.buildIndex-AverageTime-n-800000-seed-42/flame-alloc-reverse.html
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:expansionPermille":
+  956824,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (36025,000, 39867,667, 43230,000), stdev = 1835,898
+  CI (99.9%): [956824,000, 956824,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:primaryCollisions":
+  117062536,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (4407475,000, 4877605,667, 5288970,000), stdev = 224612,703
+  CI (99.9%): [117062536,000, 117062536,000] (assumes normal distribution)
+
+Secondary result "bench.PerfectHashingBenchmark.buildIndex:secondaryTableSize":
+  765325072,000 ±(99.9%) 0,001 # [Sum]
+  (min, avg, max) = (28814950,000, 31888544,667, 34577940,000), stdev = 1468460,698
+  CI (99.9%): [765325072,000, 765325072,000] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:10:56
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                                 (n)  (seed)   Mode  Cnt           Score      Error   Units
+PerfectHashingBenchmark.buildIndex                     200000      42  thrpt   24          ≈ 10⁻⁴             ops/us
+PerfectHashingBenchmark.buildIndex:async               200000      42  thrpt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   200000      42  thrpt   24    10767153,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   200000      42  thrpt   24   430582776,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  200000      42  thrpt   24  2152965552,000                  #
+PerfectHashingBenchmark.buildIndex                     400000      42  thrpt   24          ≈ 10⁻⁵             ops/us
+PerfectHashingBenchmark.buildIndex:async               400000      42  thrpt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   400000      42  thrpt   24     1790544,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   400000      42  thrpt   24    51574719,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  400000      42  thrpt   24   716349438,000                  #
+PerfectHashingBenchmark.buildIndex                     600000      42  thrpt   24          ≈ 10⁻⁵             ops/us
+PerfectHashingBenchmark.buildIndex:async               600000      42  thrpt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   600000      42  thrpt   24     1611408,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   600000      42  thrpt   24   200173312,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  600000      42  thrpt   24   966746624,000                  #
+PerfectHashingBenchmark.buildIndex                     800000      42  thrpt   24          ≈ 10⁻⁵             ops/us
+PerfectHashingBenchmark.buildIndex:async               800000      42  thrpt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   800000      42  thrpt   24     1060576,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   800000      42  thrpt   24   129756064,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  800000      42  thrpt   24   848312128,000                  #
+PerfectHashingBenchmark.buildIndex                     200000      42   avgt   24        7582,607 ±  124,406   us/op
+PerfectHashingBenchmark.buildIndex:async               200000      42   avgt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   200000      42   avgt   24    10620457,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   200000      42   avgt   24   424716344,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  200000      42   avgt   24  2123632688,000                  #
+PerfectHashingBenchmark.buildIndex                     400000      42   avgt   24       31227,087 ± 1152,056   us/op
+PerfectHashingBenchmark.buildIndex:async               400000      42   avgt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   400000      42   avgt   24     1822080,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   400000      42   avgt   24    52483080,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  400000      42   avgt   24   728966160,000                  #
+PerfectHashingBenchmark.buildIndex                     600000      42   avgt   24       49726,420 ± 1758,898   us/op
+PerfectHashingBenchmark.buildIndex:async               600000      42   avgt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   600000      42   avgt   24     1684809,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   600000      42   avgt   24   209291376,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  600000      42   avgt   24  1010782752,000                  #
+PerfectHashingBenchmark.buildIndex                     800000      42   avgt   24       74383,661 ± 2451,974   us/op
+PerfectHashingBenchmark.buildIndex:async               800000      42   avgt                  NaN                ---
+PerfectHashingBenchmark.buildIndex:expansionPermille   800000      42   avgt   24      956824,000                  #
+PerfectHashingBenchmark.buildIndex:primaryCollisions   800000      42   avgt   24   117062536,000                  #
+PerfectHashingBenchmark.buildIndex:secondaryTableSize  800000      42   avgt   24   765325072,000                  #

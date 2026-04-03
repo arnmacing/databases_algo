@@ -1,0 +1,17 @@
+benchmark,class,method,operation_kind,duration_s,profile_files,jmh_cases,score_min,score_median,score_max,score_units
+bench.ExtendableHashTableBenchmark.buildFromScratch,ExtendableHashTableBenchmark,buildFromScratch,build,179.32473707199097,96,12,28.778107625,251.36887068750002,1707.571944333333,ms/op
+bench.ExtendableHashTableBenchmark.getHit,ExtendableHashTableBenchmark,getHit,read/query,3262.6362252235413,320,40,0.01273126152851091,21.44533062363703,78.17104583908386,"ops/us, us/op"
+bench.ExtendableHashTableBenchmark.getMiss,ExtendableHashTableBenchmark,getMiss,read/query,3264.2240459918976,320,40,0.00877354948530206,25.635510451307372,112.04468564736642,"ops/us, us/op"
+bench.ExtendableHashTableBenchmark.putThenRemove,ExtendableHashTableBenchmark,putThenRemove,write,3267.945270061493,320,40,0.02072336461964436,13.205613789476802,46.21231138445909,"ops/us, us/op"
+bench.ExtendableHashTableBenchmark.removeThenPut,ExtendableHashTableBenchmark,removeThenPut,write,3265.62837600708,320,40,0.023709514317289317,12.115077478864926,42.834966828356876,"ops/us, us/op"
+bench.ExtendableHashTableBenchmark.updateExisting,ExtendableHashTableBenchmark,updateExisting,write,3265.671648979187,320,40,0.020610887270164354,14.020752040859145,48.406931852767165,"ops/us, us/op"
+bench.LshBenchmark.addDocument,LshBenchmark,addDocument,write,1054.0762922763824,64,8,0.033849511147990334,14.697589146870353,29.905478693210615,"ms/op, ops/ms"
+bench.LshBenchmark.buildIndex,LshBenchmark,buildIndex,build,944.5897903442384,64,8,0.000521828906707699,301.9564059434898,1865.4580823958331,"ms/op, ops/ms"
+bench.LshBenchmark.candidatesQuery,LshBenchmark,candidatesQuery,read/query,666.1983778476715,64,8,0.03352761080603552,13.841346369366967,29.036988344712274,"ms/op, ops/ms"
+bench.LshBenchmark.nearDuplicatesFullScan,LshBenchmark,nearDuplicatesFullScan,read/query,918.392991065979,64,8,0.00029505573895551154,414.8293402530818,3382.2316040416667,"ms/op, ops/ms"
+bench.LshBenchmark.nearDuplicatesLsh,LshBenchmark,nearDuplicatesLsh,read/query,744.5287878513336,64,8,0.013493477296742032,8.839963235203179,75.2974903339396,"ms/op, ops/ms"
+bench.PerfectHashingBenchmark.buildIndex,PerfectHashingBenchmark,buildIndex,build,655.8431718349457,64,8,1.5413444645821854e-05,3764.0282797220884,65186.59845262378,"ops/us, us/op"
+bench.PerfectHashingBenchmark.containsHit,PerfectHashingBenchmark,containsHit,read/query,648.491357088089,64,8,0.015964049816129592,15.55209214324659,62.262031306116505,"ops/us, us/op"
+bench.PerfectHashingBenchmark.containsMiss,PerfectHashingBenchmark,containsMiss,read/query,648.4716110229492,64,8,0.012871555589738745,15.008629877736253,77.82552118305375,"ops/us, us/op"
+bench.PerfectHashingBenchmark.getHit,PerfectHashingBenchmark,getHit,read/query,22799.97123503685,64,8,0.017850720310907533,14.24285361464766,55.721461121489675,"ops/us, us/op"
+bench.PerfectHashingBenchmark.getMiss,PerfectHashingBenchmark,getMiss,read/query,648.0072529315948,64,8,0.01280130245535848,15.459994845992366,77.96747642802039,"ops/us, us/op"

@@ -1,0 +1,17 @@
+benchmark,metric,mode,score,scoreError,scoreUnit,docs,seed,wordsPerDoc
+bench.LshBenchmark.candidatesQuery,primary,thrpt,28.7188963181509,0.02482423778412394,ops/ms,20000,42,16
+bench.LshBenchmark.candidatesQuery,async,thrpt,NaN,NaN,---,20000,42,16
+bench.LshBenchmark.candidatesQuery,primary,thrpt,28.48808737297323,0.1508557266715719,ops/ms,30000,42,16
+bench.LshBenchmark.candidatesQuery,async,thrpt,NaN,NaN,---,30000,42,16
+bench.LshBenchmark.candidatesQuery,primary,thrpt,27.6461884501044,0.11891620699292803,ops/ms,45000,42,16
+bench.LshBenchmark.candidatesQuery,async,thrpt,NaN,NaN,---,45000,42,16
+bench.LshBenchmark.candidatesQuery,primary,thrpt,29.036988344712274,0.3425308028332866,ops/ms,60000,42,16
+bench.LshBenchmark.candidatesQuery,async,thrpt,NaN,NaN,---,60000,42,16
+bench.LshBenchmark.candidatesQuery,primary,avgt,0.03352761080603552,3.747846385077883e-05,ms/op,20000,42,16
+bench.LshBenchmark.candidatesQuery,async,avgt,NaN,NaN,---,20000,42,16
+bench.LshBenchmark.candidatesQuery,primary,avgt,0.0345670095755474,0.00021388273472845425,ms/op,30000,42,16
+bench.LshBenchmark.candidatesQuery,async,avgt,NaN,NaN,---,30000,42,16
+bench.LshBenchmark.candidatesQuery,primary,avgt,0.03650428862953253,7.918806774929287e-05,ms/op,45000,42,16
+bench.LshBenchmark.candidatesQuery,async,avgt,NaN,NaN,---,45000,42,16
+bench.LshBenchmark.candidatesQuery,primary,avgt,0.03399012284919956,4.259669963197547e-05,ms/op,60000,42,16
+bench.LshBenchmark.candidatesQuery,async,avgt,NaN,NaN,---,60000,42,16

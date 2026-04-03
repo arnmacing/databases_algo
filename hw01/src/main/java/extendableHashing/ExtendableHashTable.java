@@ -94,7 +94,6 @@ public class ExtendableHashTable implements AutoCloseable {
         writeBucketValue(bucketOffset, position, readBucketValue(bucketOffset, last));
         writeBucketSize(bucketOffset, last);
 
-        tryMerge(directoryIndex);
         return true;
     }
 
@@ -150,10 +149,12 @@ public class ExtendableHashTable implements AutoCloseable {
         long newBucketOffset = allocateBucket(oldDepth + 1);
         writeBucketLocalDepth(oldBucketOffset, oldDepth + 1);
 
-        for (int i = 0; i < directoryLength(); i++) {
-            if (readDirectoryPointer(i) == oldBucketOffset && (i & splitBit) != 0) {
-                writeDirectoryPointer(i, newBucketOffset);
-            }
+        int directoryLen = directoryLength();
+        int baseIndex = splitDirectoryIndex & (splitBit - 1);
+        int start = baseIndex | splitBit;
+        int step = splitBit << 1;
+        for (int i = start; i < directoryLen; i += step) {
+            writeDirectoryPointer(i, newBucketOffset);
         }
 
         int count = bucketSize(oldBucketOffset);

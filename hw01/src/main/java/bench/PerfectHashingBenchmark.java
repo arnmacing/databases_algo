@@ -146,9 +146,11 @@ public class PerfectHashingBenchmark {
      */
     public int buildIndex(BuildState state, BuildAnalyticsState analytics, Blackhole bh) {
         PerfectHashTable<Integer> table = PerfectHashTable.build(state.keys, state.values, state.seed);
-        analytics.secondaryTableSize += table.secondaryTableSize();
-        analytics.primaryCollisions += table.primaryCollisionCount();
-        analytics.expansionPermille += Math.round(table.expansionFactor() * 1000.0);
+
+        analytics.secondaryTableSize = table.secondaryTableSize();
+        analytics.primaryCollisions = table.primaryCollisionCount();
+        analytics.expansionPermille = Math.round(table.expansionFactor() * 1000.0);
+
         bh.consume(table.containsKey(state.keys[state.n / 2]));
         return table.size();
     }

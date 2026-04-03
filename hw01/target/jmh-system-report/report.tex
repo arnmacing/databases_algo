@@ -1,0 +1,683 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  10pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Arial Unicode MS}
+  \setmonofont[]{Menlo}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{xurl}
+\urlstyle{same}
+\setlength{\emergencystretch}{3em}
+\sloppy
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{JMH System Report}\label{jmh-system-report}
+
+\begin{itemize}
+\tightlist
+\item
+  Generated: \texttt{2026-03-15\ 01:19:08}
+\item
+  Command:
+  \texttt{hw01/tools/jmh\_run\_with\_system\_metrics.py\ -\/-project-root\ .\ -\/-out-dir\ hw01/target/jmh-system-report\ -\/-rebuild-only}
+\end{itemize}
+
+\subsection{Summary}\label{summary}
+
+\begin{itemize}
+\tightlist
+\item
+  Benchmarks executed: \textbf{16}
+\item
+  Summary CSV: \texttt{operation\_summary.csv}
+\item
+  Flattened JMH CSV: \texttt{jmh\_results\_flat.csv}
+\end{itemize}
+
+\subsection{ExtendableHashTableBenchmark}\label{extendablehashtablebenchmark}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1304}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+kind
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+duration\_s
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p95\_cpu\_\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+peak\_rss\_mb
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+score\_median
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+buildFromScratch & build & 106.776 & 0.800 & 334.703 & 413.194 \\
+getHit & read/query & 653.918 & 0.200 & 331.516 & 26.637 \\
+getMiss & read/query & 654.388 & 0.200 & 189.484 & 35.872 \\
+putThenRemove & write & 654.354 & 0.200 & 186.562 & 16.956 \\
+removeThenPut & write & 653.696 & 0.200 & 184.953 & 13.758 \\
+updateExisting & write & 653.978 & 0.200 & 324.344 & 16.016 \\
+\end{longtable}
+}
+
+\subsubsection{buildFromScratch}\label{buildfromscratch}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{build}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{bucketCapacity}: 8, 16
+  \item
+    \texttt{n}: 200000, 350000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes}
+
+\begin{itemize}
+\tightlist
+\item
+  Построение самое тяжелое в этом алгоритме, median \textasciitilde413
+  ms/op, сильный разброс по параметрам \texttt{n},
+  \texttt{bucketCapacity}.
+\item
+  Фикс: заранее резервировать структуру бакетов/директории и
+  минимизировать перевыделения при split, переиспользовать рабочие
+  буферы чтения/записи.
+\end{itemize}
+
+\subsubsection{getHit}\label{gethit}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{bucketCapacity}: 8, 16
+  \item
+    \texttt{n}: 200000, 350000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Чтение hit стабильно быстрое.
+\item
+  Фикс: кэш горячих бакетов в state бенчмарка для лучшей locality,
+  убрать лишние чтения метаданных бакета в hot-path get.
+\end{itemize}
+
+\subsubsection{getMiss}\label{getmiss}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{bucketCapacity}: 8, 16
+  \item
+    \texttt{n}: 200000, 350000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Miss быстрее hit, что логично, так как раньше завершается без чтения
+  значения.
+\end{itemize}
+
+\subsubsection{putThenRemove}\label{putthenremove}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{write}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{bucketCapacity}: 8, 16
+  \item
+    \texttt{n}: 100000, 200000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Запись+удаление: avgt \textasciitilde0.0260 us/op, thrpt
+  \textasciitilde38.7 ops/us.
+\item
+  Фикс: объединить серию мелких записей в один проход, переиспользовать
+  tombstone-слоты перед split бакета.
+\end{itemize}
+
+\subsubsection{removeThenPut}\label{removethenput}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{write}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{bucketCapacity}: 8, 16
+  \item
+    \texttt{n}: 100000, 200000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Сценарий remove-\textgreater put медленнее put-\textgreater remove.
+\item
+  Фикс: после remove сразу оставлять slot в состоянии, удобном для
+  последующего put без повторного скана.
+\end{itemize}
+
+\subsubsection{updateExisting}\label{updateexisting}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{write}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{bucketCapacity}: 8, 16
+  \item
+    \texttt{n}: 100000, 200000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Update близок к другим write-операциям.
+\item
+  Фикс: если новое значение равно старому, выходить без физической
+  записи.
+\end{itemize}
+
+\subsection{LshBenchmark}\label{lshbenchmark}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1304}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+kind
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+duration\_s
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p95\_cpu\_\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+peak\_rss\_mb
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+score\_median
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+buildIndex & build & 488.716 & 0.200 & 2304.516 & 307.792 \\
+candidatesQuery & read/query & 332.474 & 0.200 & 723.000 & 13.563 \\
+nearDuplicatesFullScan & read/query & 483.371 & 0.200 & 324.719 &
+425.400 \\
+nearDuplicatesLsh & read/query & 371.598 & 0.200 & 1502.062 & 9.224 \\
+addDocument & write & 214.170 & 0.210 & 2702.844 & 14.595 \\
+\end{longtable}
+}
+
+\subsubsection{addDocument}\label{adddocument}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{write}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{baseDocs}: 20000
+  \item
+    \texttt{seed}: 42
+  \item
+    \texttt{wordsPerDoc}: 16
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-6}
+
+\begin{itemize}
+\tightlist
+\item
+  Добавление документа быстрое, но общиее использование памяти большое
+  на больших данных.
+\item
+  Фикс: переиспользовать временные массивы/хеши для шинглов между
+  вызовами.
+\end{itemize}
+
+\subsubsection{buildIndex}\label{buildindex}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{build}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{docs}: 20000, 60000
+  \item
+    \texttt{seed}: 42
+  \item
+    \texttt{wordsPerDoc}: 16
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-7}
+
+\begin{itemize}
+\tightlist
+\item
+  Самая тяжелая стадия LSH: avgt median \textasciitilde1250 ms/op, пик
+  памяти \textasciitilde2.3 GB.
+\item
+  Фикс: перейти на примитивные коллекции/массивы для сигнатур.
+\end{itemize}
+
+\subsubsection{candidatesQuery}\label{candidatesquery}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{docs}: 20000, 60000
+  \item
+    \texttt{seed}: 42
+  \item
+    \texttt{wordsPerDoc}: 16
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-8}
+
+\begin{itemize}
+\tightlist
+\item
+  Получение кандидатов быстрое.
+\end{itemize}
+
+\subsubsection{nearDuplicatesFullScan}\label{nearduplicatesfullscan}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{docs}: 1500, 3000
+  \item
+    \texttt{seed}: 42
+  \item
+    \texttt{threshold}: 0.9
+  \item
+    \texttt{wordsPerDoc}: 16
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-9}
+
+\begin{itemize}
+\tightlist
+\item
+  Full scan очень дорогой, но и нужен только для сравнения.
+\end{itemize}
+
+\subsubsection{nearDuplicatesLsh}\label{nearduplicateslsh}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{docs}: 6000, 12000
+  \item
+    \texttt{seed}: 42
+  \item
+    \texttt{threshold}: 0.9
+  \item
+    \texttt{wordsPerDoc}: 16
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-10}
+
+\begin{itemize}
+\tightlist
+\item
+  LSH-поиск существенно быстрее full scan.
+\end{itemize}
+
+\subsection{PerfectHashingBenchmark}\label{perfecthashingbenchmark}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1304}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1739}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+kind
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+duration\_s
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p95\_cpu\_\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+peak\_rss\_mb
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+score\_median
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+buildIndex & build & 326.361 & 0.300 & 3027.984 & 3386.281 \\
+containsHit & read/query & 323.100 & 0.200 & 331.641 & 15.627 \\
+containsMiss & read/query & 323.184 & 0.300 & 331.859 & 14.979 \\
+getHit & read/query & 323.207 & 0.300 & 330.938 & 13.926 \\
+getMiss & read/query & 323.330 & 0.300 & 330.297 & 14.738 \\
+\end{longtable}
+}
+
+\subsubsection{buildIndex}\label{buildindex-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{build}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n}: 200000, 800000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-11}
+
+\begin{itemize}
+\tightlist
+\item
+  Индекс строится дорого и с большим разбросом: avgt median
+  \textasciitilde38.6 ms/op (в переводе из 38642 us/op).
+\item
+  Фикс: сократить число повторений при подборе 2-го уровня, а также
+  можно заранее сделать pre-size массивы 2-го уровня по размеру
+  bucket\^{}2.
+\end{itemize}
+
+\subsubsection{containsHit}\label{containshit}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n}: 200000, 800000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-12}
+
+\begin{itemize}
+\tightlist
+\item
+  Просмотр быстрый и стабильный.
+\end{itemize}
+
+\subsubsection{containsMiss}\label{containsmiss}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n}: 200000, 800000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-13}
+
+\begin{itemize}
+\tightlist
+\item
+  Miss сопоставим с hit.
+\end{itemize}
+
+\subsubsection{getHit}\label{gethit-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n}: 200000, 800000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-14}
+
+\begin{itemize}
+\tightlist
+\item
+  getHit чуть хуже containsHit из-за возврата значения.
+\item
+  Фикс: хранить value в примитивном массиве/структуре.
+\end{itemize}
+
+\subsubsection{getMiss}\label{getmiss-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Operation type: \texttt{read/query}
+\item
+  Parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n}: 200000, 800000
+  \item
+    \texttt{seed}: 42
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Notes}\label{notes-15}
+
+\begin{itemize}
+\tightlist
+\item
+  Фикс: унифицировать ветку miss между get/contains для одинакового
+  поведения и меньшего кода.
+\end{itemize}
+
+\end{document}
